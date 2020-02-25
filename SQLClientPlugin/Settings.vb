@@ -22,6 +22,7 @@ Imports System.Windows.Forms
     Public Property CustomColumnCollection As List(Of CustomColumn)
     Public Property AutoResizeColumns As Boolean = True
     Public Property SelectFirstRow As Boolean = True
+    Public Property ShowErrorIfNoRow As Boolean = True
     Public Property NullValue As String = "(null)"
     Public Property ResultStyle As ResultStyleEnum = ResultStyleEnum.ShowOnlyColumns
     Public Property SplitViewStyle As Orientation = Orientation.Horizontal

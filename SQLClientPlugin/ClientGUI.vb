@@ -490,8 +490,13 @@ Public Class ClientGUI
             If _Settings.SelectFirstRow And (Not ListView1.Items.Count = 0) Then
                 ListView1.Items(0).Selected = True
             End If
-            ConnectionClosed.Visible = False
-            LoadImage.Visible = False
+            If _Settings.ShowErrorIfNoRow And ListView1.Items.Count = 0 Then
+                ConnectionClosed.Visible = True
+                LoadImage.Visible = False
+            Else
+                ConnectionClosed.Visible = False
+                LoadImage.Visible = False
+            End If
         Else
             ConnectionClosed.Visible = True
             LoadImage.Visible = False
