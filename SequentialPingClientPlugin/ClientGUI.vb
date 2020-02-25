@@ -1,0 +1,80 @@
+﻿'Copyright (C) 2019-2020 Michael Kirgus
+'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
+'Additional copyright notices in project base directory or main executable directory.
+Imports System.Drawing
+Imports CSToolLogLib.LogSettings
+Imports CSToolPingHelper
+
+Public Class ClientGUI
+    Public _Settings As Settings
+    Public _ParentInstance As CSToolPluginLib.ICSToolInterface
+    Public PingManager As New PingHelper
+    Public CurrentIPHostname As String = ""
+
+    Sub RaiseAction(ByVal IPOrHostname As String, Optional ByVal IsRefresh As Boolean = False)
+        If Not IsRefresh Then
+            ListBox1.BackColor = Color.FromArgb(_Settings.DefaultBackColor.Argb)
+            ListBox1.ForeColor = Color.FromArgb(_Settings.DefaultForeColor.Argb)
+            ListBox1.Items.Clear()
+        End If
+
+        If Not IPOrHostname = "" Then
+            CurrentIPHostname = IPOrHostname
+            If Not SeqPingWorker.IsBusy Then
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("Start ping worker for host " & CurrentIPHostname, Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                SeqPingWorker.RunWorkerAsync(IPOrHostname)
+            End If
+
+            If _Settings.AutoRefresh Then
+                RefreshTimer.Start()
+            End If
+        Else
+            RefreshTimer.Stop()
+        End If
+    End Sub
+
+    Private Sub SeqPingWorker_DoWork(sender As Object, e As ComponentModel.DoWorkEventArgs) Handles SeqPingWorker.DoWork
+        e.Result = PingManager.Ping(e.Argument, _Settings.PingTimeout, True)
+    End Sub
+
+    Private Sub SeqPingWorker_RunWorkerCompleted(sender As Object, e As ComponentModel.RunWorkerCompletedEventArgs) Handles SeqPingWorker.RunWorkerCompleted
+        Dim DateT As String = ""
+        If _Settings.ShowDateAndTime Then
+            DateT = DateAndTime.Now.ToString & " "
+        End If
+
+        If e.Result Then
+            ListBox1.Items.Add(DateT & PingManager.HostName & " [" & PingManager.IpAddressV4 & "] [ " & PingManager.IpAddressV6 & " ] " & PingManager.ResponseTime & " ms")
+            ListBox1.BackColor = Color.FromArgb(_Settings.BackColorIfPingOK.Argb)
+            ListBox1.ForeColor = Color.FromArgb(_Settings.FontForeColorIfPingOK.Argb)
+            ListBox1.SetSelected(ListBox1.Items.Count - 1, True)
+            _ParentInstance.CurrentLogInstance.WriteLogEntry("Ping worker: " & PingManager.HostName & " [" & PingManager.IpAddressV4 & "] [ " & PingManager.IpAddressV6 & " ] " & PingManager.ResponseTime & " ms", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+        Else
+            ListBox1.Items.Add(DateT & PingManager.HostName & " [" & PingManager.IpAddressV4 & "] [ " & PingManager.IpAddressV6 & " ] Error: " & PingManager.ErrorDesc)
+            ListBox1.BackColor = Color.FromArgb(_Settings.BackColorIfPingError.Argb)
+            ListBox1.ForeColor = Color.FromArgb(_Settings.FontForeColorIfPingError.Argb)
+            _ParentInstance.CurrentLogInstance.WriteLogEntry("Ping worker: " & " [" & PingManager.IpAddressV4 & "] [ " & PingManager.IpAddressV6 & " ] Error: " & PingManager.ErrorDesc, Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+        End If
+
+        If ListBox1.Items.Count >= _Settings.MaxItems Then
+            ListBox1.Items.RemoveAt(0)
+        End If
+    End Sub
+
+    Public Sub RefreshGUI()
+        ListBox1.Font = _Settings.Font.ToFont
+        ListBox1.ForeColor = Color.FromArgb(_Settings.DefaultForeColor.Argb)
+        ListBox1.BackColor = Color.FromArgb(_Settings.DefaultBackColor.Argb)
+        RefreshTimer.Interval = _Settings.AutRefreshInterval
+    End Sub
+
+    Private Sub ClientGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        RefreshGUI()
+    End Sub
+
+    Private Sub RefreshTimer_Tick(sender As Object, e As EventArgs) Handles RefreshTimer.Tick
+        RaiseAction(CurrentIPHostname, True)
+    End Sub
+End Class

@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props" Condition="Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props')" />
+  <Import Project="..\packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props')" />
+  <Import Project="..\packages\CefSharp.Common.79.1.350\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.79.1.350\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5B6DEF5F-F3BC-4015-A4C2-A6EA24F31932}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>CSTool.My.MyApplication</StartupObject>
+    <RootNamespace>CSTool</RootNamespace>
+    <AssemblyName>CSTool</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CSTool.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>CSTool.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>wizard_app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>CSTool.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>CSTool.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AdminUI.WqlQueryEngine">
+      <HintPath>O:\Eigene Dokumente\Visual Studio 2015\Projects\SCCM Software Manager.NET\SCCM Software Manager.NET\bin\Debug\AdminUI.WqlQueryEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.MSTSCLib">
+      <HintPath>bin\x64\Debug\GUIPlugins\AxInterop.MSTSCLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ConfigurationManagement.ManagementProvider">
+      <HintPath>O:\Eigene Dokumente\Visual Studio 2015\Projects\SCCM Software Manager.NET\SCCM Software Manager.NET\bin\Debug\Microsoft.ConfigurationManagement.ManagementProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Forms.UI.Controls.WebView, Version=6.0.0.0, Culture=neutral, PublicKeyToken=4aff67a105548ee2, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Toolkit.Forms.UI.Controls.WebView.6.0.0\lib\net462\Microsoft.Toolkit.Forms.UI.Controls.WebView.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015">
+      <HintPath>O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EnvironmentState.Designer.vb">
+      <DependentUpon>EnvironmentState.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EnvironmentState.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SettingsManager.Designer.vb">
+      <DependentUpon>SettingsManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EnvironmentState.resx">
+      <DependentUpon>EnvironmentState.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsManager.resx">
+      <DependentUpon>SettingsManager.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\refresh16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cstool_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit-add-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\go-next-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cstool_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cstool_22x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view-right-new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window-new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab-new-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tab-close-other.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSToolApplicationSettingsLib\CSToolApplicationSettingsLib.vbproj">
+      <Project>{ede9dfbd-e2b2-4b14-a493-0ed999e9094a}</Project>
+      <Name>CSToolApplicationSettingsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolApplicationSettingsManager\CSToolApplicationSettingsManager.vbproj">
+      <Project>{a6aff011-b72d-43ec-86b2-f0c9359015c9}</Project>
+      <Name>CSToolApplicationSettingsManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolCryptHelper\CSToolCryptHelper.vbproj">
+      <Project>{df773209-5797-4581-b299-bc57d29189e3}</Project>
+      <Name>CSToolCryptHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolEnvironmentManager\CSToolEnvironmentManager.vbproj">
+      <Project>{7809B2C0-3EE5-4983-9FEF-A11479AAFD99}</Project>
+      <Name>CSToolEnvironmentManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolHostWindow\CSToolHostWindow.vbproj">
+      <Project>{6BAC4415-9CC9-4AD9-812C-6D4158B9D731}</Project>
+      <Name>CSToolHostWindow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolLogLib\CSToolLogLib.vbproj">
+      <Project>{df373dbf-733e-4e4d-8335-3d6d5fe447b2}</Project>
+      <Name>CSToolLogLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolMessageBoxEx\CSToolMessageBoxEx.vbproj">
+      <Project>{696ed794-189b-4f10-8790-c61f27bbeba2}</Project>
+      <Name>CSToolMessageBoxEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolPingHelper\CSToolPingHelper.vbproj">
+      <Project>{2f8ad7cb-f746-4972-a5c6-72bff1a51809}</Project>
+      <Name>CSToolPingHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolPluginHelper\CSToolPluginHelper.vbproj">
+      <Project>{0B6AD670-990D-4F6D-BAA8-60F25522E2FB}</Project>
+      <Name>CSToolPluginHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolPluginLib\CSToolPluginLib.vbproj">
+      <Project>{52F811EA-55D2-4375-B177-A93D76E72BE0}</Project>
+      <Name>CSToolPluginLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolSendKeysHelper\CSToolSendKeysHelper.vbproj">
+      <Project>{3c4ef0e4-76cd-42a8-b3f9-824315e872ca}</Project>
+      <Name>CSToolSendKeysHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolUserSettingsLib\CSToolUserSettingsLib.vbproj">
+      <Project>{0bfe04e6-071c-4624-ad64-5898b4c19681}</Project>
+      <Name>CSToolUserSettingsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolUserSettingsManager\CSToolUserSettingsManager.vbproj">
+      <Project>{750fd8a4-3e8e-435c-ae22-7a44f08e977a}</Project>
+      <Name>CSToolUserSettingsManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolWindowManager\CSToolWindowManager.vbproj">
+      <Project>{64c88d9d-8b0c-4ccd-95d0-88656e17590a}</Project>
+      <Name>CSToolWindowManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolWindowsCredentialHelper\CSToolWindowsCredentialHelper.vbproj">
+      <Project>{5c70a093-f440-4646-adf7-9a95f2c2e548}</Project>
+      <Name>CSToolWindowsCredentialHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolWindowSearcherHelper\CSToolWindowSearcherHelper.vbproj">
+      <Project>{4e00ce6f-6ae5-47f7-891c-61e7db8e5272}</Project>
+      <Name>CSToolWindowSearcherHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolWMIHelper\CSToolWMIHelper.vbproj">
+      <Project>{9ed8dbb2-b501-4797-8ce1-04dddad6ef8c}</Project>
+      <Name>CSToolWMIHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\ThemeVS2015.csproj">
+      <Project>{007d4ac8-948f-4816-86ad-b9d1343672c1}</Project>
+      <Name>ThemeVS2015</Name>
+    </ProjectReference>
+    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
+      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
+      <Name>WinFormsUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\CredentialPlugins\" />
+    <Folder Include="bin\Debug\EnvironmentPlugins\" />
+    <Folder Include="bin\Debug\GUIPlugins\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\openterm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\emblem-notice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\emblem-system-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document-decrypt-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document-encrypt-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\document-save-5.png" />
+    <None Include="Resources\document-open-folder.png" />
+    <None Include="Resources\db_add-2.png" />
+    <None Include="Resources\db_remove.png" />
+    <None Include="Resources\db_remove-2.png" />
+    <None Include="Resources\icon-check-circle_22x22.png" />
+    <None Include="Resources\icon-external-link_22x22.png" />
+    <None Include="Resources\icon-folder-minus_22x22.png" />
+    <None Include="Resources\icon-folder-plus_22x22.png" />
+    <None Include="Resources\icon-group_22x22.png" />
+    <None Include="Resources\icon-information_22x22.png" />
+    <None Include="Resources\icon-lock-closed_22x22.png" />
+    <None Include="Resources\icon-lock-open_22x22.png" />
+    <None Include="Resources\icon-menu_22x22.png" />
+    <None Include="Resources\icon-minus-square_22x22.png" />
+    <None Include="Resources\icon-plus-square_22x22.png" />
+    <None Include="Resources\icon-puzzle_22x22.png" />
+    <None Include="Resources\icon-refresh_22x22.png" />
+    <None Include="Resources\icon-search_22x22.png" />
+    <None Include="Resources\icon-user_22x22.png" />
+    <None Include="Resources\icon-grid_22x22.png" />
+    <None Include="Resources\icon-download_22x22.png" />
+    <None Include="Resources\icon-upload_22x22.png" />
+    <None Include="Resources\icon-minus-circle_22x22.png" />
+    <None Include="Resources\icon-plus-circle_22x22.png" />
+    <Content Include="wizard_app.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.79.1.350\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.79.1.350\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets'))" />
+  </Target>
+  <Import Project="..\packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets')" />
+  <Import Project="..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets" Condition="Exists('..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets')" />
+  <Import Project="..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets" Condition="Exists('..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets')" />
+  <Import Project="..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets" Condition="Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets')" />
+</Project>
