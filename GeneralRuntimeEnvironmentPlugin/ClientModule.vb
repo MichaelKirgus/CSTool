@@ -18,6 +18,8 @@ Public Module ClientModule
         Private CurrentIPHostname As String = ""
         Private PrivIPHostname As String = ""
         Public LogInstanceHandler As LogLib
+        Public FirstQuery As Boolean = True
+        Public StaticEnvironmentEntries As New List(Of EnvironmentEntry)
 
         Public Property CurrentLogInstance As LogLib Implements ICSToolInterface.CurrentLogInstance
             Get
@@ -117,22 +119,37 @@ Public Module ClientModule
                 Dim CredManager As New CSToolWindowsCredentialHelper.CredentialBuildInHelper
                 Dim uu As New EnvironmentProvider
                 uu.IsProviderReadOnly = True
-                Dim CurrentAppUsernameWithoutDomain As New EnvironmentEntry
-                CurrentAppUsernameWithoutDomain.ValueName = "CurrentAppUsernameWithoutDomain"
-                CurrentAppUsernameWithoutDomain.ValueData = CredManager.GetUserName
-                uu.EnvironmentVariables.Add(CurrentAppUsernameWithoutDomain)
-                Dim CurrentAppDomain As New EnvironmentEntry
-                CurrentAppDomain.ValueName = "CurrentAppDomain"
-                CurrentAppDomain.ValueData = CredManager.GetUserName
-                uu.EnvironmentVariables.Add(CurrentAppDomain)
-                Dim CurrentAppUICulture As New EnvironmentEntry
-                CurrentAppUICulture.ValueName = "CurrentAppUICulture"
-                CurrentAppUICulture.ValueData = My.Application.UICulture.DisplayName
-                uu.EnvironmentVariables.Add(CurrentAppUICulture)
-                Dim CurrentAppUICultureEnglishName As New EnvironmentEntry
-                CurrentAppUICultureEnglishName.ValueName = "CurrentAppUICultureEnglishName"
-                CurrentAppUICultureEnglishName.ValueData = My.Application.UICulture.EnglishName
-                uu.EnvironmentVariables.Add(CurrentAppUICultureEnglishName)
+
+                If FirstQuery Then
+                    FirstQuery = False
+                    Dim CurrentAppUsernameWithoutDomain As New EnvironmentEntry
+                    CurrentAppUsernameWithoutDomain.ValueName = "CurrentAppUsernameWithoutDomain"
+                    CurrentAppUsernameWithoutDomain.ValueData = CredManager.GetUserName
+                    StaticEnvironmentEntries.Add(CurrentAppUsernameWithoutDomain)
+                    Dim CurrentAppDomain As New EnvironmentEntry
+                    CurrentAppDomain.ValueName = "CurrentAppDomain"
+                    CurrentAppDomain.ValueData = CredManager.GetUserName
+                    StaticEnvironmentEntries.Add(CurrentAppDomain)
+                    Dim CurrentAppExecutableFilename As New EnvironmentEntry
+                    CurrentAppExecutableFilename.ValueName = "CurrentAppExecutableFilename"
+                    CurrentAppExecutableFilename.ValueData = Application.ExecutablePath
+                    StaticEnvironmentEntries.Add(CurrentAppExecutableFilename)
+                    Dim CurrentAppExecutablePath As New EnvironmentEntry
+                    CurrentAppExecutablePath.ValueName = "CurrentAppExecutablePath"
+                    CurrentAppExecutablePath.ValueData = Application.StartupPath
+                    StaticEnvironmentEntries.Add(CurrentAppExecutablePath)
+                    Dim CurrentAppUICulture As New EnvironmentEntry
+                    CurrentAppUICulture.ValueName = "CurrentAppUICulture"
+                    CurrentAppUICulture.ValueData = My.Application.UICulture.DisplayName
+                    StaticEnvironmentEntries.Add(CurrentAppUICulture)
+                    Dim CurrentAppUICultureEnglishName As New EnvironmentEntry
+                    CurrentAppUICultureEnglishName.ValueName = "CurrentAppUICultureEnglishName"
+                    CurrentAppUICultureEnglishName.ValueData = My.Application.UICulture.EnglishName
+                    StaticEnvironmentEntries.Add(CurrentAppUICultureEnglishName)
+                End If
+
+                uu.EnvironmentVariables.AddRange(StaticEnvironmentEntries)
+
                 Dim CurrentRemoteClientIPHostname As New EnvironmentEntry
                 CurrentRemoteClientIPHostname.ValueName = "CurrentRemoteClientIPHostname"
                 CurrentRemoteClientIPHostname.ValueData = CurrentIPHostname
