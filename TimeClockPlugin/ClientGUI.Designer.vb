@@ -87,7 +87,7 @@ Partial Class ClientGUI
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResetTimeToolStripMenuItem, Me.ResetNotificationsToolStripMenuItem, Me.SimulateTimeToolStripMenuItem, Me.ToolStripSeparator2, Me.SetSystemBootTimeToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(186, 98)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(189, 98)
         '
         'ResetTimeToolStripMenuItem
         '
@@ -119,8 +119,8 @@ Partial Class ClientGUI
         '
         Me.SetSystemBootTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_moon_16x16
         Me.SetSystemBootTimeToolStripMenuItem.Name = "SetSystemBootTimeToolStripMenuItem"
-        Me.SetSystemBootTimeToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.SetSystemBootTimeToolStripMenuItem.Text = "Set system boot time"
+        Me.SetSystemBootTimeToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
+        Me.SetSystemBootTimeToolStripMenuItem.Text = "Use system boot time"
         '
         'GroupBox1
         '

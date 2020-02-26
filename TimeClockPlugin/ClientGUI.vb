@@ -38,7 +38,6 @@ Public Class ClientGUI
                 Dim d As SetProgressbarValueDelegate = New SetProgressbarValueDelegate(AddressOf SetProgressbarValue)
                 Me.Invoke(d, New Object() {ProgressCtl, value})
             Else
-                Debug.WriteLine(ProgressCtl.Name & " " & value & " (" & ProgressCtl.Maximum & ")")
                 ProgressCtl.Value = value
             End If
         Catch ex As Exception
@@ -156,39 +155,42 @@ Public Class ClientGUI
         NotifyIcon1.Visible = _Settings.AlwaysShowTrayIcon
     End Sub
 
+    Public Sub UnloadPlugin()
+        If BackgroundWorker1.IsBusy Then
+            BackgroundWorker1.CancelAsync()
+        End If
+    End Sub
+
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        Try
-            While e.Cancel = False
-                Try
-                    SetTextboxText(LunchTimeCountdownLbl, LunchTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
-                    SetTextboxText(RegEndCountdownLbl, RegularEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
-                    SetTextboxText(MaxEndCountdownLbl, MaxEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
-                    SetTextboxText(WithoutBreaksCountdownLbl, WithoutBreaksTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
-                    SetTextboxText(TotalWorktimeLbl, DateAndTime.Now.Subtract(StartTime).ToString("g").Split(",")(0))
+        While e.Cancel = False
+            Try
+                SetTextboxText(LunchTimeCountdownLbl, LunchTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
+                SetTextboxText(RegEndCountdownLbl, RegularEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
+                SetTextboxText(MaxEndCountdownLbl, MaxEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
+                SetTextboxText(WithoutBreaksCountdownLbl, WithoutBreaksTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
+                SetTextboxText(TotalWorktimeLbl, DateAndTime.Now.Subtract(StartTime).ToString("g").Split(",")(0))
 
-                    If DateAndTime.Now.Subtract(StartTime).TotalSeconds <= ProgressBar1.Maximum Then
-                        SetProgressbarValue(ProgressBar1, DateAndTime.Now.Subtract(StartTime).TotalSeconds)
+                If DateAndTime.Now.Subtract(StartTime).TotalSeconds <= ProgressBar1.Maximum Then
+                    SetProgressbarValue(ProgressBar1, DateAndTime.Now.Subtract(StartTime).TotalSeconds)
+                Else
+                    SetProgressbarValue(ProgressBar1, ProgressBar1.Maximum)
+                    If DateAndTime.Now.Subtract(StartTime).TotalSeconds - ProgressBar1.Maximum <= ProgressBar2.Maximum Then
+                        SetProgressbarValue(ProgressBar2, DateAndTime.Now.Subtract(StartTime).TotalSeconds - ProgressBar1.Maximum)
                     Else
-                        SetProgressbarValue(ProgressBar1, ProgressBar1.Maximum)
-                        If DateAndTime.Now.Subtract(StartTime).TotalSeconds - ProgressBar1.Maximum <= ProgressBar2.Maximum Then
-                            SetProgressbarValue(ProgressBar2, DateAndTime.Now.Subtract(StartTime).TotalSeconds - ProgressBar1.Maximum)
-                        Else
-                            SetProgressbarValue(ProgressBar2, ProgressBar2.Maximum)
-                        End If
+                        SetProgressbarValue(ProgressBar2, ProgressBar2.Maximum)
                     End If
+                End If
 
-                    If Not _Settings.CustomNotifications.Count = 0 Then
-                        CheckForNotifications()
-                    End If
+                If Not _Settings.CustomNotifications.Count = 0 Then
+                    CheckForNotifications()
+                End If
 
-                    NotifyIcon1.Text = RegularEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0)
+                NotifyIcon1.Text = RegularEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0)
 
-                    Threading.Thread.Sleep(_Settings.RefreshInterval)
-                Catch ex As Exception
-                End Try
-            End While
-        Catch ex As Exception
-        End Try
+                Threading.Thread.Sleep(_Settings.RefreshInterval)
+            Catch ex As Exception
+            End Try
+        End While
     End Sub
 
     Private Sub ClientGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
