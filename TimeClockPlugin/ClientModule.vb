@@ -16,7 +16,7 @@ Public Module ClientModule
         Implements ICSToolInterface
 
         Public GUIHandle As New ClientGUI
-        Public SettingsHandle As New Settings
+        Dim SettingsHandle As New Settings
         Public EnvironmentRuntimeVar As New List(Of KeyValuePair(Of String, String))
         Private LifetimePluginGUID As String = ""
         Private WasGUILoaded As Boolean = False
@@ -34,13 +34,13 @@ Public Module ClientModule
 
         Public ReadOnly Property PluginName As String Implements ICSToolInterface.PluginName
             Get
-                Return "RDP Client"
+                Return "Time Clock"
             End Get
         End Property
 
         Public ReadOnly Property WindowTitle As String Implements ICSToolInterface.WindowTitle
             Get
-                Return "RDP Client"
+                Return "Time Clock"
             End Get
         End Property
 
@@ -135,7 +135,7 @@ Public Module ClientModule
 
         Public ReadOnly Property NeedsEnvironmentVariables As Boolean Implements ICSToolInterface.NeedsEnvironmentVariables
             Get
-                Return True
+                Return False
             End Get
         End Property
 
@@ -150,7 +150,7 @@ Public Module ClientModule
 
         Public ReadOnly Property SupportFloat As Boolean Implements ICSToolInterface.SupportFloat
             Get
-                Return False
+                Return True
             End Get
         End Property
 

@@ -95,6 +95,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="SimulateTime.Designer.vb">
+      <DependentUpon>SimulateTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SimulateTime.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientGUI.resx">
@@ -110,6 +116,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimulateTime.resx">
+      <DependentUpon>SimulateTime.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +151,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\appointment-soon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-x-circle_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-announcement_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-clock_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-moon_16x16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
