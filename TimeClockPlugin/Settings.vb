@@ -7,6 +7,7 @@ Imports System.Windows.Forms
 
 <Serializable> Public Class Settings
     Public Property UseSystemBootupTime As Boolean = True
+    Public Property UseLocalFileTimestampIfOlder As Boolean = True
     Public Property NormalWorktimeSpan As Integer = 450
     Public Property NormalWorktimeMaxSpan As Integer = 360
     Public Property NormalWorktimeLunchSpan As Integer = 30

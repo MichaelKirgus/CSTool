@@ -164,5 +164,8 @@
   <ItemGroup>
     <None Include="Resources\icon-moon_16x16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-browser_16x16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -73,12 +73,25 @@ Public Class ClientGUI
         Try
             If Not SimulateStartTime Then
                 If _Settings.UseSystemBootupTime Then
-                    StartTime = DateTime.Now.AddMilliseconds(-Environment.TickCount)
+                    Dim tmpsysdate As New Date
+                    tmpsysdate = DateTime.Now.AddMilliseconds(-Environment.TickCount)
+                    If _Settings.UseLocalFileTimestampIfOlder Then
+                        Dim tmpfiledate As New Date
+                        tmpfiledate = GetStartTimestamp(_Settings.WorktimeTag)
+                        Dim result As Integer
+                        result = DateTime.Compare(tmpfiledate, tmpsysdate)
+                        If result < 0 Then
+                            StartTime = tmpfiledate
+                        Else
+                            StartTime = tmpsysdate
+                        End If
+                    Else
+                        StartTime = tmpsysdate
+                    End If
                 Else
                     StartTime = GetStartTimestamp(_Settings.WorktimeTag)
+                    SaveStartTimestamp(StartTime, _Settings.WorktimeTag)
                 End If
-
-                SaveStartTimestamp(StartTime, _Settings.WorktimeTag)
             End If
 
             StartWorktimeLbl.Text = StartTime.ToShortTimeString
@@ -112,7 +125,7 @@ Public Class ClientGUI
         Try
             Dim filename As String
             filename = My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData & "\" & TimeTag & ".tmp"
-            IO.File.WriteAllText(filename, StartTime.ToFileTimeUtc)
+            IO.File.WriteAllText(filename, StartTime.ToFileTime)
             Return True
         Catch ex As Exception
             Return False
@@ -128,7 +141,7 @@ Public Class ClientGUI
                 Dim datestr As Long
                 datestr = IO.File.ReadAllText(filename)
 
-                Return Date.FromFileTimeUtc(datestr)
+                Return Date.FromFileTime(datestr)
             Else
                 IO.File.Delete(filename)
                 Return DateAndTime.Now
@@ -164,11 +177,11 @@ Public Class ClientGUI
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
         While e.Cancel = False
             Try
-                SetTextboxText(LunchTimeCountdownLbl, LunchTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
-                SetTextboxText(RegEndCountdownLbl, RegularEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
-                SetTextboxText(MaxEndCountdownLbl, MaxEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
-                SetTextboxText(WithoutBreaksCountdownLbl, WithoutBreaksTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0))
-                SetTextboxText(TotalWorktimeLbl, DateAndTime.Now.Subtract(StartTime).ToString("g").Split(",")(0))
+                SetTextboxText(LunchTimeCountdownLbl, LunchTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
+                SetTextboxText(RegEndCountdownLbl, RegularEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
+                SetTextboxText(MaxEndCountdownLbl, MaxEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
+                SetTextboxText(WithoutBreaksCountdownLbl, WithoutBreaksTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
+                SetTextboxText(TotalWorktimeLbl, DateAndTime.Now.Subtract(StartTime).ToString("g").Split(",")(0).Replace("-", "+ "))
 
                 If DateAndTime.Now.Subtract(StartTime).TotalSeconds <= ProgressBar1.Maximum Then
                     SetProgressbarValue(ProgressBar1, DateAndTime.Now.Subtract(StartTime).TotalSeconds)
@@ -185,7 +198,7 @@ Public Class ClientGUI
                     CheckForNotifications()
                 End If
 
-                NotifyIcon1.Text = RegularEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0)
+                NotifyIcon1.Text = RegularEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ ")
 
                 Threading.Thread.Sleep(_Settings.RefreshInterval)
             Catch ex As Exception
@@ -215,11 +228,17 @@ Public Class ClientGUI
 
     Private Sub SetSystemBootTimeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetSystemBootTimeToolStripMenuItem.Click
         StartTime = DateTime.Now.AddMilliseconds(-Environment.TickCount)
-        CalculateStaticTimes(False)
+        CalculateStaticTimes(True)
         ClearNotificationFireState()
     End Sub
 
     Private Sub ResetNotificationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetNotificationsToolStripMenuItem.Click
+        ClearNotificationFireState()
+    End Sub
+
+    Private Sub UseFirstAppStartupTimeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseFirstAppStartupTimeToolStripMenuItem.Click
+        StartTime = GetStartTimestamp(_Settings.WorktimeTag)
+        CalculateStaticTimes(True)
         ClearNotificationFireState()
     End Sub
 End Class
