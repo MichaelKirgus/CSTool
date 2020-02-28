@@ -236,8 +236,10 @@ Public Class DockingHostWindow
     End Sub
 
     Private Sub WatchingSettingsLoadWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles WatchingSettingsLoadWorker.RunWorkerCompleted
-        If PluginHandler.LoadPluginSettings(_PluginSettingsFile) Then
-            PluginHandler.RefreshGUI()
+        If Not IsNothing(PluginHandler) Then
+            If PluginHandler.LoadPluginSettings(_PluginSettingsFile) Then
+                PluginHandler.RefreshGUI()
+            End If
         End If
     End Sub
 End Class
