@@ -220,14 +220,14 @@ Public Class WorkspaceManager
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
         If Not ListView1.SelectedItems.Count = 0 Then
             SaveGUIChanges()
-            _parent.OpenNewWindow(False, ListView1.SelectedItems(0).Text)
+            _parent.SpawnNewProcessInstance(ListView1.SelectedItems(0).Text)
         End If
     End Sub
 
     Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
         If Not ListView1.SelectedItems.Count = 0 Then
             SaveGUIChanges()
-            _parent.SpawnNewProcessInstance(ListView1.SelectedItems(0).Text)
+            _parent.OpenNewWindow(False, ListView1.SelectedItems(0).Text)
         End If
     End Sub
 End Class
