@@ -32,7 +32,9 @@ Partial Class MainForm
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.HostnameOrIPCtl = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.SearchInNewWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SearchInNewInstanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
@@ -132,12 +134,25 @@ Partial Class MainForm
         'ToolStripButton1
         '
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SearchInNewWindowToolStripMenuItem, Me.SearchInNewInstanceToolStripMenuItem})
         Me.ToolStripButton1.Image = Global.CSTool.My.Resources.Resources.icon_search_22x22
         Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(38, 26)
         Me.ToolStripButton1.Text = "Get information"
+        '
+        'SearchInNewWindowToolStripMenuItem
+        '
+        Me.SearchInNewWindowToolStripMenuItem.Name = "SearchInNewWindowToolStripMenuItem"
+        Me.SearchInNewWindowToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.SearchInNewWindowToolStripMenuItem.Text = "Search in new window"
+        '
+        'SearchInNewInstanceToolStripMenuItem
+        '
+        Me.SearchInNewInstanceToolStripMenuItem.Name = "SearchInNewInstanceToolStripMenuItem"
+        Me.SearchInNewInstanceToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.SearchInNewInstanceToolStripMenuItem.Text = "Search in new instance"
         '
         'ToolStripButton4
         '
@@ -591,7 +606,6 @@ Partial Class MainForm
     End Sub
     Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
-    Friend WithEvents ToolStripButton1 As ToolStripButton
     Friend WithEvents DockingSuiteVS2015BlueTheme As WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme
     Friend WithEvents DockingSuiteVS2015LightTheme As WeifenLuo.WinFormsUI.Docking.VS2015LightTheme
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
@@ -658,4 +672,7 @@ Partial Class MainForm
     Friend WithEvents ExportWorkspaceFile As SaveFileDialog
     Friend WithEvents ImportWorkspaceFile As OpenFileDialog
     Friend WithEvents ToolStripButton12 As ToolStripSplitButton
+    Friend WithEvents ToolStripButton1 As ToolStripSplitButton
+    Friend WithEvents SearchInNewWindowToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SearchInNewInstanceToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -57,7 +57,7 @@ Public Class MainForm
         End Try
     End Function
 
-    Public Function SpawnNewProcessInstance(Optional ByVal UserSettingName As String = "", Optional ByVal NonPersistent As Boolean = False) As Boolean
+    Public Function SpawnNewProcessInstance(Optional ByVal UserSettingName As String = "", Optional ByVal NonPersistent As Boolean = False, Optional ByVal HostOrIP As String = "") As Boolean
         Try
             Dim newinst As New Process
             newinst.StartInfo.FileName = Application.ExecutablePath
@@ -66,6 +66,9 @@ Public Class MainForm
             End If
             If NonPersistent Then
                 newinst.StartInfo.Arguments += "/nonpersistent"
+            End If
+            If Not HostOrIP = "" Then
+                newinst.StartInfo.Arguments += " /hostname " & HostOrIP
             End If
 
             Return newinst.Start()
@@ -528,10 +531,6 @@ Public Class MainForm
         ToolStripButton1.Enabled = True
     End Sub
 
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        PerformRaiseActions()
-    End Sub
-
     Sub RaiseClientAction(ByVal HostnameOrIP As String)
         'Set window title
         SetWindowTitle(HostnameOrIP)
@@ -760,7 +759,7 @@ Public Class MainForm
         newtempfrm.Show()
     End Sub
 
-    Public Function OpenNewWindow(ByVal CloneSettingsAndLayout As Boolean, Optional ByVal UserSettingName As String = "") As Boolean
+    Public Function OpenNewWindow(ByVal CloneSettingsAndLayout As Boolean, Optional ByVal UserSettingName As String = "", Optional ByVal HostOrIP As String = "") As Boolean
         Try
             Dim newins As New MainForm
             If Not CloneSettingsAndLayout Then
@@ -774,6 +773,10 @@ Public Class MainForm
             newins.IsChild = True
 
             newins.Show()
+            If Not HostOrIP = "" Then
+                newins.HostnameOrIPCtl.Text = HostOrIP
+                newins.PerformRaiseActions()
+            End If
 
             Return True
         Catch ex As Exception
@@ -928,5 +931,17 @@ Public Class MainForm
 
     Private Sub ToolStripButton8_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripButton8.ButtonClick
         ToolStripButton8.ShowDropDown()
+    End Sub
+
+    Private Sub ToolStripButton1_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripButton1.ButtonClick
+        PerformRaiseActions()
+    End Sub
+
+    Private Sub SearchInNewWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SearchInNewWindowToolStripMenuItem.Click
+        OpenNewWindow(True, CurrentUserSettingName, HostnameOrIPCtl.Text)
+    End Sub
+
+    Private Sub SearchInNewInstanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SearchInNewInstanceToolStripMenuItem.Click
+        SpawnNewProcessInstance(CurrentUserSettingName, True, HostnameOrIPCtl.Text)
     End Sub
 End Class
