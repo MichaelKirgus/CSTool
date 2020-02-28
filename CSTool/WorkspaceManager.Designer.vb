@@ -34,6 +34,14 @@ Partial Class WorkspaceManager
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton8 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.ImportToNewWorkplaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -45,10 +53,8 @@ Partial Class WorkspaceManager
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
+        Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
+        Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -65,9 +71,10 @@ Partial Class WorkspaceManager
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.UserSettingBox, Me.ToolStripButton4, Me.ToolStripButton1, Me.ToolStripButton5, Me.ToolStripButton2, Me.ToolStripSeparator1, Me.ToolStripButton3, Me.ToolStripButton6})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.UserSettingBox, Me.ToolStripButton4, Me.ToolStripButton1, Me.ToolStripButton5, Me.ToolStripButton2, Me.ToolStripSeparator1, Me.ToolStripButton3, Me.ToolStripButton6, Me.ToolStripSeparator2, Me.ToolStripButton7, Me.ToolStripButton8})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ToolStrip1.Size = New System.Drawing.Size(591, 29)
         Me.ToolStrip1.TabIndex = 0
         Me.ToolStrip1.Text = "ToolStrip1"
@@ -116,6 +123,73 @@ Partial Class WorkspaceManager
         Me.ToolStripButton5.Name = "ToolStripButton5"
         Me.ToolStripButton5.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton5.Text = "Add"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = Global.CSTool.My.Resources.Resources.icon_check_circle_22x22
+        Me.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton2.Text = "Save workspace"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 29)
+        '
+        'ToolStripButton3
+        '
+        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton3.Image = Global.CSTool.My.Resources.Resources.icon_external_link_22x22
+        Me.ToolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton3.Name = "ToolStripButton3"
+        Me.ToolStripButton3.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton3.Text = "Open workspace in new instance"
+        '
+        'ToolStripButton6
+        '
+        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton6.Image = Global.CSTool.My.Resources.Resources.icon_browser_22x22
+        Me.ToolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton6.Name = "ToolStripButton6"
+        Me.ToolStripButton6.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton6.Text = "Open workspace in new window"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 29)
+        '
+        'ToolStripButton7
+        '
+        Me.ToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton7.Image = Global.CSTool.My.Resources.Resources.icon_upload_22x22
+        Me.ToolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton7.Name = "ToolStripButton7"
+        Me.ToolStripButton7.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton7.Text = "Export workspace..."
+        '
+        'ToolStripButton8
+        '
+        Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton8.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToNewWorkplaceToolStripMenuItem})
+        Me.ToolStripButton8.Image = Global.CSTool.My.Resources.Resources.icon_download_22x22
+        Me.ToolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton8.Name = "ToolStripButton8"
+        Me.ToolStripButton8.Size = New System.Drawing.Size(38, 26)
+        Me.ToolStripButton8.Text = "Import workspace..."
+        '
+        'ImportToNewWorkplaceToolStripMenuItem
+        '
+        Me.ImportToNewWorkplaceToolStripMenuItem.Name = "ImportToNewWorkplaceToolStripMenuItem"
+        Me.ImportToNewWorkplaceToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.ImportToNewWorkplaceToolStripMenuItem.Text = "Import to new workplace..."
         '
         'ListView1
         '
@@ -239,40 +313,18 @@ Partial Class WorkspaceManager
         Me.PropertyGrid1.Size = New System.Drawing.Size(591, 383)
         Me.PropertyGrid1.TabIndex = 0
         '
-        'ToolStripButton2
+        'ExportWorkspaceFile
         '
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = Global.CSTool.My.Resources.Resources.icon_check_circle_22x22
-        Me.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton2.Text = "Save workspace"
+        Me.ExportWorkspaceFile.DefaultExt = "zip"
+        Me.ExportWorkspaceFile.Filter = "ZIP-File|*.zip"
+        Me.ExportWorkspaceFile.RestoreDirectory = True
         '
-        'ToolStripSeparator1
+        'ImportWorkspaceFile
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 29)
-        '
-        'ToolStripButton3
-        '
-        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton3.Image = Global.CSTool.My.Resources.Resources.icon_external_link_22x22
-        Me.ToolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton3.Text = "Open workspace in new instance"
-        '
-        'ToolStripButton6
-        '
-        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton6.Image = Global.CSTool.My.Resources.Resources.icon_browser_22x22
-        Me.ToolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton6.Name = "ToolStripButton6"
-        Me.ToolStripButton6.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton6.Text = "Open workspace in new window"
+        Me.ImportWorkspaceFile.DefaultExt = "zip"
+        Me.ImportWorkspaceFile.Filter = "ZIP-File|*.zip"
+        Me.ImportWorkspaceFile.RestoreDirectory = True
+        Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
         '
         'WorkspaceManager
         '
@@ -324,4 +376,10 @@ Partial Class WorkspaceManager
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripButton3 As ToolStripButton
     Friend WithEvents ToolStripButton6 As ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents ToolStripButton7 As ToolStripButton
+    Friend WithEvents ExportWorkspaceFile As SaveFileDialog
+    Friend WithEvents ImportWorkspaceFile As OpenFileDialog
+    Friend WithEvents ToolStripButton8 As ToolStripSplitButton
+    Friend WithEvents ImportToNewWorkplaceToolStripMenuItem As ToolStripMenuItem
 End Class

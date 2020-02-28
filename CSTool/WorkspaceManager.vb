@@ -230,4 +230,50 @@ Public Class WorkspaceManager
             _parent.OpenNewWindow(False, ListView1.SelectedItems(0).Text)
         End If
     End Sub
+
+    Private Sub ToolStripButton7_Click(sender As Object, e As EventArgs) Handles ToolStripButton7.Click
+        ExportWorkspaceFile.ShowDialog()
+        Dim result As Boolean = False
+        If Not ExportWorkspaceFile.FileName = "" Then
+            _parent.SaveSettings()
+            result = _parent.WindowManagerHandler.ExportWorkspace(ExportWorkspaceFile.FileName, ListView1.SelectedItems(0).Text)
+
+            If result Then
+                MsgBox("Export successful!")
+            Else
+                MsgBox("Export failed!")
+            End If
+        End If
+    End Sub
+
+    Private Sub ToolStripButton8_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripButton8.ButtonClick
+        ImportWorkspaceFile.ShowDialog()
+        Dim result As Boolean = False
+        If Not ImportWorkspaceFile.FileName = "" Then
+            result = _parent.WindowManagerHandler.ImportWorkspace(ImportWorkspaceFile.FileName, ListView1.SelectedItems(0).Text)
+
+            If result Then
+                MsgBox("Import successful.")
+            Else
+                MsgBox("Import failed!")
+            End If
+        End If
+    End Sub
+
+    Private Sub ImportToNewWorkplaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToNewWorkplaceToolStripMenuItem.Click
+        ImportWorkspaceFile.ShowDialog()
+        Dim result As Boolean = False
+        If Not ImportWorkspaceFile.FileName = "" Then
+            AddNewWorkspaceToGUI(False)
+            Dim newsetting As String
+            newsetting = ListView1.Items(ListView1.Items.Count - 1).Text
+            result = _parent.WindowManagerHandler.ImportWorkspace(ImportWorkspaceFile.FileName, newsetting)
+
+            If result Then
+                MsgBox("Import successful.")
+            Else
+                MsgBox("Import failed!")
+            End If
+        End If
+    End Sub
 End Class
