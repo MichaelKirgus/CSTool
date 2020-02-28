@@ -252,6 +252,75 @@ Public Class WindowManager
         End Try
     End Function
 
+    Public Function CloseAllOpenWindows() As Boolean
+        Try
+            For index = 0 To _DockingContent.Contents.Count - 1
+                Try
+                    Dim HostingWindowObj As DockContent
+                    HostingWindowObj = _DockingContent.Contents(index)
+                    If Not HostingWindowObj.IsDisposed Then
+                        Dim DockHostWindowsObj As DockingHostWindow
+                        DockHostWindowsObj = HostingWindowObj
+                        DockHostWindowsObj.Close()
+                    End If
+                Catch ex As Exception
+                End Try
+            Next
+
+            Return False
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function CloseAllOpenWindowsByDockingState(ByVal State As DockState) As Boolean
+        Try
+            For index = 0 To _DockingContent.Contents.Count - 1
+                Try
+                    Dim HostingWindowObj As DockContent
+                    HostingWindowObj = _DockingContent.Contents(index)
+                    If Not HostingWindowObj.IsDisposed Then
+                        If HostingWindowObj.DockState = State Then
+                            Dim DockHostWindowsObj As DockingHostWindow
+                            DockHostWindowsObj = HostingWindowObj
+                            DockHostWindowsObj.Close()
+                        End If
+                    End If
+                Catch ex As Exception
+                End Try
+            Next
+
+            Return False
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function CloseAllOpenWindowsExceptActiveWindow() As Boolean
+        Try
+            For index = 0 To _DockingContent.Contents.Count - 1
+                Try
+                    Dim HostingWindowObj As DockContent
+                    HostingWindowObj = _DockingContent.Contents(index)
+                    If Not HostingWindowObj.IsDisposed Then
+                        If Not HostingWindowObj.IsActivated Then
+                            Dim DockHostWindowsObj As DockingHostWindow
+                            DockHostWindowsObj = HostingWindowObj
+                            DockHostWindowsObj.Close()
+                        End If
+                    End If
+                Catch ex As Exception
+                End Try
+            Next
+
+            Return False
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+
+
     Public Function GetAllDockingWindows() As List(Of DockingHostWindow)
         Try
             Dim DockHostWindowColl As New List(Of DockingHostWindow)

@@ -45,6 +45,17 @@ Public Class MainForm
         LoadForm()
     End Sub
 
+    Public Function GetAllChildForms() As IEnumerable(Of MainForm)
+        Try
+            Dim frmcoll As IEnumerable(Of MainForm)
+            frmcoll = Application.OpenForms.OfType(Of MainForm)
+
+            Return frmcoll
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Function SpawnNewProcessInstance(Optional ByVal UserSettingName As String = "", Optional ByVal NonPersistent As Boolean = False) As Boolean
         Try
             Dim newinst As New Process
@@ -261,13 +272,21 @@ Public Class MainForm
             WindowManagerHandler._UserProfilePath = UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername)
 
             If Not CurrentUserSettingName = "" Then
+                'Create (default) user settings folder if not exists
+                If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & CurrentUserSettingName) Then
+                    IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & CurrentUserSettingName)
+                End If
                 'Create (default) docking layout file if not exists
                 If Not IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & CurrentUserSettingName & "\Layout.xml") Then
-                    WindowManagerHandler.SaveWindowLayoutToXML()
+                    WindowManagerHandler.SaveWindowLayoutToXML("Layout.xml", True, CurrentUserSettingName)
                 End If
                 'Set specific user setting tag (if instance or window was spawned from parent)
                 WindowManagerHandler._UserSettingName = CurrentUserSettingName
             Else
+                'Create (default) user settings folder if not exists
+                If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettings.SettingName) Then
+                    IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettings.SettingName)
+                End If
                 'Create (default) docking layout file if not exists
                 If Not IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettings.SettingName & "\Layout.xml") Then
                     WindowManagerHandler.SaveWindowLayoutToXML()
@@ -278,11 +297,41 @@ Public Class MainForm
 
             'Get Window size and location from settings
             CurrentLoadActionState = "Restore form size and location..."
-            WindowManagerHandler.LoadFormLocationAndSize(Me, True, True, UserSettings.LastWindowSize.Height, UserSettings.LastWindowSize.Width, UserSettings.LastWindowLocation.X, UserSettings.LastWindowLocation.Y,
-            UserSettings.LastNormalWindowSize.Height, UserSettings.LastNormalWindowSize.Width, UserSettings.LastNormalWindowLocation.X, UserSettings.LastNormalWindowLocation.Y, UserSettings.LastWindowState)
+
+            If Not CurrentUserSettingName = "" And Not CurrentUserSettingName = "Default" Then
+                'Get workspace to load
+                If Not UserSettings.UserTemplates.Count = 0 Then
+                    For index = 0 To UserSettings.UserTemplates.Count - 1
+                        If UserSettings.UserTemplates(index).SettingName = UserSettings.LastSettingName Then
+                            'Found setting name, load position and size
+                            WindowManagerHandler.LoadFormLocationAndSize(Me, True, True, UserSettings.UserTemplates(index).LastWindowSize.Height,
+                                                                         UserSettings.UserTemplates(index).LastWindowSize.Width,
+                                                                         UserSettings.UserTemplates(index).LastWindowLocation.X,
+                                                                         UserSettings.UserTemplates(index).LastWindowLocation.Y,
+                                                                         UserSettings.UserTemplates(index).LastNormalWindowSize.Height,
+                                                                         UserSettings.UserTemplates(index).LastNormalWindowSize.Width,
+                                                                         UserSettings.UserTemplates(index).LastNormalWindowLocation.X,
+                                                                         UserSettings.UserTemplates(index).LastNormalWindowLocation.Y,
+                                                                         UserSettings.UserTemplates(index).LastWindowState)
+
+                            Exit For
+                        End If
+                    Next
+                End If
+            Else
+                WindowManagerHandler.LoadFormLocationAndSize(Me, True, True, UserSettings.LastWindowSize.Height,
+                                                             UserSettings.LastWindowSize.Width,
+                                                             UserSettings.LastWindowLocation.X,
+                                                             UserSettings.LastWindowLocation.Y,
+                                                             UserSettings.LastNormalWindowSize.Height,
+                                                             UserSettings.LastNormalWindowSize.Width,
+                                                             UserSettings.LastNormalWindowLocation.X,
+                                                             UserSettings.LastNormalWindowLocation.Y,
+                                                             UserSettings.LastWindowState)
+            End If
 
             'Check if additional workspaces or instances should be spawn
-            If Not UserSettings.UserTemplates.Count = 0 Then
+            If Not UserSettings.UserTemplates.Count = 0 And IsChild = False And CurrentUserSettingName = "" Then
                 CurrentLoadActionState = "Restore additional workspaces..."
                 For index = 0 To UserSettings.UserTemplates.Count - 1
                     If UserSettings.UserTemplates(index).Autostart Then
@@ -399,8 +448,24 @@ Public Class MainForm
         CurrentLoadActionState = "Finished!"
     End Sub
 
-    Public Sub CloseForm()
+    Public Function CloseForm() As Boolean
         If Not IsNonPersistent Then
+            If Not CloseChildsWithoutWarningToolStripMenuItem.Checked And IsChild = False Then
+                'Check if child windows open
+                Dim oforms As IEnumerable(Of MainForm)
+                oforms = GetAllChildForms()
+                If Not IsNothing(oforms) Then
+                    If Not oforms.Count = 1 Then
+                        Dim res As MsgBoxResult
+                        res = MsgBox("One or more child windows are open. Do you want to close the application?", vbYesNo)
+                        If res = MsgBoxResult.No Then
+                            'Cancel exit application
+                            Return False
+                        End If
+                    End If
+                End If
+            End If
+
             'Save environment variables settings to file
             WindowManagerHandler.SaveEnvironmentPluginsSettings(WindowManagerHandler._UserSettingName)
 
@@ -410,26 +475,39 @@ Public Class MainForm
             'Save window gui plugin settings
             WindowManagerHandler.SaveAllGUIPluginSettings(WindowManagerHandler._UserSettingName)
 
-            If Not IsChild Then
-                'Save window layout and serialize plugin settings
-                WindowManagerHandler.SaveWindowLayoutToXML("Layout.xml", True, WindowManagerHandler._UserSettingName)
+            'Save window layout and serialize plugin settings
+            WindowManagerHandler.SaveWindowLayoutToXML("Layout.xml", True, WindowManagerHandler._UserSettingName)
 
-                'Save last normal window state
-                If Me.WindowState = FormWindowState.Normal Then
-                    UserSettings.LastNormalWindowLocation = Me.Location
-                End If
-
-                'Save window position to user settings class
-                WindowManagerHandler.SaveFormLocationAndSize(Me, UserSettings.LastWindowSize, UserSettings.LastWindowLocation, UserSettings.LastWindowState)
-
-                'Save user settings to file
-                UserSettingManager.SaveSettings(UserSettings, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure))
+            'Save last normal window state
+            If Me.WindowState = FormWindowState.Normal Then
+                UserSettings.LastNormalWindowLocation = Me.Location
             End If
+
+            'Save window position to user settings class
+            If Not CurrentUserSettingName = "" And Not CurrentUserSettingName = "Default" Then
+                'Get workspace to save
+                If Not UserSettings.UserTemplates.Count = 0 Then
+                    For index = 0 To UserSettings.UserTemplates.Count - 1
+                        If UserSettings.UserTemplates(index).SettingName = UserSettings.LastSettingName Then
+                            'Found setting name, save position and size
+                            WindowManagerHandler.SaveFormLocationAndSize(Me, UserSettings.UserTemplates(index).LastWindowSize, UserSettings.UserTemplates(index).LastWindowLocation, UserSettings.UserTemplates(index).LastWindowState)
+                            Exit For
+                        End If
+                    Next
+                End If
+            Else
+                WindowManagerHandler.SaveFormLocationAndSize(Me, UserSettings.LastWindowSize, UserSettings.LastWindowLocation, UserSettings.LastWindowState)
+            End If
+
+            'Save user settings to file
+            UserSettingManager.SaveSettings(UserSettings, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure))
 
             'Flush log file (if enabled)
             LogManager.CloseStreams()
         End If
-    End Sub
+
+        Return True
+    End Function
 
     Public Sub ResizeAndMoveHandler()
         If IsFormLoading = False Then
@@ -467,12 +545,19 @@ Public Class MainForm
             Me.Text = "CSTool"
         Else
             Me.Text = Clientname.ToUpper
+            If Not CurrentUserSettingName = "" Then
+                Me.Text += " (" & CurrentUserSettingName & ")"
+            End If
         End If
         If IsNonPersistent Then
-            Me.Text += " [Non-Persistent]"
+            If Not CurrentUserSettingName = "" Then
+                Me.Text += " (" & CurrentUserSettingName & ") [Non-Persistent]"
+            Else
+                Me.Text += " [Non-Persistent]"
+            End If
         End If
         If IsChild Then
-            Me.Text += " [Child]"
+            Me.Text += " (" & CurrentUserSettingName & ") [Child]"
         End If
     End Sub
 
@@ -511,7 +596,9 @@ Public Class MainForm
         End If
 
         If isok Then
-            CloseForm()
+            If Not CloseForm() Then
+                e.Cancel = True
+            End If
         Else
             e.Cancel = True
         End If
@@ -769,5 +856,9 @@ Public Class MainForm
         Dim logsetfrm As New LogSettingsForm
         logsetfrm._parent = Me
         logsetfrm.Show()
+    End Sub
+
+    Private Sub CloseAllOtherWindowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseAllOtherWindowsToolStripMenuItem.Click
+
     End Sub
 End Class

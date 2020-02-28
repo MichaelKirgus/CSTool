@@ -89,12 +89,14 @@ Public Class WorkspaceManager
                 If Not TemplateName = _parent.UserSettings.UserTemplates(index - 1).TemplateName Then
                     Dim Folderstr As String
                     Folderstr = _parent.CurrentUserProfilePath & "\" & _parent.UserSettings.UserTemplates(index - 1).TemplateName
-                    If Not IO.Directory.Exists(Folderstr) Then
+                    If IO.Directory.Exists(Folderstr) Then
                         My.Computer.FileSystem.RenameDirectory(Folderstr, TemplateName)
                     End If
                 End If
 
                 _parent.UserSettings.UserTemplates(index - 1).TemplateName = TemplateName
+                _parent.UserSettings.UserTemplates(index - 1).SettingName = TemplateName
+                _parent.UserSettings.UserTemplates(index - 1).LastSettingName = TemplateName
                 _parent.UserSettings.UserTemplates(index - 1).TemplateDescription = TemplateDescription
                 _parent.UserSettings.UserTemplates(index - 1).Autostart = Autostart
             End If
@@ -165,8 +167,13 @@ Public Class WorkspaceManager
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         Try
-            ListView1.SelectedItems(0).Checked = CheckBox1.Checked
-            SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+            If Not IsNothing(ListView1.SelectedItems) And Not ListView1.SelectedItems.Count = 0 Then
+                ListView1.SelectedItems(0).Checked = CheckBox1.Checked
+                SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+                If Not ListView1.SelectedItems(0).Index = 0 Then
+                    PropertyGrid1.SelectedObject = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1)
+                End If
+            End If
         Catch ex As Exception
         End Try
     End Sub
@@ -181,9 +188,10 @@ Public Class WorkspaceManager
 
     Private Sub ListView1_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles ListView1.ItemChecked
         Try
-            If Not ListView1.SelectedItems.Count = 0 Then
+            If Not IsNothing(ListView1.SelectedItems) And Not ListView1.SelectedItems.Count = 0 Then
                 CheckBox1.Checked = ListView1.SelectedItems(0).Checked
                 SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+                PropertyGrid1.SelectedObject = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1)
             End If
         Catch ex As Exception
         End Try
@@ -195,9 +203,12 @@ Public Class WorkspaceManager
 
     Public Sub SaveGUIChanges()
         Try
-            ListView1.SelectedItems(0).Text = TextBox1.Text
-            ListView1.SelectedItems(0).SubItems(1).Text = TextBox2.Text
-            SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+            If Not IsNothing(ListView1.SelectedItems) And Not ListView1.SelectedItems.Count = 0 Then
+                ListView1.SelectedItems(0).Text = TextBox1.Text
+                ListView1.SelectedItems(0).SubItems(1).Text = TextBox2.Text
+                SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+                PropertyGrid1.SelectedObject = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1)
+            End If
         Catch ex As Exception
         End Try
     End Sub

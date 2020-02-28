@@ -66,12 +66,14 @@ Partial Class MainForm
         Me.TemplateSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WorkplaceSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ApplicationSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.EnvironmentVariablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitWithoutWarning = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseChildsWithoutWarningToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
@@ -85,7 +87,12 @@ Partial Class MainForm
         Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(Me.components)
         Me.CheckHostOrIPAsync = New System.ComponentModel.BackgroundWorker()
         Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.LogSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseAllOtherWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseAllWindowsDocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CloseAllWindowsfloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseAllWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -236,6 +243,7 @@ Partial Class MainForm
         'ToolStripButton6
         '
         Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton6.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseAllOtherWindowsToolStripMenuItem, Me.ToolStripSeparator11, Me.CloseAllWindowsDocumentToolStripMenuItem, Me.CloseAllWindowsfloatToolStripMenuItem, Me.ToolStripSeparator12, Me.CloseAllWindowsToolStripMenuItem})
         Me.ToolStripButton6.Image = Global.CSTool.My.Resources.Resources.icon_minus_square_22x22
         Me.ToolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
@@ -330,7 +338,7 @@ Partial Class MainForm
         '
         Me.ToolStripButton8.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton8.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PluginSettingsToolStripMenuItem, Me.TemplateSettingsToolStripMenuItem, Me.WorkplaceSettingsToolStripMenuItem, Me.ApplicationSettingsToolStripMenuItem, Me.LogSettingsToolStripMenuItem, Me.ToolStripSeparator8, Me.EnvironmentVariablesToolStripMenuItem, Me.ToolStripMenuItem1, Me.ShowLogToolStripMenuItem, Me.ToolStripSeparator7, Me.ExitWithoutWarning, Me.SaveSettingsToolStripMenuItem})
+        Me.ToolStripButton8.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PluginSettingsToolStripMenuItem, Me.TemplateSettingsToolStripMenuItem, Me.WorkplaceSettingsToolStripMenuItem, Me.ApplicationSettingsToolStripMenuItem, Me.LogSettingsToolStripMenuItem, Me.ToolStripSeparator8, Me.EnvironmentVariablesToolStripMenuItem, Me.ToolStripMenuItem1, Me.ShowLogToolStripMenuItem, Me.ToolStripSeparator7, Me.ExitWithoutWarning, Me.CloseChildsWithoutWarningToolStripMenuItem, Me.SaveSettingsToolStripMenuItem})
         Me.ToolStripButton8.Image = Global.CSTool.My.Resources.Resources.icon_menu_22x22
         Me.ToolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
@@ -341,54 +349,60 @@ Partial Class MainForm
         'PluginSettingsToolStripMenuItem
         '
         Me.PluginSettingsToolStripMenuItem.Name = "PluginSettingsToolStripMenuItem"
-        Me.PluginSettingsToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.PluginSettingsToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.PluginSettingsToolStripMenuItem.Text = "Plug-in settings..."
         '
         'TemplateSettingsToolStripMenuItem
         '
         Me.TemplateSettingsToolStripMenuItem.Name = "TemplateSettingsToolStripMenuItem"
-        Me.TemplateSettingsToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.TemplateSettingsToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.TemplateSettingsToolStripMenuItem.Text = "Template settings..."
         '
         'WorkplaceSettingsToolStripMenuItem
         '
         Me.WorkplaceSettingsToolStripMenuItem.Name = "WorkplaceSettingsToolStripMenuItem"
-        Me.WorkplaceSettingsToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.WorkplaceSettingsToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.WorkplaceSettingsToolStripMenuItem.Text = "Workplace settings..."
         '
         'ApplicationSettingsToolStripMenuItem
         '
         Me.ApplicationSettingsToolStripMenuItem.Name = "ApplicationSettingsToolStripMenuItem"
-        Me.ApplicationSettingsToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.ApplicationSettingsToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.ApplicationSettingsToolStripMenuItem.Text = "Application settings..."
+        '
+        'LogSettingsToolStripMenuItem
+        '
+        Me.LogSettingsToolStripMenuItem.Name = "LogSettingsToolStripMenuItem"
+        Me.LogSettingsToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
+        Me.LogSettingsToolStripMenuItem.Text = "Log settings..."
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(224, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(238, 6)
         '
         'EnvironmentVariablesToolStripMenuItem
         '
         Me.EnvironmentVariablesToolStripMenuItem.Name = "EnvironmentVariablesToolStripMenuItem"
-        Me.EnvironmentVariablesToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.EnvironmentVariablesToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.EnvironmentVariablesToolStripMenuItem.Text = "Environment variables..."
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(227, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(241, 22)
         Me.ToolStripMenuItem1.Text = "Test environment strings..."
         '
         'ShowLogToolStripMenuItem
         '
         Me.ShowLogToolStripMenuItem.Name = "ShowLogToolStripMenuItem"
-        Me.ShowLogToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.ShowLogToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.ShowLogToolStripMenuItem.Text = "Show Log..."
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(224, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(238, 6)
         '
         'ExitWithoutWarning
         '
@@ -396,8 +410,15 @@ Partial Class MainForm
         Me.ExitWithoutWarning.CheckOnClick = True
         Me.ExitWithoutWarning.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ExitWithoutWarning.Name = "ExitWithoutWarning"
-        Me.ExitWithoutWarning.Size = New System.Drawing.Size(227, 22)
+        Me.ExitWithoutWarning.Size = New System.Drawing.Size(241, 22)
         Me.ExitWithoutWarning.Text = "Exit without warning"
+        '
+        'CloseChildsWithoutWarningToolStripMenuItem
+        '
+        Me.CloseChildsWithoutWarningToolStripMenuItem.CheckOnClick = True
+        Me.CloseChildsWithoutWarningToolStripMenuItem.Name = "CloseChildsWithoutWarningToolStripMenuItem"
+        Me.CloseChildsWithoutWarningToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
+        Me.CloseChildsWithoutWarningToolStripMenuItem.Text = "Close childs without warning"
         '
         'SaveSettingsToolStripMenuItem
         '
@@ -405,7 +426,7 @@ Partial Class MainForm
         Me.SaveSettingsToolStripMenuItem.CheckOnClick = True
         Me.SaveSettingsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.SaveSettingsToolStripMenuItem.Name = "SaveSettingsToolStripMenuItem"
-        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.SaveSettingsToolStripMenuItem.Text = "Save settings"
         '
         'ToolStripSeparator5
@@ -475,11 +496,39 @@ Partial Class MainForm
         Me.CustomItemsContext.Name = "CustomItemsContext"
         Me.CustomItemsContext.Size = New System.Drawing.Size(61, 4)
         '
-        'LogSettingsToolStripMenuItem
+        'CloseAllOtherWindowsToolStripMenuItem
         '
-        Me.LogSettingsToolStripMenuItem.Name = "LogSettingsToolStripMenuItem"
-        Me.LogSettingsToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
-        Me.LogSettingsToolStripMenuItem.Text = "Log settings..."
+        Me.CloseAllOtherWindowsToolStripMenuItem.Name = "CloseAllOtherWindowsToolStripMenuItem"
+        Me.CloseAllOtherWindowsToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CloseAllOtherWindowsToolStripMenuItem.Text = "Close all other windows"
+        '
+        'CloseAllWindowsDocumentToolStripMenuItem
+        '
+        Me.CloseAllWindowsDocumentToolStripMenuItem.Name = "CloseAllWindowsDocumentToolStripMenuItem"
+        Me.CloseAllWindowsDocumentToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CloseAllWindowsDocumentToolStripMenuItem.Text = "Close all windows (document)"
+        '
+        'ToolStripSeparator11
+        '
+        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(246, 6)
+        '
+        'CloseAllWindowsfloatToolStripMenuItem
+        '
+        Me.CloseAllWindowsfloatToolStripMenuItem.Name = "CloseAllWindowsfloatToolStripMenuItem"
+        Me.CloseAllWindowsfloatToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CloseAllWindowsfloatToolStripMenuItem.Text = "Close all windows (float)"
+        '
+        'CloseAllWindowsToolStripMenuItem
+        '
+        Me.CloseAllWindowsToolStripMenuItem.Name = "CloseAllWindowsToolStripMenuItem"
+        Me.CloseAllWindowsToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CloseAllWindowsToolStripMenuItem.Text = "Close all windows"
+        '
+        'ToolStripSeparator12
+        '
+        Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(246, 6)
         '
         'MainForm
         '
@@ -561,4 +610,11 @@ Partial Class MainForm
     Friend WithEvents RestoreLastClosedWindowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RestoreInitialTemplateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LogSettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CloseChildsWithoutWarningToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CloseAllOtherWindowsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator11 As ToolStripSeparator
+    Friend WithEvents CloseAllWindowsDocumentToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CloseAllWindowsfloatToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
+    Friend WithEvents CloseAllWindowsToolStripMenuItem As ToolStripMenuItem
 End Class
