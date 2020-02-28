@@ -917,4 +917,16 @@ Public Class MainForm
     Private Sub ToolStripButton12_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripButton12.ButtonClick
         OpenAddFromTemplateWindow()
     End Sub
+
+    Private Sub ToolStripButton2_MouseDown(sender As Object, e As MouseEventArgs) Handles ToolStripButton2.MouseDown
+        If e.Button = MouseButtons.Right Then
+            If Not UserSettings.CustomActions.Count = 0 Then
+                CustomItemsContext.Show(MousePosition)
+            End If
+        End If
+    End Sub
+
+    Private Sub ToolStripButton8_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripButton8.ButtonClick
+        ToolStripButton8.ShowDropDown()
+    End Sub
 End Class
