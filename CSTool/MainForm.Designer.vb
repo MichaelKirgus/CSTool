@@ -38,7 +38,7 @@ Partial Class MainForm
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripButton12 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton12 = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripSplitButton()
         Me.NewIndependentWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -49,6 +49,12 @@ Partial Class MainForm
         Me.DockbottomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocktopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton6 = New System.Windows.Forms.ToolStripSplitButton()
+        Me.CloseAllOtherWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CloseAllWindowsDocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseAllWindowsfloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
+        Me.CloseAllWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton11 = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -71,6 +77,9 @@ Partial Class MainForm
         Me.EnvironmentVariablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ExportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitWithoutWarning = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseChildsWithoutWarningToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -87,15 +96,6 @@ Partial Class MainForm
         Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(Me.components)
         Me.CheckHostOrIPAsync = New System.ComponentModel.BackgroundWorker()
         Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CloseAllOtherWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CloseAllWindowsDocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CloseAllWindowsfloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CloseAllWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ImportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStrip1.SuspendLayout()
@@ -184,7 +184,7 @@ Partial Class MainForm
         Me.ToolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton12.Name = "ToolStripButton12"
-        Me.ToolStripButton12.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton12.Size = New System.Drawing.Size(38, 26)
         Me.ToolStripButton12.Text = "Add item from template..."
         '
         'ToolStripButton3
@@ -255,6 +255,40 @@ Partial Class MainForm
         Me.ToolStripButton6.Name = "ToolStripButton6"
         Me.ToolStripButton6.Size = New System.Drawing.Size(38, 26)
         Me.ToolStripButton6.Text = "close plugin item (window)"
+        '
+        'CloseAllOtherWindowsToolStripMenuItem
+        '
+        Me.CloseAllOtherWindowsToolStripMenuItem.Name = "CloseAllOtherWindowsToolStripMenuItem"
+        Me.CloseAllOtherWindowsToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CloseAllOtherWindowsToolStripMenuItem.Text = "Close all other windows"
+        '
+        'ToolStripSeparator11
+        '
+        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(246, 6)
+        '
+        'CloseAllWindowsDocumentToolStripMenuItem
+        '
+        Me.CloseAllWindowsDocumentToolStripMenuItem.Name = "CloseAllWindowsDocumentToolStripMenuItem"
+        Me.CloseAllWindowsDocumentToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CloseAllWindowsDocumentToolStripMenuItem.Text = "Close all windows (document)"
+        '
+        'CloseAllWindowsfloatToolStripMenuItem
+        '
+        Me.CloseAllWindowsfloatToolStripMenuItem.Name = "CloseAllWindowsfloatToolStripMenuItem"
+        Me.CloseAllWindowsfloatToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CloseAllWindowsfloatToolStripMenuItem.Text = "Close all windows (float)"
+        '
+        'ToolStripSeparator12
+        '
+        Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(246, 6)
+        '
+        'CloseAllWindowsToolStripMenuItem
+        '
+        Me.CloseAllWindowsToolStripMenuItem.Name = "CloseAllWindowsToolStripMenuItem"
+        Me.CloseAllWindowsToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.CloseAllWindowsToolStripMenuItem.Text = "Close all windows"
         '
         'ToolStripSeparator4
         '
@@ -404,6 +438,23 @@ Partial Class MainForm
         Me.ShowLogToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.ShowLogToolStripMenuItem.Text = "Show Log..."
         '
+        'ToolStripSeparator13
+        '
+        Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(238, 6)
+        '
+        'ExportWorkspaceToolStripMenuItem
+        '
+        Me.ExportWorkspaceToolStripMenuItem.Name = "ExportWorkspaceToolStripMenuItem"
+        Me.ExportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
+        Me.ExportWorkspaceToolStripMenuItem.Text = "Export workspace..."
+        '
+        'ImportWorkspaceToolStripMenuItem
+        '
+        Me.ImportWorkspaceToolStripMenuItem.Name = "ImportWorkspaceToolStripMenuItem"
+        Me.ImportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
+        Me.ImportWorkspaceToolStripMenuItem.Text = "Import workspace..."
+        '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
@@ -482,6 +533,7 @@ Partial Class MainForm
         '
         Me.DockingMainMenuContext.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddItemFromTemplatesToolStripMenuItem})
         Me.DockingMainMenuContext.Name = "DockingMainMenuContext"
+        Me.DockingMainMenuContext.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.DockingMainMenuContext.Size = New System.Drawing.Size(251, 26)
         '
         'AddItemFromTemplatesToolStripMenuItem
@@ -500,57 +552,6 @@ Partial Class MainForm
         '
         Me.CustomItemsContext.Name = "CustomItemsContext"
         Me.CustomItemsContext.Size = New System.Drawing.Size(61, 4)
-        '
-        'CloseAllOtherWindowsToolStripMenuItem
-        '
-        Me.CloseAllOtherWindowsToolStripMenuItem.Name = "CloseAllOtherWindowsToolStripMenuItem"
-        Me.CloseAllOtherWindowsToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.CloseAllOtherWindowsToolStripMenuItem.Text = "Close all other windows"
-        '
-        'CloseAllWindowsDocumentToolStripMenuItem
-        '
-        Me.CloseAllWindowsDocumentToolStripMenuItem.Name = "CloseAllWindowsDocumentToolStripMenuItem"
-        Me.CloseAllWindowsDocumentToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.CloseAllWindowsDocumentToolStripMenuItem.Text = "Close all windows (document)"
-        '
-        'ToolStripSeparator11
-        '
-        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(246, 6)
-        '
-        'CloseAllWindowsfloatToolStripMenuItem
-        '
-        Me.CloseAllWindowsfloatToolStripMenuItem.Name = "CloseAllWindowsfloatToolStripMenuItem"
-        Me.CloseAllWindowsfloatToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.CloseAllWindowsfloatToolStripMenuItem.Text = "Close all windows (float)"
-        '
-        'CloseAllWindowsToolStripMenuItem
-        '
-        Me.CloseAllWindowsToolStripMenuItem.Name = "CloseAllWindowsToolStripMenuItem"
-        Me.CloseAllWindowsToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.CloseAllWindowsToolStripMenuItem.Text = "Close all windows"
-        '
-        'ToolStripSeparator12
-        '
-        Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        Me.ToolStripSeparator12.Size = New System.Drawing.Size(246, 6)
-        '
-        'ImportWorkspaceToolStripMenuItem
-        '
-        Me.ImportWorkspaceToolStripMenuItem.Name = "ImportWorkspaceToolStripMenuItem"
-        Me.ImportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
-        Me.ImportWorkspaceToolStripMenuItem.Text = "Import workspace..."
-        '
-        'ExportWorkspaceToolStripMenuItem
-        '
-        Me.ExportWorkspaceToolStripMenuItem.Name = "ExportWorkspaceToolStripMenuItem"
-        Me.ExportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
-        Me.ExportWorkspaceToolStripMenuItem.Text = "Export workspace..."
-        '
-        'ToolStripSeparator13
-        '
-        Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(238, 6)
         '
         'ExportWorkspaceFile
         '
@@ -633,7 +634,6 @@ Partial Class MainForm
     Friend WithEvents ToolStripSeparator9 As ToolStripSeparator
     Friend WithEvents TemplateSettingsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ShowLogToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripButton12 As ToolStripButton
     Friend WithEvents WorkplaceSettingsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NewEmptyWindowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CloneWorkspaceToNewWindowToolStripMenuItem As ToolStripMenuItem
@@ -657,4 +657,5 @@ Partial Class MainForm
     Friend WithEvents ImportWorkspaceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportWorkspaceFile As SaveFileDialog
     Friend WithEvents ImportWorkspaceFile As OpenFileDialog
+    Friend WithEvents ToolStripButton12 As ToolStripSplitButton
 End Class

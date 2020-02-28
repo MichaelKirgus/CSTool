@@ -741,10 +741,6 @@ Public Class MainForm
         ShowLogForm()
     End Sub
 
-    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles ToolStripButton12.Click
-        OpenAddFromTemplateWindow()
-    End Sub
-
     Private Sub WorkplaceSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WorkplaceSettingsToolStripMenuItem.Click
         Dim WorkspacesManagerFrm As New WorkspaceManager
         WorkspacesManagerFrm._parent = Me
@@ -916,5 +912,9 @@ Public Class MainForm
                 MsgBox("Import failed!")
             End If
         End If
+    End Sub
+
+    Private Sub ToolStripButton12_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripButton12.ButtonClick
+        OpenAddFromTemplateWindow()
     End Sub
 End Class

@@ -264,7 +264,7 @@ Public Class UserTemplateManager
                     If TreeView1.SelectedNode.Level = 1 Then
                         ListView1.Items(TreeView1.SelectedNode.Index).Selected = True
                     Else
-                        If Not ListView1.Items.Count = 0 Then
+                        If Not ListView1.Items.Count = 0 And Not IsNothing(ListView1.Items(0).Selected) Then
                             ListView1.Items(0).Selected = True
                         End If
                     End If
@@ -507,48 +507,51 @@ Public Class UserTemplateManager
 
     Private Sub TreeView1_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles TreeView1.AfterSelect
         Try
-            If (Not ListView1.SelectedItems(0).Index = CurrentListViewItemIndex) Or ListView1.Items.Count = 0 Then
-                LoadTemplatesFromSelectedNodeToGUI()
-                NoSelectionRaising = True
-                ListView1.Focus()
-                ListView1.Items(CurrentListViewItemIndex).Selected = True
-                ListView1.Focus()
-                NoSelectionRaising = False
-                Exit Sub
-            End If
-            Dim currparentnode As TreeNode
-            If TreeView1.SelectedNode.Level = 0 Then
-                currparentnode = TreeView1.SelectedNode
+            If Not ListView1.SelectedItems.Count = 0 Then
+                If (Not ListView1.SelectedItems(0).Index = CurrentListViewItemIndex) Or ListView1.Items.Count = 0 Then
+                    LoadTemplatesFromSelectedNodeToGUI()
+                    NoSelectionRaising = True
+                    ListView1.Focus()
+                    ListView1.Items(CurrentListViewItemIndex).Selected = True
+                    ListView1.Focus()
+                    NoSelectionRaising = False
+                    Exit Sub
+                End If
+                Dim currparentnode As TreeNode
+                If TreeView1.SelectedNode.Level = 0 Then
+                    currparentnode = TreeView1.SelectedNode
+                Else
+                    currparentnode = TreeView1.SelectedNode.Parent
+                End If
+                If Not currparentnode.Text = CurrentPluginName Then
+                    LoadTemplatesFromSelectedNodeToGUI()
+                    NoSelectionRaising = True
+                    ListView1.Focus()
+                    ListView1.Items(CurrentListViewItemIndex).Selected = True
+                    ListView1.Focus()
+                    NoSelectionRaising = False
+                    Exit Sub
+                End If
+                If TreeView1.SelectedNode.Level = 1 Then
+                    LoadTemplatesFromSelectedNodeToGUI()
+                    NoSelectionRaising = True
+                    ListView1.Focus()
+                    ListView1.Items(CurrentListViewItemIndex).Selected = True
+                    ListView1.Focus()
+                    NoSelectionRaising = False
+                End If
             Else
-                currparentnode = TreeView1.SelectedNode.Parent
-            End If
-            If Not currparentnode.Text = CurrentPluginName Then
-                LoadTemplatesFromSelectedNodeToGUI()
-                NoSelectionRaising = True
-                ListView1.Focus()
-                ListView1.Items(CurrentListViewItemIndex).Selected = True
-                ListView1.Focus()
-                NoSelectionRaising = False
-                Exit Sub
-            End If
-            If TreeView1.SelectedNode.Level = 1 Then
-                LoadTemplatesFromSelectedNodeToGUI()
-                NoSelectionRaising = True
-                ListView1.Focus()
-                ListView1.Items(CurrentListViewItemIndex).Selected = True
-                ListView1.Focus()
-                NoSelectionRaising = False
+                Try
+                    LoadTemplatesFromSelectedNodeToGUI()
+                    NoSelectionRaising = True
+                    ListView1.Focus()
+                    ListView1.Items(CurrentListViewItemIndex).Selected = True
+                    ListView1.Focus()
+                    NoSelectionRaising = False
+                Catch ex2 As Exception
+                End Try
             End If
         Catch ex As Exception
-            Try
-                LoadTemplatesFromSelectedNodeToGUI()
-                NoSelectionRaising = True
-                ListView1.Focus()
-                ListView1.Items(CurrentListViewItemIndex).Selected = True
-                ListView1.Focus()
-                NoSelectionRaising = False
-            Catch ex2 As Exception
-            End Try
         End Try
     End Sub
 
