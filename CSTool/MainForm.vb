@@ -859,6 +859,18 @@ Public Class MainForm
     End Sub
 
     Private Sub CloseAllOtherWindowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseAllOtherWindowsToolStripMenuItem.Click
+        WindowManagerHandler.CloseAllOpenWindowsExceptActiveWindow()
+    End Sub
 
+    Private Sub CloseAllWindowsDocumentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseAllWindowsDocumentToolStripMenuItem.Click
+        WindowManagerHandler.CloseAllOpenWindowsByDockingState(WeifenLuo.WinFormsUI.Docking.DockState.Document)
+    End Sub
+
+    Private Sub CloseAllWindowsfloatToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseAllWindowsfloatToolStripMenuItem.Click
+        WindowManagerHandler.CloseAllOpenWindowsByDockingState(WeifenLuo.WinFormsUI.Docking.DockState.Float)
+    End Sub
+
+    Private Sub CloseAllWindowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseAllWindowsToolStripMenuItem.Click
+        WindowManagerHandler.CloseAllOpenWindows()
     End Sub
 End Class
