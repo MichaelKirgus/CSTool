@@ -561,7 +561,11 @@ Public Class MainForm
             End If
         End If
         If IsChild Then
-            Me.Text += " (" & CurrentUserSettingName & ") [Child]"
+            If Not CurrentUserSettingName = "" Then
+                Me.Text += " (" & CurrentUserSettingName & ") [Child]"
+            Else
+                Me.Text += " [Child]"
+            End If
         End If
     End Sub
 
