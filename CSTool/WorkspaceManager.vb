@@ -126,9 +126,11 @@ Public Class WorkspaceManager
 
     Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
         Try
-            If Not IsNothing(ListView1.SelectedItems) Then
+            If Not IsNothing(ListView1.SelectedItems) And Not ListView1.SelectedItems.Count = 0 Then
                 If ListView1.SelectedItems(0).Index = 0 Then
                     ToolStripButton4.Enabled = False
+                    ToolStripButton3.Enabled = False
+                    ToolStripButton6.Enabled = False
                     GroupBox1.Enabled = False
                     GroupBox2.Enabled = False
                     CheckBox1.Enabled = False
@@ -138,6 +140,8 @@ Public Class WorkspaceManager
                     PropertyGrid1.SelectedObject = _parent.UserSettings
                 Else
                     ToolStripButton4.Enabled = True
+                    ToolStripButton3.Enabled = True
+                    ToolStripButton6.Enabled = True
                     GroupBox1.Enabled = True
                     GroupBox2.Enabled = True
                     CheckBox1.Enabled = True
@@ -152,19 +156,11 @@ Public Class WorkspaceManager
     End Sub
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-        Try
-            ListView1.SelectedItems(0).Text = TextBox1.Text
-            SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
-        Catch ex As Exception
-        End Try
+
     End Sub
 
     Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
-        Try
-            ListView1.SelectedItems(0).SubItems(1).Text = TextBox2.Text
-            SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
-        Catch ex As Exception
-        End Try
+
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
@@ -185,13 +181,42 @@ Public Class WorkspaceManager
 
     Private Sub ListView1_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles ListView1.ItemChecked
         Try
-            CheckBox1.Checked = ListView1.SelectedItems(0).Checked
-            SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+            If Not ListView1.SelectedItems.Count = 0 Then
+                CheckBox1.Checked = ListView1.SelectedItems(0).Checked
+                SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+            End If
         Catch ex As Exception
         End Try
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         AddNewWorkspaceToGUI(True)
+    End Sub
+
+    Public Sub SaveGUIChanges()
+        Try
+            ListView1.SelectedItems(0).Text = TextBox1.Text
+            ListView1.SelectedItems(0).SubItems(1).Text = TextBox2.Text
+            SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        SaveGUIChanges()
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        If Not ListView1.SelectedItems.Count = 0 Then
+            SaveGUIChanges()
+            _parent.OpenNewWindow(False, ListView1.SelectedItems(0).Text)
+        End If
+    End Sub
+
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
+        If Not ListView1.SelectedItems.Count = 0 Then
+            SaveGUIChanges()
+            _parent.SpawnNewProcessInstance(ListView1.SelectedItems(0).Text)
+        End If
     End Sub
 End Class
