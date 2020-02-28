@@ -97,6 +97,7 @@ Partial Class MainForm
         Me.ExportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
+        Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -557,6 +558,13 @@ Partial Class MainForm
         Me.ExportWorkspaceFile.Filter = "ZIP-File|*.zip"
         Me.ExportWorkspaceFile.RestoreDirectory = True
         '
+        'ImportWorkspaceFile
+        '
+        Me.ImportWorkspaceFile.DefaultExt = "zip"
+        Me.ImportWorkspaceFile.Filter = "ZIP-File|*.zip"
+        Me.ImportWorkspaceFile.RestoreDirectory = True
+        Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -648,4 +656,5 @@ Partial Class MainForm
     Friend WithEvents ExportWorkspaceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportWorkspaceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportWorkspaceFile As SaveFileDialog
+    Friend WithEvents ImportWorkspaceFile As OpenFileDialog
 End Class

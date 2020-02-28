@@ -4,6 +4,7 @@
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
 
+Imports System.ComponentModel
 Imports CSCustomActionHelper
 Imports CSTemplateManager
 Imports CSToolApplicationSettingsLib
@@ -448,6 +449,20 @@ Public Class MainForm
         CurrentLoadActionState = "Finished!"
     End Sub
 
+    Public Sub SaveSettings()
+        'Save environment variables settings to file
+        WindowManagerHandler.SaveEnvironmentPluginsSettings(WindowManagerHandler._UserSettingName)
+
+        'Save credentail plugin settings to file
+        WindowManagerHandler.SaveCredentialPluginsSettings(WindowManagerHandler._UserSettingName)
+
+        'Save window gui plugin settings
+        WindowManagerHandler.SaveAllGUIPluginSettings(WindowManagerHandler._UserSettingName)
+
+        'Save window layout and serialize plugin settings
+        WindowManagerHandler.SaveWindowLayoutToXML("Layout.xml", True, WindowManagerHandler._UserSettingName)
+    End Sub
+
     Public Function CloseForm() As Boolean
         If Not IsNonPersistent Then
             If Not CloseChildsWithoutWarningToolStripMenuItem.Checked And IsChild = False Then
@@ -466,17 +481,7 @@ Public Class MainForm
                 End If
             End If
 
-            'Save environment variables settings to file
-            WindowManagerHandler.SaveEnvironmentPluginsSettings(WindowManagerHandler._UserSettingName)
-
-            'Save credentail plugin settings to file
-            WindowManagerHandler.SaveCredentialPluginsSettings(WindowManagerHandler._UserSettingName)
-
-            'Save window gui plugin settings
-            WindowManagerHandler.SaveAllGUIPluginSettings(WindowManagerHandler._UserSettingName)
-
-            'Save window layout and serialize plugin settings
-            WindowManagerHandler.SaveWindowLayoutToXML("Layout.xml", True, WindowManagerHandler._UserSettingName)
+            SaveSettings()
 
             'Save last normal window state
             If Me.WindowState = FormWindowState.Normal Then
@@ -875,6 +880,41 @@ Public Class MainForm
     End Sub
 
     Private Sub ExportWorkspaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportWorkspaceToolStripMenuItem.Click
+        ExportWorkspaceFile.ShowDialog()
+        Dim result As Boolean = False
+        If Not ExportWorkspaceFile.FileName = "" Then
+            SaveSettings()
+            If Not CurrentUserSettingName = "" Then
+                result = WindowManagerHandler.ExportWorkspace(ExportWorkspaceFile.FileName, CurrentUserSettingName)
+            Else
+                result = WindowManagerHandler.ExportWorkspace(ExportWorkspaceFile.FileName)
+            End If
+            If result Then
+                MsgBox("Export successful!")
+            Else
+                MsgBox("Export failed!")
+            End If
+        End If
+    End Sub
 
+    Private Sub ImportWorkspaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportWorkspaceToolStripMenuItem.Click
+        ImportWorkspaceFile.ShowDialog()
+        Dim result As Boolean = False
+        If Not ImportWorkspaceFile.FileName = "" Then
+            If Not CurrentUserSettingName = "" Then
+                result = WindowManagerHandler.ImportWorkspace(ImportWorkspaceFile.FileName, CurrentUserSettingName)
+            Else
+                result = WindowManagerHandler.ImportWorkspace(ImportWorkspaceFile.FileName)
+            End If
+            If result Then
+                MsgBox("Import successful. The application needs to be restarted.")
+                CloseChildsWithoutWarningToolStripMenuItem.Checked = True
+                ExitWithoutWarning.Checked = True
+                IsNonPersistent = True
+                Application.Restart()
+            Else
+                MsgBox("Import failed!")
+            End If
+        End If
     End Sub
 End Class

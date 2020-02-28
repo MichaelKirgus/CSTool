@@ -336,13 +336,25 @@ Public Class WindowManager
         End Try
     End Function
 
-    Public Function ImportWorkspace(ByVal Filename As String, Optional ByVal SettingName As String = "Default") As Boolean
+    Public Function ImportWorkspace(ByVal Filename As String, Optional ByVal SettingName As String = "Default", Optional ByVal PurgeOldFiles As Boolean = True) As Boolean
         Try
             Dim settingsdir As String
             If SettingName = "Default" Then
                 settingsdir = _UserProfilePath & "\" & _UserSettingName
             Else
                 settingsdir = _UserProfilePath & "\" & SettingName
+            End If
+
+            If IO.Directory.Exists(settingsdir) Then
+                If PurgeOldFiles Then
+                    Dim files As String()
+                    files = IO.Directory.GetFiles(settingsdir)
+                    For index = 0 To files.Count - 1
+                        IO.File.Delete(files(index))
+                    Next
+                End If
+            Else
+                IO.Directory.CreateDirectory(settingsdir)
             End If
 
             ZipFile.ExtractToDirectory(Filename, settingsdir)
