@@ -93,6 +93,10 @@ Partial Class MainForm
         Me.CloseAllWindowsfloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseAllWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ImportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -338,7 +342,7 @@ Partial Class MainForm
         '
         Me.ToolStripButton8.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton8.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PluginSettingsToolStripMenuItem, Me.TemplateSettingsToolStripMenuItem, Me.WorkplaceSettingsToolStripMenuItem, Me.ApplicationSettingsToolStripMenuItem, Me.LogSettingsToolStripMenuItem, Me.ToolStripSeparator8, Me.EnvironmentVariablesToolStripMenuItem, Me.ToolStripMenuItem1, Me.ShowLogToolStripMenuItem, Me.ToolStripSeparator7, Me.ExitWithoutWarning, Me.CloseChildsWithoutWarningToolStripMenuItem, Me.SaveSettingsToolStripMenuItem})
+        Me.ToolStripButton8.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PluginSettingsToolStripMenuItem, Me.TemplateSettingsToolStripMenuItem, Me.WorkplaceSettingsToolStripMenuItem, Me.ApplicationSettingsToolStripMenuItem, Me.LogSettingsToolStripMenuItem, Me.ToolStripSeparator8, Me.EnvironmentVariablesToolStripMenuItem, Me.ToolStripMenuItem1, Me.ShowLogToolStripMenuItem, Me.ToolStripSeparator13, Me.ExportWorkspaceToolStripMenuItem, Me.ImportWorkspaceToolStripMenuItem, Me.ToolStripSeparator7, Me.ExitWithoutWarning, Me.CloseChildsWithoutWarningToolStripMenuItem, Me.SaveSettingsToolStripMenuItem})
         Me.ToolStripButton8.Image = Global.CSTool.My.Resources.Resources.icon_menu_22x22
         Me.ToolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
@@ -530,6 +534,29 @@ Partial Class MainForm
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
         Me.ToolStripSeparator12.Size = New System.Drawing.Size(246, 6)
         '
+        'ImportWorkspaceToolStripMenuItem
+        '
+        Me.ImportWorkspaceToolStripMenuItem.Name = "ImportWorkspaceToolStripMenuItem"
+        Me.ImportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
+        Me.ImportWorkspaceToolStripMenuItem.Text = "Import workspace..."
+        '
+        'ExportWorkspaceToolStripMenuItem
+        '
+        Me.ExportWorkspaceToolStripMenuItem.Name = "ExportWorkspaceToolStripMenuItem"
+        Me.ExportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
+        Me.ExportWorkspaceToolStripMenuItem.Text = "Export workspace..."
+        '
+        'ToolStripSeparator13
+        '
+        Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(238, 6)
+        '
+        'ExportWorkspaceFile
+        '
+        Me.ExportWorkspaceFile.DefaultExt = "zip"
+        Me.ExportWorkspaceFile.Filter = "ZIP-File|*.zip"
+        Me.ExportWorkspaceFile.RestoreDirectory = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -617,4 +644,8 @@ Partial Class MainForm
     Friend WithEvents CloseAllWindowsfloatToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator12 As ToolStripSeparator
     Friend WithEvents CloseAllWindowsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator13 As ToolStripSeparator
+    Friend WithEvents ExportWorkspaceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ImportWorkspaceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExportWorkspaceFile As SaveFileDialog
 End Class

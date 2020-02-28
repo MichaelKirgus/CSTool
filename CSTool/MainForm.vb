@@ -873,4 +873,8 @@ Public Class MainForm
     Private Sub CloseAllWindowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseAllWindowsToolStripMenuItem.Click
         WindowManagerHandler.CloseAllOpenWindows()
     End Sub
+
+    Private Sub ExportWorkspaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportWorkspaceToolStripMenuItem.Click
+
+    End Sub
 End Class

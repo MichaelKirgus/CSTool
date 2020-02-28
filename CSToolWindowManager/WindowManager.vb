@@ -4,6 +4,7 @@
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
 Imports System.Drawing
+Imports System.IO.Compression
 Imports System.Windows
 Imports System.Windows.Forms
 Imports CSToolEnvironmentManager
@@ -319,7 +320,37 @@ Public Class WindowManager
         End Try
     End Function
 
+    Public Function ExportWorkspace(ByVal Filename As String, Optional ByVal SettingName As String = "Default") As Boolean
+        Try
+            Dim settingsdir As String
+            If SettingName = "Default" Then
+                settingsdir = _UserProfilePath & "\" & _UserSettingName
+            Else
+                settingsdir = _UserProfilePath & "\" & SettingName
+            End If
 
+            ZipFile.CreateFromDirectory(settingsdir, Filename)
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function ImportWorkspace(ByVal Filename As String, Optional ByVal SettingName As String = "Default") As Boolean
+        Try
+            Dim settingsdir As String
+            If SettingName = "Default" Then
+                settingsdir = _UserProfilePath & "\" & _UserSettingName
+            Else
+                settingsdir = _UserProfilePath & "\" & SettingName
+            End If
+
+            ZipFile.ExtractToDirectory(Filename, settingsdir)
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     Public Function GetAllDockingWindows() As List(Of DockingHostWindow)
         Try
