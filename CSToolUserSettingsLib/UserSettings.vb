@@ -22,6 +22,7 @@ Imports CSToolLogLib
     Public Property TemplateName As String = "Default"
     Public Property TemplateDescription As String = "Default (build-in)"
     Public Property Autostart As Boolean = False
+    Public Property StartType As StartTypeEnum = StartTypeEnum.NewWindow
     Public Property LogSettings As New LogSettings
     Public Property Plugins As New List(Of PluginSettings)
     Public Property UserTemplates As New List(Of UserSettings)
@@ -33,4 +34,9 @@ Imports CSToolLogLib
     Public Function Clone() As Object Implements System.ICloneable.Clone
         Return MemberwiseClone()
     End Function
+
+    Public Enum StartTypeEnum As Integer
+        NewWindow = 0
+        NewInstance = 1
+    End Enum
 End Class
