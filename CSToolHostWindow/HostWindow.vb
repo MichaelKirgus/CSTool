@@ -75,4 +75,8 @@ Public Class HostWindow
             End If
         End If
     End Sub
+
+    Private Sub SaveSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveSettingsToolStripMenuItem.Click
+        PluginHandler.SavePluginSettings(_PluginSettingsFile)
+    End Sub
 End Class

@@ -252,5 +252,6 @@ Public Class DockingHostWindow
 
     Private Sub ReciveActionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReciveActionsToolStripMenuItem.Click
         PluginHandler.RaisingActionsEnabled = ReciveActionsToolStripMenuItem.Checked
+        PluginHandler.PluginSettingsChanged = True
     End Sub
 End Class

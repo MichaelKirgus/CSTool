@@ -27,6 +27,7 @@ Public Class PluginSettingsForm
     End Sub
 
     Private Sub PropertyGrid1_PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs) Handles PropertyGrid1.PropertyValueChanged
+        _Parent.PluginHandler.PluginSettingsChanged = True
         _Parent.PluginHandler.RefreshGUI()
     End Sub
 End Class

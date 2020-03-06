@@ -32,10 +32,10 @@ Partial Class HostWindow
         Me.Button1 = New System.Windows.Forms.Button()
         Me.HostFormPluginMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AllowCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HostFormPluginMenu.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -54,32 +54,20 @@ Partial Class HostWindow
         '
         Me.HostFormPluginMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EinstellungenToolStripMenuItem, Me.SaveSettingsToolStripMenuItem, Me.AllowCloseToolStripMenuItem, Me.ToolStripSeparator1, Me.RefreshToolStripMenuItem})
         Me.HostFormPluginMenu.Name = "HostFormPluginMenu"
-        Me.HostFormPluginMenu.Size = New System.Drawing.Size(143, 98)
+        Me.HostFormPluginMenu.Size = New System.Drawing.Size(181, 120)
         '
         'EinstellungenToolStripMenuItem
         '
         Me.EinstellungenToolStripMenuItem.Image = Global.CSToolHostWindow.My.Resources.Resources.icon_edit_16x16
         Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
-        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.EinstellungenToolStripMenuItem.Text = "Settings"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(139, 6)
-        '
-        'RefreshToolStripMenuItem
-        '
-        Me.RefreshToolStripMenuItem.Image = Global.CSToolHostWindow.My.Resources.Resources.icon_refresh_16x16
-        Me.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem"
-        Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
-        Me.RefreshToolStripMenuItem.Text = "Refresh"
         '
         'SaveSettingsToolStripMenuItem
         '
         Me.SaveSettingsToolStripMenuItem.CheckOnClick = True
         Me.SaveSettingsToolStripMenuItem.Name = "SaveSettingsToolStripMenuItem"
-        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SaveSettingsToolStripMenuItem.Text = "Save settings"
         '
         'AllowCloseToolStripMenuItem
@@ -88,8 +76,20 @@ Partial Class HostWindow
         Me.AllowCloseToolStripMenuItem.CheckOnClick = True
         Me.AllowCloseToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.AllowCloseToolStripMenuItem.Name = "AllowCloseToolStripMenuItem"
-        Me.AllowCloseToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.AllowCloseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AllowCloseToolStripMenuItem.Text = "Allow close"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        '
+        'RefreshToolStripMenuItem
+        '
+        Me.RefreshToolStripMenuItem.Image = Global.CSToolHostWindow.My.Resources.Resources.icon_refresh_16x16
+        Me.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem"
+        Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RefreshToolStripMenuItem.Text = "Refresh"
         '
         'HostWindow
         '

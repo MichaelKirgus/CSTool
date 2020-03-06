@@ -385,7 +385,7 @@ Public Class WindowManager
         End Try
     End Function
 
-    Public Function SaveAllGUIPluginSettings(Optional ByVal UserSettingName As String = "Default") As Boolean
+    Public Function SaveAllGUIPluginSettings(Optional ByVal UserSettingName As String = "Default", Optional ByVal ForceSave As Boolean = False) As Boolean
         Try
             For index = 0 To _DockingContent.Contents.Count - 1
                 Try
@@ -400,7 +400,9 @@ Public Class WindowManager
 
                         If Not IsNothing(PluginInterfaceObj) Then
                             If PluginInterfaceObj.PluginType = ICSToolInterface.PluginTypeEnum.GUIWindow Then
-                                PluginInterfaceObj.SavePluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginInterfaceObj.PluginGUID & "_" & DockHostWindowsObj.InstanceGUID & ".xml")
+                                If ForceSave Or PluginInterfaceObj.PluginSettingsChanged Then
+                                    PluginInterfaceObj.SavePluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginInterfaceObj.PluginGUID & "_" & DockHostWindowsObj.InstanceGUID & ".xml")
+                                End If
                             End If
                         End If
                     End If
