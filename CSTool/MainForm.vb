@@ -629,12 +629,34 @@ Public Class MainForm
     End Sub
 
     Private Sub HostnameOrIPCtl_KeyDown(sender As Object, e As KeyEventArgs) Handles HostnameOrIPCtl.KeyDown
-        If e.KeyCode = 13 Then
-            RaiseClientAction(HostnameOrIPCtl.Text)
+        Select Case e.KeyCode
+            Case 13
+                RaiseClientAction(HostnameOrIPCtl.Text)
 
-            e.Handled = True
-            e.SuppressKeyPress = True
-        End If
+                e.Handled = True
+                e.SuppressKeyPress = True
+            Case Keys.Escape
+                HostnameOrIPCtl.Text = ""
+                RaiseClientAction(HostnameOrIPCtl.Text)
+
+                e.Handled = True
+                e.SuppressKeyPress = True
+            Case Keys.F5
+                WindowManagerHandler.SendRefreshToPlugins(True)
+
+                e.Handled = True
+                e.SuppressKeyPress = True
+            Case Keys.F9
+                SpawnNewProcessInstance("", False, (HostnameOrIPCtl.Text))
+
+                e.Handled = True
+                e.SuppressKeyPress = True
+            Case Keys.F10
+                OpenNewWindow(True, "", HostnameOrIPCtl.Text)
+
+                e.Handled = True
+                e.SuppressKeyPress = True
+        End Select
     End Sub
 
     Private Sub NewWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewWindowToolStripMenuItem.Click
