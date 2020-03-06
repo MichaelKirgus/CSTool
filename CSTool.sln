@@ -164,6 +164,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LocalFilesystemBrowserPlugi
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NetworkFileSystemBrowserPlugin", "NetworkFileSystemBrowserPlugin\NetworkFileSystemBrowserPlugin.vbproj", "{2290DD93-E6E8-4703-9240-1A522654A521}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CustomButtonsPlugin", "CustomButtonsPlugin\CustomButtonsPlugin.vbproj", "{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -620,6 +622,14 @@ Global
 		{2290DD93-E6E8-4703-9240-1A522654A521}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2290DD93-E6E8-4703-9240-1A522654A521}.Release|x64.ActiveCfg = Release|Any CPU
 		{2290DD93-E6E8-4703-9240-1A522654A521}.Release|x64.Build.0 = Release|Any CPU
+		{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5}.Debug|x64.Build.0 = Debug|Any CPU
+		{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5}.Release|x64.ActiveCfg = Release|Any CPU
+		{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -662,6 +672,7 @@ Global
 		{FD0D6D7B-2CE4-4AE1-87AF-B203E2127753} = {02F006E5-5E73-4A76-836D-2384F34F47E6}
 		{59D5098F-9353-4730-839D-199B9595641E} = {02F006E5-5E73-4A76-836D-2384F34F47E6}
 		{2290DD93-E6E8-4703-9240-1A522654A521} = {02F006E5-5E73-4A76-836D-2384F34F47E6}
+		{E8FE5B08-34E0-45E1-B5A0-CE442848B4B5} = {02F006E5-5E73-4A76-836D-2384F34F47E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DC9B8990-422B-40EC-B51C-5F63F52A37BD}
