@@ -499,6 +499,7 @@ Public Class WindowManager
                     HostWindow._IsNonPersistent = _IsNonPersistent
 
                     plugin.CurrentLogInstance = New LogLib
+                    plugin.PluginSettingsChanged = True
                     HostWindow.Show()
                     If Not PluginSettingsPath = "" Then
                         plugin.LoadPluginSettings(PluginSettingsPath)
@@ -522,6 +523,7 @@ Public Class WindowManager
                     HostWindow._IsNonPersistent = _IsNonPersistent
 
                     plugin.CurrentLogInstance = _LogManager
+                    plugin.PluginSettingsChanged = True
                     HostWindow.Show(HostControl, DockingType)
                     If Not PluginSettingsPath = "" Then
                         plugin.LoadPluginSettings(PluginSettingsPath)
