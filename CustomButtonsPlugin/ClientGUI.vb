@@ -13,6 +13,11 @@ Public Class ClientGUI
 
     Public Sub RefreshGUI()
         Try
+            If Not _Settings.InitialTitle = "" Then
+                Me.ParentForm.Text = _Settings.InitialTitle
+                _ParentInstance.CurrentWindowTitle = _Settings.InitialTitle
+            End If
+
             CustomFlowPanel.Controls.Clear()
 
             If Not _Settings.CustomButtonsCollection.Count = 0 Then
