@@ -4,11 +4,11 @@
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class ClientGUI
+Partial Class CustomButtonCtl
     Inherits System.Windows.Forms.UserControl
 
     'UserControl überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,29 +25,32 @@ Partial Class ClientGUI
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.CustomFlowPanel = New System.Windows.Forms.FlowLayoutPanel()
+        Me.CustomButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'CustomFlowPanel
+        'CustomButton
         '
-        Me.CustomFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CustomFlowPanel.Location = New System.Drawing.Point(0, 0)
-        Me.CustomFlowPanel.Name = "CustomFlowPanel"
-        Me.CustomFlowPanel.Size = New System.Drawing.Size(264, 77)
-        Me.CustomFlowPanel.TabIndex = 0
+        Me.CustomButton.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CustomButton.Location = New System.Drawing.Point(3, 3)
+        Me.CustomButton.Name = "CustomButton"
+        Me.CustomButton.Size = New System.Drawing.Size(50, 50)
+        Me.CustomButton.TabIndex = 0
+        Me.CustomButton.UseVisualStyleBackColor = True
         '
-        'ClientGUI
+        'CustomButtonCtl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.CustomFlowPanel)
-        Me.Name = "ClientGUI"
-        Me.Size = New System.Drawing.Size(264, 77)
+        Me.Controls.Add(Me.CustomButton)
+        Me.Name = "CustomButtonCtl"
+        Me.Size = New System.Drawing.Size(56, 56)
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents CustomFlowPanel As Windows.Forms.FlowLayoutPanel
+    Friend WithEvents CustomButton As Windows.Forms.Button
 End Class

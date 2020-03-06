@@ -79,6 +79,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClientRes.resx</DependentUpon>
     </Compile>
+    <Compile Include="CustomButtonCtl.Designer.vb">
+      <DependentUpon>CustomButtonCtl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomButtonCtl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -105,6 +111,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ClientRes.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomButtonCtl.resx">
+      <DependentUpon>CustomButtonCtl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -124,6 +133,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CSCustomActionHelper\CSCustomActionHelper.vbproj">
+      <Project>{5dd3ad2f-28ec-4fb2-b6bc-25e741d3b796}</Project>
+      <Name>CSCustomActionHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolEnvironmentManager\CSToolEnvironmentManager.vbproj">
+      <Project>{7809B2C0-3EE5-4983-9FEF-A11479AAFD99}</Project>
+      <Name>CSToolEnvironmentManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSToolLogLib\CSToolLogLib.vbproj">
       <Project>{df373dbf-733e-4e4d-8335-3d6d5fe447b2}</Project>
       <Name>CSToolLogLib</Name>
