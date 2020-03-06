@@ -130,9 +130,9 @@ Partial Class MainForm
         Me.HostnameOrIPCtl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.HostnameOrIPCtl.Name = "HostnameOrIPCtl"
         Me.HostnameOrIPCtl.Size = New System.Drawing.Size(159, 29)
-        Me.HostnameOrIPCtl.ToolTipText = "Please enter hostname or ip-address." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Shortcuts:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ESC: Clear hostname/ip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "F5: R" &
-    "efresh GUI" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "F9: Open new instance with entered hostname/ip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "F10: Open new window" &
-    " with entered hostname/ip"
+        Me.HostnameOrIPCtl.ToolTipText = "Please enter hostname or ip-address." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Shortcuts:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ENTF: Clear hostname/ip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "F5: " &
+    "Refresh GUI" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "F9: Open new instance with entered hostname/ip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "F10: Open new windo" &
+    "w with entered hostname/ip"
         '
         'ToolStripButton1
         '

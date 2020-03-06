@@ -635,7 +635,7 @@ Public Class MainForm
 
                 e.Handled = True
                 e.SuppressKeyPress = True
-            Case Keys.Escape
+            Case Keys.Delete
                 HostnameOrIPCtl.Text = ""
                 RaiseClientAction(HostnameOrIPCtl.Text)
 
