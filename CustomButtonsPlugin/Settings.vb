@@ -14,12 +14,12 @@ End Class
 
 <Serializable> Public Class CustomButtonEntry
     Public Property ButtonText As String = ""
-    Public Property ButtonFlatStyle As FlatStyle
+    Public Property ButtonFlatStyle As FlatStyle = FlatStyle.Standard
     Public Property ButtonWidth As Integer = 50
     Public Property ButtonHeight As Integer = 50
     Public Property ButtonIconFile As String = ""
-    Public Property ButtonIconFileAlignment As ContentAlignment
-    Public Property ButtonTextAlignment As ContentAlignment
-    Public Property ButtonImageTextRelation As TextImageRelation
+    Public Property ButtonIconFileAlignment As ContentAlignment = ContentAlignment.MiddleCenter
+    Public Property ButtonTextAlignment As ContentAlignment = ContentAlignment.MiddleCenter
+    Public Property ButtonImageTextRelation As TextImageRelation = TextImageRelation.Overlay
     Public Property RaisingActions As New List(Of CustomActionEntry)
 End Class

@@ -12,7 +12,7 @@ Public Class CustomButtonCtl
     Private Sub CustomButton_Click(sender As Object, e As EventArgs) Handles CustomButton.Click
         Try
             Dim actionobj As CustomButtonEntry
-            actionobj = Me.Tag
+            actionobj = Tag
 
             If Not actionobj.RaisingActions.Count = 0 Then
                 For index = 0 To actionobj.RaisingActions.Count - 1
