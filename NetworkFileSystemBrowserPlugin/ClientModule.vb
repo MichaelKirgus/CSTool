@@ -166,6 +166,26 @@ Public Module ClientModule
             End Get
         End Property
 
+        Public ReadOnly Property SupportsRaisingActions As Boolean Implements ICSToolInterface.SupportsRaisingActions
+            Get
+                Return True
+            End Get
+        End Property
+
+        Public Property RaisingActionsEnabled As Boolean Implements ICSToolInterface.RaisingActionsEnabled
+            Get
+                If SettingsHandle.RaiseActionsLeftBrowser1 Or SettingsHandle.RaiseActionsRightBrowser2 Then
+                    Return True
+                Else
+                    Return False
+                End If
+            End Get
+            Set(value As Boolean)
+                SettingsHandle.RaiseActionsLeftBrowser1 = value
+                SettingsHandle.RaiseActionsRightBrowser2 = value
+            End Set
+        End Property
+
         Protected Overrides Sub Finalize()
             MyBase.Finalize()
         End Sub

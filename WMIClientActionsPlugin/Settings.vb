@@ -6,6 +6,7 @@
 Imports System.Management
 
 <Serializable> Public Class Settings
+    Public Property RaiseActions As Boolean = True
     Public Property ShutdownWMIExecScope As String = "\\%Clientname%\root\CIMV2"
     Public Property ShutdownWMIExecQuery As String = "Win32_Process"
     Public Property ShutdownWMIExecMethod As String = "Create"

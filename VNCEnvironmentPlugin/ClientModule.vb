@@ -267,6 +267,21 @@ Public Module ClientModule
             End Get
         End Property
 
+        Public ReadOnly Property SupportsRaisingActions As Boolean Implements ICSToolInterface.SupportsRaisingActions
+            Get
+                Throw New NotImplementedException()
+            End Get
+        End Property
+
+        Public Property RaisingActionsEnabled As Boolean Implements ICSToolInterface.RaisingActionsEnabled
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
         Protected Overrides Sub Finalize()
             MyBase.Finalize()
         End Sub

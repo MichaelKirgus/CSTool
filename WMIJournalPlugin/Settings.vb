@@ -7,6 +7,7 @@ Imports System.Management
 Imports CSToolWMIHelper
 
 <Serializable> Public Class Settings
+    Public Property RaiseActions As Boolean = True
     Public Property CheckHostIsAlive As Boolean = True
     Public Property CheckHostIsAlivePingTimeout As Integer = 500
     Public Property WMICurrentLoggedOnUserSection As String = "Win32_ComputerSystem"
