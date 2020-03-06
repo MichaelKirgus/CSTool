@@ -8,6 +8,7 @@ Imports System.Drawing
 Imports CSToolPluginLib
 <EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)>
 <Serializable> Public Class Settings
+    Public Property RaiseActions As Boolean = True
     Public Property PingTimeout As Integer = 500
     Public Property AutoRefresh As Boolean = True
     Public Property AutRefreshInterval As Integer = 500

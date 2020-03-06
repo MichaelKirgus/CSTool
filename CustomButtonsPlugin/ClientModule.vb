@@ -174,10 +174,10 @@ Public Module ClientModule
 
         Public Property RaisingActionsEnabled As Boolean Implements ICSToolInterface.RaisingActionsEnabled
             Get
-                Return SettingsHandle.RaiseActions
+                Throw New NotImplementedException()
             End Get
             Set(value As Boolean)
-                SettingsHandle.RaiseActions = value
+                Throw New NotImplementedException()
             End Set
         End Property
 
