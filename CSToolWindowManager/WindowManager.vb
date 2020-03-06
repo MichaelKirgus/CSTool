@@ -402,6 +402,7 @@ Public Class WindowManager
                             If PluginInterfaceObj.PluginType = ICSToolInterface.PluginTypeEnum.GUIWindow Then
                                 If ForceSave Or PluginInterfaceObj.PluginSettingsChanged Then
                                     PluginInterfaceObj.SavePluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginInterfaceObj.PluginGUID & "_" & DockHostWindowsObj.InstanceGUID & ".xml")
+                                    PluginInterfaceObj.PluginSettingsChanged = False
                                 End If
                             End If
                         End If
