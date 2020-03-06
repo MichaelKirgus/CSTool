@@ -23,11 +23,26 @@ Public Class PluginSettingsForm
     End Sub
 
     Private Sub PluginSettingsForm_FormClosing(sender As Object, e As Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-        _Parent.PluginHandler.RefreshGUI()
+        Try
+            _Parent.PluginHandler.RefreshGUI()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub PropertyGrid1_PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs) Handles PropertyGrid1.PropertyValueChanged
-        _Parent.PluginHandler.PluginSettingsChanged = True
-        _Parent.PluginHandler.RefreshGUI()
+        Try
+            _Parent.PluginHandler.PluginSettingsChanged = True
+            If ToolStripButton1.Checked Then
+                _Parent.PluginHandler.RefreshGUI()
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        Try
+            _Parent.PluginHandler.SavePluginSettings()
+        Catch ex As Exception
+        End Try
     End Sub
 End Class
