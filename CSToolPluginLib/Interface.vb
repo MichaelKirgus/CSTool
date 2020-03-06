@@ -41,6 +41,7 @@ Public Interface ICSToolInterface
     ReadOnly Property UserCredentialWindow As Form
     ReadOnly Property EnvironmentProviderClass As EnvironmentProvider
     ReadOnly Property NeedsEnvironmentVariables As Boolean
+    ReadOnly Property SupportsRaisingActions As Boolean
 
 
     'Life-Time Properties
@@ -48,6 +49,7 @@ Public Interface ICSToolInterface
     Property UserSettingsClass As Object
     Property CurrentWindowTitle As String
     Property CurrentLogInstance As LogLib
+    Property RaisingActionsEnabled As Boolean
     Property EnvironmentRuntimeVariables As List(Of KeyValuePair(Of String, String))
 
     Enum PluginTypeEnum
