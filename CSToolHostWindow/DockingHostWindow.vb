@@ -56,6 +56,13 @@ Public Class DockingHostWindow
                 Me.DockAreas = DockAreas.DockLeft Or DockAreas.DockRight Or DockAreas.DockTop Or DockAreas.DockBottom Or DockAreas.Document
             End If
 
+            If PluginHandler.SupportsRaisingActions Then
+                ReciveActionsToolStripMenuItem.Checked = PluginHandler.RaisingActionsEnabled
+            Else
+                ReciveActionsToolStripMenuItem.Checked = False
+                ReciveActionsToolStripMenuItem.Enabled = False
+            End If
+
             WatchingWorker.RunWorkerAsync()
         Catch ex As Exception
         End Try
@@ -241,5 +248,9 @@ Public Class DockingHostWindow
                 PluginHandler.RefreshGUI()
             End If
         End If
+    End Sub
+
+    Private Sub ReciveActionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReciveActionsToolStripMenuItem.Click
+        PluginHandler.RaisingActionsEnabled = ReciveActionsToolStripMenuItem.Checked
     End Sub
 End Class

@@ -30,19 +30,19 @@ Partial Class DockingHostWindow
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DockingHostWindow))
         Me.HostFormPluginMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutoReloadSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AllowCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReciveActionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.FileSystemWatcher1 = New System.IO.FileSystemWatcher()
-        Me.AutoReloadSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WatchingWorker = New System.ComponentModel.BackgroundWorker()
         Me.WatchingSettingsLoadWorker = New System.ComponentModel.BackgroundWorker()
         Me.HostFormPluginMenu.SuspendLayout()
@@ -55,6 +55,13 @@ Partial Class DockingHostWindow
         Me.HostFormPluginMenu.Name = "HostFormPluginMenu"
         Me.HostFormPluginMenu.Size = New System.Drawing.Size(186, 192)
         '
+        'EinstellungenToolStripMenuItem
+        '
+        Me.EinstellungenToolStripMenuItem.Image = Global.CSToolHostWindow.My.Resources.Resources.icon_edit_16x161
+        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
+        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.EinstellungenToolStripMenuItem.Text = "Settings"
+        '
         'SaveSettingsToolStripMenuItem
         '
         Me.SaveSettingsToolStripMenuItem.Checked = True
@@ -63,6 +70,15 @@ Partial Class DockingHostWindow
         Me.SaveSettingsToolStripMenuItem.Name = "SaveSettingsToolStripMenuItem"
         Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.SaveSettingsToolStripMenuItem.Text = "Save settings"
+        '
+        'AutoReloadSettingsToolStripMenuItem
+        '
+        Me.AutoReloadSettingsToolStripMenuItem.Checked = True
+        Me.AutoReloadSettingsToolStripMenuItem.CheckOnClick = True
+        Me.AutoReloadSettingsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.AutoReloadSettingsToolStripMenuItem.Name = "AutoReloadSettingsToolStripMenuItem"
+        Me.AutoReloadSettingsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.AutoReloadSettingsToolStripMenuItem.Text = "Auto-Reload settings"
         '
         'AllowCloseToolStripMenuItem
         '
@@ -77,31 +93,6 @@ Partial Class DockingHostWindow
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(182, 6)
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(182, 6)
-        '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.DefaultExt = "xml"
-        Me.OpenFileDialog1.Filter = "XML-Files|*.xml"
-        Me.OpenFileDialog1.SupportMultiDottedExtensions = True
-        '
-        'SaveFileDialog1
-        '
-        Me.SaveFileDialog1.DefaultExt = "xml"
-        Me.SaveFileDialog1.Filter = "XML-Files|*.xml"
-        Me.SaveFileDialog1.RestoreDirectory = True
-        Me.SaveFileDialog1.SupportMultiDottedExtensions = True
-        '
-        'EinstellungenToolStripMenuItem
-        '
-        Me.EinstellungenToolStripMenuItem.Image = Global.CSToolHostWindow.My.Resources.Resources.icon_edit_16x161
-        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
-        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.EinstellungenToolStripMenuItem.Text = "Settings"
         '
         'RefreshToolStripMenuItem
         '
@@ -120,6 +111,11 @@ Partial Class DockingHostWindow
         Me.ReciveActionsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.ReciveActionsToolStripMenuItem.Text = "Recive actions"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(182, 6)
+        '
         'ExportSettingsToolStripMenuItem
         '
         Me.ExportSettingsToolStripMenuItem.Image = Global.CSToolHostWindow.My.Resources.Resources.icon_upload_16x16
@@ -134,19 +130,24 @@ Partial Class DockingHostWindow
         Me.ImportSettingsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.ImportSettingsToolStripMenuItem.Text = "Import settings..."
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.DefaultExt = "xml"
+        Me.OpenFileDialog1.Filter = "XML-Files|*.xml"
+        Me.OpenFileDialog1.SupportMultiDottedExtensions = True
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "xml"
+        Me.SaveFileDialog1.Filter = "XML-Files|*.xml"
+        Me.SaveFileDialog1.RestoreDirectory = True
+        Me.SaveFileDialog1.SupportMultiDottedExtensions = True
+        '
         'FileSystemWatcher1
         '
+        Me.FileSystemWatcher1.EnableRaisingEvents = True
         Me.FileSystemWatcher1.NotifyFilter = System.IO.NotifyFilters.LastWrite
         Me.FileSystemWatcher1.SynchronizingObject = Me
-        '
-        'AutoReloadSettingsToolStripMenuItem
-        '
-        Me.AutoReloadSettingsToolStripMenuItem.Checked = True
-        Me.AutoReloadSettingsToolStripMenuItem.CheckOnClick = True
-        Me.AutoReloadSettingsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.AutoReloadSettingsToolStripMenuItem.Name = "AutoReloadSettingsToolStripMenuItem"
-        Me.AutoReloadSettingsToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.AutoReloadSettingsToolStripMenuItem.Text = "Auto-Reload settings"
         '
         'WatchingWorker
         '

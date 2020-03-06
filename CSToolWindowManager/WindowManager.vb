@@ -432,7 +432,9 @@ Public Class WindowManager
                     PluginInterfaceObj = HostingWindowObj.Tag
 
                     If Not IsNothing(PluginInterfaceObj) Then
-                        PluginInterfaceObj.RaiseActions(HostnameOrIP)
+                        If PluginInterfaceObj.SupportsRaisingActions And PluginInterfaceObj.RaisingActionsEnabled Then
+                            PluginInterfaceObj.RaiseActions(HostnameOrIP)
+                        End If
                     End If
                 Catch ex As Exception
                 End Try
