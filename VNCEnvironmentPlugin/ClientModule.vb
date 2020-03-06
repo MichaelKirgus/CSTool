@@ -282,6 +282,15 @@ Public Module ClientModule
             End Set
         End Property
 
+        Public Property PluginSettingsChanged As Boolean Implements ICSToolInterface.PluginSettingsChanged
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
         Protected Overrides Sub Finalize()
             MyBase.Finalize()
         End Sub

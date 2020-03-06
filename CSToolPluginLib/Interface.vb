@@ -50,6 +50,7 @@ Public Interface ICSToolInterface
     Property CurrentWindowTitle As String
     Property CurrentLogInstance As LogLib
     Property RaisingActionsEnabled As Boolean
+    Property PluginSettingsChanged As Boolean
     Property EnvironmentRuntimeVariables As List(Of KeyValuePair(Of String, String))
 
     Enum PluginTypeEnum

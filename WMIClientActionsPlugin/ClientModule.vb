@@ -21,6 +21,16 @@ Public Module ClientModule
         Private WasGUILoaded As Boolean = False
         Private CurrentWindowTitleStr As String = ""
         Public LogInstanceHandler As LogLib
+        Public SettingsChanged As Boolean = False
+
+        Public Property PluginSettingsChanged As Boolean Implements ICSToolInterface.PluginSettingsChanged
+            Get
+                Return SettingsChanged
+            End Get
+            Set(value As Boolean)
+                SettingsChanged = value
+            End Set
+        End Property
 
         Public Property CurrentLogInstance As LogLib Implements ICSToolInterface.CurrentLogInstance
             Get
