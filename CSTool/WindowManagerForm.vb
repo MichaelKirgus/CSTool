@@ -133,4 +133,15 @@ Public Class WindowManagerForm
     Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
         LoadAllWindowsToGUI()
     End Sub
+
+    Private Sub PropertyGrid2_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs) Handles PropertyGrid2.PropertyValueChanged
+        Try
+            If Not ListView1.SelectedItems.Count = 0 Then
+                Dim dockform As DockingHostWindow
+                dockform = ListView1.SelectedItems(0).Tag
+                dockform.PluginHandler.PluginSettingsChanged = True
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class
