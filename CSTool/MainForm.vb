@@ -970,4 +970,8 @@ Public Class MainForm
     Private Sub SearchInNewInstanceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SearchInNewInstanceToolStripMenuItem.Click
         SpawnNewProcessInstance(CurrentUserSettingName, True, HostnameOrIPCtl.Text)
     End Sub
+
+    Private Sub SaveWorkspaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveWorkspaceToolStripMenuItem.Click
+        SaveSettings()
+    End Sub
 End Class
