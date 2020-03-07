@@ -187,6 +187,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ProfileManagerForm.Designer.vb">
+      <DependentUpon>ProfileManagerForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileManagerForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SettingsManager.Designer.vb">
       <DependentUpon>SettingsManager.vb</DependentUpon>
     </Compile>
@@ -242,6 +248,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileManagerForm.resx">
+      <DependentUpon>ProfileManagerForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsManager.resx">
       <DependentUpon>SettingsManager.vb</DependentUpon>
