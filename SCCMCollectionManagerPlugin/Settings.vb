@@ -34,6 +34,7 @@ Imports System.Management
     Public Property CustomWMIConnectionOptionsAuthentication As AuthenticationLevel = AuthenticationLevel.Packet
     Public Property CustomWMIConnectionOptionsImpersonation As ImpersonationLevel = ImpersonationLevel.Default
     Public Property FilterCollectionsWithNoMembers As Boolean = False
+    Public Property ShowDevicesAndUsernameSearchPanel As Boolean = True
 End Class
 
 <Serializable> Public Class CollectionFilterEntry

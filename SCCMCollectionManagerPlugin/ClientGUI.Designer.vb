@@ -147,6 +147,7 @@ Partial Class ClientGUI
         Me.CollectSMSCollectionsWorker = New System.ComponentModel.BackgroundWorker()
         Me.GetAllClientsWorker = New System.ComponentModel.BackgroundWorker()
         Me.ConnectToSMSMServerWorker = New System.ComponentModel.BackgroundWorker()
+        Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -380,6 +381,7 @@ Partial Class ClientGUI
         Me.ToolStripButton4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton4.CheckOnClick = True
         Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton4.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_clock_16x16
         Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton4.Name = "ToolStripButton4"
         Me.ToolStripButton4.Size = New System.Drawing.Size(23, 22)
@@ -389,6 +391,7 @@ Partial Class ClientGUI
         '
         Me.ToolStripButton9.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton9.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_link_16x16
         Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton9.Name = "ToolStripButton9"
         Me.ToolStripButton9.Size = New System.Drawing.Size(23, 22)
@@ -747,7 +750,7 @@ Partial Class ClientGUI
         'ToolStrip2
         '
         Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.ToolStripTextBox2, Me.ToolStripSeparator2, Me.ToolStripButton1, Me.ToolStripButton6, Me.ToolStripSeparator3, Me.ToolStripButton3, Me.LiveModeButton, Me.ToolStripButton5, Me.ToolStripButton13})
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.ToolStripTextBox2, Me.ToolStripSeparator2, Me.ToolStripButton1, Me.ToolStripButton6, Me.ToolStripSeparator3, Me.ToolStripButton3, Me.LiveModeButton, Me.ToolStripButton5, Me.ToolStripButton13, Me.ToolStripButton15})
         Me.ToolStrip2.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.Size = New System.Drawing.Size(777, 25)
@@ -1129,6 +1132,19 @@ Partial Class ClientGUI
         Me.ConnectToSMSMServerWorker.WorkerReportsProgress = True
         Me.ConnectToSMSMServerWorker.WorkerSupportsCancellation = True
         '
+        'ToolStripButton15
+        '
+        Me.ToolStripButton15.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton15.Checked = True
+        Me.ToolStripButton15.CheckOnClick = True
+        Me.ToolStripButton15.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ToolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton15.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_view_16x16
+        Me.ToolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton15.Name = "ToolStripButton15"
+        Me.ToolStripButton15.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton15.Text = "Show search device/username panel"
+        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1299,4 +1315,5 @@ Partial Class ClientGUI
     Friend WithEvents ToolStripButton5 As ToolStripButton
     Friend WithEvents ToolStripButton13 As ToolStripButton
     Friend WithEvents ToolStripButton14 As ToolStripButton
+    Friend WithEvents ToolStripButton15 As ToolStripButton
 End Class

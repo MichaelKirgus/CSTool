@@ -1020,6 +1020,8 @@ Public Class ClientGUI
                 ToolStripButton12.Checked = True
             End If
             LiveModeButton.Checked = _Settings.EnableLiveMode
+            ToolStripButton15.Checked = _Settings.ShowDevicesAndUsernameSearchPanel
+            SplitContainer4.Panel1Collapsed = Not _Settings.ShowDevicesAndUsernameSearchPanel
 
             SetUXThemeForAllListViews()
 
@@ -1843,5 +1845,9 @@ Public Class ClientGUI
         Dim kk As New ListViewSearchFrm
         kk.ListViewCtl = ListView2
         kk.Show()
+    End Sub
+
+    Private Sub ToolStripButton15_Click(sender As Object, e As EventArgs) Handles ToolStripButton15.Click
+        SplitContainer4.Panel1Collapsed = Not ToolStripButton15.Checked
     End Sub
 End Class
