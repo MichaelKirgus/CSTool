@@ -87,8 +87,8 @@ Public Class DockingHostWindow
         End If
     End Sub
 
-    Public Sub ShowWindowTitle()
-        If PluginLoaded Then
+    Public Sub ShowWindowTitle(Optional ByVal ForceTitle As Boolean = False)
+        If PluginLoaded Or ForceTitle Then
             Dim currtitle As String
             currtitle = PluginHandler.CurrentWindowTitle
             If Not currtitle = "" Then

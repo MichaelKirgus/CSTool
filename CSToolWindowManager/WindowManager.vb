@@ -458,7 +458,7 @@ Public Class WindowManager
                     Dim DockHostWindowsObj As DockingHostWindow
                     DockHostWindowsObj = HostingWindowObj
 
-                    DockHostWindowsObj.ShowWindowTitle()
+                    DockHostWindowsObj.ShowWindowTitle(True)
                 Catch ex As Exception
                 End Try
             Next
