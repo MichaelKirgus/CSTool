@@ -449,6 +449,26 @@ Public Class WindowManager
         End Try
     End Function
 
+    Public Function RefreshAllWindowTitlesToPlugins() As Boolean
+        Try
+            For index = 0 To _DockingContent.Contents.Count - 1
+                Try
+                    Dim HostingWindowObj As DockContent
+                    HostingWindowObj = _DockingContent.Contents(index)
+                    Dim DockHostWindowsObj As DockingHostWindow
+                    DockHostWindowsObj = HostingWindowObj
+
+                    DockHostWindowsObj.ShowWindowTitle()
+                Catch ex As Exception
+                End Try
+            Next
+
+            Return False
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Public Function SendRefreshToPlugins(ByVal RefreshGUIPlugins As Boolean) As Boolean
         Try
             If RefreshGUIPlugins Then

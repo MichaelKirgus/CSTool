@@ -444,6 +444,10 @@ Public Class MainForm
         CurrentLoadActionState = "Set window title..."
         SetWindowTitle("")
 
+        'Set (initial) titles to plugin windows
+        CurrentLoadActionState = "Set window titles (plugins)..."
+        WindowManagerHandler.RefreshAllWindowTitlesToPlugins()
+
         'Check, if hostname/ip was set via command line args and raise actions
         If Not HostnameOrIPCtl.Text = "" Then
             PerformRaiseActions()
