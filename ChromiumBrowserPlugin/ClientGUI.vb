@@ -20,11 +20,14 @@ Public Class ClientGUI
 
     Private WithEvents browser As ChromiumWebBrowser
     Public Sub New()
-        InitializeComponent()
-        InitChromium()
-        browser = New ChromiumWebBrowser("")
-        Me.ToolStripContainer1.ContentPanel.Controls.Add(browser)
-        browser.Dock = Windows.Forms.DockStyle.Fill
+        Try
+            InitializeComponent()
+            InitChromium()
+            browser = New ChromiumWebBrowser("")
+            Me.ToolStripContainer1.ContentPanel.Controls.Add(browser)
+            browser.Dock = Windows.Forms.DockStyle.Fill
+        Catch ex As Exception
+        End Try
     End Sub
 
     Delegate Sub SetFormTextCallback(ByVal FormCtl As Form, ByVal text As String)

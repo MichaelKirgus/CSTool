@@ -81,6 +81,7 @@ Partial Class MainForm
         Me.ShowLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitWithoutWarning = New System.Windows.Forms.ToolStripMenuItem()
@@ -100,7 +101,6 @@ Partial Class MainForm
         Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
-        Me.SaveWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -468,6 +468,12 @@ Partial Class MainForm
         Me.ExportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
         Me.ExportWorkspaceToolStripMenuItem.Text = "Export workspace..."
         '
+        'SaveWorkspaceToolStripMenuItem
+        '
+        Me.SaveWorkspaceToolStripMenuItem.Name = "SaveWorkspaceToolStripMenuItem"
+        Me.SaveWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
+        Me.SaveWorkspaceToolStripMenuItem.Text = "Save workspace"
+        '
         'ImportWorkspaceToolStripMenuItem
         '
         Me.ImportWorkspaceToolStripMenuItem.Name = "ImportWorkspaceToolStripMenuItem"
@@ -584,12 +590,6 @@ Partial Class MainForm
         Me.ImportWorkspaceFile.Filter = "ZIP-File|*.zip"
         Me.ImportWorkspaceFile.RestoreDirectory = True
         Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
-        '
-        'SaveWorkspaceToolStripMenuItem
-        '
-        Me.SaveWorkspaceToolStripMenuItem.Name = "SaveWorkspaceToolStripMenuItem"
-        Me.SaveWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
-        Me.SaveWorkspaceToolStripMenuItem.Text = "Save workspace"
         '
         'MainForm
         '

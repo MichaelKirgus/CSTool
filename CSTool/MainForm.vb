@@ -978,4 +978,11 @@ Public Class MainForm
     Private Sub SaveWorkspaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveWorkspaceToolStripMenuItem.Click
         SaveSettings()
     End Sub
+
+    Private Sub ToolStripButton9_Click(sender As Object, e As EventArgs) Handles ToolStripButton9.Click
+        Dim profilemngrfrm As New ProfileManagerForm
+        profilemngrfrm._parent = Me
+        profilemngrfrm._UserProfilesLocation = ApplicationSettings.UserProfileDir
+        profilemngrfrm.Show()
+    End Sub
 End Class

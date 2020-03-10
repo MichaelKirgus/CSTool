@@ -395,6 +395,10 @@
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>WinFormsUI</Name>
     </ProjectReference>
+    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\XML Editor\Xml Editor\Xml Editor.csproj">
+      <Project>{5fbb3ad1-697c-4b05-b1d4-da1b83b84b13}</Project>
+      <Name>Xml Editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\CredentialPlugins\" />
@@ -472,6 +476,10 @@
     <None Include="Resources\icon-archive_22x22.png" />
     <None Include="Resources\icon-x-circle_64x64.png" />
     <None Include="Resources\icon-archive_16x16.png" />
+    <None Include="Resources\icon-user-minus_22x22.png" />
+    <None Include="Resources\icon-user-plus_22x22.png" />
+    <None Include="Resources\icon-link_22x22.png" />
+    <None Include="Resources\icon-edit_22x22.png" />
     <Content Include="wizard_app.ico" />
   </ItemGroup>
   <ItemGroup>
