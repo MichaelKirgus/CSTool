@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 
 Public Class SyncLib
-    Public Function CopyFolder_Sync(ByVal sSrcPath As String, ByVal sDestPath As String) As Boolean
+    Public Function CopyFolder_Sync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean) As Boolean
         Try
             If Not Directory.Exists(sDestPath) Then
                 Directory.CreateDirectory(sDestPath)
@@ -11,14 +11,16 @@ Public Class SyncLib
             UpdateFilesDestination(sSrcPath, sDestPath)
             CopyNewFilesDestination(sSrcPath, sDestPath)
 
-            Dim sDirs() As String = Directory.GetDirectories(sSrcPath)
-            Dim sDir As String
-            For i As Integer = 0 To sDirs.Length - 1
-                If sDirs(i) <> sDestPath Then
-                    sDir = sDirs(i).Substring(sDirs(i).LastIndexOf("\") + 1)
-                    CopyFolder_Sync(sDirs(i).ToString & "\", sDestPath & sDir & "\")
-                End If
-            Next i
+            If Recursive Then
+                Dim sDirs() As String = Directory.GetDirectories(sSrcPath)
+                Dim sDir As String
+                For i As Integer = 0 To sDirs.Length - 1
+                    If sDirs(i) <> sDestPath Then
+                        sDir = sDirs(i).Substring(sDirs(i).LastIndexOf("\") + 1)
+                        CopyFolder_Sync(sDirs(i).ToString & "\", sDestPath & sDir & "\", Recursive)
+                    End If
+                Next i
+            End If
 
             Return True
         Catch ex As Exception
@@ -74,21 +76,23 @@ Public Class SyncLib
         Next i
     End Sub
 
-    Public Function DeleteFolder_Sync(ByVal sSrcPath As String, ByVal sDestPath As String) As Boolean
+    Public Function DeleteFolder_Sync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean) As Boolean
 
         If Not Directory.Exists(sSrcPath) Then
             Directory.Delete(sDestPath, True)
         End If
 
         Try
-            Dim sDirs() As String = Directory.GetDirectories(sDestPath)
-            Dim sDir As String
-            For i As Integer = 0 To sDirs.Length - 1
-                If sDirs(i) <> sSrcPath Then
-                    sDir = sDirs(i).Substring(sDirs(i).LastIndexOf("\") + 1)
-                    DeleteFolder_Sync(sSrcPath & sDir & "\", sDirs(i).ToString & "\")
-                End If
-            Next i
+            If Recursive Then
+                Dim sDirs() As String = Directory.GetDirectories(sDestPath)
+                Dim sDir As String
+                For i As Integer = 0 To sDirs.Length - 1
+                    If sDirs(i) <> sSrcPath Then
+                        sDir = sDirs(i).Substring(sDirs(i).LastIndexOf("\") + 1)
+                        DeleteFolder_Sync(sSrcPath & sDir & "\", sDirs(i).ToString & "\", Recursive)
+                    End If
+                Next i
+            End If
 
             Return True
         Catch ex As Exception
@@ -96,9 +100,9 @@ Public Class SyncLib
         End Try
     End Function
 
-    Public Function StartSync(ByVal sSrcPath As String, ByVal sDestPath As String)
-        If CopyFolder_Sync(sSrcPath, sDestPath) Then
-            If DeleteFolder_Sync(sSrcPath, sDestPath) Then
+    Public Function StartSync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean)
+        If CopyFolder_Sync(sSrcPath, sDestPath, Recursive) Then
+            If DeleteFolder_Sync(sSrcPath, sDestPath, Recursive) Then
                 Return True
             End If
         End If

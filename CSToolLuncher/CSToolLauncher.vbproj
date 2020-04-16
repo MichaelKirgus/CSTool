@@ -153,6 +153,10 @@
       <Project>{a6aff011-b72d-43ec-86b2-f0c9359015c9}</Project>
       <Name>CSToolApplicationSettingsManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSToolSyncLib\CSToolSyncLib.vbproj">
+      <Project>{31430250-8936-4e6d-8239-77cb314e12e5}</Project>
+      <Name>CSToolSyncLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
