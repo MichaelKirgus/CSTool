@@ -363,6 +363,10 @@
       <Project>{3c4ef0e4-76cd-42a8-b3f9-824315e872ca}</Project>
       <Name>CSToolSendKeysHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSToolSettingsConsoleLib\CSToolSettingsConsoleLib.vbproj">
+      <Project>{d8818612-2fbd-4135-8634-45973dfb4a16}</Project>
+      <Name>CSToolSettingsConsoleLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSToolUserSettingsLib\CSToolUserSettingsLib.vbproj">
       <Project>{0bfe04e6-071c-4624-ad64-5898b4c19681}</Project>
       <Name>CSToolUserSettingsLib</Name>

@@ -14,6 +14,7 @@ Imports CSToolHostWindow
 Imports CSToolLogLib
 Imports CSToolPingHelper
 Imports CSToolPluginLib
+Imports CSToolSettingsConsoleLib
 Imports CSToolUserSettingsLib
 Imports CSToolUserSettingsManager
 Imports CSToolWindowManager
@@ -984,5 +985,11 @@ Public Class MainForm
         profilemngrfrm._parent = Me
         profilemngrfrm._UserProfilesLocation = ApplicationSettings.UserProfileDir
         profilemngrfrm.Show()
+    End Sub
+
+    Private Sub ApplicationSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ApplicationSettingsToolStripMenuItem.Click
+        Dim appsettingsfrm As New AppSettingsFrm
+        appsettingsfrm.ApplicationSettingsFile = ApplicationSettingManager.GetAppSettingsFilePath
+        appsettingsfrm.Show()
     End Sub
 End Class
