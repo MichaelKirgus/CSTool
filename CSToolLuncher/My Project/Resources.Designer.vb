@@ -91,6 +91,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die &quot; ähnelt.
+        '''</summary>
+        Friend ReadOnly Property pathsep() As String
+            Get
+                Return ResourceManager.GetString("pathsep", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property uac_16() As System.Drawing.Bitmap

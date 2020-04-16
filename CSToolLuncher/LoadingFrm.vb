@@ -5,6 +5,7 @@
 'Additional copyright notices in project base directory or main executable directory.
 Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
+Imports CSToolSyncLib
 
 Public Class LoadingFrm
     Public IsElevated As Boolean = False
@@ -47,6 +48,23 @@ Public Class LoadingFrm
             Return False
         End Try
     End Function
+
+    Public Function ConvertCmdArgsToString(ByVal CmdArgs As String()) As String
+        Try
+            Dim newstr As String = ""
+            Dim arglist As List(Of String)
+            arglist = CmdArgs.ToList
+
+            For ind = 0 To arglist.Count - 1
+                newstr += arglist(ind)
+            Next
+
+            Return newstr
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
 
     Public Function LoadAppSettings() As Boolean
         Try
@@ -126,12 +144,101 @@ Public Class LoadingFrm
         End Try
     End Function
 
-    Public Function SyncFolder(ByVal SourcePath As String, ByVal DestinationPath As String, ByVal Recursive As Boolean) As Boolean
+    Public Function SyncNeeded() As Boolean
+        Try
+            If AppSettingsObj.LauncherSyncNeedsElevation And IsElevated = False Then
+                HandleUserInteraction()
+                Application.Exit()
+            End If
 
+            SetLabelText(LoadingStateLbl, "Initialize syncing...")
+            Dim SyncHandler As New SyncLib
+            SetLabelText(LoadingStateLbl, "Update main application files...")
+            SyncHandler.StartSync(Application.StartupPath, AppSettingsObj.LauncherSyncPath, False)
+            SetLabelText(LoadingStateLbl, "Update credential plugins..")
+            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.CredentialPluginDir, True)
+            SetLabelText(LoadingStateLbl, "Update environment plugins..")
+            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.EnvironmentPluginDir, True)
+            SetLabelText(LoadingStateLbl, "Update GUI plugins..")
+            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.GUIPluginDir, True)
+            If Not AppSettingsObj.LauncherIncludeFolderCollection.Count = 0 Then
+                SetLabelText(LoadingStateLbl, "Update additional files...")
+                For index = 0 To AppSettingsObj.LauncherIncludeFolderCollection.Count - 1
+                    SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherIncludeFolderCollection(index).Recursive)
+                Next
+            End If
+
+            StartMainAppNonElevated()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
     End Function
 
-    Public Function SyncNeeded()
+    Public Function HandleUserInteraction() As Boolean
+        Try
+            Dim userdlg As New Form1
+            Dim targetdir As String
+            targetdir = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+            If Not IO.Directory.Exists(targetdir) Then
+                userdlg.Button1.Enabled = False
+            End If
 
+            Dim result As MsgBoxResult
+            result = userdlg.ShowDialog()
+
+            If result = MsgBoxResult.Abort Then
+                Return True
+            End If
+            If result = MsgBoxResult.Ignore Then
+                'Start old app local
+                Dim mainappargs As String
+                Dim mainapp As New Process
+                mainapp.StartInfo.FileName = AppSettingsObj.LauncherSyncPath & "\CSTool.exe"
+                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs)
+                mainapp.StartInfo.Arguments = mainappargs
+                mainapp.StartInfo.WorkingDirectory = Application.StartupPath
+                mainapp.Start()
+                Return True
+            End If
+            If result = MsgBoxResult.No Then
+                'Start old app remote
+                Dim mainappargs As String
+                Dim mainapp As New Process
+                mainapp.StartInfo.FileName = Application.StartupPath & "\CSTool.exe"
+                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs)
+                mainapp.StartInfo.Arguments = mainappargs
+                mainapp.StartInfo.WorkingDirectory = Application.StartupPath
+                mainapp.Start()
+                Return True
+            End If
+
+            If result = MsgBoxResult.Retry Then
+                RunAppElevated()
+                Return True
+            End If
+
+            Return False
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function StartMainAppNonElevated()
+        Try
+            Dim mainappargs As String
+            Dim mainapp As New Process
+            mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs)
+            mainapp.StartInfo.Arguments = My.Resources.pathsep & AppSettingsObj.LauncherSyncPath & "\CSTool.exe " & mainappargs & My.Resources.pathsep
+            mainapp.StartInfo.FileName = "explorer.exe"
+            mainapp.StartInfo.WorkingDirectory = Application.StartupPath
+            mainapp.Start()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
     End Function
 
     Private Sub LoadingState_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles LoadingState.DoWork
@@ -139,6 +246,10 @@ Public Class LoadingFrm
             SetLabelText(LoadingStateLbl, "Loading settings...")
             CheckForCommandLineArgsAppBase(Environment.GetCommandLineArgs)
             SetLabelText(LoadingStateLbl, "Reading application settings...")
+            If Not IO.File.Exists(ApplicationSettingsFile) Then
+                'Create new settings initial file if no file exists...
+                AppSettingsHandler.SaveSettings(New ApplicationSettings, ApplicationSettingsFile)
+            End If
             LoadAppSettings()
             If AppSettingsObj.EnableLauncherSync Then
                 SetLabelText(LoadingStateLbl, "Check files...")
@@ -185,8 +296,7 @@ Public Class LoadingFrm
                     End If
                 Else
                     If AppSettingsObj.LauncherSyncNeedsElevation Then
-                        Dim result As MsgBoxResult
-                        result = Form1.ShowDialog()
+                        HandleUserInteraction()
                     Else
                         IO.Directory.CreateDirectory(targetdir)
                         SyncNeeded()

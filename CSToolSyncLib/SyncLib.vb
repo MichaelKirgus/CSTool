@@ -100,7 +100,7 @@ Public Class SyncLib
         End Try
     End Function
 
-    Public Function StartSync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean)
+    Public Function StartSync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean) As Boolean
         If CopyFolder_Sync(sSrcPath, sDestPath, Recursive) Then
             If DeleteFolder_Sync(sSrcPath, sDestPath, Recursive) Then
                 Return True

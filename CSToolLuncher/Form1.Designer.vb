@@ -39,7 +39,7 @@ Partial Class Form1
         Me.Label1.Size = New System.Drawing.Size(382, 26)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "CSTool has detected that one or more files are updated on the source directory." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) &
-    "Do you want to update the application files?"
+    "Do you want to update the application files and plugins?"
         '
         'Button1
         '
@@ -69,7 +69,7 @@ Partial Class Form1
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(372, 32)
         Me.Button3.TabIndex = 5
-        Me.Button3.Text = "Yes, update files and run application local"
+        Me.Button3.Text = "Yes, update files and run application local (UAC prompt)"
         Me.Button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button3.UseVisualStyleBackColor = True
