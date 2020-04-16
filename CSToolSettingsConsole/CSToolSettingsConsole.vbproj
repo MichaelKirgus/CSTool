@@ -139,6 +139,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CSToolApplicationSettingsLib\CSToolApplicationSettingsLib.vbproj">
+      <Project>{ede9dfbd-e2b2-4b14-a493-0ed999e9094a}</Project>
+      <Name>CSToolApplicationSettingsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolApplicationSettingsManager\CSToolApplicationSettingsManager.vbproj">
+      <Project>{a6aff011-b72d-43ec-86b2-f0c9359015c9}</Project>
+      <Name>CSToolApplicationSettingsManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSToolSettingsConsoleLib\CSToolSettingsConsoleLib.vbproj">
       <Project>{d8818612-2fbd-4135-8634-45973dfb4a16}</Project>
       <Name>CSToolSettingsConsoleLib</Name>

@@ -9,7 +9,7 @@ Imports CSToolApplicationSettingsManager
 Public Class AppSettingsFrm
     Public WasChanged As Boolean = False
     Public ApplicationSettingsFile As String = "AppSettings.xml"
-    Public AppSettingsHandler As ApplicationSettingsManager
+    Public AppSettingsHandler As New ApplicationSettingsManager
     Public AppSettingsObj As ApplicationSettings
 
     Private Sub AppSettingsFrm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
