@@ -10,7 +10,7 @@ Imports CSToolSyncLib
 Public Class LoadingFrm
     Public IsElevated As Boolean = False
     Public ApplicationSettingsFile As String = "AppSettings.xml"
-    Public AppSettingsHandler As ApplicationSettingsManager
+    Public AppSettingsHandler As New ApplicationSettingsManager
     Public AppSettingsObj As ApplicationSettings
     Private Delegate Sub SetLabelTextDelegate(ByVal LabelCtl As Label, ByVal TextStr As String)
 
@@ -81,8 +81,9 @@ Public Class LoadingFrm
             elevatedproccess.StartInfo.FileName = Application.ExecutablePath
             elevatedproccess.StartInfo.Arguments = "/elevated"
             elevatedproccess.StartInfo.Verb = "runas"
+            elevatedproccess.StartInfo.UseShellExecute = True
             If elevatedproccess.Start() Then
-                Return True
+                elevatedproccess.WaitForExit()
             Else
                 Return False
             End If
@@ -93,82 +94,51 @@ Public Class LoadingFrm
         End Try
     End Function
 
-    Public Function CheckFilesDate(ByVal SourcePath As String, ByVal DestinationPath As String, ByVal Recursive As Boolean) As Boolean
+    Public Function SyncNeeded(Optional ByVal OnlyCheck As Boolean = False) As Boolean
         Try
-            Dim allfiles As String()
-            SetLabelText(LoadingStateLbl, "Check files in path " & DestinationPath & " ...")
-            allfiles = IO.Directory.GetFiles(SourcePath)
-
-            If Not allfiles.Count = 0 Then
-                For index = 0 To allfiles.Count - 1
-                    Try
-                        Dim fileinfsource As New IO.FileInfo(allfiles(index))
-                        SetLabelText(LoadingStateLbl, "Check file " & DestinationPath & "\" & fileinfsource.Name & " ...")
-                        If IO.File.Exists(DestinationPath & "\" & fileinfsource.Name) Then
-                            Dim fileinfdest As New IO.DirectoryInfo(DestinationPath & "\" & fileinfsource.Name)
-                            If fileinfdest.LastWriteTime < fileinfsource.LastWriteTime Then
-                                Return True
-                            End If
-                        Else
-                            Return True
-                        End If
-
-                    Catch ex As Exception
-                        Return False
-                    End Try
-                Next
-            End If
-
-            If Recursive Then
-                Dim alldirs As String()
-                SetLabelText(LoadingStateLbl, "Check subfolders in path " & DestinationPath & " ...")
-                alldirs = IO.Directory.GetDirectories(SourcePath)
-
-                If Not alldirs.Count = 0 Then
-                    For index = 0 To allfiles.Count - 1
-                        Try
-                            Dim dirinf As New IO.DirectoryInfo(alldirs(index))
-                            If CheckFilesDate(SourcePath & "\" & dirinf.Name, DestinationPath & "\" & dirinf.Name, Recursive) Then
-                                Return True
-                            End If
-                        Catch ex As Exception
-                            Return False
-                        End Try
-                    Next
+            If Not OnlyCheck Then
+                If AppSettingsObj.LauncherSyncNeedsElevation And IsElevated = False Then
+                    HandleUserInteraction()
+                    Return False
                 End If
-            End If
-
-            Return False
-        Catch ex As Exception
-            Return False
-        End Try
-    End Function
-
-    Public Function SyncNeeded() As Boolean
-        Try
-            If AppSettingsObj.LauncherSyncNeedsElevation And IsElevated = False Then
-                HandleUserInteraction()
-                Application.Exit()
             End If
 
             SetLabelText(LoadingStateLbl, "Initialize syncing...")
             Dim SyncHandler As New SyncLib
             SetLabelText(LoadingStateLbl, "Update main application files...")
-            SyncHandler.StartSync(Application.StartupPath, AppSettingsObj.LauncherSyncPath, False)
+            SyncHandler.StartSync(Application.StartupPath, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath), False, OnlyCheck)
+            If SyncHandler.FilesOrDirsChanged Then
+                SyncNeeded(False)
+                Return False
+            End If
             SetLabelText(LoadingStateLbl, "Update credential plugins..")
-            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.CredentialPluginDir, True)
+            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir, True, OnlyCheck)
+            If SyncHandler.FilesOrDirsChanged Then
+                SyncNeeded(False)
+                Return False
+            End If
             SetLabelText(LoadingStateLbl, "Update environment plugins..")
-            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.EnvironmentPluginDir, True)
+            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir, True, OnlyCheck)
+            If SyncHandler.FilesOrDirsChanged Then
+                SyncNeeded(False)
+                Return False
+            End If
             SetLabelText(LoadingStateLbl, "Update GUI plugins..")
-            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.GUIPluginDir, True)
+            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir, True, OnlyCheck)
+            If SyncHandler.FilesOrDirsChanged Then
+                SyncNeeded(False)
+                Return False
+            End If
             If Not AppSettingsObj.LauncherIncludeFolderCollection.Count = 0 Then
                 SetLabelText(LoadingStateLbl, "Update additional files...")
                 For index = 0 To AppSettingsObj.LauncherIncludeFolderCollection.Count - 1
-                    SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherIncludeFolderCollection(index).Recursive)
+                    SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherIncludeFolderCollection(index).Recursive, OnlyCheck)
                 Next
+                If SyncHandler.FilesOrDirsChanged Then
+                    SyncNeeded(False)
+                    Return False
+                End If
             End If
-
-            StartMainAppNonElevated()
 
             Return True
         Catch ex As Exception
@@ -185,24 +155,23 @@ Public Class LoadingFrm
                 userdlg.Button1.Enabled = False
             End If
 
-            Dim result As MsgBoxResult
-            result = userdlg.ShowDialog()
+            userdlg.ShowDialog()
 
-            If result = MsgBoxResult.Abort Then
+            If userdlg.DialogResult = MsgBoxResult.Abort Then
                 Return True
             End If
-            If result = MsgBoxResult.Ignore Then
+            If userdlg.DialogResult = MsgBoxResult.Ignore Then
                 'Start old app local
                 Dim mainappargs As String
                 Dim mainapp As New Process
-                mainapp.StartInfo.FileName = AppSettingsObj.LauncherSyncPath & "\CSTool.exe"
+                mainapp.StartInfo.FileName = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe"
                 mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs)
                 mainapp.StartInfo.Arguments = mainappargs
                 mainapp.StartInfo.WorkingDirectory = Application.StartupPath
                 mainapp.Start()
                 Return True
             End If
-            If result = MsgBoxResult.No Then
+            If userdlg.DialogResult = MsgBoxResult.No Then
                 'Start old app remote
                 Dim mainappargs As String
                 Dim mainapp As New Process
@@ -214,7 +183,7 @@ Public Class LoadingFrm
                 Return True
             End If
 
-            If result = MsgBoxResult.Retry Then
+            If userdlg.DialogResult = MsgBoxResult.Retry Then
                 RunAppElevated()
                 Return True
             End If
@@ -225,15 +194,9 @@ Public Class LoadingFrm
         End Try
     End Function
 
-    Public Function StartMainAppNonElevated()
+    Public Function StartMainAppFromSourceNonElevated()
         Try
-            Dim mainappargs As String
-            Dim mainapp As New Process
-            mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs)
-            mainapp.StartInfo.Arguments = My.Resources.pathsep & AppSettingsObj.LauncherSyncPath & "\CSTool.exe " & mainappargs & My.Resources.pathsep
-            mainapp.StartInfo.FileName = "explorer.exe"
-            mainapp.StartInfo.WorkingDirectory = Application.StartupPath
-            mainapp.Start()
+            Shell("CSTool.exe")
 
             Return True
         Catch ex As Exception
@@ -256,54 +219,31 @@ Public Class LoadingFrm
                 Dim targetdir As String
                 targetdir = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
                 If IO.Directory.Exists(targetdir) Then
-                    Dim endresult As Boolean = False
-                    endresult = CheckFilesDate(Application.StartupPath, AppSettingsObj.LauncherSyncPath, False)
-                    If endresult = False Then
-                        endresult = CheckFilesDate(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.CredentialPluginDir, True)
-                        If endresult = False Then
-                            endresult = CheckFilesDate(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.EnvironmentPluginDir, True)
-                            If endresult = False Then
-                                endresult = CheckFilesDate(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.GUIPluginDir, True)
-                                If endresult = False Then
-                                    If Not AppSettingsObj.LauncherIncludeFolderCollection.Count = 0 Then
-                                        For index = 0 To AppSettingsObj.LauncherIncludeFolderCollection.Count - 1
-                                            endresult = CheckFilesDate(Application.StartupPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherSyncPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherIncludeFolderCollection(index).Recursive)
-                                            If endresult = True Then
-                                                Exit For
-                                            End If
-                                        Next
-                                        If endresult = False Then
-                                            'No sync needed, all files are ok.
-                                        Else
-                                            SyncNeeded()
-                                        End If
-                                    End If
-                                Else
-                                    SyncNeeded()
-                                    Exit Sub
-                                End If
-                            Else
-                                SyncNeeded()
-                                Exit Sub
-                            End If
-                        Else
-                            SyncNeeded()
-                            Exit Sub
-                        End If
-                    Else
-                        SyncNeeded()
-                        Exit Sub
-                    End If
+                    SyncNeeded(True)
                 Else
                     If AppSettingsObj.LauncherSyncNeedsElevation Then
-                        HandleUserInteraction()
+                        If IsElevated = False Then
+                            HandleUserInteraction()
+                        Else
+                            IO.Directory.CreateDirectory(targetdir)
+                            SyncNeeded()
+                        End If
                     Else
                         IO.Directory.CreateDirectory(targetdir)
                         SyncNeeded()
                     End If
                 End If
+                If Not IsElevated Then
+                    StartMainAppFromSourceNonElevated()
+                End If
+            Else
+                StartMainAppFromSourceNonElevated()
             End If
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub LoadingState_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles LoadingState.RunWorkerCompleted
+        Application.ExitThread()
     End Sub
 End Class

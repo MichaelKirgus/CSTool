@@ -29,15 +29,15 @@ Partial Class LoadingFrm
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LoadingFrm))
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.AppVersionLbl = New System.Windows.Forms.Label()
         Me.LoadingState = New System.ComponentModel.BackgroundWorker()
         Me.LoadingStateLbl = New System.Windows.Forms.Label()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -51,31 +51,6 @@ Partial Class LoadingFrm
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "CSTool"
         Me.Label1.UseWaitCursor = True
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackgroundImage = Global.CSToolLauncher.My.Resources.Resources.oback_trans
-        Me.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox2.Image = Global.CSToolLauncher.My.Resources.Resources.Microsoft_1_5s_125px
-        Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(333, 254)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox2.TabIndex = 4
-        Me.PictureBox2.TabStop = False
-        Me.PictureBox2.UseWaitCursor = True
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.CSToolLauncher.My.Resources.Resources.cstool_48x48
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(48, 48)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        Me.PictureBox1.UseWaitCursor = True
         '
         'Panel1
         '
@@ -116,6 +91,31 @@ Partial Class LoadingFrm
         Me.LoadingStateLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.LoadingStateLbl.UseWaitCursor = True
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CSToolLauncher.My.Resources.Resources.cstool_48x48
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(48, 48)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
+        Me.PictureBox1.UseWaitCursor = True
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackgroundImage = Global.CSToolLauncher.My.Resources.Resources.oback_trans
+        Me.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PictureBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox2.Image = Global.CSToolLauncher.My.Resources.Resources.Microsoft_1_5s_125px
+        Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(333, 254)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox2.TabIndex = 4
+        Me.PictureBox2.TabStop = False
+        Me.PictureBox2.UseWaitCursor = True
+        '
         'LoadingFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -131,14 +131,15 @@ Partial Class LoadingFrm
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "LoadingFrm"
+        Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Loading application..."
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.UseWaitCursor = True
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

@@ -14,9 +14,13 @@
         Me.Close()
     End Sub
 
-    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If e.CloseReason = CloseReason.UserClosing Then
-            Me.DialogResult = DialogResult.Abort
-        End If
+    'Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    '    If e.CloseReason = CloseReason.UserClosing Then
+    '        Me.DialogResult = DialogResult.Abort
+    '    End If
+    'End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
