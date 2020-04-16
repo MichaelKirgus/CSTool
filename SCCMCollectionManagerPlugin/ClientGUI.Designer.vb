@@ -27,7 +27,6 @@ Partial Class ClientGUI
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ClientGUI))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
@@ -41,7 +40,7 @@ Partial Class ClientGUI
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader26 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader27 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.ImageList1 = New System.Windows.Forms.ImageList()
         Me.ToolStrip3 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripTextBox3 = New System.Windows.Forms.ToolStripTextBox()
@@ -59,7 +58,7 @@ Partial Class ClientGUI
         Me.ColumnHeader17 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader18 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader23 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.RemoveMemershipContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.RemoveMemershipContextMenu = New System.Windows.Forms.ContextMenuStrip()
         Me.EntfernenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ObjekteigenschaftenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
@@ -77,7 +76,7 @@ Partial Class ClientGUI
         Me.ColumnHeader14 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader15 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader16 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ClientPackageStateContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ClientPackageStateContextMenu = New System.Windows.Forms.ContextMenuStrip()
         Me.NurClientstatusAktualisierenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ObjekteigenschaftenToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -90,7 +89,7 @@ Partial Class ClientGUI
         Me.ColumnHeader32 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader33 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader35 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ServerPackageStateContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ServerPackageStateContextMenu = New System.Windows.Forms.ContextMenuStrip()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -106,6 +105,7 @@ Partial Class ClientGUI
         Me.LiveModeButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton13 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
         Me.SMSCollectionSplashLabel = New System.Windows.Forms.Label()
         Me.SMSCollectionSplash = New System.Windows.Forms.PictureBox()
         Me.ListView2 = New System.Windows.Forms.ListView()
@@ -114,7 +114,7 @@ Partial Class ClientGUI
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader22 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.AddMemberContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddMemberContextMenu = New System.Windows.Forms.ContextMenuStrip()
         Me.ZuweisenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ObjekteigenschaftenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -134,7 +134,7 @@ Partial Class ClientGUI
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader24 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader25 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.LogContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.LogContextMenu = New System.Windows.Forms.ContextMenuStrip()
         Me.LogSpeichernToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CollectServerPackageStateWorker = New System.ComponentModel.BackgroundWorker()
         Me.SaveTextfileDlg = New System.Windows.Forms.SaveFileDialog()
@@ -147,7 +147,6 @@ Partial Class ClientGUI
         Me.CollectSMSCollectionsWorker = New System.ComponentModel.BackgroundWorker()
         Me.GetAllClientsWorker = New System.ComponentModel.BackgroundWorker()
         Me.ConnectToSMSMServerWorker = New System.ComponentModel.BackgroundWorker()
-        Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -844,6 +843,19 @@ Partial Class ClientGUI
         Me.ToolStripButton13.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton13.Text = "Group collections"
         '
+        'ToolStripButton15
+        '
+        Me.ToolStripButton15.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton15.Checked = True
+        Me.ToolStripButton15.CheckOnClick = True
+        Me.ToolStripButton15.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ToolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton15.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_view_16x16
+        Me.ToolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton15.Name = "ToolStripButton15"
+        Me.ToolStripButton15.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton15.Text = "Show search device/username panel"
+        '
         'SMSCollectionSplashLabel
         '
         Me.SMSCollectionSplashLabel.AutoSize = True
@@ -1131,19 +1143,6 @@ Partial Class ClientGUI
         '
         Me.ConnectToSMSMServerWorker.WorkerReportsProgress = True
         Me.ConnectToSMSMServerWorker.WorkerSupportsCancellation = True
-        '
-        'ToolStripButton15
-        '
-        Me.ToolStripButton15.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton15.Checked = True
-        Me.ToolStripButton15.CheckOnClick = True
-        Me.ToolStripButton15.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ToolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton15.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_view_16x16
-        Me.ToolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton15.Name = "ToolStripButton15"
-        Me.ToolStripButton15.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton15.Text = "Show search device/username panel"
         '
         'ClientGUI
         '
