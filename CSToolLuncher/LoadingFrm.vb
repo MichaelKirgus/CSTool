@@ -89,7 +89,7 @@ Public Class LoadingFrm
         Try
             Dim elevatedproccess As New Process
             elevatedproccess.StartInfo.FileName = Application.ExecutablePath
-            elevatedproccess.StartInfo.Arguments = "/elevated" & ConvertCmdArgsToString(Environment.GetCommandLineArgs)
+            elevatedproccess.StartInfo.Arguments = "/elevated " & ConvertCmdArgsToString(Environment.GetCommandLineArgs)
             elevatedproccess.StartInfo.Verb = "runas"
             elevatedproccess.StartInfo.UseShellExecute = True
             If elevatedproccess.Start() Then
