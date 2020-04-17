@@ -19,6 +19,7 @@ Imports CSToolLogLib
     Public Property LauncherDeleteFilesFromSyncPath As Boolean = True
     Public Property LauncherIncludeFolderCollection As New List(Of LauncherIncludeFolderEntry)
     Public Property LauncherCreateMainApplicationShortcutOnDesktop As Boolean = True
+    Public Property LauncherLogSettings As New LogSettings
     Public Property LogSettings As New LogSettings
 End Class
 
