@@ -1,5 +1,5 @@
 ﻿Public Class LauncherLib
-    Public Function CreateShortCut(ByVal TargetName As String, ByVal ShortCutPath As String, ByVal ShortCutName As String) As Boolean
+    Public Function CreateShortCut(ByVal TargetName As String, ByVal ShortCutPath As String, ByVal ShortCutName As String, ByVal WorkingDir As String) As Boolean
         Dim oShell As Object
         Dim oLink As Object
 
@@ -8,6 +8,7 @@
             oLink = oShell.CreateShortcut(ShortCutPath & "\" & ShortCutName & ".lnk")
 
             oLink.TargetPath = TargetName
+            oLink.WorkingDirectory = WorkingDir
             oLink.WindowStyle = 1
             oLink.Save()
 
