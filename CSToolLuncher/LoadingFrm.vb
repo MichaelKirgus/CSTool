@@ -67,11 +67,16 @@ Public Class LoadingFrm
 
             If arglist.Count > 1 Then
                 For ind = 1 To arglist.Count - 1
-                    newstr += arglist(ind)
+                    If Not arglist(ind) = " " Or Not arglist(ind) = "" Then
+                        newstr += arglist(ind)
+                    End If
                 Next
             End If
 
             newstr = newstr.Replace("/elevated", "")
+            If newstr.EndsWith(" ") Then
+                newstr = newstr.Substring(0, newstr.Length - 1)
+            End If
 
             Return newstr
         Catch ex As Exception
