@@ -65,9 +65,11 @@ Public Class LoadingFrm
             Dim arglist As List(Of String)
             arglist = CmdArgs.ToList
 
-            For ind = 0 To arglist.Count - 1
-                newstr += arglist(ind)
-            Next
+            If arglist.Count > 1 Then
+                For ind = 1 To arglist.Count - 1
+                    newstr += arglist(ind)
+                Next
+            End If
 
             Return newstr
         Catch ex As Exception
@@ -108,7 +110,9 @@ Public Class LoadingFrm
         Try
             If Not OnlyCheck Then
                 If AppSettingsObj.LauncherSyncNeedsElevation And IsElevated = False Then
-                    HandleUserInteraction()
+                    If HandleUserInteraction() = False Then
+                        Application.ExitThread()
+                    End If
                     Return False
                 End If
             End If
@@ -173,26 +177,12 @@ Public Class LoadingFrm
                 Return True
             End If
             If userdlg.DialogResult = MsgBoxResult.Ignore Then
-                'Start old app local
-                Dim mainappargs As String
-                Dim mainapp As New Process
-                mainapp.StartInfo.FileName = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe"
-                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
-                mainapp.StartInfo.Arguments = mainappargs
-                mainapp.StartInfo.WorkingDirectory = Application.StartupPath
-                mainapp.Start()
-                Return True
+                StartMainAppFromSourceNonElevated()
+                Return False
             End If
             If userdlg.DialogResult = MsgBoxResult.No Then
-                'Start old app remote
-                Dim mainappargs As String
-                Dim mainapp As New Process
-                mainapp.StartInfo.FileName = Application.StartupPath & "\CSTool.exe"
-                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
-                mainapp.StartInfo.Arguments = mainappargs
-                mainapp.StartInfo.WorkingDirectory = Application.StartupPath
-                mainapp.Start()
-                Return True
+                StartMainAppFromShareNonElevated()
+                Return False
             End If
 
             If userdlg.DialogResult = MsgBoxResult.Retry Then
@@ -209,9 +199,32 @@ Public Class LoadingFrm
         End Try
     End Function
 
-    Public Function StartMainAppFromSourceNonElevated()
+    Public Function StartMainAppFromShareNonElevated() As Boolean
         Try
-            Shell("CSTool.exe", AppWinStyle.NormalFocus)
+            Dim mainappargs As String
+            Dim mainapp As New Process
+            mainapp.StartInfo.FileName = Application.StartupPath & "\CSTool.exe"
+            mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
+            mainapp.StartInfo.Arguments = mainappargs
+            mainapp.StartInfo.WorkingDirectory = Application.StartupPath
+            mainapp.Start()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function StartMainAppFromSourceNonElevated() As Boolean
+        Try
+            Dim mainappargs As String
+            Dim mainapp As New Process
+            mainapp.StartInfo.FileName = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe"
+            mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
+            mainapp.StartInfo.Arguments = mainappargs
+            mainapp.StartInfo.WorkingDirectory = Application.StartupPath
+            mainapp.Start()
+            Return True
 
             Return True
         Catch ex As Exception
@@ -238,7 +251,11 @@ Public Class LoadingFrm
                 Else
                     If AppSettingsObj.LauncherSyncNeedsElevation Then
                         If IsElevated = False Then
-                            HandleUserInteraction()
+                            If HandleUserInteraction() = False Then
+                                Exit Try
+                            Else
+                                StartMainAppFromSourceNonElevated()
+                            End If
                         Else
                             Try
                                 IO.Directory.CreateDirectory(targetdir)
@@ -257,6 +274,7 @@ Public Class LoadingFrm
                         SetLabelText(LoadingStateLbl, "Create shortcut...")
                         CheckAndCreateDesktopShortcut()
                     End If
+                Else
                     StartMainAppFromSourceNonElevated()
                 End If
             Else
