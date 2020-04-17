@@ -259,6 +259,9 @@ Public Class LoadingFrm
                     StartMainAppFromSourceNonElevated()
                 End If
             Else
+                If AppSettingsObj.LauncherCreateMainApplicationShortcutOnDesktop Then
+                    CheckAndCreateDesktopShortcut()
+                End If
                 StartMainAppFromSourceNonElevated()
             End If
         Catch ex As Exception
