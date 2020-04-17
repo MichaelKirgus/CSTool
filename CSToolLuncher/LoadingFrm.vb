@@ -71,6 +71,8 @@ Public Class LoadingFrm
                 Next
             End If
 
+            newstr = newstr.Replace("/elevated", "")
+
             Return newstr
         Catch ex As Exception
             Return ""
