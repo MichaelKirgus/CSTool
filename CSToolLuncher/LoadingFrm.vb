@@ -43,6 +43,14 @@ Public Class LoadingFrm
                 If arglist(ind).ToLower = "/appsettings" Then
                     ApplicationSettingsFile = arglist(ind + 1)
                 End If
+
+                If arglist(ind).ToLower = "/noshortcut" Then
+                    AppSettingsObj.LauncherCreateMainApplicationShortcutOnDesktop = False
+                End If
+
+                If arglist(ind).ToLower = "/shortcut" Then
+                    AppSettingsObj.LauncherCreateMainApplicationShortcutOnDesktop = True
+                End If
             Next
 
             Return True
@@ -242,7 +250,9 @@ Public Class LoadingFrm
                     End If
                 End If
                 If Not IsElevated Then
-                    CheckAndCreateDesktopShortcut()
+                    If AppSettingsObj.LauncherCreateMainApplicationShortcutOnDesktop Then
+                        CheckAndCreateDesktopShortcut()
+                    End If
                     StartMainAppFromSourceNonElevated()
                 End If
             Else
