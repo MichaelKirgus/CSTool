@@ -226,7 +226,6 @@ Public Class LoadingFrm
             mainapp.StartInfo.Arguments = mainappargs
             mainapp.StartInfo.WorkingDirectory = Application.StartupPath
             mainapp.Start()
-            Return True
 
             Return True
         Catch ex As Exception
