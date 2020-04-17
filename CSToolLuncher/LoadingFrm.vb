@@ -209,7 +209,7 @@ Public Class LoadingFrm
 
     Public Function StartMainAppFromSourceNonElevated()
         Try
-            Shell("CSTool.exe")
+            Shell("CSTool.exe", AppWinStyle.NormalFocus)
 
             Return True
         Catch ex As Exception
