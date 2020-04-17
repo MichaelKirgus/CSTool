@@ -127,6 +127,8 @@ Public Class LoadingFrm
 
             SetLabelText(LoadingStateLbl, "Initialize syncing...")
             Dim SyncHandler As New SyncLib
+            SyncHandler.LogHandler.LogSettings = AppSettingsObj.LauncherLogSettings
+            SyncHandler.LogHandler.InitLogSystem()
             SetLabelText(LoadingStateLbl, "Update main application files...")
             SyncHandler.StartSync(Application.StartupPath, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath), False, OnlyCheck)
             SyncHandler.StartSync(Application.StartupPath & "\locales", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\locales", True, OnlyCheck)
