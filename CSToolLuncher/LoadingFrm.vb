@@ -5,6 +5,7 @@
 'Additional copyright notices in project base directory or main executable directory.
 Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
+Imports CSToolLauncherLib
 Imports CSToolSyncLib
 
 Public Class LoadingFrm
@@ -12,6 +13,7 @@ Public Class LoadingFrm
     Public ApplicationSettingsFile As String = "AppSettings.xml"
     Public AppSettingsHandler As New ApplicationSettingsManager
     Public AppSettingsObj As ApplicationSettings
+    Public LauncherHelperInstance As New LauncherLib
     Private Delegate Sub SetLabelTextDelegate(ByVal LabelCtl As Label, ByVal TextStr As String)
 
     Private Sub SetLabelText(ByVal LabelCtl As Label, ByVal TextStr As String)
@@ -107,6 +109,8 @@ Public Class LoadingFrm
             Dim SyncHandler As New SyncLib
             SetLabelText(LoadingStateLbl, "Update main application files...")
             SyncHandler.StartSync(Application.StartupPath, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath), False, OnlyCheck)
+            SyncHandler.StartSync(Application.StartupPath & "\locales", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\locales", True, OnlyCheck)
+            SyncHandler.StartSync(Application.StartupPath & "\swiftshader", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\swiftshader", True, OnlyCheck)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncNeeded(False)
                 Return False
@@ -165,7 +169,7 @@ Public Class LoadingFrm
                 Dim mainappargs As String
                 Dim mainapp As New Process
                 mainapp.StartInfo.FileName = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe"
-                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs)
+                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
                 mainapp.StartInfo.Arguments = mainappargs
                 mainapp.StartInfo.WorkingDirectory = Application.StartupPath
                 mainapp.Start()
@@ -176,7 +180,7 @@ Public Class LoadingFrm
                 Dim mainappargs As String
                 Dim mainapp As New Process
                 mainapp.StartInfo.FileName = Application.StartupPath & "\CSTool.exe"
-                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs)
+                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
                 mainapp.StartInfo.Arguments = mainappargs
                 mainapp.StartInfo.WorkingDirectory = Application.StartupPath
                 mainapp.Start()
@@ -225,7 +229,11 @@ Public Class LoadingFrm
                         If IsElevated = False Then
                             HandleUserInteraction()
                         Else
-                            IO.Directory.CreateDirectory(targetdir)
+                            Try
+                                IO.Directory.CreateDirectory(targetdir)
+                            Catch ex As Exception
+                            End Try
+
                             SyncNeeded()
                         End If
                     Else
@@ -234,6 +242,7 @@ Public Class LoadingFrm
                     End If
                 End If
                 If Not IsElevated Then
+                    CheckAndCreateDesktopShortcut()
                     StartMainAppFromSourceNonElevated()
                 End If
             Else
@@ -242,6 +251,18 @@ Public Class LoadingFrm
         Catch ex As Exception
         End Try
     End Sub
+
+    Public Function CheckAndCreateDesktopShortcut() As Boolean
+        If Not LauncherHelperInstance.ShortcutExists(My.Computer.FileSystem.SpecialDirectories.Desktop & "\CSTool") Then
+            If Not LauncherHelperInstance.CreateShortCut(Application.StartupPath & "\CSToolLauncher.exe", My.Computer.FileSystem.SpecialDirectories.Desktop, "CSTool") Then
+                Return False
+            Else
+                Return True
+            End If
+        Else
+            Return False
+        End If
+    End Function
 
     Private Sub LoadingState_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles LoadingState.RunWorkerCompleted
         Application.ExitThread()

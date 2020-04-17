@@ -180,6 +180,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CSToolSettingsConsoleLib", 
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CSToolSettingsConsole", "CSToolSettingsConsole\CSToolSettingsConsole.vbproj", "{B8819A5D-A688-4607-842B-EFE4E87F12BB}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CSToolLauncherLib", "CSToolLauncherLib\CSToolLauncherLib.vbproj", "{3FE92D22-F454-4C7E-AEE8-5DB435182570}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1434,6 +1436,26 @@ Global
 		{B8819A5D-A688-4607-842B-EFE4E87F12BB}.Release|x64.Build.0 = Release|Any CPU
 		{B8819A5D-A688-4607-842B-EFE4E87F12BB}.Release|x86.ActiveCfg = Release|Any CPU
 		{B8819A5D-A688-4607-842B-EFE4E87F12BB}.Release|x86.Build.0 = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|ARM.Build.0 = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|x64.Build.0 = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Debug|x86.Build.0 = Debug|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|ARM.ActiveCfg = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|ARM.Build.0 = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|ARM64.Build.0 = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|x64.ActiveCfg = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|x64.Build.0 = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|x86.ActiveCfg = Release|Any CPU
+		{3FE92D22-F454-4C7E-AEE8-5DB435182570}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

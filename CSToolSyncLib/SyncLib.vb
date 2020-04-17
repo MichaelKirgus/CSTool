@@ -7,7 +7,11 @@ Public Class SyncLib
         Try
             If Not Directory.Exists(sDestPath) Then
                 If Not Simulate Then
-                    Directory.CreateDirectory(sDestPath)
+                    Try
+                        Directory.CreateDirectory(sDestPath)
+                    Catch ex As Exception
+                        Return False
+                    End Try
                 Else
                     FilesOrDirsChanged = True
                     Return True
@@ -61,7 +65,10 @@ Public Class SyncLib
 
             If Not File.Exists(sSrcPath & sFile) Then
                 If Not Simulate Then
-                    File.Delete(sDestPath & sFile)
+                    Try
+                        File.Delete(sDestPath & sFile)
+                    Catch ex As Exception
+                    End Try
                 Else
                     FilesOrDirsChanged = True
                     Exit Sub
@@ -84,8 +91,11 @@ Public Class SyncLib
 
                 If DestFile.LastWriteTime <> SrcFile.LastWriteTime Then
                     If Not Simulate Then
-                        File.Delete(sDestPath & sFile)
-                        File.Copy(sSrcPath & sFile, sDestPath & sFile)
+                        Try
+                            File.Delete(sDestPath & sFile)
+                            File.Copy(sSrcPath & sFile, sDestPath & sFile)
+                        Catch ex As Exception
+                        End Try
                     Else
                         FilesOrDirsChanged = True
                         Exit Sub
@@ -105,7 +115,10 @@ Public Class SyncLib
 
             If Not File.Exists(sDestPath & sFile) Then
                 If Not Simulate Then
-                    File.Copy(sSrcPath & sFile, sDestPath & sFile)
+                    Try
+                        File.Copy(sSrcPath & sFile, sDestPath & sFile)
+                    Catch ex As Exception
+                    End Try
                 Else
                     FilesOrDirsChanged = True
                     Exit Sub
@@ -117,7 +130,12 @@ Public Class SyncLib
     Public Function DeleteFolder_Sync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean, ByVal Simulate As Boolean) As Boolean
 
         If Not Directory.Exists(sSrcPath) Then
-            Directory.Delete(sDestPath, True)
+            If Not Simulate Then
+                Directory.Delete(sDestPath, True)
+            Else
+                FilesOrDirsChanged = True
+                Return True
+            End If
         End If
 
         Try
