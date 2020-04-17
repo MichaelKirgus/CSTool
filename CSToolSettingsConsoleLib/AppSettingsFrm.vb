@@ -15,6 +15,8 @@ Public Class AppSettingsFrm
     Private Sub AppSettingsFrm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         AppSettingsObj = AppSettingsHandler.LoadSettings(ApplicationSettingsFile)
         PropertyGrid1.SelectedObject = AppSettingsObj
+        PropertyGrid2.SelectedObject = AppSettingsObj.LogSettings
+        PropertyGrid3.SelectedObject = AppSettingsObj.LauncherLogSettings
     End Sub
 
     Private Sub PropertyGrid1_PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs) Handles PropertyGrid1.PropertyValueChanged
@@ -29,5 +31,13 @@ Public Class AppSettingsFrm
                 AppSettingsHandler.SaveSettings(AppSettingsObj, ApplicationSettingsFile)
             End If
         End If
+    End Sub
+
+    Private Sub PropertyGrid2_PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs) Handles PropertyGrid2.PropertyValueChanged
+        WasChanged = True
+    End Sub
+
+    Private Sub PropertyGrid3_PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs) Handles PropertyGrid3.PropertyValueChanged
+        WasChanged = True
     End Sub
 End Class

@@ -119,6 +119,10 @@
       <Project>{A6AFF011-B72D-43EC-86B2-F0C9359015C9}</Project>
       <Name>CSToolApplicationSettingsManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSToolLogLib\CSToolLogLib.vbproj">
+      <Project>{DF373DBF-733E-4E4D-8335-3D6D5FE447B2}</Project>
+      <Name>CSToolLogLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

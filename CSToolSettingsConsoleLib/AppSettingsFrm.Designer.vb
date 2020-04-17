@@ -31,13 +31,21 @@ Partial Class AppSettingsFrm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.PropertyGrid2 = New System.Windows.Forms.PropertyGrid()
+        Me.PropertyGrid3 = New System.Windows.Forms.PropertyGrid()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -66,6 +74,48 @@ Partial Class AppSettingsFrm
         Me.PropertyGrid1.TabIndex = 0
         Me.PropertyGrid1.ToolbarVisible = False
         '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.PropertyGrid2)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(656, 485)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Main application log settings"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.PropertyGrid3)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(656, 485)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Launcher application log settings"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'PropertyGrid2
+        '
+        Me.PropertyGrid2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PropertyGrid2.HelpVisible = False
+        Me.PropertyGrid2.Location = New System.Drawing.Point(3, 3)
+        Me.PropertyGrid2.Name = "PropertyGrid2"
+        Me.PropertyGrid2.Size = New System.Drawing.Size(650, 479)
+        Me.PropertyGrid2.TabIndex = 1
+        Me.PropertyGrid2.ToolbarVisible = False
+        '
+        'PropertyGrid3
+        '
+        Me.PropertyGrid3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PropertyGrid3.HelpVisible = False
+        Me.PropertyGrid3.Location = New System.Drawing.Point(3, 3)
+        Me.PropertyGrid3.Name = "PropertyGrid3"
+        Me.PropertyGrid3.Size = New System.Drawing.Size(650, 479)
+        Me.PropertyGrid3.TabIndex = 1
+        Me.PropertyGrid3.ToolbarVisible = False
+        '
         'AppSettingsFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -78,6 +128,8 @@ Partial Class AppSettingsFrm
         Me.Text = "Application settings"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -85,4 +137,8 @@ Partial Class AppSettingsFrm
     Friend WithEvents TabControl1 As Windows.Forms.TabControl
     Friend WithEvents TabPage1 As Windows.Forms.TabPage
     Friend WithEvents PropertyGrid1 As Windows.Forms.PropertyGrid
+    Friend WithEvents TabPage2 As Windows.Forms.TabPage
+    Friend WithEvents PropertyGrid2 As Windows.Forms.PropertyGrid
+    Friend WithEvents TabPage3 As Windows.Forms.TabPage
+    Friend WithEvents PropertyGrid3 As Windows.Forms.PropertyGrid
 End Class
