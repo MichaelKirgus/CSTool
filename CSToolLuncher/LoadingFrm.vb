@@ -254,12 +254,14 @@ Public Class LoadingFrm
                 End If
                 If Not IsElevated Then
                     If AppSettingsObj.LauncherCreateMainApplicationShortcutOnDesktop Then
+                        SetLabelText(LoadingStateLbl, "Create shortcut...")
                         CheckAndCreateDesktopShortcut()
                     End If
                     StartMainAppFromSourceNonElevated()
                 End If
             Else
                 If AppSettingsObj.LauncherCreateMainApplicationShortcutOnDesktop Then
+                    SetLabelText(LoadingStateLbl, "Create shortcut...")
                     CheckAndCreateDesktopShortcut()
                 End If
                 StartMainAppFromSourceNonElevated()
