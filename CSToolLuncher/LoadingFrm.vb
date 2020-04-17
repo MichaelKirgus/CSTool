@@ -134,19 +134,19 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
-            SetLabelText(LoadingStateLbl, "Update credential plugins..")
+            SetLabelText(LoadingStateLbl, "Update credential plugins...")
             SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir, True, OnlyCheck)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncNeeded(False)
                 Return False
             End If
-            SetLabelText(LoadingStateLbl, "Update environment plugins..")
+            SetLabelText(LoadingStateLbl, "Update environment plugins...")
             SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir, True, OnlyCheck)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncNeeded(False)
                 Return False
             End If
-            SetLabelText(LoadingStateLbl, "Update GUI plugins..")
+            SetLabelText(LoadingStateLbl, "Update GUI plugins...")
             SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir, True, OnlyCheck)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncNeeded(False)
