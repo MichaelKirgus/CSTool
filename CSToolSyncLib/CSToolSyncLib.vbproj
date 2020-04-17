@@ -100,5 +100,11 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSToolLogLib\CSToolLogLib.vbproj">
+      <Project>{df373dbf-733e-4e4d-8335-3d6d5fe447b2}</Project>
+      <Name>CSToolLogLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
