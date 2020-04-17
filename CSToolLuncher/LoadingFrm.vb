@@ -103,6 +103,7 @@ Public Class LoadingFrm
             elevatedproccess.StartInfo.UseShellExecute = True
             If elevatedproccess.Start() Then
                 elevatedproccess.WaitForExit()
+                Threading.Thread.Sleep(500)
             Else
                 Return False
             End If
