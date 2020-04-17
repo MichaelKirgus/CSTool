@@ -196,6 +196,7 @@ Public Class LoadingFrm
             End If
 
             If userdlg.DialogResult = MsgBoxResult.Retry Then
+                SetLabelText(LoadingStateLbl, "Start launcher elevated...")
                 RunAppElevated()
                 Return True
             End If
