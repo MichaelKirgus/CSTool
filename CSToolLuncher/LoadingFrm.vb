@@ -12,7 +12,7 @@ Public Class LoadingFrm
     Public IsElevated As Boolean = False
     Public ApplicationSettingsFile As String = "AppSettings.xml"
     Public AppSettingsHandler As New ApplicationSettingsManager
-    Public AppSettingsObj As ApplicationSettings
+    Public AppSettingsObj As New ApplicationSettings
     Public LauncherHelperInstance As New LauncherLib
     Private Delegate Sub SetLabelTextDelegate(ByVal LabelCtl As Label, ByVal TextStr As String)
 
@@ -68,7 +68,7 @@ Public Class LoadingFrm
             If arglist.Count > 1 Then
                 For ind = 1 To arglist.Count - 1
                     If Not arglist(ind) = " " Or Not arglist(ind) = "" Then
-                        newstr += arglist(ind)
+                        newstr += arglist(ind) & " "
                     End If
                 Next
             End If
@@ -118,10 +118,12 @@ Public Class LoadingFrm
         Try
             If Not OnlyCheck Then
                 If AppSettingsObj.LauncherSyncNeedsElevation And IsElevated = False Then
-                    If HandleUserInteraction() = False Then
-                        Application.ExitThread()
-                    End If
-                    Return False
+                    Select Case HandleUserInteraction()
+                        Case 1
+                            StartMainAppFromSourceNonElevated()
+                        Case 2
+                            StartMainAppFromShareNonElevated()
+                    End Select
                 End If
             End If
 
@@ -131,27 +133,41 @@ Public Class LoadingFrm
             SyncHandler.LogHandler.InitLogSystem()
             SetLabelText(LoadingStateLbl, "Update main application files...")
             SyncHandler.StartSync(Application.StartupPath, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath), False, OnlyCheck)
+            If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.CloseStreams()
+                SyncNeeded(False)
+                Return False
+            End If
             SyncHandler.StartSync(Application.StartupPath & "\locales", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\locales", True, OnlyCheck)
+            If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.CloseStreams()
+                SyncNeeded(False)
+                Return False
+            End If
             SyncHandler.StartSync(Application.StartupPath & "\swiftshader", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\swiftshader", True, OnlyCheck)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
             SetLabelText(LoadingStateLbl, "Update credential plugins...")
             SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir, True, OnlyCheck)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
             SetLabelText(LoadingStateLbl, "Update environment plugins...")
             SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir, True, OnlyCheck)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
             SetLabelText(LoadingStateLbl, "Update GUI plugins...")
             SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir, True, OnlyCheck)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
@@ -161,6 +177,7 @@ Public Class LoadingFrm
                     SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherIncludeFolderCollection(index).Recursive, OnlyCheck)
                 Next
                 If SyncHandler.FilesOrDirsChanged Then
+                    SyncHandler.LogHandler.CloseStreams()
                     SyncNeeded(False)
                     Return False
                 End If
@@ -172,7 +189,7 @@ Public Class LoadingFrm
         End Try
     End Function
 
-    Public Function HandleUserInteraction() As Boolean
+    Public Function HandleUserInteraction() As Integer
         Try
             Dim userdlg As New Form1
             Dim targetdir As String
@@ -183,29 +200,25 @@ Public Class LoadingFrm
 
             userdlg.ShowDialog()
 
-            If userdlg.DialogResult = MsgBoxResult.Abort Then
-                Return True
-            End If
             If userdlg.DialogResult = MsgBoxResult.Ignore Then
-                StartMainAppFromSourceNonElevated()
-                Return False
+                Return 1
             End If
             If userdlg.DialogResult = MsgBoxResult.No Then
-                StartMainAppFromShareNonElevated()
-                Return False
+                Return 2
             End If
 
             If userdlg.DialogResult = MsgBoxResult.Retry Then
                 SetLabelText(LoadingStateLbl, "Start launcher elevated...")
                 If RunAppElevated() = False Then
-                    Application.ExitThread()
+                    Return -1
+                Else
+                    Return 3
                 End If
-                Return True
             End If
 
-            Return False
+            Return -1
         Catch ex As Exception
-            Return False
+            Return -1
         End Try
     End Function
 
@@ -255,25 +268,27 @@ Public Class LoadingFrm
                 SetLabelText(LoadingStateLbl, "Check files...")
                 Dim targetdir As String
                 targetdir = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+
                 If IO.Directory.Exists(targetdir) Then
-                    SyncNeeded(True)
+                    If SyncNeeded(True) Then
+                        StartMainAppFromSourceNonElevated()
+                    End If
                 Else
                     If AppSettingsObj.LauncherSyncNeedsElevation Then
                         If IsElevated = False Then
-                            If HandleUserInteraction() = False Then
-                                Exit Try
-                            Else
-                                StartMainAppFromSourceNonElevated()
-                            End If
+                            SyncNeeded()
                         Else
                             Try
                                 IO.Directory.CreateDirectory(targetdir)
                             Catch ex As Exception
                             End Try
 
-                            SyncNeeded()
+                            If SyncNeeded() = False Then
+                                'Start main app if target directory was first created.
+                                StartMainAppFromSourceNonElevated()
+                            End If
                         End If
-                    Else
+                            Else
                         IO.Directory.CreateDirectory(targetdir)
                         SyncNeeded()
                     End If
@@ -283,7 +298,8 @@ Public Class LoadingFrm
                         SetLabelText(LoadingStateLbl, "Create shortcut...")
                         CheckAndCreateDesktopShortcut()
                     End If
-                Else
+
+                    'Start main app if target directory was synced.
                     StartMainAppFromSourceNonElevated()
                 End If
             Else
