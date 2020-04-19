@@ -99,7 +99,7 @@ Partial Class ClientGUI
         Me.ToolStripComboBox1.DropDownWidth = 250
         Me.ToolStripComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
-        Me.ToolStripComboBox1.Size = New System.Drawing.Size(300, 25)
+        Me.ToolStripComboBox1.Size = New System.Drawing.Size(300, 29)
         '
         'ToolStripButton2
         '
