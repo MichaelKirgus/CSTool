@@ -3,6 +3,9 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
+Imports System.Windows.Forms
+Imports Gecko
+
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ClientGUI
     Inherits System.Windows.Forms.UserControl
@@ -160,14 +163,23 @@ Partial Class ClientGUI
 
     End Sub
 
-    Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
-    Friend WithEvents ToolStrip1 As Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripButton2 As Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton3 As Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton1 As Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton4 As Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripComboBox1 As Windows.Forms.ToolStripComboBox
+    Friend WithEvents ToolStripContainer1 As ToolStripContainer
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents ToolStripButton2 As ToolStripButton
+    Friend WithEvents ToolStripButton3 As ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents ToolStripButton4 As ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripComboBox1 As ToolStripComboBox
     Friend WithEvents WebBrowser1 As Gecko.GeckoWebBrowser
+
+    Public Sub New()
+
+        ' Dieser Aufruf ist für den Designer erforderlich.
+        InitializeComponent()
+
+        ' Fügen Sie Initialisierungen nach dem InitializeComponent()-Aufruf hinzu.
+        Xpcom.Initialize("Firefox64")
+    End Sub
 End Class
