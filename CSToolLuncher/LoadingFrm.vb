@@ -150,6 +150,12 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
+            SyncHandler.StartSync(Application.StartupPath & "\Firefox64", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\Firefox64", True, OnlyCheck)
+            If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.CloseStreams()
+                SyncNeeded(False)
+                Return False
+            End If
             SetLabelText(LoadingStateLbl, "Update credential plugins...")
             SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir, True, OnlyCheck)
             If SyncHandler.FilesOrDirsChanged Then
