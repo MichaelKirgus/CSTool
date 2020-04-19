@@ -278,6 +278,7 @@ Public Class LoadingFrm
                 If IO.Directory.Exists(targetdir) Then
                     If SyncNeeded(True) Then
                         StartMainAppFromSourceNonElevated()
+                        Exit Try
                     End If
                 Else
                     If AppSettingsObj.LauncherSyncNeedsElevation Then
