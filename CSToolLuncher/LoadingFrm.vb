@@ -167,7 +167,7 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
-            SyncHandler.StartSyncAsync(Application.StartupPath & "\License", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\License", True, OnlyCheck)
+            SyncHandler.StartSyncAsync(Application.StartupPath & "\Licenses", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\Licenses", True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncHandler.LogHandler.CloseStreams()
