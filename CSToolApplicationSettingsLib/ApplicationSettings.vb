@@ -20,6 +20,7 @@ Imports CSToolLogLib
     Public Property LauncherIncludeFolderCollection As New List(Of LauncherIncludeFolderEntry)
     Public Property LauncherCreateMainApplicationShortcutOnDesktop As Boolean = True
     Public Property LauncherMainAppStartMode As MainAppCommandlLineArgumentsMode = MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithoutLocalWorkingDir
+    Public Property LauncherPolicy As LauncherPolicyMode = LauncherPolicyMode.CheckForChangesAndAskUser
     Public Property LauncherAdditionalMainAppArguments As String = ""
     Public Property LauncherLogSettings As New LogSettings
     Public Property LogSettings As New LogSettings
@@ -32,6 +33,12 @@ Public Enum MainAppCommandlLineArgumentsMode As Integer
     RunMainAppWithoutLocalWorkingDirAndSetAppSettingsFolders = 3
     RunMainAppWithLocalWorkingDirAndLocalPluginFolders = 4
     RunMainAppWithLocalWorkingDirAndSetAppSettingsFolders = 5
+End Enum
+
+Public Enum LauncherPolicyMode As Integer
+    CheckForChangesAndAskUser = 0
+    CheckForChangesAndForceUpdate = 1
+    CheckForChangesAndForceUpdateWithoutAskingUser = 2
 End Enum
 
 <Serializable> Public Class LauncherIncludeFolderEntry
