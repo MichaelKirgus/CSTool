@@ -118,6 +118,7 @@ Partial Class ClientGUI
         Me.AddMemberContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ZuweisenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WakeUpClientToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ObjekteigenschaftenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportInDateiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -918,9 +919,9 @@ Partial Class ClientGUI
         '
         'AddMemberContextMenu
         '
-        Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem, Me.ToolStripSeparator5, Me.ExportInDateiToolStripMenuItem})
+        Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.WakeUpClientToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem, Me.ToolStripSeparator5, Me.ExportInDateiToolStripMenuItem})
         Me.AddMemberContextMenu.Name = "ContextMenuStrip1"
-        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 98)
+        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 120)
         '
         'ZuweisenToolStripMenuItem
         '
@@ -935,6 +936,13 @@ Partial Class ClientGUI
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Name = "AlleGeräteMitDieserCollectionToolStripMenuItem"
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Text = "Show all devices with this collection..."
+        '
+        'WakeUpClientToolStripMenuItem
+        '
+        Me.WakeUpClientToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_announcement_16x16
+        Me.WakeUpClientToolStripMenuItem.Name = "WakeUpClientToolStripMenuItem"
+        Me.WakeUpClientToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
+        Me.WakeUpClientToolStripMenuItem.Text = "Wake-Up Client..."
         '
         'ObjekteigenschaftenToolStripMenuItem
         '
@@ -1316,4 +1324,5 @@ Partial Class ClientGUI
     Friend WithEvents ToolStripButton13 As ToolStripButton
     Friend WithEvents ToolStripButton14 As ToolStripButton
     Friend WithEvents ToolStripButton15 As ToolStripButton
+    Friend WithEvents WakeUpClientToolStripMenuItem As ToolStripMenuItem
 End Class

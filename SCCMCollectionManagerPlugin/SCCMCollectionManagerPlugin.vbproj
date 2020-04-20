@@ -251,6 +251,7 @@
     <None Include="Resources\icon-trash_16x16.png" />
     <None Include="Resources\icon-book_16x16.png" />
     <None Include="Resources\icon-clock_16x16.png" />
+    <None Include="Resources\icon-announcement_16x161.png" />
     <Content Include="wizard_app.ico" />
   </ItemGroup>
   <ItemGroup>
