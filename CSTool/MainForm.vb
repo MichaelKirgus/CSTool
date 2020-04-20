@@ -995,4 +995,9 @@ Public Class MainForm
         appsettingsfrm.ApplicationSettingsFile = ApplicationSettingManager.GetAppSettingsFilePath
         appsettingsfrm.Show()
     End Sub
+
+    Private Sub ToolStripButton7_Click(sender As Object, e As EventArgs) Handles ToolStripButton7.Click
+        Dim AboutFrmInstance As New AboutFrm
+        AboutFrmInstance.ShowDialog()
+    End Sub
 End Class

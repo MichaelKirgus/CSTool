@@ -136,6 +136,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutFrm.Designer.vb">
+      <DependentUpon>AboutFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AboutFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EnvironmentState.Designer.vb">
       <DependentUpon>EnvironmentState.vb</DependentUpon>
     </Compile>
@@ -226,6 +232,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutFrm.resx">
+      <DependentUpon>AboutFrm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EnvironmentState.resx">
       <DependentUpon>EnvironmentState.vb</DependentUpon>
     </EmbeddedResource>
