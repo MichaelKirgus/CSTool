@@ -282,6 +282,10 @@ Public Class LoadingFrm
                     mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
             End Select
 
+            If mainappargs.EndsWith(" ") Then
+                mainappargs = mainappargs.Substring(0, mainappargs.Length - 1)
+            End If
+
             mainapp.StartInfo.Arguments = mainappargs
             mainapp.Start()
 
@@ -295,7 +299,8 @@ Public Class LoadingFrm
         Dim result As String
         result = "/appsettingspath " & Application.StartupPath & "\AppSettings.xml" &
             " /usertemplatesdir " & Application.StartupPath & "\" & AppSettingsObj.UserTemplatesDir &
-            " /userinitialtemplatedir " & Application.StartupPath & "\" & AppSettingsObj.UserInitialTemplateDir
+            " /userinitialtemplatedir " & Application.StartupPath & "\" & AppSettingsObj.UserInitialTemplateDir &
+            " /userprofiledir " & Application.StartupPath & "\" & AppSettingsObj.UserProfileDir
 
         Return result
     End Function

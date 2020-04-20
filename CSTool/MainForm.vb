@@ -114,6 +114,9 @@ Public Class MainForm
                 If arglist(ind).ToLower = "/userinitialtemplatedir" Then
                     ApplicationSettings.UserInitialTemplateDir = (arglist(ind + 1))
                 End If
+                If arglist(ind).ToLower = "/userprofiledir" Then
+                    ApplicationSettings.UserProfileDir = (arglist(ind + 1))
+                End If
             Next
 
             Return True
