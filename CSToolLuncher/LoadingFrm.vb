@@ -261,18 +261,33 @@ Public Class LoadingFrm
 
     Public Function StartMainAppFromSourceNonElevated() As Boolean
         Try
-            Dim mainappargs As String
+            Dim mainappargs As String = ""
             Dim mainapp As New Process
             mainapp.StartInfo.FileName = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe"
-            mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
-            mainapp.StartInfo.Arguments = mainappargs
             mainapp.StartInfo.WorkingDirectory = Application.StartupPath
+
+            If AppSettingsObj.LauncherBypassLocalDirsToMainApp Then
+                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
+            Else
+                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainApp()
+            End If
+
+            mainapp.StartInfo.Arguments = mainappargs
             mainapp.Start()
 
             Return True
         Catch ex As Exception
             Return False
         End Try
+    End Function
+
+    Public Function GenerateCommandLineMainApp() As String
+        Dim result As String
+        result = "/environmentplugindir " & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir &
+            " /credentialplugindir " & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir &
+            " /guiplugindir " & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir
+
+        Return result
     End Function
 
     Private Sub LoadingState_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles LoadingState.DoWork
