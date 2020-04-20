@@ -114,6 +114,13 @@ Public Class LoadingFrm
         End Try
     End Function
 
+    Public Sub UntilFinishShowStatus(ByVal SyncHandlerInstance As SyncLib)
+        Do While SyncHandlerInstance.IsAsyncTaskRunning
+            SetLabelText(LoadingStateLbl, SyncHandlerInstance.CurrentTask & ": " & SyncHandlerInstance.CurrentFile)
+            Threading.Thread.Sleep(10)
+        Loop
+    End Sub
+
     Public Function SyncNeeded(Optional ByVal OnlyCheck As Boolean = False) As Boolean
         Try
             If Not OnlyCheck Then
@@ -132,46 +139,53 @@ Public Class LoadingFrm
             SyncHandler.LogHandler.LogSettings = AppSettingsObj.LauncherLogSettings
             SyncHandler.LogHandler.InitLogSystem()
             SetLabelText(LoadingStateLbl, "Update main application files...")
-            SyncHandler.StartSync(Application.StartupPath, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath), False, OnlyCheck)
+            SyncHandler.StartSyncAsync(Application.StartupPath, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath), False, OnlyCheck)
+            UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
-            SyncHandler.StartSync(Application.StartupPath & "\locales", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\locales", True, OnlyCheck)
+            SyncHandler.StartSyncAsync(Application.StartupPath & "\locales", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\locales", True, OnlyCheck)
+            UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
-            SyncHandler.StartSync(Application.StartupPath & "\swiftshader", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\swiftshader", True, OnlyCheck)
+            SyncHandler.StartSyncAsync(Application.StartupPath & "\swiftshader", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\swiftshader", True, OnlyCheck)
+            UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
-            SyncHandler.StartSync(Application.StartupPath & "\Firefox64", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\Firefox64", True, OnlyCheck)
+            SyncHandler.StartSyncAsync(Application.StartupPath & "\Firefox64", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\Firefox64", True, OnlyCheck)
+            UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
             SetLabelText(LoadingStateLbl, "Update credential plugins...")
-            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir, True, OnlyCheck)
+            SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir, True, OnlyCheck)
+            UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
             SetLabelText(LoadingStateLbl, "Update environment plugins...")
-            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir, True, OnlyCheck)
+            SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir, True, OnlyCheck)
+            UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
             End If
             SetLabelText(LoadingStateLbl, "Update GUI plugins...")
-            SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir, True, OnlyCheck)
+            SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir, True, OnlyCheck)
+            UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
@@ -180,7 +194,8 @@ Public Class LoadingFrm
             If Not AppSettingsObj.LauncherIncludeFolderCollection.Count = 0 Then
                 SetLabelText(LoadingStateLbl, "Update additional files...")
                 For index = 0 To AppSettingsObj.LauncherIncludeFolderCollection.Count - 1
-                    SyncHandler.StartSync(Application.StartupPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherIncludeFolderCollection(index).Recursive, OnlyCheck)
+                    SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherIncludeFolderCollection(index).Recursive, OnlyCheck)
+                    UntilFinishShowStatus(SyncHandler)
                 Next
                 If SyncHandler.FilesOrDirsChanged Then
                     SyncHandler.LogHandler.CloseStreams()

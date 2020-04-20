@@ -31,9 +31,9 @@ Partial Class LoadingFrm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.AppVersionLbl = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.LoadingState = New System.ComponentModel.BackgroundWorker()
         Me.LoadingStateLbl = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -74,6 +74,17 @@ Partial Class LoadingFrm
         Me.AppVersionLbl.TabIndex = 2
         Me.AppVersionLbl.UseWaitCursor = True
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CSToolLauncher.My.Resources.Resources.cstool_48x48
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(48, 48)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
+        Me.PictureBox1.UseWaitCursor = True
+        '
         'LoadingState
         '
         Me.LoadingState.WorkerReportsProgress = True
@@ -90,17 +101,6 @@ Partial Class LoadingFrm
         Me.LoadingStateLbl.TabIndex = 6
         Me.LoadingStateLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.LoadingStateLbl.UseWaitCursor = True
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.CSToolLauncher.My.Resources.Resources.cstool_48x48
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(48, 48)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        Me.PictureBox1.UseWaitCursor = True
         '
         'PictureBox2
         '
