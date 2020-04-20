@@ -1866,7 +1866,7 @@ Public Class ClientGUI
         End Try
     End Function
 
-    Private Sub WakeUpClientToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WakeUpClientToolStripMenuItem.Click
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem4.Click
         If WakeUpClient(GetClientnameResourceID, _Settings.ClientWakeUpServerCollectionID, CurrentSMSConnection) Then
             MsgBox("Client Wake-Up successful!")
         Else

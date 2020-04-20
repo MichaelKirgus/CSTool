@@ -41,6 +41,8 @@ Partial Class ClientGUI
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader26 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader27 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ClientItemMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolStrip3 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
@@ -118,7 +120,6 @@ Partial Class ClientGUI
         Me.AddMemberContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ZuweisenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.WakeUpClientToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ObjekteigenschaftenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportInDateiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -162,6 +163,7 @@ Partial Class ClientGUI
         Me.SplitContainer4.Panel2.SuspendLayout()
         Me.SplitContainer4.SuspendLayout()
         CType(Me.SCCMClientsSplash, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ClientItemMenu.SuspendLayout()
         Me.ToolStrip3.SuspendLayout()
         CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer3.Panel1.SuspendLayout()
@@ -273,6 +275,7 @@ Partial Class ClientGUI
         'ListView5
         '
         Me.ListView5.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader19, Me.ColumnHeader20, Me.ColumnHeader21, Me.ColumnHeader5, Me.ColumnHeader26, Me.ColumnHeader27})
+        Me.ListView5.ContextMenuStrip = Me.ClientItemMenu
         Me.ListView5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView5.FullRowSelect = True
         Me.ListView5.HideSelection = False
@@ -310,6 +313,19 @@ Partial Class ClientGUI
         'ColumnHeader27
         '
         Me.ColumnHeader27.Text = "Client-Version"
+        '
+        'ClientItemMenu
+        '
+        Me.ClientItemMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem4})
+        Me.ClientItemMenu.Name = "ClientItemMenu"
+        Me.ClientItemMenu.Size = New System.Drawing.Size(156, 26)
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_announcement_16x16
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(155, 22)
+        Me.ToolStripMenuItem4.Text = "Wake-Up client"
         '
         'ImageList1
         '
@@ -919,9 +935,9 @@ Partial Class ClientGUI
         '
         'AddMemberContextMenu
         '
-        Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.WakeUpClientToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem, Me.ToolStripSeparator5, Me.ExportInDateiToolStripMenuItem})
+        Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem, Me.ToolStripSeparator5, Me.ExportInDateiToolStripMenuItem})
         Me.AddMemberContextMenu.Name = "ContextMenuStrip1"
-        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 120)
+        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 98)
         '
         'ZuweisenToolStripMenuItem
         '
@@ -936,13 +952,6 @@ Partial Class ClientGUI
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Name = "AlleGeräteMitDieserCollectionToolStripMenuItem"
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Text = "Show all devices with this collection..."
-        '
-        'WakeUpClientToolStripMenuItem
-        '
-        Me.WakeUpClientToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_announcement_16x16
-        Me.WakeUpClientToolStripMenuItem.Name = "WakeUpClientToolStripMenuItem"
-        Me.WakeUpClientToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
-        Me.WakeUpClientToolStripMenuItem.Text = "Wake-Up Client..."
         '
         'ObjekteigenschaftenToolStripMenuItem
         '
@@ -1176,6 +1185,7 @@ Partial Class ClientGUI
         CType(Me.SplitContainer4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer4.ResumeLayout(False)
         CType(Me.SCCMClientsSplash, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ClientItemMenu.ResumeLayout(False)
         Me.ToolStrip3.ResumeLayout(False)
         Me.ToolStrip3.PerformLayout()
         Me.SplitContainer3.Panel1.ResumeLayout(False)
@@ -1324,5 +1334,6 @@ Partial Class ClientGUI
     Friend WithEvents ToolStripButton13 As ToolStripButton
     Friend WithEvents ToolStripButton14 As ToolStripButton
     Friend WithEvents ToolStripButton15 As ToolStripButton
-    Friend WithEvents WakeUpClientToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ClientItemMenu As ContextMenuStrip
+    Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
 End Class
