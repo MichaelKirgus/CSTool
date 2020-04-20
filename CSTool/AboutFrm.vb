@@ -16,6 +16,8 @@ Public Class AboutFrm
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-        Shell("https://github.com/MichaelKirgus/CSTool")
+        Dim giturl As New Process
+        giturl.StartInfo.FileName = "https://github.com/MichaelKirgus/CSTool"
+        giturl.Start()
     End Sub
 End Class
