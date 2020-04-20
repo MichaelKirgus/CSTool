@@ -19,10 +19,19 @@ Imports CSToolLogLib
     Public Property LauncherDeleteFilesFromSyncPath As Boolean = True
     Public Property LauncherIncludeFolderCollection As New List(Of LauncherIncludeFolderEntry)
     Public Property LauncherCreateMainApplicationShortcutOnDesktop As Boolean = True
-    Public Property LauncherBypassLocalDirsToMainApp As Boolean = True
+    Public Property LauncherMainAppStartMode As MainAppCommandlLineArgumentsMode = MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithoutLocalWorkingDir
     Public Property LauncherLogSettings As New LogSettings
     Public Property LogSettings As New LogSettings
 End Class
+
+Public Enum MainAppCommandlLineArgumentsMode As Integer
+    OnlyRunMainAppWithoutLocalWorkingDir = 0
+    OnlyRunMainAppWithLocalWorkingDir = 1
+    RunMainAppWithoutLocalWorkingDirAndLocalPluginFolders = 2
+    RunMainAppWithoutLocalWorkingDirAndSetAppSettingsFolders = 3
+    RunMainAppWithLocalWorkingDirAndLocalPluginFolders = 4
+    RunMainAppWithLocalWorkingDirAndSetAppSettingsFolders = 5
+End Enum
 
 <Serializable> Public Class LauncherIncludeFolderEntry
     Public Property FolderName As String = ""
