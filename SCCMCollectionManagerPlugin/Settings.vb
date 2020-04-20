@@ -27,6 +27,7 @@ Imports System.Management
     Public Property RefreshClientPoliciesWMIExecMethod As String = "CALL"
     Public Property RefreshClientPoliciesWMIExecArgumentValue As String = "TriggerSchedule"
     Public Property RefreshClientPoliciesWMIExecArgumentData As String = "{00000000-0000-0000-0000-000000000021}"
+    Public Property ClientWakeUpServerCollectionID As String = "SMS00001"
     Public Property UseCustomWMIConnectionOptions As Boolean = False
     Public Property CustomWMIConnectionOptionsUsername As String = ""
     Public Property CustomWMIConnectionOptionsPassword As String = ""

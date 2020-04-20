@@ -1851,21 +1851,23 @@ Public Class ClientGUI
         SplitContainer4.Panel1Collapsed = Not ToolStripButton15.Checked
     End Sub
 
-    Public Function WakeUpClient(ByVal ComputerResourceId As String, ByVal connection As WqlConnectionManager) As Boolean
+    Public Function WakeUpClient(ByVal ComputerResourceId As String, ByVal SMSServerCollectionID As String, ByVal connection As WqlConnectionManager) As Boolean
         Try
             Dim oCollection As IResultObject = connection.GetInstance("SMS_SleepServer")
             Dim inParams As Dictionary(Of String, Object) = New Dictionary(Of String, Object)
             inParams.Add("MachineIDs", ComputerResourceId)
+            inParams.Add("CollectionID", SMSServerCollectionID)
             oCollection.ExecuteMethod("MachinesToWakeup", inParams)
 
             Return True
         Catch ex As Exception
+            PostLogText("Error: " & ex.Message, True)
             Return False
         End Try
     End Function
 
     Private Sub WakeUpClientToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WakeUpClientToolStripMenuItem.Click
-        If WakeUpClient(GetClientnameResourceID, CurrentSMSConnection) Then
+        If WakeUpClient(GetClientnameResourceID, _Settings.ClientWakeUpServerCollectionID, CurrentSMSConnection) Then
             MsgBox("Client Wake-Up successful!")
         Else
             MsgBox("Client Wake-Up failed. Please check configuration.")
