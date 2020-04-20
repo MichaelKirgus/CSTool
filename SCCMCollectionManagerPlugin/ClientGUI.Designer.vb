@@ -458,7 +458,7 @@ Partial Class ClientGUI
         '
         'ColumnHeader2
         '
-        Me.ColumnHeader2.Text = "Packet"
+        Me.ColumnHeader2.Text = "Collection"
         Me.ColumnHeader2.Width = 370
         '
         'ColumnHeader9
@@ -897,7 +897,7 @@ Partial Class ClientGUI
         '
         'ColumnHeader3
         '
-        Me.ColumnHeader3.Text = "Packet"
+        Me.ColumnHeader3.Text = "Collection"
         Me.ColumnHeader3.Width = 370
         '
         'ColumnHeader6
@@ -1063,7 +1063,7 @@ Partial Class ClientGUI
         '
         'ColumnHeader4
         '
-        Me.ColumnHeader4.Text = "Datum/Uhrzeit"
+        Me.ColumnHeader4.Text = "Date/Time"
         Me.ColumnHeader4.Width = 130
         '
         'ColumnHeader24
@@ -1073,7 +1073,7 @@ Partial Class ClientGUI
         '
         'ColumnHeader25
         '
-        Me.ColumnHeader25.Text = "Ausgabe"
+        Me.ColumnHeader25.Text = "Output"
         Me.ColumnHeader25.Width = 80
         '
         'LogContextMenu
