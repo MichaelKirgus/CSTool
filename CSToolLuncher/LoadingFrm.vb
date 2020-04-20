@@ -287,6 +287,8 @@ Public Class LoadingFrm
                     mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
                 Case MainAppCommandlLineArgumentsMode.RunMainAppWithoutLocalWorkingDirAndSetAppSettingsFolders
                     mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
+                Case MainAppCommandlLineArgumentsMode.RunMainAppWithoutLocalWorkingDirAndLocalPluginFolders
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppLocalFolders() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
             End Select
 
             If mainappargs.EndsWith(" ") Then
