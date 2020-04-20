@@ -266,11 +266,21 @@ Public Class LoadingFrm
             mainapp.StartInfo.FileName = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe"
             mainapp.StartInfo.WorkingDirectory = Application.StartupPath
 
-            If AppSettingsObj.LauncherBypassLocalDirsToMainApp Then
-                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
-            Else
-                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainApp()
-            End If
+            Select Case AppSettingsObj.LauncherMainAppStartMode
+                Case MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithoutLocalWorkingDir
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
+                Case MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithLocalWorkingDir
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
+                    mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+                Case MainAppCommandlLineArgumentsMode.RunMainAppWithLocalWorkingDirAndLocalPluginFolders
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppLocalFolders()
+                    mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+                Case MainAppCommandlLineArgumentsMode.RunMainAppWithLocalWorkingDirAndSetAppSettingsFolders
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings()
+                    mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+                Case MainAppCommandlLineArgumentsMode.RunMainAppWithoutLocalWorkingDirAndSetAppSettingsFolders
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings()
+            End Select
 
             mainapp.StartInfo.Arguments = mainappargs
             mainapp.Start()
@@ -281,7 +291,16 @@ Public Class LoadingFrm
         End Try
     End Function
 
-    Public Function GenerateCommandLineMainApp() As String
+    Public Function GenerateCommandLineMainAppSettings() As String
+        Dim result As String
+        result = "/appsettingspath " & Application.StartupPath & "\AppSettings.xml" &
+            " /usertemplatesdir " & Application.StartupPath & "\" & AppSettingsObj.UserTemplatesDir &
+            " /userinitialtemplatedir " & Application.StartupPath & "\" & AppSettingsObj.UserInitialTemplateDir
+
+        Return result
+    End Function
+
+    Public Function GenerateCommandLineMainAppLocalFolders() As String
         Dim result As String
         result = "/environmentplugindir " & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir &
             " /credentialplugindir " & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir &
