@@ -268,18 +268,18 @@ Public Class LoadingFrm
 
             Select Case AppSettingsObj.LauncherMainAppStartMode
                 Case MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithoutLocalWorkingDir
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher " & AppSettingsObj.LauncherAdditionalMainAppArguments
                 Case MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithLocalWorkingDir
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher " & AppSettingsObj.LauncherAdditionalMainAppArguments
                     mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
                 Case MainAppCommandlLineArgumentsMode.RunMainAppWithLocalWorkingDirAndLocalPluginFolders
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppLocalFolders()
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppLocalFolders() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
                     mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
                 Case MainAppCommandlLineArgumentsMode.RunMainAppWithLocalWorkingDirAndSetAppSettingsFolders
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings()
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
                     mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
                 Case MainAppCommandlLineArgumentsMode.RunMainAppWithoutLocalWorkingDirAndSetAppSettingsFolders
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings()
+                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
             End Select
 
             mainapp.StartInfo.Arguments = mainappargs
