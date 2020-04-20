@@ -1,17 +1,82 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports CSToolLogLib
 
 Public Class SyncLib
+    Public WithEvents SyncTaskHost As New BackgroundWorker
+
     Public FilesOrDirsChanged As Boolean = False
     Public LogHandler As New LogLib
 
+    Public CurrentTask As String = "None"
+    Public CurrentFile As String = "None"
+    Public CurrentFolder As String = "None"
+    Public IsAsyncTaskRunning As Boolean = False
+    Public SyncSuccessful As Boolean = False
+    Public LastError As String = ""
+
+    Public Function StartSyncAsync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean, ByVal Simulate As Boolean)
+        Try
+            Dim RuntimeArgs As New List(Of Object)
+            RuntimeArgs.Add(sSrcPath)
+            RuntimeArgs.Add(sDestPath)
+            RuntimeArgs.Add(Recursive)
+            RuntimeArgs.Add(Simulate)
+
+            If Not SyncTaskHost.IsBusy Then
+                SyncTaskHost.RunWorkerAsync(RuntimeArgs)
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function WaitForSyncEnd() As Boolean
+        If IsAsyncTaskRunning Then
+            Do While IsAsyncTaskRunning
+                Threading.Thread.Sleep(50)
+            Loop
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Sub StartSyncWorker(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles SyncTaskHost.DoWork
+        IsAsyncTaskRunning = True
+
+        Dim args As List(Of Object)
+        args = e.Argument
+
+        e.Result = StartSync(args(0), args(1), args(2), args(3))
+    End Sub
+
+    Public Sub FinishedSyncWorker(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles SyncTaskHost.RunWorkerCompleted
+        CurrentTask = "None"
+        CurrentFile = "None"
+        CurrentFolder = "None"
+        IsAsyncTaskRunning = False
+
+        If e.Result Then
+            SyncSuccessful = True
+        Else
+            SyncSuccessful = False
+        End If
+    End Sub
+
     Public Function CopyFolder_Sync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean, ByVal Simulate As Boolean) As Boolean
         Try
+            CurrentFile = ""
+            CurrentFolder = sDestPath
+            CurrentTask = "Checking"
             If Not Directory.Exists(sDestPath) Then
                 LogHandler.WriteLogEntry("Directory " & sDestPath & " does not exist.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug)
                 If Not Simulate Then
                     Try
                         LogHandler.WriteLogEntry("Create Directory " & sDestPath, Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug)
+                        CurrentTask = "Create"
                         Directory.CreateDirectory(sDestPath)
                     Catch ex As Exception
                         LogHandler.WriteLogEntry("Create Directory " & sDestPath & ": Error.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug, Err)
@@ -87,6 +152,8 @@ Public Class SyncLib
                     If Not Simulate Then
                         Try
                             LogHandler.WriteLogEntry("Delete file " & sSrcPath & sFile & " ...", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug)
+                            CurrentTask = "Delete"
+                            CurrentFile = sFile
                             My.Computer.FileSystem.DeleteFile(sDestPath & sFile)
                         Catch ex As Exception
                             LogHandler.WriteLogEntry("Delete file " & sSrcPath & sFile & ": Error.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug, Err)
@@ -100,6 +167,7 @@ Public Class SyncLib
                     LogHandler.WriteLogEntry("Skipping file " & sSrcPath & sFile & ": File exists in source directory.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug)
                 End If
             Catch ex As Exception
+                LastError = Err.Description
                 LogHandler.WriteLogEntry("File " & sSrcPath & sFile & ": Error.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug, Err)
             End Try
         Next i
@@ -121,6 +189,8 @@ Public Class SyncLib
                     If DestFile.LastWriteTime <> SrcFile.LastWriteTime Then
                         If Not Simulate Then
                             Try
+                                CurrentTask = "Update"
+                                CurrentFile = sFile
                                 LogHandler.WriteLogEntry("Delete file " & sDestPath & sFile & " ...", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug)
                                 My.Computer.FileSystem.DeleteFile(sDestPath & sFile)
                                 LogHandler.WriteLogEntry("Copy file " & sSrcPath & sFile & " to " & sDestPath & sFile, Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug)
@@ -136,6 +206,7 @@ Public Class SyncLib
                     End If
                 End If
             Catch ex As Exception
+                LastError = Err.Description
                 LogHandler.WriteLogEntry("File " & sSrcPath & sFile & ": Error.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug, Err)
             End Try
         Next i
@@ -154,6 +225,8 @@ Public Class SyncLib
                     If Not Simulate Then
                         Try
                             LogHandler.WriteLogEntry("Copy file " & sSrcPath & sFile & " to " & sDestPath & sFile, Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug)
+                            CurrentTask = "Copy"
+                            CurrentFile = sFile
                             My.Computer.FileSystem.CopyFile(sSrcPath & sFile, sDestPath & sFile)
                         Catch ex As Exception
                             LogHandler.WriteLogEntry("Copy file " & sSrcPath & sFile & ": Error.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug, Err)
@@ -167,6 +240,7 @@ Public Class SyncLib
                     LogHandler.WriteLogEntry("File  " & sDestPath & sFile & ": Exists in source and target.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug)
                 End If
             Catch ex As Exception
+                LastError = Err.Description
                 LogHandler.WriteLogEntry("File " & sSrcPath & sFile & ": Error.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug, Err)
             End Try
         Next i
