@@ -167,6 +167,13 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
+            SyncHandler.StartSyncAsync(Application.StartupPath & "\License", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\License", True, OnlyCheck)
+            UntilFinishShowStatus(SyncHandler)
+            If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.CloseStreams()
+                SyncNeeded(False)
+                Return False
+            End If
             SetLabelText(LoadingStateLbl, "Update credential plugins...")
             SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir, True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
