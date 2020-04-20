@@ -219,30 +219,70 @@ Public Class LoadingFrm
 
     Public Function HandleUserInteraction() As Integer
         Try
-            Dim userdlg As New Form1
-            Dim targetdir As String
-            targetdir = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
-            If Not IO.Directory.Exists(targetdir) Then
-                userdlg.Button1.Enabled = False
-            End If
+            Select Case AppSettingsObj.LauncherPolicy
+                Case LauncherPolicyMode.CheckForChangesAndAskUser
+                    Dim userdlg As New Form1
+                    Dim targetdir As String
+                    targetdir = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+                    If Not IO.Directory.Exists(targetdir) Then
+                        userdlg.Button1.Enabled = False
+                    End If
 
-            userdlg.ShowDialog()
+                    userdlg.ShowDialog()
 
-            If userdlg.DialogResult = MsgBoxResult.Ignore Then
-                Return 1
-            End If
-            If userdlg.DialogResult = MsgBoxResult.No Then
-                Return 2
-            End If
+                    If userdlg.DialogResult = MsgBoxResult.Ignore Then
+                        Return 1
+                    End If
+                    If userdlg.DialogResult = MsgBoxResult.No Then
+                        Return 2
+                    End If
 
-            If userdlg.DialogResult = MsgBoxResult.Retry Then
-                SetLabelText(LoadingStateLbl, "Start launcher elevated...")
-                If RunAppElevated() = False Then
+                    If userdlg.DialogResult = MsgBoxResult.Retry Then
+                        SetLabelText(LoadingStateLbl, "Start launcher elevated...")
+                        If RunAppElevated() = False Then
+                            Return -1
+                        Else
+                            Return 3
+                        End If
+                    End If
+
                     Return -1
-                Else
-                    Return 3
-                End If
-            End If
+                Case LauncherPolicyMode.CheckForChangesAndForceUpdate
+                    Dim userdlg As New Form1
+                    Dim targetdir As String
+                    targetdir = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+                    If Not IO.Directory.Exists(targetdir) Then
+                        userdlg.Button1.Enabled = False
+                    End If
+                    userdlg.Button2.Enabled = False
+
+                    userdlg.ShowDialog()
+
+                    If userdlg.DialogResult = MsgBoxResult.Ignore Then
+                        Return 1
+                    End If
+                    If userdlg.DialogResult = MsgBoxResult.No Then
+                        Return 2
+                    End If
+
+                    If userdlg.DialogResult = MsgBoxResult.Retry Then
+                        SetLabelText(LoadingStateLbl, "Start launcher elevated...")
+                        If RunAppElevated() = False Then
+                            Return -1
+                        Else
+                            Return 3
+                        End If
+                    End If
+
+                    Return -1
+                Case LauncherPolicyMode.CheckForChangesAndForceUpdateWithoutAskingUser
+                    SetLabelText(LoadingStateLbl, "Start launcher elevated...")
+                    If RunAppElevated() = False Then
+                        Return -1
+                    Else
+                        Return 3
+                    End If
+            End Select
 
             Return -1
         Catch ex As Exception
