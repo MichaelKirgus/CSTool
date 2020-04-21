@@ -6,6 +6,7 @@
 Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
 Imports CSToolLauncherLib
+Imports CSToolLogLib
 Imports CSToolSyncLib
 
 Public Class LoadingFrm
@@ -122,6 +123,8 @@ Public Class LoadingFrm
     End Sub
 
     Public Function SyncNeeded(Optional ByVal OnlyCheck As Boolean = False) As Boolean
+        Dim LogInstance As LogLib = Nothing
+
         Try
             If Not OnlyCheck Then
                 If AppSettingsObj.LauncherSyncNeedsElevation And IsElevated = False Then
@@ -138,6 +141,8 @@ Public Class LoadingFrm
             Dim SyncHandler As New SyncLib
             SyncHandler.LogHandler.LogSettings = AppSettingsObj.LauncherLogSettings
             SyncHandler.LogHandler.InitLogSystem()
+            LogInstance = SyncHandler.LogHandler
+            SyncHandler.LogHandler.WriteLogEntry("Update main application files (Core application files)...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
             SetLabelText(LoadingStateLbl, "Update main application files...")
             SyncHandler.StartSyncAsync(Application.StartupPath, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath), False, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
@@ -146,6 +151,7 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
+            SyncHandler.LogHandler.WriteLogEntry("Update main application files (Chromium locales directory)...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
             SyncHandler.StartSyncAsync(Application.StartupPath & "\locales", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\locales", True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
@@ -153,6 +159,7 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
+            SyncHandler.LogHandler.WriteLogEntry("Update main application files (Chromium swiftshader directory)...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
             SyncHandler.StartSyncAsync(Application.StartupPath & "\swiftshader", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\swiftshader", True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
@@ -160,6 +167,7 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
+            SyncHandler.LogHandler.WriteLogEntry("Update main application files (Gecko core directory)...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
             SyncHandler.StartSyncAsync(Application.StartupPath & "\Firefox64", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\Firefox64", True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
@@ -167,6 +175,7 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
+            SyncHandler.LogHandler.WriteLogEntry("Update main application files (License documentation)...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
             SyncHandler.StartSyncAsync(Application.StartupPath & "\Licenses", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\Licenses", True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
@@ -174,6 +183,7 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
+            SyncHandler.LogHandler.WriteLogEntry("Update credential plugins...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
             SetLabelText(LoadingStateLbl, "Update credential plugins...")
             SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir, True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
@@ -182,6 +192,7 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
+            SyncHandler.LogHandler.WriteLogEntry("Update environment plugins...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
             SetLabelText(LoadingStateLbl, "Update environment plugins...")
             SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir, True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
@@ -190,6 +201,7 @@ Public Class LoadingFrm
                 SyncNeeded(False)
                 Return False
             End If
+            SyncHandler.LogHandler.WriteLogEntry("Update GUI plugins...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
             SetLabelText(LoadingStateLbl, "Update GUI plugins...")
             SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir, True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
@@ -199,6 +211,7 @@ Public Class LoadingFrm
                 Return False
             End If
             If Not AppSettingsObj.LauncherIncludeFolderCollection.Count = 0 Then
+                SyncHandler.LogHandler.WriteLogEntry("Update additional files...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                 SetLabelText(LoadingStateLbl, "Update additional files...")
                 For index = 0 To AppSettingsObj.LauncherIncludeFolderCollection.Count - 1
                     SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.LauncherIncludeFolderCollection(index).FolderName, AppSettingsObj.LauncherIncludeFolderCollection(index).Recursive, OnlyCheck)
@@ -213,6 +226,7 @@ Public Class LoadingFrm
 
             Return True
         Catch ex As Exception
+            LogInstance.WriteLogEntry("Error: " & Err.Description, Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.ErrorL, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential, ex)
             Return False
         End Try
     End Function
@@ -398,7 +412,7 @@ Public Class LoadingFrm
                                 StartMainAppFromSourceNonElevated()
                             End If
                         End If
-                            Else
+                    Else
                         IO.Directory.CreateDirectory(targetdir)
                         SyncNeeded()
                     End If
