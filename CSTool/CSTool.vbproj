@@ -503,6 +503,12 @@
     <None Include="Resources\icon-user-plus_22x22.png" />
     <None Include="Resources\icon-link_22x22.png" />
     <None Include="Resources\icon-edit_22x22.png" />
+    <Content Include="Licenses\License_AdysTechCredentialManager.txt" />
+    <Content Include="Licenses\License_CefSharp.txt" />
+    <Content Include="Licenses\License_Chromium.txt" />
+    <Content Include="Licenses\License_DockPanelSuite.txt" />
+    <Content Include="Licenses\License_Gecko.txt" />
+    <Content Include="Licenses\License_MainApp.txt" />
     <Content Include="wizard_app.ico" />
   </ItemGroup>
   <ItemGroup>

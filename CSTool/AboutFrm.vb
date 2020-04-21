@@ -11,6 +11,9 @@ Public Class AboutFrm
             TextBox1.Text = IO.File.ReadAllText("Licenses\License_MainApp.txt")
             TextBox2.Text = IO.File.ReadAllText("Licenses\License_DockPanelSuite.txt")
             TextBox3.Text = IO.File.ReadAllText("Licenses\License_Chromium.txt")
+            TextBox4.Text = IO.File.ReadAllText("Licenses\License_AdysTechCredentialManager.txt")
+            TextBox5.Text = IO.File.ReadAllText("Licenses\License_CefSharp.txt")
+            TextBox6.Text = IO.File.ReadAllText("Licenses\License_Gecko.txt")
         Catch ex As Exception
         End Try
     End Sub
