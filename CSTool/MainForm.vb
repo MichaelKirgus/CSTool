@@ -1000,4 +1000,9 @@ Public Class MainForm
         Dim AboutFrmInstance As New AboutFrm
         AboutFrmInstance.ShowDialog()
     End Sub
+
+    Private Sub ShowApplicationRuntimeInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowApplicationRuntimeInfoToolStripMenuItem.Click
+        Dim runtimedlg As New RuntimeInfoForm
+        runtimedlg.Show()
+    End Sub
 End Class
