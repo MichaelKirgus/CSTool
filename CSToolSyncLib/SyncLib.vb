@@ -57,13 +57,14 @@ Public Class SyncLib
         CurrentTask = "None"
         CurrentFile = "None"
         CurrentFolder = "None"
-        IsAsyncTaskRunning = False
 
         If e.Result Then
             SyncSuccessful = True
         Else
             SyncSuccessful = False
         End If
+
+        IsAsyncTaskRunning = False
     End Sub
 
     Public Function CopyFolder_Sync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean, ByVal Simulate As Boolean) As Boolean
