@@ -99,6 +99,7 @@ Public Class LoadingFrm
         Try
             Dim elevatedproccess As New Process
             elevatedproccess.StartInfo.FileName = Application.ExecutablePath
+            elevatedproccess.StartInfo.WorkingDirectory = Application.StartupPath
             elevatedproccess.StartInfo.Arguments = "/elevated " & ConvertCmdArgsToString(Environment.GetCommandLineArgs)
             elevatedproccess.StartInfo.Verb = "runas"
             elevatedproccess.StartInfo.UseShellExecute = True
@@ -128,7 +129,9 @@ Public Class LoadingFrm
     End Sub
 
     Public Function SyncNeeded(Optional ByVal OnlyCheck As Boolean = False) As Boolean
-        Dim LogInstance As LogLib = Nothing
+        Dim SyncHandler As New SyncLib
+        SyncHandler.LogHandler.LogSettings = AppSettingsObj.LauncherLogSettings
+        SyncHandler.LogHandler.InitLogSystem()
 
         Try
             If Not OnlyCheck Then
@@ -143,15 +146,12 @@ Public Class LoadingFrm
             End If
 
             SetLabelText(LoadingStateLbl, "Initialize syncing...")
-            Dim SyncHandler As New SyncLib
-            SyncHandler.LogHandler.LogSettings = AppSettingsObj.LauncherLogSettings
-            SyncHandler.LogHandler.InitLogSystem()
-            LogInstance = SyncHandler.LogHandler
             SyncHandler.LogHandler.WriteLogEntry("Update main application files (Core application files)...", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
             SetLabelText(LoadingStateLbl, "Update main application files...")
             SyncHandler.StartSyncAsync(Application.StartupPath, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath), False, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.WriteLogEntry("Update main application files (Core application files) => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
@@ -160,6 +160,7 @@ Public Class LoadingFrm
             SyncHandler.StartSyncAsync(Application.StartupPath & "\locales", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\locales", True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.WriteLogEntry("Update main application files (Chromium locales directory) => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
@@ -168,6 +169,7 @@ Public Class LoadingFrm
             SyncHandler.StartSyncAsync(Application.StartupPath & "\swiftshader", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\swiftshader", True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.WriteLogEntry("Update main application files (Chromium swiftshader directory) => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
@@ -176,6 +178,7 @@ Public Class LoadingFrm
             SyncHandler.StartSyncAsync(Application.StartupPath & "\Firefox64", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\Firefox64", True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.WriteLogEntry("Update main application files (Gecko core directory) => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
@@ -184,6 +187,7 @@ Public Class LoadingFrm
             SyncHandler.StartSyncAsync(Application.StartupPath & "\Licenses", Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\Licenses", True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.WriteLogEntry("Update main application files (License documentation) => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
@@ -193,6 +197,7 @@ Public Class LoadingFrm
             SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.CredentialPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir, True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.WriteLogEntry("Update credential plugins => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
@@ -202,6 +207,7 @@ Public Class LoadingFrm
             SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.EnvironmentPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir, True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.WriteLogEntry("Update environment plugins => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
@@ -211,6 +217,7 @@ Public Class LoadingFrm
             SyncHandler.StartSyncAsync(Application.StartupPath & "\" & AppSettingsObj.GUIPluginDir, Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir, True, OnlyCheck)
             UntilFinishShowStatus(SyncHandler)
             If SyncHandler.FilesOrDirsChanged Then
+                SyncHandler.LogHandler.WriteLogEntry("Update GUI plugins => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                 SyncHandler.LogHandler.CloseStreams()
                 SyncNeeded(False)
                 Return False
@@ -223,6 +230,7 @@ Public Class LoadingFrm
                     UntilFinishShowStatus(SyncHandler)
                 Next
                 If SyncHandler.FilesOrDirsChanged Then
+                    SyncHandler.LogHandler.WriteLogEntry("Update additional files => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                     SyncHandler.LogHandler.CloseStreams()
                     SyncNeeded(False)
                     Return False
@@ -231,7 +239,8 @@ Public Class LoadingFrm
 
             Return True
         Catch ex As Exception
-            LogInstance.WriteLogEntry("Error: " & Err.Description, Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.ErrorL, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential, Err)
+            SyncHandler.LogHandler.WriteLogEntry("Error: " & Err.Description, Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.ErrorL, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential, Err)
+            SyncHandler.LogHandler.CloseStreams()
             Return False
         End Try
     End Function
