@@ -6,7 +6,7 @@ Public Class SyncLib
     Public WithEvents SyncTaskHost As New BackgroundWorker
 
     Public FilesOrDirsChanged As Boolean = False
-    Public LogHandler As New LogLib
+    Public LogHandler As LogLib = Nothing
 
     Public CurrentTask As String = "None"
     Public CurrentFile As String = "None"
@@ -15,7 +15,7 @@ Public Class SyncLib
     Public SyncSuccessful As Boolean = False
     Public LastError As String = ""
 
-    Public Function StartSyncAsync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean, ByVal Simulate As Boolean)
+    Public Function StartSyncAsync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean, ByVal Simulate As Boolean) As Boolean
         Try
             Dim RuntimeArgs As New List(Of Object)
             RuntimeArgs.Add(sSrcPath)
@@ -25,6 +25,8 @@ Public Class SyncLib
 
             If Not SyncTaskHost.IsBusy Then
                 SyncTaskHost.RunWorkerAsync(RuntimeArgs)
+            Else
+                Return False
             End If
 
             Return True
@@ -290,6 +292,10 @@ Public Class SyncLib
 
     Public Function StartSync(ByVal sSrcPath As String, ByVal sDestPath As String, ByVal Recursive As Boolean, ByVal Simulate As Boolean) As Boolean
         FilesOrDirsChanged = False
+
+        Debug.WriteLine("Start syncing...")
+        Debug.WriteLine(sSrcPath)
+        Debug.WriteLine(sDestPath)
 
         LogHandler.WriteLogEntry("SyncLib: Copy task started.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Advanced)
         If CopyFolder_Sync(sSrcPath, sDestPath, Recursive, Simulate) Then
