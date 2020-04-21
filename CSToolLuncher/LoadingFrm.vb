@@ -117,7 +117,12 @@ Public Class LoadingFrm
 
     Public Sub UntilFinishShowStatus(ByVal SyncHandlerInstance As SyncLib)
         Do While SyncHandlerInstance.IsAsyncTaskRunning
-            SetLabelText(LoadingStateLbl, SyncHandlerInstance.CurrentTask & ": " & SyncHandlerInstance.CurrentFile)
+            If Not SyncHandlerInstance.CurrentFile = "" Then
+                SetLabelText(LoadingStateLbl, SyncHandlerInstance.CurrentTask & ": " & SyncHandlerInstance.CurrentFile)
+            Else
+                SetLabelText(LoadingStateLbl, SyncHandlerInstance.CurrentTask & ": " & SyncHandlerInstance.CurrentFolder)
+            End If
+
             Threading.Thread.Sleep(10)
         Loop
     End Sub
