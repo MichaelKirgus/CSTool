@@ -105,6 +105,7 @@ Public Class LoadingFrm
             elevatedproccess.StartInfo.Verb = "runas"
             elevatedproccess.StartInfo.UseShellExecute = True
             If elevatedproccess.Start() Then
+                SetLabelText(LoadingStateLbl, "Waiting...")
                 elevatedproccess.WaitForExit()
                 Threading.Thread.Sleep(500)
             Else
