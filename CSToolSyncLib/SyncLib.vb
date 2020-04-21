@@ -204,6 +204,8 @@ Public Class SyncLib
                             FilesOrDirsChanged = True
                             Exit Sub
                         End If
+                    Else
+                        LogHandler.WriteLogEntry("File " & sSrcPath & sFile & ": Identical file time-stamp, skipping.", Me.GetType, LogSettings.LogEntryTypeEnum.Info, LogSettings.LogEntryLevelEnum.Debug)
                     End If
                 End If
             Catch ex As Exception
