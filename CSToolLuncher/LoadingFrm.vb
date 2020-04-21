@@ -226,7 +226,7 @@ Public Class LoadingFrm
 
             Return True
         Catch ex As Exception
-            LogInstance.WriteLogEntry("Error: " & Err.Description, Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.ErrorL, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential, ex)
+            LogInstance.WriteLogEntry("Error: " & Err.Description, Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.ErrorL, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential, Err)
             Return False
         End Try
     End Function
