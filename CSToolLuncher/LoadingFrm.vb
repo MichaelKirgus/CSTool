@@ -7,6 +7,7 @@ Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
 Imports CSToolLauncherLib
 Imports CSToolLogLib
+Imports CSToolSignatureHelper
 Imports CSToolSyncLib
 
 Public Class LoadingFrm
@@ -234,17 +235,17 @@ Public Class LoadingFrm
                     SyncHandler.LogHandler.WriteLogEntry("Update additional files => Files or directories changed.", Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.Info, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential)
                     SyncNeeded(False, SyncHandler)
                     Return False
-                    End If
                 End If
+            End If
 
-                SyncHandler.LogHandler.CloseStreams()
+            SyncHandler.LogHandler.CloseStreams()
 
-                Return True
-            Catch ex As Exception
-                SyncHandler.LogHandler.WriteLogEntry("Error: " & Err.Description, Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.ErrorL, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential, Err)
-                SyncHandler.LogHandler.CloseStreams()
-                Return False
-            End Try
+            Return True
+        Catch ex As Exception
+            SyncHandler.LogHandler.WriteLogEntry("Error: " & Err.Description, Me.GetType, CSToolLogLib.LogSettings.LogEntryTypeEnum.ErrorL, CSToolLogLib.LogSettings.LogEntryLevelEnum.Essential, Err)
+            SyncHandler.LogHandler.CloseStreams()
+            Return False
+        End Try
     End Function
 
     Public Function HandleUserInteraction() As Integer
@@ -338,6 +339,17 @@ Public Class LoadingFrm
 
     Public Function StartMainAppFromSourceNonElevated() As Boolean
         Try
+            Dim SignatureHandler As New SignatureHelper
+            If SignatureHandler.CheckSign(Application.ExecutablePath) Then
+                If Not SignatureHandler.CheckSign(Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe") Then
+                    Dim result As MsgBoxResult
+                    result = MsgBox("Main application file is not digital signed or the signature is not valid! Do you want to run the application anyway?", MsgBoxStyle.YesNo)
+                    If result = MsgBoxResult.No Then
+                        Return False
+                    End If
+                End If
+            End If
+
             Dim mainappargs As String = ""
             Dim mainapp As New Process
             mainapp.StartInfo.FileName = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe"

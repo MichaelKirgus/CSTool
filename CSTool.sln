@@ -188,6 +188,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FlushDNSEnvironmentPlugin",
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "GeckoBrowserPlugin", "GeckoBrowserPlugin\GeckoBrowserPlugin.vbproj", "{3F89161D-4162-4B73-96BC-BF4EBD4CC73A}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CSToolSignatureHelper", "CSToolSignatureHelper\CSToolSignatureHelper.vbproj", "{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1502,6 +1504,26 @@ Global
 		{3F89161D-4162-4B73-96BC-BF4EBD4CC73A}.Release|x64.Build.0 = Release|Any CPU
 		{3F89161D-4162-4B73-96BC-BF4EBD4CC73A}.Release|x86.ActiveCfg = Release|Any CPU
 		{3F89161D-4162-4B73-96BC-BF4EBD4CC73A}.Release|x86.Build.0 = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|x64.Build.0 = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Debug|x86.Build.0 = Debug|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|ARM.Build.0 = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|ARM64.Build.0 = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|x64.ActiveCfg = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|x64.Build.0 = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{1B6EE1EF-A813-4160-A94E-505B20EBE0F3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
