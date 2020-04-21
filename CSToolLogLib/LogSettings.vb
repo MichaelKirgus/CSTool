@@ -13,6 +13,8 @@
     Public Property LogToEventLogLevel As LogEntryLevelEnum = LogEntryLevelEnum.Essential
     Public Property EventLogSource As String = "CSTool"
     Public Property EventLogName As String = "CSTool application log"
+    Public Property LogToDebugConsole As Boolean = False
+    Public Property LogToStandardOutputStream As Boolean = False
 
     Public Enum LogEntryTypeEnum
         Info = 0

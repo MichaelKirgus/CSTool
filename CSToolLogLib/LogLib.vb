@@ -20,9 +20,10 @@ Public Class LogLib
     Public Sub WriteToFile(ByVal LogEntryObj As LogEntry)
         Try
             LogFileWriterHandler.WriteLine(LogEntryObj.DateAndTime.ToLocalTime.ToString() & vbTab &
-                                             LogEntryObj.Level & vbTab & LogEntryObj.Type & vbTab &
-                                             LogEntryObj.TargetHandler.ToString & vbTab &
-                                             LogEntryObj.Message)
+                                                         LogEntryObj.Level & vbTab & LogEntryObj.Type & vbTab &
+                                                         LogEntryObj.TargetHandler.ToString & vbTab &
+                                                         LogEntryObj.Message)
+
         Catch ex As Exception
         End Try
     End Sub
@@ -56,6 +57,12 @@ Public Class LogLib
                     Case LogEntryLevelEnum.Debug
                         LogEventLogHandler.WriteEntry(LogEntryObj.Message)
                 End Select
+            End If
+            If LogSettings.LogToStandardOutputStream Then
+                Console.WriteLine(LogEntryObj.Message)
+            End If
+            If LogSettings.LogToDebugConsole Then
+                Debug.WriteLine(LogEntryObj.Message)
             End If
         Catch ex As Exception
         End Try
@@ -97,8 +104,11 @@ Public Class LogLib
     Public Sub CloseStreams()
         Try
             If Not IsNothing(LogFileWriterHandler) And LogSettings.LogToFile Then
-                LogFileWriterHandler.Flush()
-                LogFileStreamHandler.Flush()
+                Try
+                    LogFileWriterHandler.Flush()
+                    LogFileStreamHandler.Flush()
+                Catch ex As Exception
+                End Try
                 LogFileWriterHandler.Close()
                 LogFileStreamHandler.Close()
             End If
