@@ -29,6 +29,10 @@ Public Class WindowManager
     Public Property CredentialPluginDir As String = My.Application.Info.DirectoryPath & "\CredentialPlugins"
     Public Property EnvironmentPluginDir As String = My.Application.Info.DirectoryPath & "\EnvironmentPlugins"
 
+    Public LastAddedPluginName As String = ""
+    Public LastAddedPluginGUID As String = ""
+    Public LastAddedPluginInstanceGUID As String = ""
+
     Public Function InitAllPlugins() As Boolean
         Dim LoadEnvPluginsResult As Boolean
         Dim LoadCredPluginsResult As Boolean
@@ -553,6 +557,8 @@ Public Class WindowManager
                     End If
                     plugin.LoadPlugin()
 
+                    LastAddedPluginInstanceGUID = HostWindow.InstanceGUID
+
                     If Not HostOrIP = "" Then
                         plugin.RaiseActions(HostOrIP)
                     End If
@@ -561,6 +567,10 @@ Public Class WindowManager
                     Return False
                 End If
             End If
+
+            LastAddedPluginName = plugin.PluginName
+            LastAddedPluginGUID = plugin.PluginGUID
+
 
             Return True
         Catch ex As Exception
