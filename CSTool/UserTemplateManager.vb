@@ -484,14 +484,17 @@ Public Class UserTemplateManager
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         RemoveTemplateFromNode()
+        LoadTemplatesFromSelectedNodeToGUI()
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
         AddNewTemplate(True)
+        LoadTemplatesFromSelectedNodeToGUI()
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         AddNewTemplate(False)
+        LoadTemplatesFromSelectedNodeToGUI()
     End Sub
 
     Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged

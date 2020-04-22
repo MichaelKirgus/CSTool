@@ -33,27 +33,27 @@ Partial Class UserTemplateManager
         Me.TreeView1 = New System.Windows.Forms.TreeView()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ImageList2 = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.NoTemplatePanel = New System.Windows.Forms.PictureBox()
         Me.SplitContainer4 = New System.Windows.Forms.SplitContainer()
         Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
         Me.PropertyGrid2 = New System.Windows.Forms.PropertyGrid()
         Me.ToolStrip3 = New System.Windows.Forms.ToolStrip()
-        Me.ImageList2 = New System.Windows.Forms.ImageList(Me.components)
-        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
-        Me.NoTemplatePanel = New System.Windows.Forms.PictureBox()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -68,12 +68,12 @@ Partial Class UserTemplateManager
         Me.SplitContainer3.Panel1.SuspendLayout()
         Me.SplitContainer3.Panel2.SuspendLayout()
         Me.SplitContainer3.SuspendLayout()
+        CType(Me.NoTemplatePanel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer4.Panel1.SuspendLayout()
         Me.SplitContainer4.Panel2.SuspendLayout()
         Me.SplitContainer4.SuspendLayout()
         Me.ToolStrip3.SuspendLayout()
-        CType(Me.NoTemplatePanel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -122,6 +122,17 @@ Partial Class UserTemplateManager
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        'ToolStripButton5
+        '
+        Me.ToolStripButton5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton5.Image = Global.CSTool.My.Resources.Resources.icon_refresh_22x22
+        Me.ToolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton5.Name = "ToolStripButton5"
+        Me.ToolStripButton5.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton5.Text = "Refresh template collection"
+        '
         'SplitContainer2
         '
         Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
@@ -145,6 +156,7 @@ Partial Class UserTemplateManager
         '
         'ListView1
         '
+        Me.ListView1.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
         Me.ListView1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -152,9 +164,11 @@ Partial Class UserTemplateManager
         Me.ListView1.HideSelection = False
         Me.ListView1.LargeImageList = Me.ImageList2
         Me.ListView1.Location = New System.Drawing.Point(0, 29)
+        Me.ListView1.MultiSelect = False
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(340, 501)
         Me.ListView1.SmallImageList = Me.ImageList2
+        Me.ListView1.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.ListView1.TabIndex = 0
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -169,6 +183,17 @@ Partial Class UserTemplateManager
         Me.ColumnHeader2.Text = "Description"
         Me.ColumnHeader2.Width = 150
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
+        '
+        'ImageList2
+        '
+        Me.ImageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
+        Me.ImageList2.ImageSize = New System.Drawing.Size(32, 32)
+        Me.ImageList2.TransparentColor = System.Drawing.Color.Transparent
+        '
         'ToolStrip2
         '
         Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
@@ -178,6 +203,52 @@ Partial Class UserTemplateManager
         Me.ToolStrip2.Size = New System.Drawing.Size(340, 29)
         Me.ToolStrip2.TabIndex = 2
         Me.ToolStrip2.Text = "ToolStrip2"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = Global.CSTool.My.Resources.Resources.icon_plus_circle_22x22
+        Me.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton2.Text = "Add new template"
+        '
+        'ToolStripButton3
+        '
+        Me.ToolStripButton3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton3.Image = Global.CSTool.My.Resources.Resources.icon_duplicate_22x22
+        Me.ToolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton3.Name = "ToolStripButton3"
+        Me.ToolStripButton3.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton3.Text = "Duplicate template"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = Global.CSTool.My.Resources.Resources.icon_minus_circle_22x22
+        Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton1.Text = "Remove template"
+        '
+        'ToolStripButton6
+        '
+        Me.ToolStripButton6.Checked = True
+        Me.ToolStripButton6.CheckOnClick = True
+        Me.ToolStripButton6.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton6.Image = Global.CSTool.My.Resources.Resources.icon_check_circle_22x22
+        Me.ToolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton6.Name = "ToolStripButton6"
+        Me.ToolStripButton6.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton6.Text = "Close window after adding item to workspace"
         '
         'SplitContainer3
         '
@@ -215,6 +286,18 @@ Partial Class UserTemplateManager
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Add to workspace"
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'NoTemplatePanel
+        '
+        Me.NoTemplatePanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.NoTemplatePanel.Image = Global.CSTool.My.Resources.Resources.icon_x_circle_64x64
+        Me.NoTemplatePanel.Location = New System.Drawing.Point(0, 0)
+        Me.NoTemplatePanel.Name = "NoTemplatePanel"
+        Me.NoTemplatePanel.Size = New System.Drawing.Size(340, 552)
+        Me.NoTemplatePanel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.NoTemplatePanel.TabIndex = 5
+        Me.NoTemplatePanel.TabStop = False
+        Me.NoTemplatePanel.Visible = False
         '
         'SplitContainer4
         '
@@ -264,56 +347,6 @@ Partial Class UserTemplateManager
         Me.ToolStrip3.TabIndex = 2
         Me.ToolStrip3.Text = "ToolStrip3"
         '
-        'ImageList2
-        '
-        Me.ImageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
-        Me.ImageList2.ImageSize = New System.Drawing.Size(32, 32)
-        Me.ImageList2.TransparentColor = System.Drawing.Color.Transparent
-        '
-        'ToolStripButton5
-        '
-        Me.ToolStripButton5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton5.Image = Global.CSTool.My.Resources.Resources.icon_refresh_22x22
-        Me.ToolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton5.Name = "ToolStripButton5"
-        Me.ToolStripButton5.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton5.Text = "Refresh template collection"
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = Global.CSTool.My.Resources.Resources.icon_plus_circle_22x22
-        Me.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton2.Text = "Add new template"
-        '
-        'ToolStripButton3
-        '
-        Me.ToolStripButton3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton3.Image = Global.CSTool.My.Resources.Resources.icon_duplicate_22x22
-        Me.ToolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton3.Text = "Duplicate template"
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton1.Image = Global.CSTool.My.Resources.Resources.icon_minus_circle_22x22
-        Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton1.Text = "Remove template"
-        '
         'ToolStripButton4
         '
         Me.ToolStripButton4.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
@@ -324,36 +357,6 @@ Partial Class UserTemplateManager
         Me.ToolStripButton4.Name = "ToolStripButton4"
         Me.ToolStripButton4.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton4.Text = "Save template settings"
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
-        '
-        'ToolStripButton6
-        '
-        Me.ToolStripButton6.Checked = True
-        Me.ToolStripButton6.CheckOnClick = True
-        Me.ToolStripButton6.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton6.Image = Global.CSTool.My.Resources.Resources.icon_check_circle_22x22
-        Me.ToolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton6.Name = "ToolStripButton6"
-        Me.ToolStripButton6.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton6.Text = "Close window after adding item to workspace"
-        '
-        'NoTemplatePanel
-        '
-        Me.NoTemplatePanel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.NoTemplatePanel.Image = Global.CSTool.My.Resources.Resources.icon_x_circle_64x64
-        Me.NoTemplatePanel.Location = New System.Drawing.Point(0, 0)
-        Me.NoTemplatePanel.Name = "NoTemplatePanel"
-        Me.NoTemplatePanel.Size = New System.Drawing.Size(340, 552)
-        Me.NoTemplatePanel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.NoTemplatePanel.TabIndex = 5
-        Me.NoTemplatePanel.TabStop = False
-        Me.NoTemplatePanel.Visible = False
         '
         'UserTemplateManager
         '
@@ -385,13 +388,13 @@ Partial Class UserTemplateManager
         Me.SplitContainer3.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer3.ResumeLayout(False)
+        CType(Me.NoTemplatePanel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer4.Panel1.ResumeLayout(False)
         Me.SplitContainer4.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer4.ResumeLayout(False)
         Me.ToolStrip3.ResumeLayout(False)
         Me.ToolStrip3.PerformLayout()
-        CType(Me.NoTemplatePanel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

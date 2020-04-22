@@ -389,19 +389,19 @@ Public Class LoadingFrm
 
     Public Function GenerateCommandLineMainAppSettings() As String
         Dim result As String
-        result = "/appsettingspath " & Application.StartupPath & "\AppSettings.xml" &
-            " /usertemplatesdir " & Application.StartupPath & "\" & AppSettingsObj.UserTemplatesDir &
-            " /userinitialtemplatedir " & Application.StartupPath & "\" & AppSettingsObj.UserInitialTemplateDir &
-            " /userprofiledir " & Application.StartupPath & "\" & AppSettingsObj.UserProfileDir
+        result = "/appsettingspath " & My.Resources.pathsep & Application.StartupPath & "\AppSettings.xml" & My.Resources.pathsep &
+            " /usertemplatesdir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserTemplatesDir & My.Resources.pathsep &
+            " /userinitialtemplatedir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserInitialTemplateDir & My.Resources.pathsep &
+            " /userprofiledir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserProfileDir & My.Resources.pathsep
 
         Return result
     End Function
 
     Public Function GenerateCommandLineMainAppLocalFolders() As String
         Dim result As String
-        result = "/environmentplugindir " & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir &
-            " /credentialplugindir " & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir &
-            " /guiplugindir " & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir
+        result = "/environmentplugindir " & My.Resources.pathsep & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir & My.Resources.pathsep &
+            " /credentialplugindir " & My.Resources.pathsep & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir & My.Resources.pathsep &
+            " /guiplugindir " & My.Resources.pathsep & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir & My.Resources.pathsep
 
         Return result
     End Function
