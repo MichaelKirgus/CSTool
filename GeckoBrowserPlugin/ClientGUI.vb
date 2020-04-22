@@ -48,7 +48,7 @@ Public Class ClientGUI
 
     Private Sub WebBrowser1_DocumentCompleted(sender As Object, e As Gecko.Events.GeckoDocumentCompletedEventArgs) Handles WebBrowser1.DocumentCompleted
         If _Settings.ShowWebsiteTitleInWindowTitle Then
-            ToolStripComboBox1.Text = e.Uri.ToString
+            ToolStripComboBox1.Text = WebBrowser1.Url.ToString
             _ParentInstance.CurrentWindowTitle = WebBrowser1.DocumentTitle
             ParentForm.Text = WebBrowser1.DocumentTitle
 
