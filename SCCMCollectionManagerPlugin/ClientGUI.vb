@@ -1019,6 +1019,7 @@ Public Class ClientGUI
             If _Settings.FilterCollectionsWithNoMembers Then
                 ToolStripButton12.Checked = True
             End If
+            ToolStripButton14.Checked = _Settings.SortCollections
             LiveModeButton.Checked = _Settings.EnableLiveMode
             ToolStripButton15.Checked = _Settings.ShowDevicesAndUsernameSearchPanel
             SplitContainer4.Panel1Collapsed = Not _Settings.ShowDevicesAndUsernameSearchPanel
@@ -1405,7 +1406,7 @@ Public Class ClientGUI
     End Sub
 
     Private Sub CollectSMSCollectionsWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles CollectSMSCollectionsWorker.DoWork
-        LoadCollectionsFromServer(ToolStripButton10.Checked, ToolStripButton12.Checked, ToolStripButton14.Checked)
+        LoadCollectionsFromServer(ToolStripButton10.Checked, ToolStripButton12.Checked, _Settings.SortCollections)
     End Sub
 
     Private Sub CollectSMSCollectionsWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles CollectSMSCollectionsWorker.RunWorkerCompleted
@@ -1871,6 +1872,14 @@ Public Class ClientGUI
             MsgBox("Client Wake-Up successful!")
         Else
             MsgBox("Client Wake-Up failed. Please check configuration.")
+        End If
+    End Sub
+
+    Private Sub ToolStripButton14_Click(sender As Object, e As EventArgs) Handles ToolStripButton14.Click
+        If ToolStripButton14.Checked Then
+            _Settings.SortCollections = True
+        Else
+            _Settings.SortCollections = False
         End If
     End Sub
 End Class
