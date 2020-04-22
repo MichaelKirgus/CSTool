@@ -412,7 +412,7 @@ Partial Class ClientGUI
         Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton9.Name = "ToolStripButton9"
         Me.ToolStripButton9.Size = New System.Drawing.Size(23, 22)
-        Me.ToolStripButton9.Text = "Benutzerdefinierte Abfrage..."
+        Me.ToolStripButton9.Text = "Custom WQL-Query..."
         '
         'SplitContainer3
         '
