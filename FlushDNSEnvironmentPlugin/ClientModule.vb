@@ -13,7 +13,7 @@ Imports CSToolPluginLib
 Public Module ClientModule
     Public Class Client
         Implements ICSToolInterface
-        Public SettingsHandle As New Settings
+        Public SettingsHandle As New SettingsClass
         Private LifetimePluginGUID As String = ""
         Public LogInstanceHandler As LogLib
 
