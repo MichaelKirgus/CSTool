@@ -63,7 +63,9 @@ Public Class DockingHostWindow
                 ReciveActionsToolStripMenuItem.Enabled = False
             End If
 
-            WatchingWorker.RunWorkerAsync()
+            If Not _PluginSettingsFile = "" Then
+                WatchingWorker.RunWorkerAsync()
+            End If
         Catch ex As Exception
         End Try
     End Sub

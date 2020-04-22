@@ -41,7 +41,8 @@ Public Class PluginSettingsForm
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         Try
-            _Parent.PluginHandler.SavePluginSettings()
+            _Parent.PluginHandler.SavePluginSettings(_Parent._PluginSettingsFile)
+            _Parent.PluginHandler.PluginSettingsChanged = False
         Catch ex As Exception
         End Try
     End Sub

@@ -524,7 +524,7 @@ Public Class WindowManager
     End Function
 
     Public Function AddPluginWindowToGUI(ByVal HostControl As DockPanel, ByVal HostOrIP As String, ByVal PluginName As String, ByVal TargetPluginCollection As List(Of CSToolPluginLib.ICSToolInterface), Optional ByVal UserSettingName As String = "Default",
-            Optional DockingType As WeifenLuo.WinFormsUI.Docking.DockState = DockState.Document, Optional IsIndependent As Boolean = False, Optional PluginSettingsPath As String = "") As Boolean
+            Optional DockingType As WeifenLuo.WinFormsUI.Docking.DockState = DockState.Document, Optional IsIndependent As Boolean = False, Optional PluginSettingsPath As String = "", Optional ForceRaiseRefresh As Boolean = False, Optional ForceRaiseActions As Boolean = False) As Boolean
         Try
             Dim plugin As CSToolPluginLib.ICSToolInterface
             plugin = PluginManager.CreateNewPluginInstance(GetPluginIndexByName(PluginName, TargetPluginCollection))
@@ -551,14 +551,20 @@ Public Class WindowManager
 
                     plugin.CurrentLogInstance = New LogLib
                     plugin.PluginSettingsChanged = True
-                    HostWindow.Show()
+
                     If Not PluginSettingsPath = "" Then
                         plugin.LoadPluginSettings(PluginSettingsPath)
                     End If
+
+                    HostWindow.Show()
+
                     plugin.LoadPlugin()
 
-                    If Not HostOrIP = "" Then
+                    If Not HostOrIP = "" Or ForceRaiseActions Then
                         plugin.RaiseActions(HostOrIP)
+                    End If
+                    If ForceRaiseRefresh Then
+                        plugin.RefreshGUI()
                     End If
                 Else
                     MsgBox("This plugin does not support this action!")
@@ -575,16 +581,22 @@ Public Class WindowManager
 
                     plugin.CurrentLogInstance = _LogManager
                     plugin.PluginSettingsChanged = True
-                    HostWindow.Show(HostControl, DockingType)
+
                     If Not PluginSettingsPath = "" Then
                         plugin.LoadPluginSettings(PluginSettingsPath)
                     End If
+
+                    HostWindow.Show(HostControl, DockingType)
+
                     plugin.LoadPlugin()
 
                     LastAddedPluginInstanceGUID = HostWindow.InstanceGUID
 
-                    If Not HostOrIP = "" Then
+                    If Not HostOrIP = "" Or ForceRaiseActions Then
                         plugin.RaiseActions(HostOrIP)
+                    End If
+                    If ForceRaiseRefresh Then
+                        plugin.RefreshGUI()
                     End If
                 Else
                     MsgBox("This plugin does not support this action!")

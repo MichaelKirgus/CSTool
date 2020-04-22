@@ -6,6 +6,7 @@
 Imports System.Runtime.InteropServices
 Imports CSTemplateManager
 Imports CSTemplateManager.TemplateCollectionSettings
+Imports CSToolHostWindow
 Imports CSToolPluginLib
 Imports WeifenLuo.WinFormsUI.Docking
 
@@ -111,7 +112,6 @@ Public Class UserTemplateManager
                     isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.DockBottom, False, tempsett)
                 Case DefaultWindowStyleEnum.DockDocument
                     isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.Document, False, tempsett)
-
                 Case DefaultWindowStyleEnum.DockLeft
                     isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.DockLeft, False, tempsett)
                 Case DefaultWindowStyleEnum.DockRight
@@ -569,7 +569,7 @@ Public Class UserTemplateManager
             curritm = ListView1.SelectedItems(0)
             Dim tempitm As TemplateCollectionSettings
             tempitm = curritm.Tag
-            If AddItemFromTemplateToWorkspace(tempitm.TemplateGUID, _parent.CSDockPanelHosting, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, ComboBox1.SelectedIndex) Then
+            If AddItemFromTemplateToWorkspace(tempitm.TemplateGUID, _parent.WindowManagerHandler._DockingContent, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, ComboBox1.SelectedIndex) Then
                 If ToolStripButton6.Checked Then
                     Me.Close()
                 Else
