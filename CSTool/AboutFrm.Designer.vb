@@ -42,10 +42,10 @@ Partial Class AboutFrm
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -83,7 +83,6 @@ Partial Class AboutFrm
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(546, 94)
         Me.Panel1.TabIndex = 6
-        Me.Panel1.UseWaitCursor = True
         '
         'LinkLabel1
         '
@@ -95,7 +94,6 @@ Partial Class AboutFrm
         Me.LinkLabel1.TabIndex = 4
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "https://github.com/MichaelKirgus/CSTool"
-        Me.LinkLabel1.UseWaitCursor = True
         '
         'Label2
         '
@@ -106,7 +104,6 @@ Partial Class AboutFrm
         Me.Label2.Size = New System.Drawing.Size(218, 16)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Copyright 2016-2020 Michael Kirgus"
-        Me.Label2.UseWaitCursor = True
         '
         'AppVersionLbl
         '
@@ -116,7 +113,6 @@ Partial Class AboutFrm
         Me.AppVersionLbl.Name = "AppVersionLbl"
         Me.AppVersionLbl.Size = New System.Drawing.Size(0, 16)
         Me.AppVersionLbl.TabIndex = 2
-        Me.AppVersionLbl.UseWaitCursor = True
         '
         'Label1
         '
@@ -128,7 +124,6 @@ Partial Class AboutFrm
         Me.Label1.Size = New System.Drawing.Size(61, 20)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "CSTool"
-        Me.Label1.UseWaitCursor = True
         '
         'PictureBox1
         '
@@ -139,7 +134,6 @@ Partial Class AboutFrm
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
-        Me.PictureBox1.UseWaitCursor = True
         '
         'TabControl1
         '
@@ -184,7 +178,7 @@ Partial Class AboutFrm
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(437, 275)
+        Me.TabPage2.Size = New System.Drawing.Size(542, 275)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "DockingPanelSuite"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -198,7 +192,7 @@ Partial Class AboutFrm
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
         Me.TextBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox2.Size = New System.Drawing.Size(431, 269)
+        Me.TextBox2.Size = New System.Drawing.Size(536, 269)
         Me.TextBox2.TabIndex = 1
         '
         'TabPage3
@@ -206,7 +200,7 @@ Partial Class AboutFrm
         Me.TabPage3.Controls.Add(Me.TextBox3)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(437, 275)
+        Me.TabPage3.Size = New System.Drawing.Size(542, 275)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Chromium"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -220,7 +214,7 @@ Partial Class AboutFrm
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.ReadOnly = True
         Me.TextBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox3.Size = New System.Drawing.Size(437, 275)
+        Me.TextBox3.Size = New System.Drawing.Size(542, 275)
         Me.TextBox3.TabIndex = 1
         '
         'TabPage4
@@ -229,10 +223,22 @@ Partial Class AboutFrm
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(437, 275)
+        Me.TabPage4.Size = New System.Drawing.Size(542, 275)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "AdysTech.CredentialManager"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'TextBox4
+        '
+        Me.TextBox4.BackColor = System.Drawing.Color.White
+        Me.TextBox4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox4.Location = New System.Drawing.Point(3, 3)
+        Me.TextBox4.Multiline = True
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.ReadOnly = True
+        Me.TextBox4.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TextBox4.Size = New System.Drawing.Size(536, 269)
+        Me.TextBox4.TabIndex = 2
         '
         'TabPage5
         '
@@ -240,10 +246,22 @@ Partial Class AboutFrm
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(437, 275)
+        Me.TabPage5.Size = New System.Drawing.Size(542, 275)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "CefSharp"
         Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'TextBox5
+        '
+        Me.TextBox5.BackColor = System.Drawing.Color.White
+        Me.TextBox5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox5.Location = New System.Drawing.Point(3, 3)
+        Me.TextBox5.Multiline = True
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.ReadOnly = True
+        Me.TextBox5.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TextBox5.Size = New System.Drawing.Size(536, 269)
+        Me.TextBox5.TabIndex = 2
         '
         'TabPage6
         '
@@ -255,30 +273,6 @@ Partial Class AboutFrm
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "Gecko"
         Me.TabPage6.UseVisualStyleBackColor = True
-        '
-        'TextBox4
-        '
-        Me.TextBox4.BackColor = System.Drawing.Color.White
-        Me.TextBox4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox4.Location = New System.Drawing.Point(3, 3)
-        Me.TextBox4.Multiline = True
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.ReadOnly = True
-        Me.TextBox4.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox4.Size = New System.Drawing.Size(431, 269)
-        Me.TextBox4.TabIndex = 2
-        '
-        'TextBox5
-        '
-        Me.TextBox5.BackColor = System.Drawing.Color.White
-        Me.TextBox5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox5.Location = New System.Drawing.Point(3, 3)
-        Me.TextBox5.Multiline = True
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.ReadOnly = True
-        Me.TextBox5.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox5.Size = New System.Drawing.Size(431, 269)
-        Me.TextBox5.TabIndex = 2
         '
         'TextBox6
         '
