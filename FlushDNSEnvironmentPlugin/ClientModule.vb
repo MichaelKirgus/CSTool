@@ -192,11 +192,31 @@ Public Module ClientModule
         End Sub
 
         Public Function SavePluginSettings(Optional Filename As String = "") As Boolean Implements ICSToolInterface.SavePluginSettings
-            Return True
+            Try
+                Dim XML As New XmlSerializer(SettingsClass.GetType)
+                Dim FS As New FileStream(Filename, FileMode.Create)
+                XML.Serialize(FS, SettingsHandle)
+                FS.Close()
+
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
         End Function
 
         Public Function LoadPluginSettings(Optional Filename As String = "") As Boolean Implements ICSToolInterface.LoadPluginSettings
-            Return True
+            Try
+                Dim objStreamReader As New StreamReader(Filename)
+                Dim p2 As New SettingsClass
+                Dim x As New XmlSerializer(p2.GetType)
+                p2 = x.Deserialize(objStreamReader)
+                objStreamReader.Close()
+
+                SettingsHandle = p2
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
         End Function
 
         Public Function RefreshGUI() As Boolean Implements ICSToolInterface.RefreshGUI
