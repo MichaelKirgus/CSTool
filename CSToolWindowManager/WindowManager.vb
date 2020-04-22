@@ -278,6 +278,30 @@ Public Class WindowManager
         End Try
     End Function
 
+    Public Function GetPluginHostWindowByInstanceGUID(ByVal InstanceGUID As String) As DockingHostWindow
+        Try
+            For index = 0 To _DockingContent.Contents.Count - 1
+                Try
+                    Dim HostingWindowObj As DockContent
+                    HostingWindowObj = _DockingContent.Contents(index)
+                    If Not HostingWindowObj.IsDisposed Then
+                        Dim DockHostWindowsObj As DockingHostWindow
+                        DockHostWindowsObj = HostingWindowObj
+
+                        If DockHostWindowsObj.InstanceGUID = InstanceGUID Then
+                            Return DockHostWindowsObj
+                        End If
+                    End If
+                Catch ex As Exception
+                End Try
+            Next
+
+            Return Nothing
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Function CloseAllOpenWindowsByDockingState(ByVal State As DockState) As Boolean
         Try
             For index = 0 To _DockingContent.Contents.Count - 1

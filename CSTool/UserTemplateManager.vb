@@ -111,6 +111,7 @@ Public Class UserTemplateManager
                     isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.DockBottom, False, tempsett)
                 Case DefaultWindowStyleEnum.DockDocument
                     isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.Document, False, tempsett)
+
                 Case DefaultWindowStyleEnum.DockLeft
                     isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.DockLeft, False, tempsett)
                 Case DefaultWindowStyleEnum.DockRight
