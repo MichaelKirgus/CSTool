@@ -337,7 +337,7 @@ Public Class LoadingFrm
 
     Public Function StartMainAppFromShareNonElevated() As Boolean
         Try
-            If Not LauncherHelperInstance.IsCurrentUserAdmin Then
+            If Not LauncherHelperInstance.IsCurrentUserAdmin And AppSettingsObj.PreventMainAppFromRunningElevated Then
                 Dim mainappargs As String
                 Dim mainapp As New Process
                 mainapp.StartInfo.FileName = Application.StartupPath & "\CSTool.exe"
@@ -359,7 +359,7 @@ Public Class LoadingFrm
 
     Public Function StartMainAppFromSourceNonElevated() As Boolean
         Try
-            If Not LauncherHelperInstance.IsCurrentUserAdmin Then
+            If Not LauncherHelperInstance.IsCurrentUserAdmin And AppSettingsObj.PreventMainAppFromRunningElevated Then
                 Dim SignatureHandler As New SignatureHelper
                 If SignatureHandler.CheckSign(Application.ExecutablePath) Then
                     If Not SignatureHandler.CheckSign(Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe") Then
