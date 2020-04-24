@@ -95,4 +95,14 @@ Public Class AppSettingsFrm
             UserSettingsHandler.SaveSettings(PropertyGrid5.SelectedObject, AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile)
         End If
     End Sub
+
+    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+        OpenFileDialog1.ShowDialog()
+    End Sub
+
+    Private Sub OpenFileDialog1_FileOk(sender As Object, e As ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
+        If Not OpenFileDialog1.FileName = "" Then
+            ToolStripTextBox1.Text = OpenFileDialog1.FileName
+        End If
+    End Sub
 End Class

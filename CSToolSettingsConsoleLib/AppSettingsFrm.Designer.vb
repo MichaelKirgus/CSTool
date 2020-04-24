@@ -31,38 +31,39 @@ Partial Class AppSettingsFrm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.PropertyGrid2 = New System.Windows.Forms.PropertyGrid()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.PropertyGrid3 = New System.Windows.Forms.PropertyGrid()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
-        Me.PropertyGrid4 = New System.Windows.Forms.PropertyGrid()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.ToolStrip3 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.PropertyGrid2 = New System.Windows.Forms.PropertyGrid()
         Me.ToolStrip4 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.PropertyGrid3 = New System.Windows.Forms.PropertyGrid()
         Me.ToolStrip5 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.PropertyGrid4 = New System.Windows.Forms.PropertyGrid()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.PropertyGrid5 = New System.Windows.Forms.PropertyGrid()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
-        Me.PropertyGrid5 = New System.Windows.Forms.PropertyGrid()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.ToolStrip3.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.ToolStrip4.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.ToolStrip5.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.TabPage5.SuspendLayout()
-        Me.ToolStrip3.SuspendLayout()
-        Me.ToolStrip4.SuspendLayout()
-        Me.ToolStrip5.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -102,136 +103,6 @@ Partial Class AppSettingsFrm
         Me.PropertyGrid1.TabIndex = 0
         Me.PropertyGrid1.ToolbarVisible = False
         '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.PropertyGrid2)
-        Me.TabPage2.Controls.Add(Me.ToolStrip4)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(720, 485)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Main application log settings"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'PropertyGrid2
-        '
-        Me.PropertyGrid2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PropertyGrid2.HelpVisible = False
-        Me.PropertyGrid2.Location = New System.Drawing.Point(3, 32)
-        Me.PropertyGrid2.Name = "PropertyGrid2"
-        Me.PropertyGrid2.Size = New System.Drawing.Size(714, 450)
-        Me.PropertyGrid2.TabIndex = 1
-        Me.PropertyGrid2.ToolbarVisible = False
-        '
-        'TabPage3
-        '
-        Me.TabPage3.Controls.Add(Me.PropertyGrid3)
-        Me.TabPage3.Controls.Add(Me.ToolStrip5)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(720, 485)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Launcher application log settings"
-        Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'PropertyGrid3
-        '
-        Me.PropertyGrid3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PropertyGrid3.HelpVisible = False
-        Me.PropertyGrid3.Location = New System.Drawing.Point(3, 32)
-        Me.PropertyGrid3.Name = "PropertyGrid3"
-        Me.PropertyGrid3.Size = New System.Drawing.Size(714, 450)
-        Me.PropertyGrid3.TabIndex = 1
-        Me.PropertyGrid3.ToolbarVisible = False
-        '
-        'TabPage4
-        '
-        Me.TabPage4.Controls.Add(Me.PropertyGrid4)
-        Me.TabPage4.Controls.Add(Me.ToolStrip1)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(720, 485)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Central custom actions"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripSeparator1, Me.ToolStripTextBox1, Me.ToolStripButton4})
-        Me.ToolStrip1.Location = New System.Drawing.Point(3, 3)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip1.Size = New System.Drawing.Size(714, 29)
-        Me.ToolStrip1.TabIndex = 0
-        Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 29)
-        '
-        'ToolStripTextBox1
-        '
-        Me.ToolStripTextBox1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
-        Me.ToolStripTextBox1.Size = New System.Drawing.Size(400, 29)
-        '
-        'PropertyGrid4
-        '
-        Me.PropertyGrid4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PropertyGrid4.HelpVisible = False
-        Me.PropertyGrid4.Location = New System.Drawing.Point(3, 32)
-        Me.PropertyGrid4.Name = "PropertyGrid4"
-        Me.PropertyGrid4.Size = New System.Drawing.Size(714, 450)
-        Me.PropertyGrid4.TabIndex = 2
-        Me.PropertyGrid4.ToolbarVisible = False
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton1.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_upload_22x22
-        Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton1.Text = "Load from current file"
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_download_22x22
-        Me.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton2.Text = "save current actions to current file..."
-        '
-        'ToolStripButton4
-        '
-        Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton4.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_more_horiz_22x22
-        Me.ToolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton4.Name = "ToolStripButton4"
-        Me.ToolStripButton4.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton4.Text = "Browse for file..."
-        '
-        'TabPage5
-        '
-        Me.TabPage5.Controls.Add(Me.PropertyGrid5)
-        Me.TabPage5.Controls.Add(Me.ToolStrip2)
-        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(720, 485)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "Initial workspace template"
-        Me.TabPage5.UseVisualStyleBackColor = True
-        '
         'ToolStrip3
         '
         Me.ToolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
@@ -253,6 +124,28 @@ Partial Class AppSettingsFrm
         Me.ToolStripButton3.Name = "ToolStripButton3"
         Me.ToolStripButton3.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton3.Text = "Save settings"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.PropertyGrid2)
+        Me.TabPage2.Controls.Add(Me.ToolStrip4)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(720, 485)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Main application log settings"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'PropertyGrid2
+        '
+        Me.PropertyGrid2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PropertyGrid2.HelpVisible = False
+        Me.PropertyGrid2.Location = New System.Drawing.Point(3, 32)
+        Me.PropertyGrid2.Name = "PropertyGrid2"
+        Me.PropertyGrid2.Size = New System.Drawing.Size(714, 450)
+        Me.PropertyGrid2.TabIndex = 1
+        Me.PropertyGrid2.ToolbarVisible = False
         '
         'ToolStrip4
         '
@@ -276,6 +169,28 @@ Partial Class AppSettingsFrm
         Me.ToolStripButton5.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton5.Text = "Save settings"
         '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.PropertyGrid3)
+        Me.TabPage3.Controls.Add(Me.ToolStrip5)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(720, 485)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Launcher application log settings"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'PropertyGrid3
+        '
+        Me.PropertyGrid3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PropertyGrid3.HelpVisible = False
+        Me.PropertyGrid3.Location = New System.Drawing.Point(3, 32)
+        Me.PropertyGrid3.Name = "PropertyGrid3"
+        Me.PropertyGrid3.Size = New System.Drawing.Size(714, 450)
+        Me.PropertyGrid3.TabIndex = 1
+        Me.PropertyGrid3.ToolbarVisible = False
+        '
         'ToolStrip5
         '
         Me.ToolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
@@ -297,6 +212,102 @@ Partial Class AppSettingsFrm
         Me.ToolStripButton6.Name = "ToolStripButton6"
         Me.ToolStripButton6.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton6.Text = "Save settings"
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.PropertyGrid4)
+        Me.TabPage4.Controls.Add(Me.ToolStrip1)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(720, 485)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Central custom actions"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'PropertyGrid4
+        '
+        Me.PropertyGrid4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PropertyGrid4.HelpVisible = False
+        Me.PropertyGrid4.Location = New System.Drawing.Point(3, 32)
+        Me.PropertyGrid4.Name = "PropertyGrid4"
+        Me.PropertyGrid4.Size = New System.Drawing.Size(714, 450)
+        Me.PropertyGrid4.TabIndex = 2
+        Me.PropertyGrid4.ToolbarVisible = False
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripSeparator1, Me.ToolStripTextBox1, Me.ToolStripButton4})
+        Me.ToolStrip1.Location = New System.Drawing.Point(3, 3)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.ToolStrip1.Size = New System.Drawing.Size(714, 29)
+        Me.ToolStrip1.TabIndex = 0
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_upload_22x22
+        Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton1.Text = "Load from current file"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_download_22x22
+        Me.ToolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton2.Text = "save current actions to current file..."
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 29)
+        '
+        'ToolStripTextBox1
+        '
+        Me.ToolStripTextBox1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
+        Me.ToolStripTextBox1.Size = New System.Drawing.Size(400, 29)
+        '
+        'ToolStripButton4
+        '
+        Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton4.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_more_horiz_22x22
+        Me.ToolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton4.Name = "ToolStripButton4"
+        Me.ToolStripButton4.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton4.Text = "Browse for file..."
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Controls.Add(Me.PropertyGrid5)
+        Me.TabPage5.Controls.Add(Me.ToolStrip2)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(720, 485)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Initial workspace template"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'PropertyGrid5
+        '
+        Me.PropertyGrid5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PropertyGrid5.HelpVisible = False
+        Me.PropertyGrid5.Location = New System.Drawing.Point(3, 32)
+        Me.PropertyGrid5.Name = "PropertyGrid5"
+        Me.PropertyGrid5.Size = New System.Drawing.Size(714, 450)
+        Me.PropertyGrid5.TabIndex = 5
+        Me.PropertyGrid5.ToolbarVisible = False
         '
         'ToolStrip2
         '
@@ -320,15 +331,13 @@ Partial Class AppSettingsFrm
         Me.ToolStripButton7.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton7.Text = "Save settings"
         '
-        'PropertyGrid5
+        'OpenFileDialog1
         '
-        Me.PropertyGrid5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PropertyGrid5.HelpVisible = False
-        Me.PropertyGrid5.Location = New System.Drawing.Point(3, 32)
-        Me.PropertyGrid5.Name = "PropertyGrid5"
-        Me.PropertyGrid5.Size = New System.Drawing.Size(714, 450)
-        Me.PropertyGrid5.TabIndex = 5
-        Me.PropertyGrid5.ToolbarVisible = False
+        Me.OpenFileDialog1.CheckFileExists = False
+        Me.OpenFileDialog1.DefaultExt = "xml"
+        Me.OpenFileDialog1.Filter = "XML-File|*.xml"
+        Me.OpenFileDialog1.RestoreDirectory = True
+        Me.OpenFileDialog1.SupportMultiDottedExtensions = True
         '
         'AppSettingsFrm
         '
@@ -343,22 +352,22 @@ Partial Class AppSettingsFrm
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        Me.ToolStrip3.ResumeLayout(False)
+        Me.ToolStrip3.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
+        Me.ToolStrip4.ResumeLayout(False)
+        Me.ToolStrip4.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        Me.ToolStrip5.ResumeLayout(False)
+        Me.ToolStrip5.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout()
-        Me.ToolStrip3.ResumeLayout(False)
-        Me.ToolStrip3.PerformLayout()
-        Me.ToolStrip4.ResumeLayout(False)
-        Me.ToolStrip4.PerformLayout()
-        Me.ToolStrip5.ResumeLayout(False)
-        Me.ToolStrip5.PerformLayout()
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
         Me.ResumeLayout(False)
@@ -390,4 +399,5 @@ Partial Class AppSettingsFrm
     Friend WithEvents ToolStrip2 As Windows.Forms.ToolStrip
     Friend WithEvents ToolStripButton7 As Windows.Forms.ToolStripButton
     Friend WithEvents PropertyGrid5 As Windows.Forms.PropertyGrid
+    Friend WithEvents OpenFileDialog1 As Windows.Forms.OpenFileDialog
 End Class
