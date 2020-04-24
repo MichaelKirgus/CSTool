@@ -55,6 +55,11 @@ Partial Class AppSettingsFrm
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.ToolStrip3.SuspendLayout()
@@ -107,7 +112,7 @@ Partial Class AppSettingsFrm
         'ToolStrip3
         '
         Me.ToolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3})
+        Me.ToolStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3, Me.ToolStripSeparator2, Me.ToolStripButton9, Me.ToolStripButton10})
         Me.ToolStrip3.Location = New System.Drawing.Point(3, 3)
         Me.ToolStrip3.Name = "ToolStrip3"
         Me.ToolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -350,6 +355,45 @@ Partial Class AppSettingsFrm
         Me.ToolStripButton7.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton7.Text = "Save settings"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 29)
+        '
+        'ToolStripButton9
+        '
+        Me.ToolStripButton9.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton9.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_download_22x22
+        Me.ToolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton9.Name = "ToolStripButton9"
+        Me.ToolStripButton9.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton9.Text = "Import settings from file..."
+        '
+        'ToolStripButton10
+        '
+        Me.ToolStripButton10.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton10.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_upload_22x22
+        Me.ToolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton10.Name = "ToolStripButton10"
+        Me.ToolStripButton10.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton10.Text = "Save as..."
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "xml"
+        Me.SaveFileDialog1.Filter = "XML-File|*.xml"
+        Me.SaveFileDialog1.RestoreDirectory = True
+        Me.SaveFileDialog1.SupportMultiDottedExtensions = True
+        '
+        'OpenFileDialog2
+        '
+        Me.OpenFileDialog2.FileName = "OpenFileDialog2"
+        '
         'AppSettingsFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -412,4 +456,9 @@ Partial Class AppSettingsFrm
     Friend WithEvents PropertyGrid5 As Windows.Forms.PropertyGrid
     Friend WithEvents OpenFileDialog1 As Windows.Forms.OpenFileDialog
     Friend WithEvents ToolStripButton8 As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripButton9 As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButton10 As Windows.Forms.ToolStripButton
+    Friend WithEvents SaveFileDialog1 As Windows.Forms.SaveFileDialog
+    Friend WithEvents OpenFileDialog2 As Windows.Forms.OpenFileDialog
 End Class

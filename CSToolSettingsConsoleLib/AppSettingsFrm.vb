@@ -16,7 +16,15 @@ Public Class AppSettingsFrm
     Public AppSettingsObj As ApplicationSettings
 
     Private Sub AppSettingsFrm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        AppSettingsObj = AppSettingsHandler.LoadSettings(ApplicationSettingsFile)
+        LoadAllSettingsToGUI()
+    End Sub
+
+    Public Sub LoadAllSettingsToGUI(Optional ByVal Filename As String = "")
+        If Filename = "" Then
+            AppSettingsObj = AppSettingsHandler.LoadSettings(ApplicationSettingsFile)
+        Else
+            AppSettingsObj = AppSettingsHandler.LoadSettings(Filename)
+        End If
         PropertyGrid1.SelectedObject = AppSettingsObj
         PropertyGrid2.SelectedObject = AppSettingsObj.LogSettings
         PropertyGrid3.SelectedObject = AppSettingsObj.LauncherLogSettings
@@ -110,6 +118,26 @@ Public Class AppSettingsFrm
         If Not IO.File.Exists(ToolStripTextBox1.Text) Then
             UserSettingsHandler.SaveCentralCustomActions(New CentralCustomActions, ToolStripTextBox1.Text)
             PropertyGrid4.SelectedObject = UserSettingsHandler.LoadCentralCustomActions(ToolStripTextBox1.Text)
+        End If
+    End Sub
+
+    Private Sub ToolStripButton10_Click(sender As Object, e As EventArgs) Handles ToolStripButton10.Click
+        SaveFileDialog1.ShowDialog()
+    End Sub
+
+    Private Sub ToolStripButton9_Click(sender As Object, e As EventArgs) Handles ToolStripButton9.Click
+        OpenFileDialog2.ShowDialog()
+    End Sub
+
+    Private Sub SaveFileDialog1_FileOk(sender As Object, e As ComponentModel.CancelEventArgs) Handles SaveFileDialog1.FileOk
+        If Not SaveFileDialog1.FileName = "" Then
+            AppSettingsHandler.SaveSettings(AppSettingsObj, SaveFileDialog1.FileName)
+        End If
+    End Sub
+
+    Private Sub OpenFileDialog2_FileOk(sender As Object, e As ComponentModel.CancelEventArgs) Handles OpenFileDialog2.FileOk
+        If Not OpenFileDialog2.FileName = "" Then
+            LoadAllSettingsToGUI(OpenFileDialog2.FileName)
         End If
     End Sub
 End Class
