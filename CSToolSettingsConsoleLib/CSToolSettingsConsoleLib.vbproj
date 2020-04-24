@@ -123,6 +123,26 @@
       <Project>{DF373DBF-733E-4E4D-8335-3D6D5FE447B2}</Project>
       <Name>CSToolLogLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSToolUserSettingsLib\CSToolUserSettingsLib.vbproj">
+      <Project>{0BFE04E6-071C-4624-AD64-5898B4C19681}</Project>
+      <Name>CSToolUserSettingsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolUserSettingsManager\CSToolUserSettingsManager.vbproj">
+      <Project>{750FD8A4-3E8E-435C-AE22-7A44F08E977A}</Project>
+      <Name>CSToolUserSettingsManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-check-circle_22x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-download_22x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-upload_22x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-more-horiz_22x22.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

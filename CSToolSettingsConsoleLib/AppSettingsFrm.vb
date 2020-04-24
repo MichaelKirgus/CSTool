@@ -5,11 +5,13 @@
 'Additional copyright notices in project base directory or main executable directory.
 Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
+Imports CSToolUserSettingsManager
 
 Public Class AppSettingsFrm
     Public WasChanged As Boolean = False
     Public ApplicationSettingsFile As String = "AppSettings.xml"
     Public AppSettingsHandler As New ApplicationSettingsManager
+    Public UserSettingsHandler As New UserSettingsManager
     Public AppSettingsObj As ApplicationSettings
 
     Private Sub AppSettingsFrm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -17,6 +19,11 @@ Public Class AppSettingsFrm
         PropertyGrid1.SelectedObject = AppSettingsObj
         PropertyGrid2.SelectedObject = AppSettingsObj.LogSettings
         PropertyGrid3.SelectedObject = AppSettingsObj.LauncherLogSettings
+        If Not AppSettingsObj.UserInitialTemplateDir = "" Then
+            If IO.File.Exists(AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile) Then
+                PropertyGrid5.SelectedObject = UserSettingsHandler.LoadSettings(AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile)
+            End If
+        End If
     End Sub
 
     Private Sub PropertyGrid1_PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs) Handles PropertyGrid1.PropertyValueChanged
@@ -33,11 +40,52 @@ Public Class AppSettingsFrm
         End If
     End Sub
 
+    Public Sub HandleSaveSettings()
+        AppSettingsHandler.SaveSettings(AppSettingsObj, ApplicationSettingsFile)
+        If IO.File.Exists(AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile) Then
+            PropertyGrid5.SelectedObject = UserSettingsHandler.LoadSettings(AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile)
+        End If
+    End Sub
+
     Private Sub PropertyGrid2_PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs) Handles PropertyGrid2.PropertyValueChanged
         WasChanged = True
     End Sub
 
     Private Sub PropertyGrid3_PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs) Handles PropertyGrid3.PropertyValueChanged
         WasChanged = True
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        If Not ToolStripTextBox1.Text = "" Then
+            If IO.File.Exists(ToolStripTextBox1.Text) Then
+                PropertyGrid4.SelectedObject = UserSettingsHandler.LoadCentralCustomActions(ToolStripTextBox1.Text)
+            End If
+        End If
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        If Not ToolStripTextBox1.Text = "" Then
+            If Not IsNothing(PropertyGrid4.SelectedObject) Then
+                UserSettingsHandler.SaveCentralCustomActions(PropertyGrid4.SelectedObject, ToolStripTextBox1.Text)
+            End If
+        End If
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        HandleSaveSettings()
+    End Sub
+
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+        HandleSaveSettings()
+    End Sub
+
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
+        HandleSaveSettings()
+    End Sub
+
+    Private Sub ToolStripButton7_Click(sender As Object, e As EventArgs) Handles ToolStripButton7.Click
+        If Not IsNothing(PropertyGrid5.SelectedObject) Then
+            UserSettingsHandler.SaveSettings(PropertyGrid5.SelectedObject, AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile)
+        End If
     End Sub
 End Class
