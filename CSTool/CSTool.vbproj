@@ -206,6 +206,12 @@
     <Compile Include="RuntimeInfoForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SavingFrm.Designer.vb">
+      <DependentUpon>SavingFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SavingFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SettingsManager.Designer.vb">
       <DependentUpon>SettingsManager.vb</DependentUpon>
     </Compile>
@@ -270,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RuntimeInfoForm.resx">
       <DependentUpon>RuntimeInfoForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SavingFrm.resx">
+      <DependentUpon>SavingFrm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsManager.resx">
       <DependentUpon>SettingsManager.vb</DependentUpon>

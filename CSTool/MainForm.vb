@@ -515,6 +515,10 @@ Public Class MainForm
     End Sub
 
     Public Function CloseForm() As Boolean
+        Dim SavingAppForm As New SavingFrm
+        SavingAppForm.Show()
+        Application.DoEvents()
+
         If Not IsNonPersistent Then
             If Not CloseChildsWithoutWarningToolStripMenuItem.Checked And IsChild = False Then
                 'Check if child windows open
@@ -561,6 +565,8 @@ Public Class MainForm
             'Flush log file (if enabled)
             LogManager.CloseStreams()
         End If
+
+        SavingAppForm.Close()
 
         Return True
     End Function
