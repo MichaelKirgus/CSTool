@@ -105,4 +105,11 @@ Public Class AppSettingsFrm
             ToolStripTextBox1.Text = OpenFileDialog1.FileName
         End If
     End Sub
+
+    Private Sub ToolStripButton8_Click(sender As Object, e As EventArgs) Handles ToolStripButton8.Click
+        If Not IO.File.Exists(ToolStripTextBox1.Text) Then
+            UserSettingsHandler.SaveCentralCustomActions(New CentralCustomActions, ToolStripTextBox1.Text)
+            PropertyGrid4.SelectedObject = UserSettingsHandler.LoadCentralCustomActions(ToolStripTextBox1.Text)
+        End If
+    End Sub
 End Class
