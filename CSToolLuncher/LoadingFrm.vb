@@ -394,6 +394,10 @@ Public Class LoadingFrm
             " /userinitialtemplatedir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserInitialTemplateDir & My.Resources.pathsep &
             " /userprofiledir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserProfileDir & My.Resources.pathsep
 
+        If Not AppSettingsObj.MainAppInstanceTag = "" Then
+            result += " /instancetag " & My.Resources.pathsep & AppSettingsObj.MainAppInstanceTag & My.Resources.pathsep
+        End If
+
         Return result
     End Function
 
@@ -402,6 +406,10 @@ Public Class LoadingFrm
         result = "/environmentplugindir " & My.Resources.pathsep & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.EnvironmentPluginDir & My.Resources.pathsep &
             " /credentialplugindir " & My.Resources.pathsep & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.CredentialPluginDir & My.Resources.pathsep &
             " /guiplugindir " & My.Resources.pathsep & Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\" & AppSettingsObj.GUIPluginDir & My.Resources.pathsep
+
+        If Not AppSettingsObj.MainAppInstanceTag = "" Then
+            result += " /instancetag " & My.Resources.pathsep & AppSettingsObj.MainAppInstanceTag & My.Resources.pathsep
+        End If
 
         Return result
     End Function

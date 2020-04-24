@@ -40,6 +40,7 @@ Public Class MainForm
     Public IsNonPersistent As Boolean = False
     Public RestoreSettings As Boolean = True
     Public LastWindowState As FormWindowState = FormWindowState.Normal
+    Public InstanceTag As String = ""
 
     Public CurrentLoadActionState As String = ""
 
@@ -130,6 +131,9 @@ Public Class MainForm
                 End If
                 If arglist(ind).ToLower = "/userprofiledir" Then
                     ApplicationSettings.UserProfileDir = (arglist(ind + 1))
+                End If
+                If arglist(ind).ToLower = "/instancetag" Then
+                    InstanceTag = (arglist(ind + 1))
                 End If
             Next
 
@@ -620,6 +624,9 @@ Public Class MainForm
             Else
                 Me.Text += " [Child]"
             End If
+        End If
+        If Not InstanceTag = "" Then
+            Me.Text += " - " & InstanceTag
         End If
     End Sub
 

@@ -17,6 +17,7 @@ Imports CSToolLogLib
     Public Property UseUserDomainInFolderStructure As Boolean = False
     Public Property EnableLauncherSync As Boolean = False
     Public Property LauncherSyncPath As String = "%ProgramFiles%\Michael Kirgus\CSTool"
+    Public Property MainAppInstanceTag As String = ""
     Public Property LauncherSyncNeedsElevation As Boolean = True
     Public Property LauncherDeleteFilesFromSyncPath As Boolean = True
     Public Property LauncherIncludeFolderCollection As New List(Of LauncherIncludeFolderEntry)
