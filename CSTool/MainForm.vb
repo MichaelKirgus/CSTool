@@ -504,7 +504,7 @@ Public Class MainForm
         'Save environment variables settings to file
         WindowManagerHandler.SaveEnvironmentPluginsSettings(WindowManagerHandler._UserSettingName)
 
-        'Save credentail plugin settings to file
+        'Save credential plugin settings to file
         WindowManagerHandler.SaveCredentialPluginsSettings(WindowManagerHandler._UserSettingName)
 
         'Save window gui plugin settings
