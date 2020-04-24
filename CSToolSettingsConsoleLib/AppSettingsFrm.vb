@@ -117,7 +117,7 @@ Public Class AppSettingsFrm
         OpenFileDialog1.ShowDialog()
     End Sub
 
-    Private Sub OpenFileDialog1_FileOk(sender As Object, e As ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
+    Private Sub OpenFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
         If Not OpenFileDialog1.FileName = "" Then
             ToolStripTextBox1.Text = OpenFileDialog1.FileName
         End If
@@ -138,13 +138,13 @@ Public Class AppSettingsFrm
         OpenFileDialog2.ShowDialog()
     End Sub
 
-    Private Sub SaveFileDialog1_FileOk(sender As Object, e As ComponentModel.CancelEventArgs) Handles SaveFileDialog1.FileOk
+    Private Sub SaveFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles SaveFileDialog1.FileOk
         If Not SaveFileDialog1.FileName = "" Then
             AppSettingsHandler.SaveSettings(AppSettingsObj, SaveFileDialog1.FileName)
         End If
     End Sub
 
-    Private Sub OpenFileDialog2_FileOk(sender As Object, e As ComponentModel.CancelEventArgs) Handles OpenFileDialog2.FileOk
+    Private Sub OpenFileDialog2_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog2.FileOk
         If Not OpenFileDialog2.FileName = "" Then
             LoadAllSettingsToGUI(OpenFileDialog2.FileName)
         End If
