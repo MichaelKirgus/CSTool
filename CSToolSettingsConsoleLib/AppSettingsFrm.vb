@@ -5,6 +5,7 @@
 'Additional copyright notices in project base directory or main executable directory.
 Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
+Imports CSToolUserSettingsLib
 Imports CSToolUserSettingsManager
 
 Public Class AppSettingsFrm
@@ -22,6 +23,12 @@ Public Class AppSettingsFrm
         If Not AppSettingsObj.UserInitialTemplateDir = "" Then
             If IO.File.Exists(AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile) Then
                 PropertyGrid5.SelectedObject = UserSettingsHandler.LoadSettings(AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile)
+                Dim settingsobj As UserSettings
+                settingsobj = PropertyGrid5.SelectedObject
+                If Not settingsobj.CentralCustomActions = "" Then
+                    ToolStripTextBox1.Text = settingsobj.CentralCustomActions
+                    PropertyGrid4.SelectedObject = UserSettingsHandler.LoadCentralCustomActions(ToolStripTextBox1.Text)
+                End If
             End If
         End If
     End Sub
