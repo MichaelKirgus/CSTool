@@ -62,14 +62,28 @@ Public Class MainForm
         Try
             Dim newinst As New Process
             newinst.StartInfo.FileName = Application.ExecutablePath
+            newinst.StartInfo.WorkingDirectory = Application.StartupPath
+            newinst.StartInfo.Arguments = Environment.CommandLine
+
             If Not UserSettingName = "" Then
-                newinst.StartInfo.Arguments = "/settingsname " & UserSettingName
+                If Not newinst.StartInfo.Arguments.EndsWith(" ") Then
+                    newinst.StartInfo.Arguments += " "
+                End If
+                newinst.StartInfo.Arguments += "/settingsname " & UserSettingName
+            Else
+
             End If
             If NonPersistent Then
+                If Not newinst.StartInfo.Arguments.EndsWith(" ") Then
+                    newinst.StartInfo.Arguments += " "
+                End If
                 newinst.StartInfo.Arguments += "/nonpersistent"
             End If
             If Not HostOrIP = "" Then
-                newinst.StartInfo.Arguments += " /hostname " & HostOrIP
+                If Not newinst.StartInfo.Arguments.EndsWith(" ") Then
+                    newinst.StartInfo.Arguments += " "
+                End If
+                newinst.StartInfo.Arguments += "/hostname " & HostOrIP
             End If
 
             Return newinst.Start()
