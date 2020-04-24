@@ -24,6 +24,7 @@ Imports CSToolLogLib
     Public Property LauncherIncludeFolderCollection As New List(Of LauncherIncludeFolderEntry)
     Public Property LauncherCreateMainApplicationShortcutOnDesktop As Boolean = True
     Public Property LauncherMainAppStartMode As MainAppCommandlLineArgumentsMode = MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithoutLocalWorkingDir
+    Public Property PreventMainAppFromRunningElevated As Boolean = True
     Public Property LauncherPolicy As LauncherPolicyMode = LauncherPolicyMode.CheckForChangesAndAskUser
     Public Property LauncherAdditionalMainAppArguments As String = ""
     Public Property LauncherLogSettings As New LogSettings

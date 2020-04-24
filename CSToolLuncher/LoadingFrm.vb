@@ -130,6 +130,11 @@ Public Class LoadingFrm
         Loop
     End Sub
 
+    Public Sub ShowElevatedAppWarningMsg()
+        MsgBox("It is not allowed to run this application as elevated user. Please execute this application as normal user.", MsgBoxStyle.Exclamation)
+    End Sub
+
+
     Public Function SyncNeeded(Optional ByVal OnlyCheck As Boolean = False, Optional SyncLibInstance As SyncLib = Nothing) As Boolean
         Dim SyncHandler As SyncLib = Nothing
 
@@ -147,9 +152,17 @@ Public Class LoadingFrm
                 If AppSettingsObj.LauncherSyncNeedsElevation And IsElevated = False Then
                     Select Case HandleUserInteraction()
                         Case 1
-                            StartMainAppFromSourceNonElevated()
+                            If StartMainAppFromSourceNonElevated() = False Then
+                                If LauncherHelperInstance.IsCurrentUserAdmin Then
+                                    ShowElevatedAppWarningMsg()
+                                    Exit Try
+                                End If
+                            End If
                         Case 2
-                            StartMainAppFromShareNonElevated()
+                            If StartMainAppFromShareNonElevated() = False Then
+                                ShowElevatedAppWarningMsg()
+                                Exit Try
+                            End If
                         Case -1
                             Exit Try
                     End Select
@@ -324,15 +337,21 @@ Public Class LoadingFrm
 
     Public Function StartMainAppFromShareNonElevated() As Boolean
         Try
-            Dim mainappargs As String
-            Dim mainapp As New Process
-            mainapp.StartInfo.FileName = Application.StartupPath & "\CSTool.exe"
-            mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
-            mainapp.StartInfo.Arguments = mainappargs
-            mainapp.StartInfo.WorkingDirectory = Application.StartupPath
-            mainapp.Start()
+            If Not LauncherHelperInstance.IsCurrentUserAdmin Then
+                Dim mainappargs As String
+                Dim mainapp As New Process
+                mainapp.StartInfo.FileName = Application.StartupPath & "\CSTool.exe"
+                mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher"
+                mainapp.StartInfo.Arguments = mainappargs
+                mainapp.StartInfo.WorkingDirectory = Application.StartupPath
 
-            Return True
+                Dim result As Boolean
+                result = mainapp.Start()
+
+                Return result
+            Else
+                Return False
+            End If
         Catch ex As Exception
             Return False
         End Try
@@ -340,48 +359,53 @@ Public Class LoadingFrm
 
     Public Function StartMainAppFromSourceNonElevated() As Boolean
         Try
-            Dim SignatureHandler As New SignatureHelper
-            If SignatureHandler.CheckSign(Application.ExecutablePath) Then
-                If Not SignatureHandler.CheckSign(Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe") Then
-                    Dim result As MsgBoxResult
-                    result = MsgBox("Main application file is not digital signed or the signature is not valid! Do you want to run the application anyway?", MsgBoxStyle.YesNo)
-                    If result = MsgBoxResult.No Then
-                        Return False
+            If Not LauncherHelperInstance.IsCurrentUserAdmin Then
+                Dim SignatureHandler As New SignatureHelper
+                If SignatureHandler.CheckSign(Application.ExecutablePath) Then
+                    If Not SignatureHandler.CheckSign(Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe") Then
+                        Dim result As MsgBoxResult
+                        result = MsgBox("Main application file is not digital signed or the signature is not valid! Do you want to run the application anyway?", MsgBoxStyle.YesNo)
+                        If result = MsgBoxResult.No Then
+                            Return False
+                        End If
                     End If
                 End If
+
+                Dim mainappargs As String = ""
+                Dim mainapp As New Process
+                mainapp.StartInfo.FileName = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe"
+                mainapp.StartInfo.WorkingDirectory = Application.StartupPath
+
+                Select Case AppSettingsObj.LauncherMainAppStartMode
+                    Case MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithoutLocalWorkingDir
+                        mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher " & AppSettingsObj.LauncherAdditionalMainAppArguments
+                    Case MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithLocalWorkingDir
+                        mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher " & AppSettingsObj.LauncherAdditionalMainAppArguments
+                        mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+                    Case MainAppCommandlLineArgumentsMode.RunMainAppWithLocalWorkingDirAndLocalPluginFolders
+                        mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppLocalFolders() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
+                        mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+                    Case MainAppCommandlLineArgumentsMode.RunMainAppWithLocalWorkingDirAndSetAppSettingsFolders
+                        mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
+                        mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
+                    Case MainAppCommandlLineArgumentsMode.RunMainAppWithoutLocalWorkingDirAndSetAppSettingsFolders
+                        mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
+                    Case MainAppCommandlLineArgumentsMode.RunMainAppWithoutLocalWorkingDirAndLocalPluginFolders
+                        mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppLocalFolders() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
+                End Select
+
+                If mainappargs.EndsWith(" ") Then
+                    mainappargs = mainappargs.Substring(0, mainappargs.Length - 1)
+                End If
+
+                mainapp.StartInfo.Arguments = mainappargs
+                Dim execresult As Boolean
+                execresult = mainapp.Start()
+
+                Return execresult
+            Else
+                Return False
             End If
-
-            Dim mainappargs As String = ""
-            Dim mainapp As New Process
-            mainapp.StartInfo.FileName = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe"
-            mainapp.StartInfo.WorkingDirectory = Application.StartupPath
-
-            Select Case AppSettingsObj.LauncherMainAppStartMode
-                Case MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithoutLocalWorkingDir
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher " & AppSettingsObj.LauncherAdditionalMainAppArguments
-                Case MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithLocalWorkingDir
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher " & AppSettingsObj.LauncherAdditionalMainAppArguments
-                    mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
-                Case MainAppCommandlLineArgumentsMode.RunMainAppWithLocalWorkingDirAndLocalPluginFolders
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppLocalFolders() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
-                    mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
-                Case MainAppCommandlLineArgumentsMode.RunMainAppWithLocalWorkingDirAndSetAppSettingsFolders
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
-                    mainapp.StartInfo.WorkingDirectory = Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath)
-                Case MainAppCommandlLineArgumentsMode.RunMainAppWithoutLocalWorkingDirAndSetAppSettingsFolders
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppSettings() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
-                Case MainAppCommandlLineArgumentsMode.RunMainAppWithoutLocalWorkingDirAndLocalPluginFolders
-                    mainappargs = ConvertCmdArgsToString(Environment.GetCommandLineArgs) & " /fromlauncher" & " " & GenerateCommandLineMainAppLocalFolders() & " " & AppSettingsObj.LauncherAdditionalMainAppArguments
-            End Select
-
-            If mainappargs.EndsWith(" ") Then
-                mainappargs = mainappargs.Substring(0, mainappargs.Length - 1)
-            End If
-
-            mainapp.StartInfo.Arguments = mainappargs
-            mainapp.Start()
-
-            Return True
         Catch ex As Exception
             Return False
         End Try
@@ -437,7 +461,9 @@ Public Class LoadingFrm
 
                 If IO.Directory.Exists(targetdir) Then
                     If SyncNeeded(True) Then
-                        StartMainAppFromSourceNonElevated()
+                        If StartMainAppFromSourceNonElevated() = False Then
+                            ShowElevatedAppWarningMsg()
+                        End If
                         Exit Try
                     End If
                 Else
@@ -452,7 +478,10 @@ Public Class LoadingFrm
 
                             If SyncNeeded() = False Then
                                 'Start main app if target directory was first created.
-                                StartMainAppFromSourceNonElevated()
+                                If StartMainAppFromSourceNonElevated() = False Then
+                                    ShowElevatedAppWarningMsg()
+                                    Exit Try
+                                End If
                             End If
                         End If
                     Else
@@ -467,14 +496,19 @@ Public Class LoadingFrm
                     End If
 
                     'Start main app if target directory was synced.
-                    StartMainAppFromSourceNonElevated()
+                    If StartMainAppFromSourceNonElevated() = False Then
+                        ShowElevatedAppWarningMsg()
+                        Exit Try
+                    End If
                 End If
             Else
                 If AppSettingsObj.LauncherCreateMainApplicationShortcutOnDesktop Then
                     SetLabelText(LoadingStateLbl, "Create shortcut...")
                     CheckAndCreateDesktopShortcut()
                 End If
-                StartMainAppFromSourceNonElevated()
+                If StartMainAppFromSourceNonElevated() = False Then
+                    ShowElevatedAppWarningMsg()
+                End If
             End If
         Catch ex As Exception
         End Try

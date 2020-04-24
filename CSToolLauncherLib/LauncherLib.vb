@@ -29,4 +29,12 @@
             Return False
         End Try
     End Function
+
+    Public Function IsCurrentUserAdmin() As Boolean
+        If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 End Class
