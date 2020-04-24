@@ -130,10 +130,6 @@ Public Class LoadingFrm
         Loop
     End Sub
 
-    Public Sub ShowElevatedAppWarningMsg()
-        MsgBox("It is not allowed to run this application as elevated user. Please execute this application as normal user.", MsgBoxStyle.Exclamation)
-    End Sub
-
 
     Public Function SyncNeeded(Optional ByVal OnlyCheck As Boolean = False, Optional SyncLibInstance As SyncLib = Nothing) As Boolean
         Dim SyncHandler As SyncLib = Nothing
@@ -154,13 +150,13 @@ Public Class LoadingFrm
                         Case 1
                             If StartMainAppFromSourceNonElevated() = False Then
                                 If LauncherHelperInstance.IsCurrentUserAdmin Then
-                                    ShowElevatedAppWarningMsg()
+                                    LauncherHelperInstance.ShowElevatedAppWarningMsg()
                                     Exit Try
                                 End If
                             End If
                         Case 2
                             If StartMainAppFromShareNonElevated() = False Then
-                                ShowElevatedAppWarningMsg()
+                                LauncherHelperInstance.ShowElevatedAppWarningMsg()
                                 Exit Try
                             End If
                         Case -1
@@ -462,7 +458,7 @@ Public Class LoadingFrm
                 If IO.Directory.Exists(targetdir) Then
                     If SyncNeeded(True) Then
                         If StartMainAppFromSourceNonElevated() = False Then
-                            ShowElevatedAppWarningMsg()
+                            LauncherHelperInstance.ShowElevatedAppWarningMsg()
                         End If
                         Exit Try
                     End If
@@ -479,7 +475,7 @@ Public Class LoadingFrm
                             If SyncNeeded() = False Then
                                 'Start main app if target directory was first created.
                                 If StartMainAppFromSourceNonElevated() = False Then
-                                    ShowElevatedAppWarningMsg()
+                                    LauncherHelperInstance.ShowElevatedAppWarningMsg()
                                     Exit Try
                                 End If
                             End If
@@ -497,7 +493,7 @@ Public Class LoadingFrm
 
                     'Start main app if target directory was synced.
                     If StartMainAppFromSourceNonElevated() = False Then
-                        ShowElevatedAppWarningMsg()
+                        LauncherHelperInstance.ShowElevatedAppWarningMsg()
                         Exit Try
                     End If
                 End If
@@ -507,7 +503,7 @@ Public Class LoadingFrm
                     CheckAndCreateDesktopShortcut()
                 End If
                 If StartMainAppFromSourceNonElevated() = False Then
-                    ShowElevatedAppWarningMsg()
+                    LauncherHelperInstance.ShowElevatedAppWarningMsg()
                 End If
             End If
         Catch ex As Exception

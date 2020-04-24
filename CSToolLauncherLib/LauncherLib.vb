@@ -37,4 +37,8 @@
             Return False
         End If
     End Function
+
+    Public Sub ShowElevatedAppWarningMsg()
+        MsgBox("It is not allowed to run this application as elevated user. Please execute this application as normal user.", MsgBoxStyle.Exclamation)
+    End Sub
 End Class
