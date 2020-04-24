@@ -11,6 +11,7 @@ Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
 Imports CSToolEnvironmentManager
 Imports CSToolHostWindow
+Imports CSToolLauncherLib
 Imports CSToolLogLib
 Imports CSToolPingHelper
 Imports CSToolPluginLib
@@ -31,6 +32,7 @@ Public Class MainForm
     Public CustomActionsHandler As New CustomActionHelper
     Public CustomActionsAutostartHandler As New CustomActionHelper
     Public UserTemplateManager As New TemplateManager
+    Public LauncherLibHandler As New LauncherLib
 
     Public CurrentUserSettingName As String = ""
     Public CurrentUsername As String = ""
@@ -232,6 +234,14 @@ Public Class MainForm
             'Load app settings
             CurrentLoadActionState = "Loading app settings..."
             ApplicationSettings = ApplicationSettingManager.LoadSettings(ApplicationSettingManager.GetAppSettingsFilePath)
+        End If
+
+        'Prevent main application from executed by elevated user (if specified)
+        If IsChild = False Then
+            If ApplicationSettings.PreventMainAppFromRunningElevated And LauncherLibHandler.IsCurrentUserAdmin Then
+                LauncherLibHandler.ShowElevatedAppWarningMsg()
+                Application.ExitThread()
+            End If
         End If
 
         'Set logging settings from app settings to log manager

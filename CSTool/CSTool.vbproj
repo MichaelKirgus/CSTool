@@ -367,6 +367,10 @@
       <Project>{6BAC4415-9CC9-4AD9-812C-6D4158B9D731}</Project>
       <Name>CSToolHostWindow</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSToolLauncherLib\CSToolLauncherLib.vbproj">
+      <Project>{3FE92D22-F454-4C7E-AEE8-5DB435182570}</Project>
+      <Name>CSToolLauncherLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSToolLogLib\CSToolLogLib.vbproj">
       <Project>{df373dbf-733e-4e4d-8335-3d6d5fe447b2}</Project>
       <Name>CSToolLogLib</Name>
