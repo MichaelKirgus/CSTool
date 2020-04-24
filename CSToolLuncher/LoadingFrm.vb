@@ -511,14 +511,26 @@ Public Class LoadingFrm
     End Sub
 
     Public Function CheckAndCreateDesktopShortcut() As Boolean
-        If Not LauncherHelperInstance.ShortcutExists(My.Computer.FileSystem.SpecialDirectories.Desktop & "\CSTool") Then
-            If Not LauncherHelperInstance.CreateShortCut(Application.StartupPath & "\CSToolLauncher.exe", My.Computer.FileSystem.SpecialDirectories.Desktop, "CSTool", Application.StartupPath) Then
-                Return False
+        If AppSettingsObj.MainAppInstanceTag = "" Then
+            If Not LauncherHelperInstance.ShortcutExists(My.Computer.FileSystem.SpecialDirectories.Desktop & "\CSTool") Then
+                If Not LauncherHelperInstance.CreateShortCut(Application.StartupPath & "\CSToolLauncher.exe", My.Computer.FileSystem.SpecialDirectories.Desktop, "CSTool", Application.StartupPath) Then
+                    Return False
+                Else
+                    Return True
+                End If
             Else
-                Return True
+                Return False
             End If
         Else
-            Return False
+            If Not LauncherHelperInstance.ShortcutExists(My.Computer.FileSystem.SpecialDirectories.Desktop & "\CSTool (" & AppSettingsObj.MainAppInstanceTag & ")") Then
+                If Not LauncherHelperInstance.CreateShortCut(Application.StartupPath & "\CSToolLauncher.exe", My.Computer.FileSystem.SpecialDirectories.Desktop, "CSTool (" & AppSettingsObj.MainAppInstanceTag & ")", Application.StartupPath) Then
+                    Return False
+                Else
+                    Return True
+                End If
+            Else
+                Return False
+            End If
         End If
     End Function
 
