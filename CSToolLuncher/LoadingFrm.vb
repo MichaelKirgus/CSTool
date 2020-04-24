@@ -424,6 +424,12 @@ Public Class LoadingFrm
                 AppSettingsHandler.SaveSettings(New ApplicationSettings, ApplicationSettingsFile)
             End If
             LoadAppSettings()
+            If AppSettingsObj.DetectAppInstanceTagByParentDirectory Then
+                'Get parent directory and set instance tag
+                SetLabelText(LoadingStateLbl, "Detect application instance tag...")
+                Dim parentinfo As New IO.DirectoryInfo(Application.StartupPath)
+                AppSettingsObj.MainAppInstanceTag = parentinfo.Parent.Name
+            End If
             If AppSettingsObj.EnableLauncherSync Then
                 SetLabelText(LoadingStateLbl, "Check files...")
                 Dim targetdir As String
