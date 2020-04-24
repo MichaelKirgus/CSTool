@@ -3,6 +3,7 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
+Imports System.Windows.Forms
 Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
 Imports CSToolLogLib
@@ -39,6 +40,13 @@ Public Class AppSettingsFrm
                     PropertyGrid4.SelectedObject = UserSettingsHandler.LoadCentralCustomActions(ToolStripTextBox1.Text)
                 End If
             End If
+        End If
+        If Not AppSettingsObj.MainAppInstanceTag = "" Then
+            Me.Text += " - " & AppSettingsObj.MainAppInstanceTag
+        End If
+        If AppSettingsObj.DetectAppInstanceTagByParentDirectory Then
+            Dim parentinfo As New IO.DirectoryInfo(Application.StartupPath)
+            Me.Text += " - " & parentinfo.Name
         End If
     End Sub
 
