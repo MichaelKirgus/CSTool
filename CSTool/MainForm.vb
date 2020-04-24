@@ -181,7 +181,7 @@ Public Class MainForm
                     ShowEnvironmentVariablesForm()
                 End If
                 If arglist(ind).ToLower = "/showenvironmenttester" Then
-                    ShwoEnvironmentTesterForm()
+                    ShowEnvironmentTesterForm()
                 End If
                 If arglist(ind).ToLower = "/hostname" Then
                     HostnameOrIPCtl.Text = arglist(ind + 1)
@@ -743,7 +743,7 @@ Public Class MainForm
         End If
     End Sub
 
-    Public Sub ShwoEnvironmentTesterForm()
+    Public Sub ShowEnvironmentTesterForm()
         Dim EnvTesterFrm As New EnvironmentVarTesterFrm
         EnvTesterFrm._parent = Me
         EnvTesterFrm.Show()
