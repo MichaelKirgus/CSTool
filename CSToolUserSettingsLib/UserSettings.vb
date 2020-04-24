@@ -27,6 +27,7 @@ Imports CSToolLogLib
     Public Property Plugins As New List(Of PluginSettings)
     Public Property UserTemplates As New List(Of UserSettings)
     Public Property CustomActions As New List(Of CustomActionEntry)
+    Public Property CentralCustomActions As String = ""
     Public Property EnableCustomAutostartActions As Boolean = False
     Public Property CustomAutostartActions As New List(Of CustomActionEntry)
     Public Property ShowWarningOnCustomActions As Boolean = True
