@@ -147,5 +147,8 @@
   <ItemGroup>
     <None Include="Resources\icon-file-blank_22x22.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-trash_22x22.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

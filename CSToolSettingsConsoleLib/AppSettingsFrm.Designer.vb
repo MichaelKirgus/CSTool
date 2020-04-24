@@ -47,7 +47,13 @@ Partial Class AppSettingsFrm
         Me.PropertyGrid5 = New System.Windows.Forms.PropertyGrid()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton11 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
@@ -55,11 +61,11 @@ Partial Class AppSettingsFrm
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
+        Me.ToolStripButton12 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton13 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton14 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.ToolStrip3.SuspendLayout()
@@ -112,7 +118,7 @@ Partial Class AppSettingsFrm
         'ToolStrip3
         '
         Me.ToolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3, Me.ToolStripSeparator2, Me.ToolStripButton9, Me.ToolStripButton10})
+        Me.ToolStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3, Me.ToolStripSeparator2, Me.ToolStripButton9, Me.ToolStripButton10, Me.ToolStripButton11})
         Me.ToolStrip3.Location = New System.Drawing.Point(3, 3)
         Me.ToolStrip3.Name = "ToolStrip3"
         Me.ToolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -145,7 +151,7 @@ Partial Class AppSettingsFrm
         'ToolStrip4
         '
         Me.ToolStrip4.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip4.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton5})
+        Me.ToolStrip4.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton5, Me.ToolStripButton12})
         Me.ToolStrip4.Location = New System.Drawing.Point(3, 3)
         Me.ToolStrip4.Name = "ToolStrip4"
         Me.ToolStrip4.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -178,7 +184,7 @@ Partial Class AppSettingsFrm
         'ToolStrip5
         '
         Me.ToolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip5.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton6})
+        Me.ToolStrip5.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton6, Me.ToolStripButton13})
         Me.ToolStrip5.Location = New System.Drawing.Point(3, 3)
         Me.ToolStrip5.Name = "ToolStrip5"
         Me.ToolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -211,7 +217,7 @@ Partial Class AppSettingsFrm
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton8, Me.ToolStripButton2, Me.ToolStripSeparator1, Me.ToolStripTextBox1, Me.ToolStripButton4})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton14, Me.ToolStripSeparator3, Me.ToolStripButton1, Me.ToolStripButton8, Me.ToolStripButton2, Me.ToolStripSeparator1, Me.ToolStripTextBox1, Me.ToolStripButton4})
         Me.ToolStrip1.Location = New System.Drawing.Point(3, 3)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -255,7 +261,7 @@ Partial Class AppSettingsFrm
         'ToolStrip2
         '
         Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton7})
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton7, Me.ToolStripButton15})
         Me.ToolStrip2.Location = New System.Drawing.Point(3, 3)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -271,6 +277,23 @@ Partial Class AppSettingsFrm
         Me.OpenFileDialog1.RestoreDirectory = True
         Me.OpenFileDialog1.SupportMultiDottedExtensions = True
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 29)
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.DefaultExt = "xml"
+        Me.SaveFileDialog1.Filter = "XML-File|*.xml"
+        Me.SaveFileDialog1.RestoreDirectory = True
+        Me.SaveFileDialog1.SupportMultiDottedExtensions = True
+        '
+        'OpenFileDialog2
+        '
+        Me.OpenFileDialog2.FileName = "OpenFileDialog2"
+        '
         'ToolStripButton3
         '
         Me.ToolStripButton3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
@@ -281,6 +304,38 @@ Partial Class AppSettingsFrm
         Me.ToolStripButton3.Name = "ToolStripButton3"
         Me.ToolStripButton3.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton3.Text = "Save settings"
+        '
+        'ToolStripButton9
+        '
+        Me.ToolStripButton9.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton9.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_download_22x22
+        Me.ToolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton9.Name = "ToolStripButton9"
+        Me.ToolStripButton9.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton9.Text = "Import settings from file..."
+        '
+        'ToolStripButton10
+        '
+        Me.ToolStripButton10.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton10.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_upload_22x22
+        Me.ToolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton10.Name = "ToolStripButton10"
+        Me.ToolStripButton10.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton10.Text = "Save as..."
+        '
+        'ToolStripButton11
+        '
+        Me.ToolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton11.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_trash_22x22
+        Me.ToolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton11.Name = "ToolStripButton11"
+        Me.ToolStripButton11.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton11.Text = "Reset all global application settings"
         '
         'ToolStripButton5
         '
@@ -355,44 +410,50 @@ Partial Class AppSettingsFrm
         Me.ToolStripButton7.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton7.Text = "Save settings"
         '
-        'ToolStripSeparator2
+        'ToolStripButton12
         '
-        Me.ToolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 29)
+        Me.ToolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton12.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_trash_22x22
+        Me.ToolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton12.Name = "ToolStripButton12"
+        Me.ToolStripButton12.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton12.Text = "Reset main application log settings"
         '
-        'ToolStripButton9
+        'ToolStripButton13
         '
-        Me.ToolStripButton9.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton9.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_download_22x22
-        Me.ToolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton9.Name = "ToolStripButton9"
-        Me.ToolStripButton9.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton9.Text = "Import settings from file..."
+        Me.ToolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton13.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_trash_22x22
+        Me.ToolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton13.Name = "ToolStripButton13"
+        Me.ToolStripButton13.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton13.Text = "Reset launcher log settings"
         '
-        'ToolStripButton10
+        'ToolStripButton14
         '
-        Me.ToolStripButton10.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton10.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_upload_22x22
-        Me.ToolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ToolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton10.Name = "ToolStripButton10"
-        Me.ToolStripButton10.Size = New System.Drawing.Size(26, 26)
-        Me.ToolStripButton10.Text = "Save as..."
+        Me.ToolStripButton14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton14.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_trash_22x22
+        Me.ToolStripButton14.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton14.Name = "ToolStripButton14"
+        Me.ToolStripButton14.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton14.Text = "Reset central custom actions"
         '
-        'SaveFileDialog1
+        'ToolStripSeparator3
         '
-        Me.SaveFileDialog1.DefaultExt = "xml"
-        Me.SaveFileDialog1.Filter = "XML-File|*.xml"
-        Me.SaveFileDialog1.RestoreDirectory = True
-        Me.SaveFileDialog1.SupportMultiDottedExtensions = True
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 29)
         '
-        'OpenFileDialog2
+        'ToolStripButton15
         '
-        Me.OpenFileDialog2.FileName = "OpenFileDialog2"
+        Me.ToolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton15.Image = Global.CSToolSettingsConsoleLib.My.Resources.Resources.icon_trash_22x22
+        Me.ToolStripButton15.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton15.Name = "ToolStripButton15"
+        Me.ToolStripButton15.Size = New System.Drawing.Size(26, 26)
+        Me.ToolStripButton15.Text = "Reset initial workspace template"
         '
         'AppSettingsFrm
         '
@@ -461,4 +522,10 @@ Partial Class AppSettingsFrm
     Friend WithEvents ToolStripButton10 As Windows.Forms.ToolStripButton
     Friend WithEvents SaveFileDialog1 As Windows.Forms.SaveFileDialog
     Friend WithEvents OpenFileDialog2 As Windows.Forms.OpenFileDialog
+    Friend WithEvents ToolStripButton11 As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButton12 As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButton13 As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButton14 As Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator3 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripButton15 As Windows.Forms.ToolStripButton
 End Class

@@ -5,6 +5,7 @@
 'Additional copyright notices in project base directory or main executable directory.
 Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
+Imports CSToolLogLib
 Imports CSToolUserSettingsLib
 Imports CSToolUserSettingsManager
 
@@ -139,5 +140,33 @@ Public Class AppSettingsFrm
         If Not OpenFileDialog2.FileName = "" Then
             LoadAllSettingsToGUI(OpenFileDialog2.FileName)
         End If
+    End Sub
+
+    Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs) Handles ToolStripButton11.Click
+        AppSettingsObj = New ApplicationSettings
+        PropertyGrid1.SelectedObject = AppSettingsObj
+        WasChanged = True
+    End Sub
+
+    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles ToolStripButton12.Click
+        AppSettingsObj.LogSettings = New LogSettings
+        PropertyGrid2.SelectedObject = AppSettingsObj.LogSettings
+        WasChanged = True
+    End Sub
+
+    Private Sub ToolStripButton13_Click(sender As Object, e As EventArgs) Handles ToolStripButton13.Click
+        AppSettingsObj.LauncherLogSettings = New LogSettings
+        PropertyGrid3.SelectedObject = AppSettingsObj.LauncherLogSettings
+        WasChanged = True
+    End Sub
+
+    Private Sub ToolStripButton14_Click(sender As Object, e As EventArgs) Handles ToolStripButton14.Click
+        Dim NewCentralActionsObj As New CentralCustomActions
+        PropertyGrid4.SelectedObject = NewCentralActionsObj
+    End Sub
+
+    Private Sub ToolStripButton15_Click(sender As Object, e As EventArgs) Handles ToolStripButton15.Click
+        Dim NewUserSettingsObj As New UserSettings
+        PropertyGrid5.SelectedObject = NewUserSettingsObj
     End Sub
 End Class
