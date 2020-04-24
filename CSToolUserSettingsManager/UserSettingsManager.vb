@@ -38,6 +38,33 @@ Public Class UserSettingsManager
         End Try
     End Function
 
+    Public Function LoadCentralCustomActions(ByVal Filename As String) As CentralCustomActions
+        Try
+            Dim objStreamReader As New StreamReader(Filename)
+            Dim p2 As New CentralCustomActions
+            Dim x As New XmlSerializer(p2.GetType)
+            p2 = x.Deserialize(objStreamReader)
+            objStreamReader.Close()
+
+            Return p2
+        Catch ex As Exception
+            Return New CentralCustomActions
+        End Try
+    End Function
+
+    Public Function SaveCentralCustomActions(ByVal Settingsx As CentralCustomActions, ByVal Filename As String) As Boolean
+        Try
+            Dim XML As New XmlSerializer(Settingsx.GetType)
+            Dim FS As New FileStream(Filename, FileMode.Create)
+            XML.Serialize(FS, Settingsx)
+            FS.Close()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Public Function GetUserSettingsFilePath(ByVal BasePath As String, ByVal UseDomain As Boolean, Optional ByVal WithFilename As Boolean = True, Optional ByVal OverridingUsername As String = "") As String
         'Loading user settings
         If OverridingUsername = "" Then
