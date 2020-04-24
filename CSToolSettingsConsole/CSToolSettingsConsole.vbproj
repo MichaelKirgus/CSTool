@@ -63,7 +63,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>wizard_app.ico</ApplicationIcon>
+    <ApplicationIcon>wizard_app_mod_settings.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="wizard_app.ico" />
+    <Content Include="wizard_app_mod_settings.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

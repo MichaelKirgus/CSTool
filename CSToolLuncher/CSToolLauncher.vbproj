@@ -63,7 +63,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>wizard_app.ico</ApplicationIcon>
+    <ApplicationIcon>wizard_app_mod_launcher.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -157,6 +157,7 @@
     <None Include="Resources\oback_trans.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="wizard_app_mod_launcher.ico" />
     <None Include="Resources\uac_16.png" />
     <Content Include="wizard_app.ico" />
   </ItemGroup>
