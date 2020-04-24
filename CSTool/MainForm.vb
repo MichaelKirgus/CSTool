@@ -252,6 +252,18 @@ Public Class MainForm
                     'Copy content to new user profile path
                     CurrentLoadActionState = "Copy user settings..."
                     My.Computer.FileSystem.CopyDirectory(ApplicationSettings.UserInitialTemplateDir, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername), True)
+                    If IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettingManager.UserSettingsFile) Then
+                        'We found a valid initial user settings file...
+                        CurrentLoadActionState = "Apply initial user settings..."
+                        UserSettings = UserSettingManager.LoadSettings(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, True, CurrentUsername))
+                        CurrentLoadActionState = "Resetting window positions..."
+                        UserSettings.LastWindowLocation = New Size(0, 0)
+                        UserSettings.LastNormalWindowSize = ApplicationSettings.InitialWindowSize
+                        UserSettings.LastNormalWindowLocation = ApplicationSettings.InitialWindowLocation
+                        UserSettings.LastWindowLocation = ApplicationSettings.InitialWindowLocation
+                        UserSettings.LastWindowSize = ApplicationSettings.InitialWindowSize
+                        UserSettings.LastWindowState = ApplicationSettings.InitialWindowState
+                    End If
                 Else
                     'No initial template, start with an empty one and save it.
                     UserSettingManager.SaveSettings(UserSettings, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, True, CurrentUsername))
@@ -401,6 +413,20 @@ Public Class MainForm
         CurrentLoadActionState = "Loading custom actions..."
         CustomActionsHandler._ShowWarningOnCustomActions = UserSettings.ShowWarningOnCustomActions
         CustomActionsHandler._CustomActionsCollection = UserSettings.CustomActions
+
+        'Check if we have to load central custom actions
+        If IO.File.Exists(UserSettings.CentralCustomActions) Then
+            'Load central custom actions
+            CurrentLoadActionState = "Loading central custom actions..."
+            Dim CentralCustomActionsObj As CentralCustomActions
+            CentralCustomActionsObj = UserSettingManager.LoadCentralCustomActions(UserSettings.CentralCustomActions)
+            If CustomActionsHandler._CustomActionsCollection.Count = 0 Then
+                CustomActionsHandler._CustomActionsCollection = CentralCustomActionsObj.CustomActions
+            Else
+                CustomActionsHandler._CustomActionsCollection.AddRange(CentralCustomActionsObj.CustomActions)
+            End If
+        End If
+
         CustomActionsHandler._LogManager = LogManager
         CustomActionsHandler.LoadCustomItems(CustomItemsContext)
 

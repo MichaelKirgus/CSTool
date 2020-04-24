@@ -3,6 +3,8 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
+Imports System.Drawing
+Imports System.Windows.Forms
 Imports CSToolLogLib
 
 <Serializable> Public Class ApplicationSettings
@@ -24,6 +26,9 @@ Imports CSToolLogLib
     Public Property LauncherAdditionalMainAppArguments As String = ""
     Public Property LauncherLogSettings As New LogSettings
     Public Property LogSettings As New LogSettings
+    Public Property InitialWindowLocation As New Point(0, 0)
+    Public Property InitialWindowSize As New Size(0, 0)
+    Public Property InitialWindowState As FormWindowState = FormWindowState.Normal
 End Class
 
 Public Enum MainAppCommandlLineArgumentsMode As Integer
