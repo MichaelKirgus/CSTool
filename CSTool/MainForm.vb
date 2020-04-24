@@ -899,16 +899,38 @@ Public Class MainForm
         End Try
     End Function
 
-    'Public Function RestoreInitialTemplateWorkspace()
-    '    Try
-    '        If IO.Directory.Exists(ApplicationSettings.UserInitialTemplateDir) Then
-    '            'Copy content to new user profile path
-    '            My.Computer.FileSystem.CopyDirectory(ApplicationSettings.UserInitialTemplateDir, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False), True)
-    '        End If
-    '    Catch ex As Exception
+    Public Function RestartApp() As Boolean
+        Try
+            Dim newinstance As New Process
+            newinstance.StartInfo.FileName = Application.ExecutablePath
+            newinstance.StartInfo.WorkingDirectory = Application.StartupPath
+            newinstance.StartInfo.Arguments = Environment.CommandLine
 
-    '    End Try
-    'End Function
+            If newinstance.Start() Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Sub RestoreInitialTemplateWorkspace()
+        Try
+            'Delete user profile
+            My.Computer.FileSystem.DeleteDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername), FileIO.DeleteDirectoryOption.DeleteAllContents)
+
+            'Ensure that no settings will be saved if application exits
+            IsNonPersistent = True
+
+            'Restart application
+            If RestartApp() Then
+                Me.Close()
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
 
     Private Sub RestoreLastClosedWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreLastClosedWindowToolStripMenuItem.Click
         If Not RestoreLastClosedWindow() Then
@@ -1030,5 +1052,13 @@ Public Class MainForm
     Private Sub ShowApplicationRuntimeInfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowApplicationRuntimeInfoToolStripMenuItem.Click
         Dim runtimedlg As New RuntimeInfoForm
         runtimedlg.Show()
+    End Sub
+
+    Private Sub RestoreInitialTemplateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreInitialTemplateToolStripMenuItem.Click
+        Dim confirmmsg As MsgBoxResult
+        confirmmsg = MsgBox("Reset plugin and workspace layout? The application will restart.", MsgBoxStyle.YesNo)
+        If confirmmsg = MsgBoxResult.Yes Then
+            RestoreInitialTemplateWorkspace()
+        End If
     End Sub
 End Class

@@ -78,6 +78,7 @@ Partial Class MainForm
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.EnvironmentVariablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowApplicationRuntimeInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -101,7 +102,6 @@ Partial Class MainForm
         Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
-        Me.ShowApplicationRuntimeInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -452,6 +452,12 @@ Partial Class MainForm
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(258, 22)
         Me.ToolStripMenuItem1.Text = "Test environment strings..."
         '
+        'ShowApplicationRuntimeInfoToolStripMenuItem
+        '
+        Me.ShowApplicationRuntimeInfoToolStripMenuItem.Name = "ShowApplicationRuntimeInfoToolStripMenuItem"
+        Me.ShowApplicationRuntimeInfoToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.ShowApplicationRuntimeInfoToolStripMenuItem.Text = "Show application runtime info..."
+        '
         'ShowLogToolStripMenuItem
         '
         Me.ShowLogToolStripMenuItem.Name = "ShowLogToolStripMenuItem"
@@ -591,12 +597,6 @@ Partial Class MainForm
         Me.ImportWorkspaceFile.Filter = "ZIP-File|*.zip"
         Me.ImportWorkspaceFile.RestoreDirectory = True
         Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
-        '
-        'ShowApplicationRuntimeInfoToolStripMenuItem
-        '
-        Me.ShowApplicationRuntimeInfoToolStripMenuItem.Name = "ShowApplicationRuntimeInfoToolStripMenuItem"
-        Me.ShowApplicationRuntimeInfoToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
-        Me.ShowApplicationRuntimeInfoToolStripMenuItem.Text = "Show application runtime info..."
         '
         'MainForm
         '
