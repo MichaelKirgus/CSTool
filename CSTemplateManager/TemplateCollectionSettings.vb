@@ -3,11 +3,17 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
+Imports System.Drawing
+Imports System.Windows.Forms
+
 Public Class TemplateCollectionSettings
     Public Property TemplateName As String = ""
     Public Property TemplateGUID As String = ""
     Public Property TemplateDescription As String = ""
     Public Property DefaultWindowStyle As DefaultWindowStyleEnum = DefaultWindowStyleEnum.DockDocument
+    Public Property InitialWindowSize As New Size(350, 350)
+    Public Property InitialWindowLocation As New Point(50, 50)
+    Public Property InitialWindowState As FormWindowState = FormWindowState.Normal
 
     Public Enum DefaultWindowStyleEnum
         IndependentWindow = 0
