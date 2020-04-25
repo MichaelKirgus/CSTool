@@ -524,7 +524,10 @@ Public Class WindowManager
     End Function
 
     Public Function AddPluginWindowToGUI(ByVal HostControl As DockPanel, ByVal HostOrIP As String, ByVal PluginName As String, ByVal TargetPluginCollection As List(Of CSToolPluginLib.ICSToolInterface), Optional ByVal UserSettingName As String = "Default",
-            Optional DockingType As WeifenLuo.WinFormsUI.Docking.DockState = DockState.Document, Optional IsIndependent As Boolean = False, Optional PluginSettingsPath As String = "", Optional ForceRaiseRefresh As Boolean = False, Optional ForceRaiseActions As Boolean = False) As Boolean
+            Optional DockingType As WeifenLuo.WinFormsUI.Docking.DockState = DockState.Document, Optional IsIndependent As Boolean = False, Optional PluginSettingsPath As String = "", Optional ForceRaiseRefresh As Boolean = False, Optional ForceRaiseActions As Boolean = False,
+            Optional ByVal InitialWindowSizeWidth As Integer = 350, Optional ByVal InitialWindowSizeHeight As Integer = 350, Optional ByVal InitialWindowLocationX As Integer = 50, Optional ByVal InitialWindowLocationY As Integer = 50,
+            Optional ByVal InitialWindowState As FormWindowState = FormWindowState.Normal) As Boolean
+
         Try
             Dim plugin As CSToolPluginLib.ICSToolInterface
             plugin = PluginManager.CreateNewPluginInstance(GetPluginIndexByName(PluginName, TargetPluginCollection))
@@ -556,6 +559,12 @@ Public Class WindowManager
                         plugin.LoadPluginSettings(PluginSettingsPath)
                     End If
 
+                    Dim sizepos As New Point(InitialWindowLocationX, InitialWindowLocationY)
+                    HostWindow.Size = sizepos
+                    HostWindow.Width = InitialWindowSizeWidth
+                    HostWindow.Height = InitialWindowSizeHeight
+                    HostWindow.WindowState = InitialWindowState
+
                     HostWindow.Show()
 
                     plugin.LoadPlugin()
@@ -585,6 +594,12 @@ Public Class WindowManager
                     If Not PluginSettingsPath = "" Then
                         plugin.LoadPluginSettings(PluginSettingsPath)
                     End If
+
+                    Dim sizepos As New Point(InitialWindowLocationX, InitialWindowLocationY)
+                    HostWindow.Size = sizepos
+                    HostWindow.Width = InitialWindowSizeWidth
+                    HostWindow.Height = InitialWindowSizeHeight
+                    HostWindow.WindowState = InitialWindowState
 
                     HostWindow.Show(HostControl, DockingType)
 
