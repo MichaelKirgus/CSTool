@@ -20,6 +20,8 @@
     Public Property IgnoreCertificateErrors As Boolean = False
     Public Property UserAgent As String = ""
     Public Property ChromiumExtensions As List(Of ExtensionEntry)
+    Public Property EnableLog As Boolean = False
+    Public Property Logfile As String = ""
 End Class
 
 <Serializable> Public Class ExtensionEntry

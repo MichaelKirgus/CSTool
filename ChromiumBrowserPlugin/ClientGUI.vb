@@ -50,6 +50,12 @@ Public Class ClientGUI
                     End If
                     settings.PersistSessionCookies = _Settings.PersistSessionCookies
                     settings.UserAgent = _Settings.UserAgent
+                    If _Settings.EnableLog Then
+                        settings.LogSeverity = LogSeverity.Verbose
+                        settings.LogFile = _Settings.Logfile
+                    Else
+                        settings.LogSeverity = LogSeverity.Disable
+                    End If
                 End If
 
                 CefSharp.Cef.Initialize(settings)
