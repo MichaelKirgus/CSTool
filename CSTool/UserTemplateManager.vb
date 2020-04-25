@@ -119,9 +119,14 @@ Public Class UserTemplateManager
                 Case DefaultWindowStyleEnum.DockTop
                     isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.DockTop, False, tempsett)
                 Case DefaultWindowStyleEnum.FloatWindow
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.Float, False, tempsett)
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.Float, False, tempsett,
+                                                                                 currtempobj.ForceInitialRefresh, currtempobj.ForceInitialRaiseAction, currtempobj.InitialWindowSize.Width, currtempobj.InitialWindowSize.Height, currtempobj.InitialWindowLocation.X,
+                                                                                 currtempobj.InitialWindowLocation.Y, currtempobj.InitialWindowState)
+
                 Case DefaultWindowStyleEnum.IndependentWindow
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.Unknown, True, tempsett)
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.Float, False, tempsett,
+                                                                                 currtempobj.ForceInitialRefresh, currtempobj.ForceInitialRaiseAction, currtempobj.InitialWindowSize.Width, currtempobj.InitialWindowSize.Height, currtempobj.InitialWindowLocation.X,
+                                                                                 currtempobj.InitialWindowLocation.Y, currtempobj.InitialWindowState)
             End Select
 
             Return isok

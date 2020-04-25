@@ -14,7 +14,8 @@ Public Class TemplateCollectionSettings
     Public Property InitialWindowSize As New Size(350, 350)
     Public Property InitialWindowLocation As New Point(50, 50)
     Public Property InitialWindowState As FormWindowState = FormWindowState.Normal
-    Public Property SetInitialWindowState As Boolean = False
+    Public Property ForceInitialRaiseAction As Boolean = False
+    Public Property ForceInitialRefresh As Boolean = False
 
     Public Enum DefaultWindowStyleEnum
         IndependentWindow = 0
