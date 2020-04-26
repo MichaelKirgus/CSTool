@@ -41,4 +41,25 @@
     Public Sub ShowElevatedAppWarningMsg()
         MsgBox("It is not allowed to run this application as elevated user. Please execute this application as normal user.", MsgBoxStyle.Exclamation)
     End Sub
+
+    Public Sub ShowMainAppAlreadyRunningMsg()
+        MsgBox("The main application is running! Please use the main application to create new window/application instances.", MsgBoxStyle.Exclamation)
+    End Sub
+
+    Public Function IsApplicationRunning(ByVal ProcessName As String) As Boolean
+        Try
+            Dim currinstance As Process()
+            currinstance = Process.GetProcessesByName(ProcessName)
+
+            If Not currinstance.Count = 0 Then
+                Return True
+            Else
+                Return False
+            End If
+
+            Return False
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 End Class

@@ -469,6 +469,13 @@ Public Class LoadingFrm
                 Dim parentinfo As New IO.DirectoryInfo(Application.StartupPath)
                 AppSettingsObj.MainAppInstanceTag = parentinfo.Name
             End If
+            If AppSettingsObj.LauncherCheckIfMainApplicationIsRunning Then
+                'Is main application running?
+                If LauncherHelperInstance.IsApplicationRunning("CSTool") Then
+                    LauncherHelperInstance.ShowMainAppAlreadyRunningMsg()
+                    Exit Try
+                End If
+            End If
             If AppSettingsObj.EnableLauncherSync Then
                 SetLabelText(LoadingStateLbl, "Check files...")
                 Dim targetdir As String
