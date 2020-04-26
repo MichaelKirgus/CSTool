@@ -972,17 +972,56 @@ Public Class MainForm
         End Try
     End Function
 
-    Public Sub RestoreInitialTemplateWorkspace()
+    Public Sub RestoreInitialTemplateWorkspace(ByVal PurgeUserProfile As Boolean, Optional ByVal RestartAppAfterReset As Boolean = False, Optional ByVal WorkspaceToReset As String = "Default")
         Try
-            'Delete user profile
-            My.Computer.FileSystem.DeleteDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername), FileIO.DeleteDirectoryOption.DeleteAllContents)
+            If PurgeUserProfile Then
+                'Delete user profile
+                My.Computer.FileSystem.DeleteDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername), FileIO.DeleteDirectoryOption.DeleteAllContents)
 
-            'Ensure that no settings will be saved if application exits
-            IsNonPersistent = True
+                'Ensure that no settings will be saved if application exits
+                IsNonPersistent = True
 
-            'Restart application
-            If RestartApp() Then
-                Me.Close()
+                If RestartAppAfterReset Then
+                    'Restart application
+                    If RestartApp() Then
+                        Me.Close()
+                    End If
+                End If
+            Else
+                'Delete workspace folder in user profile
+                Dim workspacedir As String
+                workspacedir = UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & WorkspaceToReset
+
+                If IO.Directory.Exists(workspacedir) Then
+                    My.Computer.FileSystem.DeleteDirectory(workspacedir, FileIO.DeleteDirectoryOption.DeleteAllContents)
+
+                    If UserSettings.SettingName = WorkspaceToReset Then
+                        'Its the default profile, delete file and profile itself
+                        My.Computer.FileSystem.DeleteDirectory(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername)
+                    Else
+                        'Its an sub-workspace, find workspace in user settings
+                        If Not UserSettings.UserTemplates.Count = 0 Then
+                            For index = 0 To UserSettings.UserTemplates.Count - 1
+                                If UserSettings.UserTemplates(index).SettingName = WorkspaceToReset Then
+                                    'Delete workspace directory
+                                    My.Computer.FileSystem.DeleteDirectory(workspacedir, FileIO.DeleteDirectoryOption.DeleteAllContents)
+                                    'Copy initial workspace to directory
+                                    My.Computer.FileSystem.CopyDirectory(ApplicationSettings.UserInitialTemplateDir & "\Default", workspacedir, True)
+                                End If
+                            Next
+                        End If
+                    End If
+
+                    'Ensure that no settings will be saved if application exits
+                    IsNonPersistent = True
+
+                    If RestartAppAfterReset Then
+                        'Restart application
+                        If RestartApp() Then
+                            Me.Close()
+                        End If
+                    End If
+                End If
             End If
         Catch ex As Exception
         End Try
@@ -1175,9 +1214,17 @@ Public Class MainForm
 
     Private Sub RestoreInitialTemplateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreInitialTemplateToolStripMenuItem.Click
         Dim confirmmsg As MsgBoxResult
-        confirmmsg = MsgBox("Reset plugin and workspace layout? The application will restart.", MsgBoxStyle.YesNo)
+        confirmmsg = MsgBox("Reset current plugin and workspace layout? The application will restart.", MsgBoxStyle.YesNo)
         If confirmmsg = MsgBoxResult.Yes Then
-            RestoreInitialTemplateWorkspace()
+            RestoreInitialTemplateWorkspace(False, True, CurrentUserSettingName)
+        End If
+    End Sub
+
+    Private Sub ResetUserProfileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetUserProfileToolStripMenuItem.Click
+        Dim confirmmsg As MsgBoxResult
+        confirmmsg = MsgBox("Reset user profile? All workspaces and plugin settings will be lost. The application will restart.", MsgBoxStyle.YesNo)
+        If confirmmsg = MsgBoxResult.Yes Then
+            RestoreInitialTemplateWorkspace(True, True)
         End If
     End Sub
 End Class

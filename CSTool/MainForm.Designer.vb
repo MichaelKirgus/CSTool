@@ -102,6 +102,8 @@ Partial Class MainForm
         Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
+        Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ResetUserProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -318,7 +320,7 @@ Partial Class MainForm
         'ToolStripButton11
         '
         Me.ToolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton11.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripSeparator9, Me.NewEmptyWindowToolStripMenuItem, Me.CloneWorkspaceToNewWindowToolStripMenuItem, Me.ToolStripSeparator10, Me.RestoreLastClosedWindowToolStripMenuItem, Me.RestoreInitialTemplateToolStripMenuItem})
+        Me.ToolStripButton11.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripSeparator9, Me.NewEmptyWindowToolStripMenuItem, Me.CloneWorkspaceToNewWindowToolStripMenuItem, Me.ToolStripSeparator10, Me.RestoreLastClosedWindowToolStripMenuItem, Me.RestoreInitialTemplateToolStripMenuItem, Me.ToolStripSeparator14, Me.ResetUserProfileToolStripMenuItem})
         Me.ToolStripButton11.Image = Global.CSTool.My.Resources.Resources.icon_browser_22x22
         Me.ToolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta
@@ -598,6 +600,17 @@ Partial Class MainForm
         Me.ImportWorkspaceFile.RestoreDirectory = True
         Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
         '
+        'ToolStripSeparator14
+        '
+        Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(359, 6)
+        '
+        'ResetUserProfileToolStripMenuItem
+        '
+        Me.ResetUserProfileToolStripMenuItem.Name = "ResetUserProfileToolStripMenuItem"
+        Me.ResetUserProfileToolStripMenuItem.Size = New System.Drawing.Size(362, 22)
+        Me.ResetUserProfileToolStripMenuItem.Text = "Reset user profile"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -694,4 +707,6 @@ Partial Class MainForm
     Friend WithEvents SearchInNewInstanceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveWorkspaceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ShowApplicationRuntimeInfoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator14 As ToolStripSeparator
+    Friend WithEvents ResetUserProfileToolStripMenuItem As ToolStripMenuItem
 End Class
