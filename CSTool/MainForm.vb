@@ -824,7 +824,7 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
-        ShowEnvironmentVariablesForm()
+        ShowEnvironmentTesterForm()
     End Sub
 
     Private Sub NewIndependentWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewIndependentWindowToolStripMenuItem.Click
