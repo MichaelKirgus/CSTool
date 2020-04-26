@@ -11,6 +11,7 @@ Public Class TemplateManager
     Public WindowHandlerObj As New WindowManager
 
     Public CurrentTemplates As List(Of TemplateCollectionEntry)
+    Public _CurrentPinnedTemplates As List(Of TemplateCollectionSettings)
 
     Public Function GetTemplates(ByVal TemplatePath As String, ByVal PluginCollection As List(Of ICSToolInterface)) As List(Of TemplateCollectionEntry)
         Try
@@ -45,6 +46,30 @@ Public Class TemplateManager
             Return TemplateListObj
         Catch ex As Exception
             Return New List(Of TemplateCollectionEntry)
+        End Try
+    End Function
+
+    Public Function GetPinnedTemplates(ByVal Collection As List(Of TemplateCollectionEntry)) As List(Of TemplateCollectionSettings)
+        Try
+            Dim resultlist As New List(Of TemplateCollectionSettings)
+
+            If Not Collection.Count = 0 Then
+                For index = 0 To Collection.Count - 1
+                    If Not Collection(index).PluginTemplates.Count = 0 Then
+                        For plugind = 0 To Collection(index).PluginTemplates.Count - 1
+                            If Collection(index).PluginTemplates(plugind).PinToShortcutMenu Then
+                                Collection(index).PluginTemplates(plugind).PluginName = Collection(index).PluginName
+                                resultlist.Add(Collection(index).PluginTemplates(plugind))
+                                Exit For
+                            End If
+                        Next
+                    End If
+                Next
+            End If
+
+            Return resultlist
+        Catch ex As Exception
+            Return New List(Of TemplateCollectionSettings)
         End Try
     End Function
 

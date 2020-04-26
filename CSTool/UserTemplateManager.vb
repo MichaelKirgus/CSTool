@@ -80,7 +80,7 @@ Public Class UserTemplateManager
             tempitm = curritm.Tag
             Dim currmenuitm As ToolStripItem
             currmenuitm = sender
-            If AddItemFromTemplateToWorkspace(tempitm.TemplateGUID, _parent.CSDockPanelHosting, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, currmenuitm.Tag) Then
+            If AddItemFromTemplateToWorkspace(tempitm.TemplateGUID, _parent.CSDockPanelHosting, CurrentPluginName, _parent.WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, _parent.WindowManagerHandler.PluginManager.PluginCollection), _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, currmenuitm.Tag) Then
                 If ToolStripButton6.Checked Then
                     Me.Close()
                 Else
@@ -97,11 +97,11 @@ Public Class UserTemplateManager
         MsgBox("Invalid style for plugin or plugin instance is already loaded!" & vbNewLine & "Please choose different style or close plugin instance.")
     End Sub
 
-    Public Function AddItemFromTemplateToWorkspace(ByVal TemplateGUID As String, ByVal DockingHost As DockPanel, ByVal PluginName As String, ByVal TargetPluginCollection As List(Of CSToolPluginLib.ICSToolInterface), Optional ByVal UserSettingName As String = "Default", Optional Style As DefaultWindowStyleEnum = DefaultWindowStyleEnum.DockDocument) As Boolean
+    Public Function AddItemFromTemplateToWorkspace(ByVal TemplateGUID As String, ByVal DockingHost As DockPanel, ByVal PluginName As String, ByVal TargetGUIPluginCollection As List(Of CSToolPluginLib.ICSToolInterface), ByVal TargetPluginCollection As List(Of CSToolPluginLib.ICSToolInterface), Optional ByVal UserSettingName As String = "Default", Optional Style As DefaultWindowStyleEnum = DefaultWindowStyleEnum.DockDocument) As Boolean
         Try
             Dim currtempobj As TemplateCollectionSettings
             Dim currplug As ICSToolInterface
-            currplug = _parent.WindowManagerHandler.GetPluginByName(PluginName, TargetPluginCollection)
+            currplug = _parent.WindowManagerHandler.GetPluginByName(PluginName, TargetGUIPluginCollection)
             currtempobj = _parent.UserTemplateManager.GetTemplateSettingsFromTemplateGUID(_parent.ApplicationSettings.UserTemplatesDir, currplug, TemplateGUID)
             Dim tempsett As String
             tempsett = _parent.UserTemplateManager.GetPluginTemplateSettingsFilePath(_parent.ApplicationSettings.UserTemplatesDir, currplug, currtempobj)
@@ -109,22 +109,22 @@ Public Class UserTemplateManager
             Dim isok As Boolean
             Select Case Style
                 Case DefaultWindowStyleEnum.DockBottom
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.DockBottom, False, tempsett)
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.DockBottom, False, tempsett)
                 Case DefaultWindowStyleEnum.DockDocument
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.Document, False, tempsett)
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.Document, False, tempsett)
                 Case DefaultWindowStyleEnum.DockLeft
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.DockLeft, False, tempsett)
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.DockLeft, False, tempsett)
                 Case DefaultWindowStyleEnum.DockRight
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.DockRight, False, tempsett)
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.DockRight, False, tempsett)
                 Case DefaultWindowStyleEnum.DockTop
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.DockTop, False, tempsett)
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.DockTop, False, tempsett)
                 Case DefaultWindowStyleEnum.FloatWindow
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.Float, False, tempsett,
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.Float, False, tempsett,
                                                                                  currtempobj.ForceInitialRefresh, currtempobj.ForceInitialRaiseAction, currtempobj.InitialWindowSize.Width, currtempobj.InitialWindowSize.Height, currtempobj.InitialWindowLocation.X,
                                                                                  currtempobj.InitialWindowLocation.Y, currtempobj.InitialWindowState)
 
                 Case DefaultWindowStyleEnum.IndependentWindow
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, DockState.Float, False, tempsett,
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.Float, False, tempsett,
                                                                                  currtempobj.ForceInitialRefresh, currtempobj.ForceInitialRaiseAction, currtempobj.InitialWindowSize.Width, currtempobj.InitialWindowSize.Height, currtempobj.InitialWindowLocation.X,
                                                                                  currtempobj.InitialWindowLocation.Y, currtempobj.InitialWindowState)
             End Select
@@ -574,7 +574,7 @@ Public Class UserTemplateManager
             curritm = ListView1.SelectedItems(0)
             Dim tempitm As TemplateCollectionSettings
             tempitm = curritm.Tag
-            If AddItemFromTemplateToWorkspace(tempitm.TemplateGUID, _parent.WindowManagerHandler._DockingContent, CurrentPluginName, _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, ComboBox1.SelectedIndex) Then
+            If AddItemFromTemplateToWorkspace(tempitm.TemplateGUID, _parent.WindowManagerHandler._DockingContent, CurrentPluginName, _parent.WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, _parent.WindowManagerHandler.PluginManager.PluginCollection), _parent.WindowManagerHandler.PluginManager.PluginCollection, _parent.UserSettings.SettingName, ComboBox1.SelectedIndex) Then
                 If ToolStripButton6.Checked Then
                     Me.Close()
                 Else

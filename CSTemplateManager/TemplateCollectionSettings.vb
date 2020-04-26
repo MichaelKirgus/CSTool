@@ -7,6 +7,8 @@ Imports System.Drawing
 Imports System.Windows.Forms
 
 Public Class TemplateCollectionSettings
+    Implements ICloneable
+
     Public Property TemplateName As String = ""
     Public Property TemplateGUID As String = ""
     Public Property TemplateDescription As String = ""
@@ -16,6 +18,9 @@ Public Class TemplateCollectionSettings
     Public Property InitialWindowState As FormWindowState = FormWindowState.Normal
     Public Property ForceInitialRaiseAction As Boolean = False
     Public Property ForceInitialRefresh As Boolean = False
+    Public Property PinToShortcutMenu As Boolean = False
+
+    Public PluginName As String = ""
 
     Public Enum DefaultWindowStyleEnum
         IndependentWindow = 0
@@ -26,4 +31,8 @@ Public Class TemplateCollectionSettings
         DockRight = 5
         DockLeft = 6
     End Enum
+
+    Public Function Clone() As Object Implements System.ICloneable.Clone
+        Return MemberwiseClone()
+    End Function
 End Class

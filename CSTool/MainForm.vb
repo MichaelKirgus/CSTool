@@ -491,6 +491,16 @@ Public Class MainForm
         CurrentLoadActionState = "Loading user templates..."
         UserTemplateManager.CurrentTemplates = UserTemplateManager.GetTemplates(ApplicationSettings.UserTemplatesDir, WindowManagerHandler.PluginManager.PluginCollection)
 
+        'Load pinned user templates (to create new form instances faster)
+        If UserSettings.LoadPinnedTemplates Then
+            CurrentLoadActionState = "Loading pinned user templates..."
+            If IsChild Then
+                ClonePinnedTemplatesFromParentToChild()
+            Else
+                LoadAllPinnedTemplates()
+            End If
+        End If
+
         'Set initial window state for raising windows state events
         LastWindowState = Me.WindowState
 
@@ -965,6 +975,69 @@ Public Class MainForm
             If RestartApp() Then
                 Me.Close()
             End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Public Function LoadAllPinnedTemplates() As Boolean
+        Try
+            Dim pinnedtemplates As List(Of TemplateCollectionSettings)
+            pinnedtemplates = UserTemplateManager.GetPinnedTemplates(UserTemplateManager.CurrentTemplates)
+
+            UserTemplateManager._CurrentPinnedTemplates = pinnedtemplates
+
+            If Not pinnedtemplates.Count = 0 Then
+                For index = 0 To pinnedtemplates.Count - 1
+                    Dim templatemenuctl As New ToolStripMenuItem
+                    templatemenuctl.Text = pinnedtemplates(index).TemplateName
+                    templatemenuctl.Image = WindowManagerHandler.GetPluginByName(pinnedtemplates(index).PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)).UserControlIcon.ToBitmap
+                    templatemenuctl.Tag = pinnedtemplates(index)
+                    ToolStripButton12.DropDownItems.Add(templatemenuctl)
+                    AddHandler templatemenuctl.Click, AddressOf TemplateMenuEntryClicked
+                Next
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function ClonePinnedTemplatesFromParentToChild()
+        Try
+            Dim parentfrm As MainForm
+            parentfrm = Me.ParentForm
+
+            UserTemplateManager._CurrentPinnedTemplates = parentfrm.UserTemplateManager._CurrentPinnedTemplates
+
+            If Not UserTemplateManager._CurrentPinnedTemplates.Count = 0 Then
+                For index = 0 To UserTemplateManager._CurrentPinnedTemplates.Count - 1
+                    Dim templatemenuctl As New ToolStripMenuItem
+                    templatemenuctl.Text = UserTemplateManager._CurrentPinnedTemplates(index).TemplateName
+                    templatemenuctl.Image = WindowManagerHandler.GetPluginByName(UserTemplateManager._CurrentPinnedTemplates(index).PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)).UserControlIcon.ToBitmap
+                    templatemenuctl.Tag = UserTemplateManager._CurrentPinnedTemplates(index)
+                    ToolStripButton12.DropDownItems.Add(templatemenuctl)
+                    AddHandler templatemenuctl.Click, AddressOf TemplateMenuEntryClicked
+                Next
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Sub TemplateMenuEntryClicked(sender As Object, e As EventArgs)
+        Try
+            Dim templateobj As TemplateCollectionSettings
+            templateobj = sender.Tag
+            Dim plugininstanceobj As ICSToolInterface
+            plugininstanceobj = WindowManagerHandler.GetPluginByName(templateobj.PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection))
+
+            Dim newtemplatemangr As New UserTemplateManager
+            newtemplatemangr._parent = Me
+
+            newtemplatemangr.AddItemFromTemplateToWorkspace(templateobj.TemplateGUID, CSDockPanelHosting, plugininstanceobj.PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection), WindowManagerHandler.PluginManager.PluginCollection, UserSettings.SettingName, templateobj.DefaultWindowStyle)
         Catch ex As Exception
         End Try
     End Sub

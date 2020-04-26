@@ -26,6 +26,7 @@ Imports CSToolLogLib
     Public Property LogSettings As New LogSettings
     Public Property Plugins As New List(Of PluginSettings)
     Public Property UserTemplates As New List(Of UserSettings)
+    Public Property LoadPinnedTemplates As Boolean = True
     Public Property CustomActions As New List(Of CustomActionEntry)
     Public Property CentralCustomActions As String = ""
     Public Property EnableCustomAutostartActions As Boolean = False
