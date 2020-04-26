@@ -494,6 +494,7 @@ Public Class LoadingFrm
             End If
             If AppSettingsObj.LauncherCheckIfUserCanSaveSettings Then
                 'Can user write in the profiles folder?
+                SetLabelText(LoadingStateLbl, "Check file permissions...")
                 If Not CheckIfUserCanWriteAtProfilePath() Then
                     LauncherHelperInstance.ShowUserCanNotWriteInUserProfilePathMsg()
                     Exit Try
