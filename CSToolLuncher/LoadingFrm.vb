@@ -134,6 +134,21 @@ Public Class LoadingFrm
         End Try
     End Function
 
+    Public Function CheckIfUserCanWriteAtProfilePath() As Boolean
+        Try
+            If Not IO.File.Exists(AppSettingsObj.UserProfileDir & "\Test.dat") Then
+                IO.File.WriteAllText(AppSettingsObj.UserProfileDir & "\Test.dat", "Test")
+                IO.File.Delete(AppSettingsObj.UserProfileDir & "\Test.dat")
+            Else
+                Return True
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Public Sub UntilFinishShowStatus(ByRef SyncHandlerInstance As SyncLib)
         Do While SyncHandlerInstance.SyncTaskHost.IsBusy
             If Not SyncHandlerInstance.CurrentFile = "" Then
@@ -473,6 +488,13 @@ Public Class LoadingFrm
                 'Is main application running?
                 If LauncherHelperInstance.IsApplicationRunning("CSTool") Then
                     LauncherHelperInstance.ShowMainAppAlreadyRunningMsg()
+                    Exit Try
+                End If
+            End If
+            If AppSettingsObj.LauncherCheckIfUserCanSaveSettings Then
+                'Can user write in the profiles folder?
+                If Not CheckIfUserCanWriteAtProfilePath() Then
+                    LauncherHelperInstance.ShowUserCanNotWriteInUserProfilePathMsg()
                     Exit Try
                 End If
             End If

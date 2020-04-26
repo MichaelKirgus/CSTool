@@ -46,6 +46,10 @@
         MsgBox("The main application is running! Please use the main application to create new window/application instances.", MsgBoxStyle.Exclamation)
     End Sub
 
+    Public Sub ShowUserCanNotWriteInUserProfilePathMsg()
+        MsgBox("The user can not write in the user profile path.", MsgBoxStyle.Exclamation)
+    End Sub
+
     Public Function IsApplicationRunning(ByVal ProcessName As String) As Boolean
         Try
             Dim currinstance As Process()
