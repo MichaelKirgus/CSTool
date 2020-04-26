@@ -1061,6 +1061,7 @@ Public Class MainForm
                     Dim templatemenuctl As New ToolStripMenuItem
                     templatemenuctl.Text = pinnedtemplates(index).TemplateName
                     templatemenuctl.Image = WindowManagerHandler.GetPluginByName(pinnedtemplates(index).PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)).UserControlIcon.ToBitmap
+                    templatemenuctl.ToolTipText = pinnedtemplates(index).TemplateDescription
                     templatemenuctl.Tag = pinnedtemplates(index)
                     ToolStripButton12.DropDownItems.Add(templatemenuctl)
                     AddHandler templatemenuctl.Click, AddressOf TemplateMenuEntryClicked
@@ -1085,6 +1086,7 @@ Public Class MainForm
                     Dim templatemenuctl As New ToolStripMenuItem
                     templatemenuctl.Text = UserTemplateManager._CurrentPinnedTemplates(index).TemplateName
                     templatemenuctl.Image = WindowManagerHandler.GetPluginByName(UserTemplateManager._CurrentPinnedTemplates(index).PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)).UserControlIcon.ToBitmap
+                    templatemenuctl.ToolTipText = UserTemplateManager._CurrentPinnedTemplates(index).TemplateDescription
                     templatemenuctl.Tag = UserTemplateManager._CurrentPinnedTemplates(index)
                     ToolStripButton12.DropDownItems.Add(templatemenuctl)
                     AddHandler templatemenuctl.Click, AddressOf TemplateMenuEntryClicked
