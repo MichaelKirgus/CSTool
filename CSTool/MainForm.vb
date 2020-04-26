@@ -39,6 +39,7 @@ Public Class MainForm
     Public CurrentUserProfilePath As String = ""
     Public IsFormLoading As Boolean = True
     Public IsChild As Boolean = False
+    Public ParentInstance As MainForm = Nothing
     Public IsNonPersistent As Boolean = False
     Public RestoreSettings As Boolean = True
     Public LastWindowState As FormWindowState = FormWindowState.Normal
@@ -489,7 +490,11 @@ Public Class MainForm
 
         'Load user templates (to load new window instance faster)
         CurrentLoadActionState = "Loading user templates..."
-        UserTemplateManager.CurrentTemplates = UserTemplateManager.GetTemplates(ApplicationSettings.UserTemplatesDir, WindowManagerHandler.PluginManager.PluginCollection)
+        If IsChild Then
+            UserTemplateManager.CurrentTemplates = ParentInstance.UserTemplateManager.CurrentTemplates
+        Else
+            UserTemplateManager.CurrentTemplates = UserTemplateManager.GetTemplates(ApplicationSettings.UserTemplatesDir, WindowManagerHandler.PluginManager.PluginCollection)
+        End If
 
         'Load pinned user templates (to create new form instances faster)
         If UserSettings.LoadPinnedTemplates Then
@@ -878,8 +883,9 @@ Public Class MainForm
                 End If
             End If
             newins.IsChild = True
+            newins.ParentInstance = Me
 
-            newins.Show()
+            newins.Show(Me)
             If Not HostOrIP = "" Then
                 newins.HostnameOrIPCtl.Text = HostOrIP
                 newins.PerformRaiseActions()
