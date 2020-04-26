@@ -14,16 +14,18 @@ Imports CSToolLogLib.LogSettings
 
 Public Class CustomActionHelper
     Public _CurrentIPHostname As String = ""
-    Public _CustomActionsCollection As List(Of CustomActionEntry)
+    Public _CustomActionsCollection As New List(Of CustomActionEntry)
     Public _ShowWarningOnCustomActions As Boolean = True
     Public _EnvironmentRuntimeVariables As List(Of KeyValuePair(Of String, String))
     Public _LogManager As LogLib
     Public EnvManager As New EnvironmentManager
     Public WithEvents RaiseCustomActionAsync As New BackgroundWorker
 
-    Public Function LoadCustomItems(ByVal ContextMenuStripCtl As ContextMenuStrip) As Boolean
+    Public Function LoadCustomItems(ByVal ContextMenuStripCtl As ContextMenuStrip, Optional ByVal ClearItems As Boolean = True) As Boolean
         Try
-            ContextMenuStripCtl.Items.Clear()
+            If ClearItems Then
+                ContextMenuStripCtl.Items.Clear()
+            End If
 
             For Each itm As CustomActionEntry In _CustomActionsCollection
                 Try

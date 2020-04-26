@@ -286,7 +286,6 @@ Public Class MainForm
                         CurrentLoadActionState = "Apply initial user settings..."
                         UserSettings = UserSettingManager.LoadSettings(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, True, CurrentUsername))
                         CurrentLoadActionState = "Resetting window positions..."
-                        UserSettings.LastWindowLocation = New Size(0, 0)
                         UserSettings.LastNormalWindowSize = ApplicationSettings.InitialWindowSize
                         UserSettings.LastNormalWindowLocation = ApplicationSettings.InitialWindowLocation
                         UserSettings.LastWindowLocation = ApplicationSettings.InitialWindowLocation
@@ -438,28 +437,38 @@ Public Class MainForm
         CurrentLoadActionState = "Loading environment variables cache..."
         EnvironmentManager.SetEnvironmentVarsInPlugins(WindowManagerHandler.PluginManager.PluginCollection, CSDockPanelHosting.Contents)
 
-        'Load custom actions
-        CurrentLoadActionState = "Loading custom actions..."
-        CustomActionsHandler._ShowWarningOnCustomActions = UserSettings.ShowWarningOnCustomActions
-        CustomActionsHandler._CustomActionsCollection = UserSettings.CustomActions
-
         'Check if we have to load central custom actions
-        If IO.File.Exists(UserSettings.CentralCustomActions) Then
+        If Not UserSettings.CentralCustomActions = "" Then
             'Load central custom actions
             CurrentLoadActionState = "Loading central custom actions..."
             Dim CentralCustomActionsObj As CentralCustomActions
-            CentralCustomActionsObj = UserSettingManager.LoadCentralCustomActions(UserSettings.CentralCustomActions)
-            If CustomActionsHandler._CustomActionsCollection.Count = 0 Then
-                CustomActionsHandler._CustomActionsCollection = CentralCustomActionsObj.CustomActions
-            Else
-                CustomActionsHandler._CustomActionsCollection.AddRange(CentralCustomActionsObj.CustomActions)
+
+            'Central custom actions local?
+            Dim centralfilepath As String = UserSettings.CentralCustomActions
+            If Not IO.File.Exists(centralfilepath) Then
+                'Search in launcher startup path (use profile path to detect)
+                Dim profilesdirobj As New IO.DirectoryInfo(ApplicationSettings.UserProfileDir)
+                If IO.File.Exists(profilesdirobj.Parent.FullName & "\" & centralfilepath) Then
+                    centralfilepath = profilesdirobj.Parent.FullName & "\" & centralfilepath
+                End If
             End If
+            CentralCustomActionsObj = UserSettingManager.LoadCentralCustomActions(centralfilepath)
+            CustomActionsHandler._CustomActionsCollection.AddRange(CentralCustomActionsObj.CustomActions)
+            CustomActionsHandler.LoadCustomItems(CustomItemsContext)
         End If
 
         CustomActionsHandler._LogManager = LogManager
-        CustomActionsHandler.LoadCustomItems(CustomItemsContext)
 
-        If Not CustomActionsHandler._CustomActionsCollection.Count = 0 Then
+        If Not UserSettings.CustomActions.Count = 0 Then
+            'Load additional custom actions in workspace
+            CurrentLoadActionState = "Loading custom actions..."
+            CustomActionsHandler._CustomActionsCollection.Clear()
+            CustomActionsHandler._CustomActionsCollection.AddRange(UserSettings.CustomActions)
+            CustomActionsHandler._ShowWarningOnCustomActions = UserSettings.ShowWarningOnCustomActions
+            CustomActionsHandler.LoadCustomItems(CustomItemsContext, False)
+        End If
+
+        If (Not UserSettings.CustomActions.Count = 0) Or (Not CustomItemsContext.Items.Count = 0) Then
             'Load environment variables to custom actions class
             CurrentLoadActionState = "Loading environment variables for custom actions..."
             CustomActionsHandler._EnvironmentRuntimeVariables = EnvironmentManager.GetEnvironmentVarsFromPlugins(WindowManagerHandler.PluginManager.PluginCollection)
@@ -852,7 +861,7 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
-        If Not UserSettings.CustomActions.Count = 0 Then
+        If Not CustomItemsContext.Items.Count = 0 Then
             CustomItemsContext.Show(MousePosition)
         End If
     End Sub
