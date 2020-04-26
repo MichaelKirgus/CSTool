@@ -738,7 +738,7 @@ Public Class MainForm
                 e.Handled = True
                 e.SuppressKeyPress = True
             Case Keys.F10
-                OpenNewWindow(True, "", HostnameOrIPCtl.Text)
+                OpenNewWindow(True, "", HostnameOrIPCtl.Text, True)
 
                 e.Handled = True
                 e.SuppressKeyPress = True
@@ -871,17 +871,20 @@ Public Class MainForm
         newtempfrm.Show()
     End Sub
 
-    Public Function OpenNewWindow(ByVal CloneSettingsAndLayout As Boolean, Optional ByVal UserSettingName As String = "", Optional ByVal HostOrIP As String = "") As Boolean
+    Public Function OpenNewWindow(ByVal CloneSettingsAndLayout As Boolean, Optional ByVal UserSettingName As String = "", Optional ByVal HostOrIP As String = "", Optional ByVal NonPersistent As Boolean = False) As Boolean
         Try
             Dim newins As New MainForm
             If Not CloneSettingsAndLayout Then
+                newins.RestoreSettings = False
                 If UserSettingName = "" Then
-                    newins.RestoreSettings = False
                     newins.IsNonPersistent = True
                 Else
                     newins.CurrentUserSettingName = UserSettingName
                 End If
             End If
+
+            newins.IsNonPersistent = NonPersistent
+
             newins.IsChild = True
             newins.ParentInstance = Me
 
@@ -898,11 +901,11 @@ Public Class MainForm
     End Function
 
     Private Sub NewEmptyWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewEmptyWindowToolStripMenuItem.Click
-        OpenNewWindow(False)
+        OpenNewWindow(False, "", "", True)
     End Sub
 
     Private Sub CloneWorkspaceToNewWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloneWorkspaceToNewWindowToolStripMenuItem.Click
-        OpenNewWindow(True)
+        OpenNewWindow(True, UserSettings.SettingName, HostnameOrIPCtl.Text, True)
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
