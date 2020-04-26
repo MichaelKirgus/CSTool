@@ -1076,10 +1076,7 @@ Public Class MainForm
 
     Public Function ClonePinnedTemplatesFromParentToChild()
         Try
-            Dim parentfrm As MainForm
-            parentfrm = Me.ParentForm
-
-            UserTemplateManager._CurrentPinnedTemplates = parentfrm.UserTemplateManager._CurrentPinnedTemplates
+            UserTemplateManager._CurrentPinnedTemplates = ParentInstance.UserTemplateManager._CurrentPinnedTemplates
 
             If Not UserTemplateManager._CurrentPinnedTemplates.Count = 0 Then
                 For index = 0 To UserTemplateManager._CurrentPinnedTemplates.Count - 1
