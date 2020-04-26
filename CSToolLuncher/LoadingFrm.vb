@@ -486,6 +486,7 @@ Public Class LoadingFrm
             End If
             If AppSettingsObj.LauncherCheckIfMainApplicationIsRunning Then
                 'Is main application running?
+                SetLabelText(LoadingStateLbl, "Check for running CSTool...")
                 If LauncherHelperInstance.IsApplicationRunning("CSTool") Then
                     LauncherHelperInstance.ShowMainAppAlreadyRunningMsg()
                     Exit Try
