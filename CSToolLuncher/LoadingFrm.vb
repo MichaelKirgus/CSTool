@@ -374,7 +374,7 @@ Public Class LoadingFrm
 
     Public Function StartMainAppFromSourceNonElevated() As Boolean
         Try
-            If Not LauncherHelperInstance.IsCurrentUserAdmin And AppSettingsObj.PreventMainAppFromRunningElevated Then
+            If Not LauncherHelperInstance.IsCurrentUserAdmin And AppSettingsObj.PreventMainAppFromRunningElevated And Not IsElevated Then
                 Dim SignatureHandler As New SignatureHelper
                 If SignatureHandler.CheckSign(Application.ExecutablePath) Then
                     If Not SignatureHandler.CheckSign(Environment.ExpandEnvironmentVariables(AppSettingsObj.LauncherSyncPath) & "\CSTool.exe") Then
