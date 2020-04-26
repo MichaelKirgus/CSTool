@@ -124,7 +124,7 @@ Public Class UserTemplateManager
                                                                                  currtempobj.InitialWindowLocation.Y, currtempobj.InitialWindowState)
 
                 Case DefaultWindowStyleEnum.IndependentWindow
-                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.Float, False, tempsett,
+                    isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.Unknown, True, tempsett,
                                                                                  currtempobj.ForceInitialRefresh, currtempobj.ForceInitialRaiseAction, currtempobj.InitialWindowSize.Width, currtempobj.InitialWindowSize.Height, currtempobj.InitialWindowLocation.X,
                                                                                  currtempobj.InitialWindowLocation.Y, currtempobj.InitialWindowState)
             End Select
