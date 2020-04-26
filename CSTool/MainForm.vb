@@ -595,9 +595,31 @@ Public Class MainForm
             LogManager.CloseStreams()
         End If
 
+        'Delete temp. files
+        DeleteNonPersistentFilesFromLocalFolder()
+
         SavingAppForm.Close()
 
         Return True
+    End Function
+
+    Public Function DeleteNonPersistentFilesFromLocalFolder() As Boolean
+        Try
+            If Not ApplicationSettings.NonPersistentFilesCollection.Count = 0 Then
+                For index = 0 To ApplicationSettings.NonPersistentFilesCollection.Count - 1
+                    If IO.File.Exists(My.Application.Info.DirectoryPath & "\" & ApplicationSettings.NonPersistentFilesCollection(index).FileName) Then
+                        Try
+                            IO.File.Delete(My.Application.Info.DirectoryPath & "\" & ApplicationSettings.NonPersistentFilesCollection(index).FileName)
+                        Catch ex As Exception
+                        End Try
+                    End If
+                Next
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
     End Function
 
     Public Sub ResizeAndMoveHandler()

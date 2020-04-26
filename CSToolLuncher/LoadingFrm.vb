@@ -118,6 +118,22 @@ Public Class LoadingFrm
         End Try
     End Function
 
+    Public Function DeleteNonPersistentFilesFromShare() As Boolean
+        Try
+            If Not AppSettingsObj.NonPersistentFilesCollection.Count = 0 Then
+                For index = 0 To AppSettingsObj.NonPersistentFilesCollection.Count - 1
+                    If IO.File.Exists(Application.StartupPath & "\" & AppSettingsObj.NonPersistentFilesCollection(index).FileName) Then
+                        IO.File.Delete(Application.StartupPath & "\" & AppSettingsObj.NonPersistentFilesCollection(index).FileName)
+                    End If
+                Next
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Public Sub UntilFinishShowStatus(ByRef SyncHandlerInstance As SyncLib)
         Do While SyncHandlerInstance.SyncTaskHost.IsBusy
             If Not SyncHandlerInstance.CurrentFile = "" Then
@@ -163,6 +179,9 @@ Public Class LoadingFrm
                             Exit Try
                     End Select
                 End If
+            Else
+                SetLabelText(LoadingStateLbl, "Delete temp. files...")
+                DeleteNonPersistentFilesFromShare()
             End If
 
             SetLabelText(LoadingStateLbl, "Initialize syncing...")
