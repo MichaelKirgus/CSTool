@@ -437,36 +437,8 @@ Public Class MainForm
         CurrentLoadActionState = "Loading environment variables cache..."
         EnvironmentManager.SetEnvironmentVarsInPlugins(WindowManagerHandler.PluginManager.PluginCollection, CSDockPanelHosting.Contents)
 
-        'Check if we have to load central custom actions
-        If Not UserSettings.CentralCustomActions = "" Then
-            'Load central custom actions
-            CurrentLoadActionState = "Loading central custom actions..."
-            Dim CentralCustomActionsObj As CentralCustomActions
-
-            'Central custom actions local?
-            Dim centralfilepath As String = UserSettings.CentralCustomActions
-            If Not IO.File.Exists(centralfilepath) Then
-                'Search in launcher startup path (use profile path to detect)
-                Dim profilesdirobj As New IO.DirectoryInfo(ApplicationSettings.UserProfileDir)
-                If IO.File.Exists(profilesdirobj.Parent.FullName & "\" & centralfilepath) Then
-                    centralfilepath = profilesdirobj.Parent.FullName & "\" & centralfilepath
-                End If
-            End If
-            CentralCustomActionsObj = UserSettingManager.LoadCentralCustomActions(centralfilepath)
-            CustomActionsHandler._CustomActionsCollection.AddRange(CentralCustomActionsObj.CustomActions)
-            CustomActionsHandler.LoadCustomItems(CustomItemsContext)
-        End If
-
-        CustomActionsHandler._LogManager = LogManager
-
-        If Not UserSettings.CustomActions.Count = 0 Then
-            'Load additional custom actions in workspace
-            CurrentLoadActionState = "Loading custom actions..."
-            CustomActionsHandler._CustomActionsCollection.Clear()
-            CustomActionsHandler._CustomActionsCollection.AddRange(UserSettings.CustomActions)
-            CustomActionsHandler._ShowWarningOnCustomActions = UserSettings.ShowWarningOnCustomActions
-            CustomActionsHandler.LoadCustomItems(CustomItemsContext, False)
-        End If
+        'Load custom actions
+        LoadCustomActions()
 
         If (Not UserSettings.CustomActions.Count = 0) Or (Not CustomItemsContext.Items.Count = 0) Then
             'Load environment variables to custom actions class
@@ -536,6 +508,44 @@ Public Class MainForm
         End If
 
         CurrentLoadActionState = "Finished!"
+    End Sub
+
+    Public Sub LoadCustomActions()
+        'Clear custom actions collection
+        CustomActionsHandler._CustomActionsCollection.Clear()
+
+        'Check if we have to load central custom actions
+        If Not UserSettings.CentralCustomActions = "" Then
+            'Load central custom actions
+            CurrentLoadActionState = "Loading central custom actions..."
+            Dim CentralCustomActionsObj As CentralCustomActions
+
+            'Central custom actions local?
+            Dim centralfilepath As String = UserSettings.CentralCustomActions
+            If Not IO.File.Exists(centralfilepath) Then
+                'Search in launcher startup path (use profile path to detect)
+                Dim profilesdirobj As New IO.DirectoryInfo(ApplicationSettings.UserProfileDir)
+                If IO.File.Exists(profilesdirobj.Parent.FullName & "\" & centralfilepath) Then
+                    centralfilepath = profilesdirobj.Parent.FullName & "\" & centralfilepath
+                End If
+            End If
+            CentralCustomActionsObj = UserSettingManager.LoadCentralCustomActions(centralfilepath)
+            CustomActionsHandler._CustomActionsCollection.AddRange(CentralCustomActionsObj.CustomActions)
+        End If
+
+        CustomActionsHandler._LogManager = LogManager
+
+        If Not UserSettings.CustomActions.Count = 0 Then
+            'Load additional custom actions in workspace
+            CurrentLoadActionState = "Loading custom actions..."
+            CustomActionsHandler._CustomActionsCollection.AddRange(UserSettings.CustomActions)
+            CustomActionsHandler._ShowWarningOnCustomActions = UserSettings.ShowWarningOnCustomActions
+        End If
+
+        If Not UserSettings.CustomActions.Count = 0 Or Not UserSettings.CentralCustomActions = "" Then
+            'Load custom actions
+            CustomActionsHandler.LoadCustomItems(CustomItemsContext)
+        End If
     End Sub
 
     Public Sub SaveSettings()
@@ -888,10 +898,8 @@ Public Class MainForm
         WorkspacesManagerFrm._parent = Me
         WorkspacesManagerFrm.ShowDialog()
 
-        'Reload custom actions
-        CustomActionsHandler._ShowWarningOnCustomActions = UserSettings.ShowWarningOnCustomActions
-        CustomActionsHandler._CustomActionsCollection = UserSettings.CustomActions
-        CustomActionsHandler.LoadCustomItems(CustomItemsContext)
+        'Load custom actions
+        LoadCustomActions()
     End Sub
 
     Public Sub OpenAddFromTemplateWindow()
