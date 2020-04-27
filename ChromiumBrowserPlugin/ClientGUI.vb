@@ -207,6 +207,8 @@ Public Class ClientGUI
                 If Not browser.GetBrowser.MainFrame.IsValid Then
                     HandleResize()
                 End If
+            Else
+                InitChromium()
             End If
         End If
     End Sub
@@ -217,6 +219,8 @@ Public Class ClientGUI
                 If Not browser.GetBrowser.MainFrame.IsValid Then
                     HandleResize()
                 End If
+            Else
+                InitChromium()
             End If
         End If
     End Sub
@@ -225,6 +229,11 @@ Public Class ClientGUI
         If e.KeyCode = 13 Then
             If Not IsNothing(browser) Then
                 If Not ToolStripComboBox1.Text = "" Then
+                    If browser.IsBrowserInitialized Then
+                        If Not browser.GetBrowser.MainFrame.IsValid Then
+                            HandleResize()
+                        End If
+                    End If
                     browser.Load(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, ToolStripComboBox1.Text))
 
                     e.Handled = True

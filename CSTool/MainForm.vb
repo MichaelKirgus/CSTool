@@ -1077,7 +1077,9 @@ Public Class MainForm
                 For index = 0 To pinnedtemplates.Count - 1
                     Dim templatemenuctl As New ToolStripMenuItem
                     templatemenuctl.Text = pinnedtemplates(index).TemplateName
-                    templatemenuctl.Image = WindowManagerHandler.GetPluginByName(pinnedtemplates(index).PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)).UserControlIcon.ToBitmap
+                    Dim pluginimage As Image
+                    pluginimage = WindowManagerHandler.GetPluginByName(pinnedtemplates(index).PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)).UserControlIcon.ToBitmap
+                    templatemenuctl.Image = pluginimage.Clone
                     templatemenuctl.ToolTipText = pinnedtemplates(index).TemplateDescription
                     templatemenuctl.Tag = pinnedtemplates(index)
                     ToolStripButton12.DropDownItems.Add(templatemenuctl)
@@ -1099,7 +1101,9 @@ Public Class MainForm
                 For index = 0 To UserTemplateManager._CurrentPinnedTemplates.Count - 1
                     Dim templatemenuctl As New ToolStripMenuItem
                     templatemenuctl.Text = UserTemplateManager._CurrentPinnedTemplates(index).TemplateName
-                    templatemenuctl.Image = WindowManagerHandler.GetPluginByName(UserTemplateManager._CurrentPinnedTemplates(index).PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)).UserControlIcon.ToBitmap
+                    Dim pluginimage As Image
+                    pluginimage = WindowManagerHandler.GetPluginByName(UserTemplateManager._CurrentPinnedTemplates(index).PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)).UserControlIcon.ToBitmap
+                    templatemenuctl.Image = pluginimage.Clone
                     templatemenuctl.ToolTipText = UserTemplateManager._CurrentPinnedTemplates(index).TemplateDescription
                     templatemenuctl.Tag = UserTemplateManager._CurrentPinnedTemplates(index)
                     ToolStripButton12.DropDownItems.Add(templatemenuctl)
