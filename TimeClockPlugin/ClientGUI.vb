@@ -166,6 +166,10 @@ Public Class ClientGUI
 
     Public Sub RefreshGUI()
         NotifyIcon1.Visible = _Settings.AlwaysShowTrayIcon
+        If Not _Settings.WindowTitle = "" Then
+            _ParentInstance.CurrentWindowTitle = _Settings.WindowTitle
+            Me.ParentForm.Text = _Settings.WindowTitle
+        End If
     End Sub
 
     Public Sub UnloadPlugin()
@@ -210,6 +214,7 @@ Public Class ClientGUI
         NotifyIcon1.Visible = _Settings.AlwaysShowTrayIcon
         If Not _Settings.WindowTitle = "" Then
             _ParentInstance.CurrentWindowTitle = _Settings.WindowTitle
+            Me.ParentForm.Text = _Settings.WindowTitle
         End If
         GroupBox2.Visible = _Settings.ShowBreakfast
         CalculateStaticTimes(False)
