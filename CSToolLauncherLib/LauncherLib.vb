@@ -50,6 +50,10 @@
         MsgBox("The user can not write in the user profile path.", MsgBoxStyle.Exclamation)
     End Sub
 
+    Public Sub ShowWrongLauncherWorkingDirectoryMsg()
+        MsgBox("The launcher cannot found any global settings in working directory. Please ensure that the working directory is valid.", MsgBoxStyle.Exclamation)
+    End Sub
+
     Public Function IsApplicationRunning(ByVal ProcessName As String) As Boolean
         Try
             Dim currinstance As Process()

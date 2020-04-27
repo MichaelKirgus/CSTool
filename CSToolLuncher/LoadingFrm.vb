@@ -53,6 +53,11 @@ Public Class LoadingFrm
                 If arglist(ind).ToLower = "/shortcut" Then
                     AppSettingsObj.LauncherCreateMainApplicationShortcutOnDesktop = True
                 End If
+
+                If arglist(ind).ToLower = "/skipenvironmentcheck" Then
+                    AppSettingsObj.LauncherCheckIfLauncherRunningFromValidWorkingDirectory = False
+                    AppSettingsObj.LauncherCheckIfUserCanSaveSettings = False
+                End If
             Next
 
             Return True
@@ -472,6 +477,14 @@ Public Class LoadingFrm
         Try
             SetLabelText(LoadingStateLbl, "Loading settings...")
             CheckForCommandLineArgsAppBase(Environment.GetCommandLineArgs)
+            If AppSettingsObj.LauncherCheckIfLauncherRunningFromValidWorkingDirectory Then
+                'Is launcher running with valid working directory (check if appsetings.xml and main application exists)?
+                SetLabelText(LoadingStateLbl, "Check for valid global config...")
+                If Not IO.File.Exists(ApplicationSettingsFile) Or Not IO.File.Exists("CSTool.exe") Then
+                    LauncherHelperInstance.ShowWrongLauncherWorkingDirectoryMsg()
+                    Exit Try
+                End If
+            End If
             SetLabelText(LoadingStateLbl, "Reading application settings...")
             If Not IO.File.Exists(ApplicationSettingsFile) Then
                 'Create new settings initial file if no file exists...
