@@ -14,7 +14,7 @@ Imports CSToolPluginLib
 Public Module ClientModule
     Public Class Client
         Implements ICSToolInterface
-        Public SettingsHandle As New Settings
+        Public SettingsHandle As New SettingsClass
         Private LifetimePluginGUID As String = ""
         Private FirstLoad As Boolean = True
         Public EvProvider As New EnvironmentProvider
@@ -116,30 +116,35 @@ Public Module ClientModule
         Public ReadOnly Property EnvironmentProviderClass As EnvironmentProvider Implements ICSToolInterface.EnvironmentProviderClass
             Get
                 If FirstLoad Then
-                    Dim FullUserName As New EnvironmentEntry
-                    FullUserName.ValueName = "%CurrentAppDomainFullUsername%"
-                    FullUserName.ValueData = UserPrincipal.Current.DisplayName
-                    EvProvider.EnvironmentVariables.Add(FullUserName)
-
-                    Dim UsernameSID As New EnvironmentEntry
-                    UsernameSID.ValueName = "%CurrentAppDomainUsernameSID%"
-                    UsernameSID.ValueData = UserPrincipal.Current.Sid.Value
-                    EvProvider.EnvironmentVariables.Add(UsernameSID)
-
-                    Dim EmployeeID As New EnvironmentEntry
-                    EmployeeID.ValueName = "%CurrentAppDomainUsernameEmployeeID"
-                    EmployeeID.ValueData = UserPrincipal.Current.EmployeeId
-                    EvProvider.EnvironmentVariables.Add(EmployeeID)
-
-                    Dim SAMAccountName As New EnvironmentEntry
-                    SAMAccountName.ValueName = "%CurrentAppDomainUsernameSAMAccountName"
-                    SAMAccountName.ValueData = UserPrincipal.Current.SamAccountName
-                    EvProvider.EnvironmentVariables.Add(SAMAccountName)
+                    If SettingsHandle.GetFullUsername Then
+                        Dim FullUserName As New EnvironmentEntry
+                        FullUserName.ValueName = "%CurrentAppDomainFullUsername%"
+                        FullUserName.ValueData = UserPrincipal.Current.DisplayName
+                        EvProvider.EnvironmentVariables.Add(FullUserName)
+                    End If
+                    If SettingsHandle.GetUsernameSID Then
+                        Dim UsernameSID As New EnvironmentEntry
+                        UsernameSID.ValueName = "%CurrentAppDomainUsernameSID%"
+                        UsernameSID.ValueData = UserPrincipal.Current.Sid.Value
+                        EvProvider.EnvironmentVariables.Add(UsernameSID)
+                    End If
+                    If SettingsHandle.GetUsernameEmployeeID Then
+                        Dim EmployeeID As New EnvironmentEntry
+                        EmployeeID.ValueName = "%CurrentAppDomainUsernameEmployeeID"
+                        EmployeeID.ValueData = UserPrincipal.Current.EmployeeId
+                        EvProvider.EnvironmentVariables.Add(EmployeeID)
+                    End If
+                    If SettingsHandle.GetUsernameSAMAccountName Then
+                        Dim SAMAccountName As New EnvironmentEntry
+                        SAMAccountName.ValueName = "%CurrentAppDomainUsernameSAMAccountName"
+                        SAMAccountName.ValueData = UserPrincipal.Current.SamAccountName
+                        EvProvider.EnvironmentVariables.Add(SAMAccountName)
+                    End If
 
                     FirstLoad = False
-                    Return EvProvider
-                Else
-                    Return EvProvider
+                        Return EvProvider
+                    Else
+                        Return EvProvider
                 End If
             End Get
         End Property
@@ -215,11 +220,31 @@ Public Module ClientModule
         End Sub
 
         Public Function SavePluginSettings(Optional Filename As String = "") As Boolean Implements ICSToolInterface.SavePluginSettings
-            Return True
+            Try
+                Dim XML As New XmlSerializer(SettingsClass.GetType)
+                Dim FS As New FileStream(Filename, FileMode.Create)
+                XML.Serialize(FS, SettingsHandle)
+                FS.Close()
+
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
         End Function
 
         Public Function LoadPluginSettings(Optional Filename As String = "") As Boolean Implements ICSToolInterface.LoadPluginSettings
-            Return True
+            Try
+                Dim objStreamReader As New StreamReader(Filename)
+                Dim p2 As New SettingsClass
+                Dim x As New XmlSerializer(p2.GetType)
+                p2 = x.Deserialize(objStreamReader)
+                objStreamReader.Close()
+
+                SettingsHandle = p2
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
         End Function
 
         Public Function RefreshGUI() As Boolean Implements ICSToolInterface.RefreshGUI

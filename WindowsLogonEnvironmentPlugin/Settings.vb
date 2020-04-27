@@ -3,5 +3,9 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
-<Serializable> Public Class Settings
+<Serializable> Public Class SettingsClass
+    Public Property GetFullUsername As Boolean = True
+    Public Property GetUsernameSID As Boolean = True
+    Public Property GetUsernameEmployeeID As Boolean = False
+    Public Property GetUsernameSAMAccountName As Boolean = False
 End Class
