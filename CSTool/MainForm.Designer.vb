@@ -66,6 +66,8 @@ Partial Class MainForm
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.RestoreLastClosedWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestoreInitialTemplateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ResetUserProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -102,8 +104,6 @@ Partial Class MainForm
         Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
-        Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ResetUserProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -141,12 +141,13 @@ Partial Class MainForm
         'ToolStripButton1
         '
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.DropDownButtonWidth = 15
         Me.ToolStripButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SearchInNewWindowToolStripMenuItem, Me.SearchInNewInstanceToolStripMenuItem})
         Me.ToolStripButton1.Image = Global.CSTool.My.Resources.Resources.icon_search_22x22
         Me.ToolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(38, 26)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(42, 26)
         Me.ToolStripButton1.Text = "Get information"
         '
         'SearchInNewWindowToolStripMenuItem
@@ -202,22 +203,24 @@ Partial Class MainForm
         'ToolStripButton12
         '
         Me.ToolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton12.DropDownButtonWidth = 15
         Me.ToolStripButton12.Image = Global.CSTool.My.Resources.Resources.icon_archive_22x22
         Me.ToolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton12.Name = "ToolStripButton12"
-        Me.ToolStripButton12.Size = New System.Drawing.Size(38, 26)
+        Me.ToolStripButton12.Size = New System.Drawing.Size(42, 26)
         Me.ToolStripButton12.Text = "Add item from template..."
         '
         'ToolStripButton3
         '
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton3.DropDownButtonWidth = 15
         Me.ToolStripButton3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewIndependentWindowToolStripMenuItem, Me.NewWindowToolStripMenuItem, Me.ToolStripSeparator6, Me.DockdocumentToolStripMenuItem, Me.DockleftToolStripMenuItem, Me.DockrightToolStripMenuItem, Me.DockbottomToolStripMenuItem, Me.DocktopToolStripMenuItem})
         Me.ToolStripButton3.Image = Global.CSTool.My.Resources.Resources.icon_plus_square_22x22
         Me.ToolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(38, 26)
+        Me.ToolStripButton3.Size = New System.Drawing.Size(42, 26)
         Me.ToolStripButton3.Text = "Add plugin item (docking)"
         '
         'NewIndependentWindowToolStripMenuItem
@@ -270,12 +273,13 @@ Partial Class MainForm
         'ToolStripButton6
         '
         Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton6.DropDownButtonWidth = 15
         Me.ToolStripButton6.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseAllOtherWindowsToolStripMenuItem, Me.ToolStripSeparator11, Me.CloseAllWindowsDocumentToolStripMenuItem, Me.CloseAllWindowsfloatToolStripMenuItem, Me.ToolStripSeparator12, Me.CloseAllWindowsToolStripMenuItem})
         Me.ToolStripButton6.Image = Global.CSTool.My.Resources.Resources.icon_minus_square_22x22
         Me.ToolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton6.Name = "ToolStripButton6"
-        Me.ToolStripButton6.Size = New System.Drawing.Size(38, 26)
+        Me.ToolStripButton6.Size = New System.Drawing.Size(42, 26)
         Me.ToolStripButton6.Text = "close plugin item (window)"
         '
         'CloseAllOtherWindowsToolStripMenuItem
@@ -320,12 +324,13 @@ Partial Class MainForm
         'ToolStripButton11
         '
         Me.ToolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton11.DropDownButtonWidth = 15
         Me.ToolStripButton11.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripSeparator9, Me.NewEmptyWindowToolStripMenuItem, Me.CloneWorkspaceToNewWindowToolStripMenuItem, Me.ToolStripSeparator10, Me.RestoreLastClosedWindowToolStripMenuItem, Me.RestoreInitialTemplateToolStripMenuItem, Me.ToolStripSeparator14, Me.ResetUserProfileToolStripMenuItem})
         Me.ToolStripButton11.Image = Global.CSTool.My.Resources.Resources.icon_browser_22x22
         Me.ToolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton11.Name = "ToolStripButton11"
-        Me.ToolStripButton11.Size = New System.Drawing.Size(38, 26)
+        Me.ToolStripButton11.Size = New System.Drawing.Size(42, 26)
         Me.ToolStripButton11.Text = "Templates/Workspaces"
         '
         'ToolStripMenuItem2
@@ -368,6 +373,17 @@ Partial Class MainForm
         Me.RestoreInitialTemplateToolStripMenuItem.Size = New System.Drawing.Size(362, 22)
         Me.RestoreInitialTemplateToolStripMenuItem.Text = "Restore initial template"
         '
+        'ToolStripSeparator14
+        '
+        Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(359, 6)
+        '
+        'ResetUserProfileToolStripMenuItem
+        '
+        Me.ResetUserProfileToolStripMenuItem.Name = "ResetUserProfileToolStripMenuItem"
+        Me.ResetUserProfileToolStripMenuItem.Size = New System.Drawing.Size(362, 22)
+        Me.ResetUserProfileToolStripMenuItem.Text = "Reset user profile"
+        '
         'ToolStripButton5
         '
         Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -399,12 +415,13 @@ Partial Class MainForm
         '
         Me.ToolStripButton8.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton8.DropDownButtonWidth = 18
         Me.ToolStripButton8.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PluginSettingsToolStripMenuItem, Me.TemplateSettingsToolStripMenuItem, Me.WorkplaceSettingsToolStripMenuItem, Me.ApplicationSettingsToolStripMenuItem, Me.LogSettingsToolStripMenuItem, Me.ToolStripSeparator8, Me.EnvironmentVariablesToolStripMenuItem, Me.ToolStripMenuItem1, Me.ShowApplicationRuntimeInfoToolStripMenuItem, Me.ShowLogToolStripMenuItem, Me.ToolStripSeparator13, Me.ExportWorkspaceToolStripMenuItem, Me.SaveWorkspaceToolStripMenuItem, Me.ImportWorkspaceToolStripMenuItem, Me.ToolStripSeparator7, Me.ExitWithoutWarning, Me.CloseChildsWithoutWarningToolStripMenuItem, Me.SaveSettingsToolStripMenuItem})
         Me.ToolStripButton8.Image = Global.CSTool.My.Resources.Resources.icon_menu_22x22
         Me.ToolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton8.Name = "ToolStripButton8"
-        Me.ToolStripButton8.Size = New System.Drawing.Size(38, 26)
+        Me.ToolStripButton8.Size = New System.Drawing.Size(45, 26)
         Me.ToolStripButton8.Text = "Options"
         '
         'PluginSettingsToolStripMenuItem
@@ -599,17 +616,6 @@ Partial Class MainForm
         Me.ImportWorkspaceFile.Filter = "ZIP-File|*.zip"
         Me.ImportWorkspaceFile.RestoreDirectory = True
         Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
-        '
-        'ToolStripSeparator14
-        '
-        Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        Me.ToolStripSeparator14.Size = New System.Drawing.Size(359, 6)
-        '
-        'ResetUserProfileToolStripMenuItem
-        '
-        Me.ResetUserProfileToolStripMenuItem.Name = "ResetUserProfileToolStripMenuItem"
-        Me.ResetUserProfileToolStripMenuItem.Size = New System.Drawing.Size(362, 22)
-        Me.ResetUserProfileToolStripMenuItem.Text = "Reset user profile"
         '
         'MainForm
         '
