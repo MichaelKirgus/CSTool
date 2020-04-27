@@ -31,39 +31,39 @@ Partial Class ClientGUI
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ClientGUI))
         Me.TimeClockPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ResetTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResetNotificationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SimulateTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SetSystemBootTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UseFirstAppStartupTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TotalWorktimeLbl = New System.Windows.Forms.TextBox()
         Me.StartWorktimeLbl = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LunchTimeCountdownLbl = New System.Windows.Forms.TextBox()
         Me.LunchTimeLbl = New System.Windows.Forms.TextBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.WithoutBreaksCountdownLbl = New System.Windows.Forms.TextBox()
+        Me.WithoutBreaksLbl = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.RegEndCountdownLbl = New System.Windows.Forms.TextBox()
         Me.RegEndLbl = New System.Windows.Forms.TextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.MaxEndCountdownLbl = New System.Windows.Forms.TextBox()
         Me.MaxEndLbl = New System.Windows.Forms.TextBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.WithoutBreaksCountdownLbl = New System.Windows.Forms.TextBox()
-        Me.WithoutBreaksLbl = New System.Windows.Forms.TextBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.ResetTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResetNotificationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SimulateTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SetSystemBootTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UseFirstAppStartupTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TimeClockPanel.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -91,10 +91,45 @@ Partial Class ClientGUI
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(207, 120)
         '
+        'ResetTimeToolStripMenuItem
+        '
+        Me.ResetTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_x_circle_16x16
+        Me.ResetTimeToolStripMenuItem.Name = "ResetTimeToolStripMenuItem"
+        Me.ResetTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ResetTimeToolStripMenuItem.Text = "Reset time"
+        '
+        'ResetNotificationsToolStripMenuItem
+        '
+        Me.ResetNotificationsToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_announcement_16x16
+        Me.ResetNotificationsToolStripMenuItem.Name = "ResetNotificationsToolStripMenuItem"
+        Me.ResetNotificationsToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ResetNotificationsToolStripMenuItem.Text = "Reset notifications"
+        '
+        'SimulateTimeToolStripMenuItem
+        '
+        Me.SimulateTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_clock_16x16
+        Me.SimulateTimeToolStripMenuItem.Name = "SimulateTimeToolStripMenuItem"
+        Me.SimulateTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.SimulateTimeToolStripMenuItem.Text = "Set start time..."
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(203, 6)
+        '
+        'SetSystemBootTimeToolStripMenuItem
+        '
+        Me.SetSystemBootTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_moon_16x16
+        Me.SetSystemBootTimeToolStripMenuItem.Name = "SetSystemBootTimeToolStripMenuItem"
+        Me.SetSystemBootTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.SetSystemBootTimeToolStripMenuItem.Text = "Use system boot time"
+        '
+        'UseFirstAppStartupTimeToolStripMenuItem
+        '
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_browser_16x16
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Name = "UseFirstAppStartupTimeToolStripMenuItem"
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Text = "Use first app startup time"
         '
         'GroupBox1
         '
@@ -160,6 +195,38 @@ Partial Class ClientGUI
         Me.LunchTimeLbl.Size = New System.Drawing.Size(109, 22)
         Me.LunchTimeLbl.TabIndex = 0
         '
+        'GroupBox5
+        '
+        Me.GroupBox5.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.GroupBox5.Controls.Add(Me.WithoutBreaksCountdownLbl)
+        Me.GroupBox5.Controls.Add(Me.WithoutBreaksLbl)
+        Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox5.Location = New System.Drawing.Point(245, 3)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(115, 66)
+        Me.GroupBox5.TabIndex = 4
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Without breaks"
+        '
+        'WithoutBreaksCountdownLbl
+        '
+        Me.WithoutBreaksCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.WithoutBreaksCountdownLbl.Location = New System.Drawing.Point(3, 40)
+        Me.WithoutBreaksCountdownLbl.Name = "WithoutBreaksCountdownLbl"
+        Me.WithoutBreaksCountdownLbl.ReadOnly = True
+        Me.WithoutBreaksCountdownLbl.Size = New System.Drawing.Size(109, 22)
+        Me.WithoutBreaksCountdownLbl.TabIndex = 2
+        '
+        'WithoutBreaksLbl
+        '
+        Me.WithoutBreaksLbl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.WithoutBreaksLbl.Location = New System.Drawing.Point(3, 18)
+        Me.WithoutBreaksLbl.Name = "WithoutBreaksLbl"
+        Me.WithoutBreaksLbl.ReadOnly = True
+        Me.WithoutBreaksLbl.Size = New System.Drawing.Size(109, 22)
+        Me.WithoutBreaksLbl.TabIndex = 0
+        '
         'GroupBox3
         '
         Me.GroupBox3.ContextMenuStrip = Me.ContextMenuStrip1
@@ -224,38 +291,6 @@ Partial Class ClientGUI
         Me.MaxEndLbl.Size = New System.Drawing.Size(109, 22)
         Me.MaxEndLbl.TabIndex = 0
         '
-        'GroupBox5
-        '
-        Me.GroupBox5.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.GroupBox5.Controls.Add(Me.WithoutBreaksCountdownLbl)
-        Me.GroupBox5.Controls.Add(Me.WithoutBreaksLbl)
-        Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox5.Location = New System.Drawing.Point(245, 3)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(115, 66)
-        Me.GroupBox5.TabIndex = 4
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Without breaks"
-        '
-        'WithoutBreaksCountdownLbl
-        '
-        Me.WithoutBreaksCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
-        Me.WithoutBreaksCountdownLbl.Location = New System.Drawing.Point(3, 40)
-        Me.WithoutBreaksCountdownLbl.Name = "WithoutBreaksCountdownLbl"
-        Me.WithoutBreaksCountdownLbl.ReadOnly = True
-        Me.WithoutBreaksCountdownLbl.Size = New System.Drawing.Size(109, 22)
-        Me.WithoutBreaksCountdownLbl.TabIndex = 2
-        '
-        'WithoutBreaksLbl
-        '
-        Me.WithoutBreaksLbl.Dock = System.Windows.Forms.DockStyle.Top
-        Me.WithoutBreaksLbl.Location = New System.Drawing.Point(3, 18)
-        Me.WithoutBreaksLbl.Name = "WithoutBreaksLbl"
-        Me.WithoutBreaksLbl.ReadOnly = True
-        Me.WithoutBreaksLbl.Size = New System.Drawing.Size(109, 22)
-        Me.WithoutBreaksLbl.TabIndex = 0
-        '
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -306,41 +341,6 @@ Partial Class ClientGUI
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
         Me.NotifyIcon1.Text = "TimeClock"
         '
-        'ResetTimeToolStripMenuItem
-        '
-        Me.ResetTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_x_circle_16x16
-        Me.ResetTimeToolStripMenuItem.Name = "ResetTimeToolStripMenuItem"
-        Me.ResetTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.ResetTimeToolStripMenuItem.Text = "Reset time"
-        '
-        'ResetNotificationsToolStripMenuItem
-        '
-        Me.ResetNotificationsToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_announcement_16x16
-        Me.ResetNotificationsToolStripMenuItem.Name = "ResetNotificationsToolStripMenuItem"
-        Me.ResetNotificationsToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.ResetNotificationsToolStripMenuItem.Text = "Reset notifications"
-        '
-        'SimulateTimeToolStripMenuItem
-        '
-        Me.SimulateTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_clock_16x16
-        Me.SimulateTimeToolStripMenuItem.Name = "SimulateTimeToolStripMenuItem"
-        Me.SimulateTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.SimulateTimeToolStripMenuItem.Text = "Set time..."
-        '
-        'SetSystemBootTimeToolStripMenuItem
-        '
-        Me.SetSystemBootTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_moon_16x16
-        Me.SetSystemBootTimeToolStripMenuItem.Name = "SetSystemBootTimeToolStripMenuItem"
-        Me.SetSystemBootTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.SetSystemBootTimeToolStripMenuItem.Text = "Use system boot time"
-        '
-        'UseFirstAppStartupTimeToolStripMenuItem
-        '
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_browser_16x16
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Name = "UseFirstAppStartupTimeToolStripMenuItem"
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Text = "Use first app startup time"
-        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -355,12 +355,12 @@ Partial Class ClientGUI
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()

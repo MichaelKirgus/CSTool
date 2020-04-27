@@ -48,7 +48,7 @@ Partial Class SimulateTime
         Me.Name = "SimulateTime"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Set time"
+        Me.Text = "Set start time"
         Me.ResumeLayout(False)
 
     End Sub

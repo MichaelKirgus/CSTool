@@ -6,6 +6,8 @@
 Imports System.Windows.Forms
 
 <Serializable> Public Class Settings
+    Public Property WindowTitle As String = ""
+    Public Property ShowBreakfast As Boolean = False
     Public Property UseSystemBootupTime As Boolean = True
     Public Property UseLocalFileTimestampIfOlder As Boolean = True
     Public Property NormalWorktimeSpan As Integer = 450

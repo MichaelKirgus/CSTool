@@ -208,6 +208,10 @@ Public Class ClientGUI
 
     Private Sub ClientGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         NotifyIcon1.Visible = _Settings.AlwaysShowTrayIcon
+        If Not _Settings.WindowTitle = "" Then
+            _ParentInstance.CurrentWindowTitle = _Settings.WindowTitle
+        End If
+        GroupBox2.Visible = _Settings.ShowBreakfast
         CalculateStaticTimes(False)
         If Not BackgroundWorker1.IsBusy Then
             BackgroundWorker1.RunWorkerAsync()
