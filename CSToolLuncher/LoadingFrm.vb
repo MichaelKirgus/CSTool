@@ -58,6 +58,10 @@ Public Class LoadingFrm
                     AppSettingsObj.LauncherCheckIfLauncherRunningFromValidWorkingDirectory = False
                     AppSettingsObj.LauncherCheckIfUserCanSaveSettings = False
                 End If
+
+                If arglist(ind).ToLower = "/skiprunningmainappcheck" Then
+                    AppSettingsObj.LauncherCheckIfMainApplicationIsRunning = False
+                End If
             Next
 
             Return True
