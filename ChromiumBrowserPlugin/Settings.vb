@@ -18,6 +18,8 @@
     Public Property CachePath As String = ""
     Public Property PersistSessionCookies As Boolean = False
     Public Property IgnoreCertificateErrors As Boolean = False
+    Public Property DisableGPURendering As Boolean = False
+    Public Property WindowlessRendering As Boolean = False
     Public Property UserAgent As String = ""
     Public Property ChromiumExtensions As List(Of ExtensionEntry)
     Public Property EnableLog As Boolean = False

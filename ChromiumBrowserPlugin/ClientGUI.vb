@@ -56,6 +56,10 @@ Public Class ClientGUI
                     Else
                         settings.LogSeverity = LogSeverity.Disable
                     End If
+                    If _Settings.DisableGPURendering Then
+                        settings.DisableGpuAcceleration()
+                    End If
+                    settings.WindowlessRenderingEnabled = _Settings.WindowlessRendering
                 End If
 
                 CefSharp.Cef.Initialize(settings)
