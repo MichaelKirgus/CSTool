@@ -104,6 +104,7 @@ Partial Class MainForm
         Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
+        Me.ReloadUserTemplatesAndActionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -416,7 +417,7 @@ Partial Class MainForm
         Me.ToolStripButton8.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton8.DropDownButtonWidth = 18
-        Me.ToolStripButton8.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PluginSettingsToolStripMenuItem, Me.TemplateSettingsToolStripMenuItem, Me.WorkplaceSettingsToolStripMenuItem, Me.ApplicationSettingsToolStripMenuItem, Me.LogSettingsToolStripMenuItem, Me.ToolStripSeparator8, Me.EnvironmentVariablesToolStripMenuItem, Me.ToolStripMenuItem1, Me.ShowApplicationRuntimeInfoToolStripMenuItem, Me.ShowLogToolStripMenuItem, Me.ToolStripSeparator13, Me.ExportWorkspaceToolStripMenuItem, Me.SaveWorkspaceToolStripMenuItem, Me.ImportWorkspaceToolStripMenuItem, Me.ToolStripSeparator7, Me.ExitWithoutWarning, Me.CloseChildsWithoutWarningToolStripMenuItem, Me.SaveSettingsToolStripMenuItem})
+        Me.ToolStripButton8.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PluginSettingsToolStripMenuItem, Me.TemplateSettingsToolStripMenuItem, Me.WorkplaceSettingsToolStripMenuItem, Me.ApplicationSettingsToolStripMenuItem, Me.LogSettingsToolStripMenuItem, Me.ToolStripSeparator8, Me.EnvironmentVariablesToolStripMenuItem, Me.ToolStripMenuItem1, Me.ShowApplicationRuntimeInfoToolStripMenuItem, Me.ShowLogToolStripMenuItem, Me.ToolStripSeparator13, Me.ExportWorkspaceToolStripMenuItem, Me.ReloadUserTemplatesAndActionsToolStripMenuItem, Me.SaveWorkspaceToolStripMenuItem, Me.ImportWorkspaceToolStripMenuItem, Me.ToolStripSeparator7, Me.ExitWithoutWarning, Me.CloseChildsWithoutWarningToolStripMenuItem, Me.SaveSettingsToolStripMenuItem})
         Me.ToolStripButton8.Image = Global.CSTool.My.Resources.Resources.icon_menu_22x22
         Me.ToolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
@@ -427,89 +428,89 @@ Partial Class MainForm
         'PluginSettingsToolStripMenuItem
         '
         Me.PluginSettingsToolStripMenuItem.Name = "PluginSettingsToolStripMenuItem"
-        Me.PluginSettingsToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.PluginSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.PluginSettingsToolStripMenuItem.Text = "Plug-in settings..."
         '
         'TemplateSettingsToolStripMenuItem
         '
         Me.TemplateSettingsToolStripMenuItem.Name = "TemplateSettingsToolStripMenuItem"
-        Me.TemplateSettingsToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.TemplateSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.TemplateSettingsToolStripMenuItem.Text = "Template settings..."
         '
         'WorkplaceSettingsToolStripMenuItem
         '
         Me.WorkplaceSettingsToolStripMenuItem.Name = "WorkplaceSettingsToolStripMenuItem"
-        Me.WorkplaceSettingsToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.WorkplaceSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.WorkplaceSettingsToolStripMenuItem.Text = "Workplace settings..."
         '
         'ApplicationSettingsToolStripMenuItem
         '
         Me.ApplicationSettingsToolStripMenuItem.Name = "ApplicationSettingsToolStripMenuItem"
-        Me.ApplicationSettingsToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.ApplicationSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ApplicationSettingsToolStripMenuItem.Text = "Application settings..."
         '
         'LogSettingsToolStripMenuItem
         '
         Me.LogSettingsToolStripMenuItem.Name = "LogSettingsToolStripMenuItem"
-        Me.LogSettingsToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.LogSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.LogSettingsToolStripMenuItem.Text = "Log settings..."
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(255, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(275, 6)
         '
         'EnvironmentVariablesToolStripMenuItem
         '
         Me.EnvironmentVariablesToolStripMenuItem.Name = "EnvironmentVariablesToolStripMenuItem"
-        Me.EnvironmentVariablesToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.EnvironmentVariablesToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.EnvironmentVariablesToolStripMenuItem.Text = "Environment variables..."
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(258, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(278, 22)
         Me.ToolStripMenuItem1.Text = "Test environment strings..."
         '
         'ShowApplicationRuntimeInfoToolStripMenuItem
         '
         Me.ShowApplicationRuntimeInfoToolStripMenuItem.Name = "ShowApplicationRuntimeInfoToolStripMenuItem"
-        Me.ShowApplicationRuntimeInfoToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.ShowApplicationRuntimeInfoToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ShowApplicationRuntimeInfoToolStripMenuItem.Text = "Show application runtime info..."
         '
         'ShowLogToolStripMenuItem
         '
         Me.ShowLogToolStripMenuItem.Name = "ShowLogToolStripMenuItem"
-        Me.ShowLogToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.ShowLogToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ShowLogToolStripMenuItem.Text = "Show Log..."
         '
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(255, 6)
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(275, 6)
         '
         'ExportWorkspaceToolStripMenuItem
         '
         Me.ExportWorkspaceToolStripMenuItem.Name = "ExportWorkspaceToolStripMenuItem"
-        Me.ExportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.ExportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ExportWorkspaceToolStripMenuItem.Text = "Export workspace..."
         '
         'SaveWorkspaceToolStripMenuItem
         '
         Me.SaveWorkspaceToolStripMenuItem.Name = "SaveWorkspaceToolStripMenuItem"
-        Me.SaveWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.SaveWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.SaveWorkspaceToolStripMenuItem.Text = "Save workspace"
         '
         'ImportWorkspaceToolStripMenuItem
         '
         Me.ImportWorkspaceToolStripMenuItem.Name = "ImportWorkspaceToolStripMenuItem"
-        Me.ImportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.ImportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ImportWorkspaceToolStripMenuItem.Text = "Import workspace..."
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(255, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(275, 6)
         '
         'ExitWithoutWarning
         '
@@ -517,14 +518,14 @@ Partial Class MainForm
         Me.ExitWithoutWarning.CheckOnClick = True
         Me.ExitWithoutWarning.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ExitWithoutWarning.Name = "ExitWithoutWarning"
-        Me.ExitWithoutWarning.Size = New System.Drawing.Size(258, 22)
+        Me.ExitWithoutWarning.Size = New System.Drawing.Size(278, 22)
         Me.ExitWithoutWarning.Text = "Exit without warning"
         '
         'CloseChildsWithoutWarningToolStripMenuItem
         '
         Me.CloseChildsWithoutWarningToolStripMenuItem.CheckOnClick = True
         Me.CloseChildsWithoutWarningToolStripMenuItem.Name = "CloseChildsWithoutWarningToolStripMenuItem"
-        Me.CloseChildsWithoutWarningToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.CloseChildsWithoutWarningToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.CloseChildsWithoutWarningToolStripMenuItem.Text = "Close childs without warning"
         '
         'SaveSettingsToolStripMenuItem
@@ -533,7 +534,7 @@ Partial Class MainForm
         Me.SaveSettingsToolStripMenuItem.CheckOnClick = True
         Me.SaveSettingsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.SaveSettingsToolStripMenuItem.Name = "SaveSettingsToolStripMenuItem"
-        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(258, 22)
+        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.SaveSettingsToolStripMenuItem.Text = "Save settings"
         '
         'ToolStripSeparator5
@@ -616,6 +617,12 @@ Partial Class MainForm
         Me.ImportWorkspaceFile.Filter = "ZIP-File|*.zip"
         Me.ImportWorkspaceFile.RestoreDirectory = True
         Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
+        '
+        'ReloadUserTemplatesAndActionsToolStripMenuItem
+        '
+        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Name = "ReloadUserTemplatesAndActionsToolStripMenuItem"
+        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Text = "Reload user templates and actions"
         '
         'MainForm
         '
@@ -715,4 +722,5 @@ Partial Class MainForm
     Friend WithEvents ShowApplicationRuntimeInfoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator14 As ToolStripSeparator
     Friend WithEvents ResetUserProfileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReloadUserTemplatesAndActionsToolStripMenuItem As ToolStripMenuItem
 End Class

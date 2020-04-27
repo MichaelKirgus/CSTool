@@ -470,12 +470,7 @@ Public Class MainForm
         End If
 
         'Load user templates (to load new window instance faster)
-        CurrentLoadActionState = "Loading user templates..."
-        If IsChild Then
-            UserTemplateManager.CurrentTemplates = ParentInstance.UserTemplateManager.CurrentTemplates
-        Else
-            UserTemplateManager.CurrentTemplates = UserTemplateManager.GetTemplates(ApplicationSettings.UserTemplatesDir, WindowManagerHandler.PluginManager.PluginCollection)
-        End If
+        LoadTemplates()
 
         'Load pinned user templates (to create new form instances faster)
         If UserSettings.LoadPinnedTemplates Then
@@ -508,6 +503,15 @@ Public Class MainForm
         End If
 
         CurrentLoadActionState = "Finished!"
+    End Sub
+
+    Public Sub LoadTemplates()
+        CurrentLoadActionState = "Loading user templates..."
+        If IsChild Then
+            UserTemplateManager.CurrentTemplates = ParentInstance.UserTemplateManager.CurrentTemplates
+        Else
+            UserTemplateManager.CurrentTemplates = UserTemplateManager.GetTemplates(ApplicationSettings.UserTemplatesDir, WindowManagerHandler.PluginManager.PluginCollection)
+        End If
     End Sub
 
     Public Sub LoadCustomActions()
@@ -1273,5 +1277,11 @@ Public Class MainForm
     Private Sub ToolStripButton8_DropDownOpening(sender As Object, e As EventArgs) Handles ToolStripButton8.DropDownOpening
         'Main menu should open at form client area...
         ToolStripButton8.DropDownDirection = ToolStripDropDownDirection.BelowLeft
+    End Sub
+
+    Private Sub ReloadUserTemplatesAndActionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReloadUserTemplatesAndActionsToolStripMenuItem.Click
+        'Reload all external actions and templates
+        LoadTemplates()
+        LoadCustomActions()
     End Sub
 End Class
