@@ -118,33 +118,33 @@ Public Module ClientModule
                 If FirstLoad Then
                     If SettingsHandle.GetFullUsername Then
                         Dim FullUserName As New EnvironmentEntry
-                        FullUserName.ValueName = "%CurrentAppDomainFullUsername%"
+                        FullUserName.ValueName = "CurrentAppDomainFullUsername"
                         FullUserName.ValueData = UserPrincipal.Current.DisplayName
                         EvProvider.EnvironmentVariables.Add(FullUserName)
                     End If
                     If SettingsHandle.GetUsernameSID Then
                         Dim UsernameSID As New EnvironmentEntry
-                        UsernameSID.ValueName = "%CurrentAppDomainUsernameSID%"
+                        UsernameSID.ValueName = "CurrentAppDomainUsernameSID"
                         UsernameSID.ValueData = UserPrincipal.Current.Sid.Value
                         EvProvider.EnvironmentVariables.Add(UsernameSID)
                     End If
                     If SettingsHandle.GetUsernameEmployeeID Then
                         Dim EmployeeID As New EnvironmentEntry
-                        EmployeeID.ValueName = "%CurrentAppDomainUsernameEmployeeID"
+                        EmployeeID.ValueName = "CurrentAppDomainUsernameEmployeeID"
                         EmployeeID.ValueData = UserPrincipal.Current.EmployeeId
                         EvProvider.EnvironmentVariables.Add(EmployeeID)
                     End If
                     If SettingsHandle.GetUsernameSAMAccountName Then
                         Dim SAMAccountName As New EnvironmentEntry
-                        SAMAccountName.ValueName = "%CurrentAppDomainUsernameSAMAccountName"
+                        SAMAccountName.ValueName = "CurrentAppDomainUsernameSAMAccountName"
                         SAMAccountName.ValueData = UserPrincipal.Current.SamAccountName
                         EvProvider.EnvironmentVariables.Add(SAMAccountName)
                     End If
 
                     FirstLoad = False
-                        Return EvProvider
-                    Else
-                        Return EvProvider
+                    Return EvProvider
+                Else
+                    Return EvProvider
                 End If
             End Get
         End Property
