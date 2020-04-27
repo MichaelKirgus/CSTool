@@ -60,7 +60,6 @@ Public Class TemplateManager
                             If Collection(index).PluginTemplates(plugind).PinToShortcutMenu Then
                                 Collection(index).PluginTemplates(plugind).PluginName = Collection(index).PluginName
                                 resultlist.Add(Collection(index).PluginTemplates(plugind))
-                                Exit For
                             End If
                         Next
                     End If
