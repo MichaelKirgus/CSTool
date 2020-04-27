@@ -1257,4 +1257,9 @@ Public Class MainForm
             RestoreInitialTemplateWorkspace(True, True)
         End If
     End Sub
+
+    Private Sub ToolStripButton8_DropDownOpening(sender As Object, e As EventArgs) Handles ToolStripButton8.DropDownOpening
+        'Main menu should open at form client area...
+        ToolStripButton8.DropDownDirection = ToolStripDropDownDirection.BelowLeft
+    End Sub
 End Class
