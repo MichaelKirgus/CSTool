@@ -249,6 +249,9 @@ Public Class ClientGUI
 
     Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
         If Not IsNothing(browser) Then
+            If browser.IsBrowserInitialized Then
+                InitChromium()
+            End If
             browser.Reload
         End If
     End Sub
