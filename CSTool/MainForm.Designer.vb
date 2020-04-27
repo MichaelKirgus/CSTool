@@ -27,7 +27,6 @@ Partial Class MainForm
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
@@ -84,6 +83,7 @@ Partial Class MainForm
         Me.ShowLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReloadUserTemplatesAndActionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
@@ -96,15 +96,14 @@ Partial Class MainForm
         Me.DockingSuiteVS2015LightTheme = New WeifenLuo.WinFormsUI.Docking.VS2015LightTheme()
         Me.DockingSuiteVS2015BlueTheme = New WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme()
         Me.CSDockPanelHosting = New WeifenLuo.WinFormsUI.Docking.DockPanel()
-        Me.DockingMainMenuContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DockingMainMenuContext = New System.Windows.Forms.ContextMenuStrip()
         Me.AddItemFromTemplatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VS2015DarkTheme1 = New WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme()
-        Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(Me.components)
+        Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender()
         Me.CheckHostOrIPAsync = New System.ComponentModel.BackgroundWorker()
-        Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip()
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
-        Me.ReloadUserTemplatesAndActionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -427,30 +426,35 @@ Partial Class MainForm
         '
         'PluginSettingsToolStripMenuItem
         '
+        Me.PluginSettingsToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_puzzle_16x16
         Me.PluginSettingsToolStripMenuItem.Name = "PluginSettingsToolStripMenuItem"
         Me.PluginSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.PluginSettingsToolStripMenuItem.Text = "Plug-in settings..."
         '
         'TemplateSettingsToolStripMenuItem
         '
+        Me.TemplateSettingsToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_archive_16x16
         Me.TemplateSettingsToolStripMenuItem.Name = "TemplateSettingsToolStripMenuItem"
         Me.TemplateSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.TemplateSettingsToolStripMenuItem.Text = "Template settings..."
         '
         'WorkplaceSettingsToolStripMenuItem
         '
+        Me.WorkplaceSettingsToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_browser_16x16
         Me.WorkplaceSettingsToolStripMenuItem.Name = "WorkplaceSettingsToolStripMenuItem"
         Me.WorkplaceSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.WorkplaceSettingsToolStripMenuItem.Text = "Workplace settings..."
         '
         'ApplicationSettingsToolStripMenuItem
         '
+        Me.ApplicationSettingsToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_server_16x16
         Me.ApplicationSettingsToolStripMenuItem.Name = "ApplicationSettingsToolStripMenuItem"
         Me.ApplicationSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ApplicationSettingsToolStripMenuItem.Text = "Application settings..."
         '
         'LogSettingsToolStripMenuItem
         '
+        Me.LogSettingsToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_file_16x16
         Me.LogSettingsToolStripMenuItem.Name = "LogSettingsToolStripMenuItem"
         Me.LogSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.LogSettingsToolStripMenuItem.Text = "Log settings..."
@@ -462,24 +466,28 @@ Partial Class MainForm
         '
         'EnvironmentVariablesToolStripMenuItem
         '
+        Me.EnvironmentVariablesToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_inbox_16x16
         Me.EnvironmentVariablesToolStripMenuItem.Name = "EnvironmentVariablesToolStripMenuItem"
         Me.EnvironmentVariablesToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.EnvironmentVariablesToolStripMenuItem.Text = "Environment variables..."
         '
         'ToolStripMenuItem1
         '
+        Me.ToolStripMenuItem1.Image = Global.CSTool.My.Resources.Resources.icon_search_16x16
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         Me.ToolStripMenuItem1.Size = New System.Drawing.Size(278, 22)
         Me.ToolStripMenuItem1.Text = "Test environment strings..."
         '
         'ShowApplicationRuntimeInfoToolStripMenuItem
         '
+        Me.ShowApplicationRuntimeInfoToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_information_16x16
         Me.ShowApplicationRuntimeInfoToolStripMenuItem.Name = "ShowApplicationRuntimeInfoToolStripMenuItem"
         Me.ShowApplicationRuntimeInfoToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ShowApplicationRuntimeInfoToolStripMenuItem.Text = "Show application runtime info..."
         '
         'ShowLogToolStripMenuItem
         '
+        Me.ShowLogToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_menu_16x16
         Me.ShowLogToolStripMenuItem.Name = "ShowLogToolStripMenuItem"
         Me.ShowLogToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ShowLogToolStripMenuItem.Text = "Show Log..."
@@ -491,18 +499,28 @@ Partial Class MainForm
         '
         'ExportWorkspaceToolStripMenuItem
         '
+        Me.ExportWorkspaceToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_upload_16x16
         Me.ExportWorkspaceToolStripMenuItem.Name = "ExportWorkspaceToolStripMenuItem"
         Me.ExportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ExportWorkspaceToolStripMenuItem.Text = "Export workspace..."
         '
+        'ReloadUserTemplatesAndActionsToolStripMenuItem
+        '
+        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_refresh_16x16
+        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Name = "ReloadUserTemplatesAndActionsToolStripMenuItem"
+        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
+        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Text = "Reload user templates and actions"
+        '
         'SaveWorkspaceToolStripMenuItem
         '
+        Me.SaveWorkspaceToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_check_circle_16x16
         Me.SaveWorkspaceToolStripMenuItem.Name = "SaveWorkspaceToolStripMenuItem"
         Me.SaveWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.SaveWorkspaceToolStripMenuItem.Text = "Save workspace"
         '
         'ImportWorkspaceToolStripMenuItem
         '
+        Me.ImportWorkspaceToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_download_16x16
         Me.ImportWorkspaceToolStripMenuItem.Name = "ImportWorkspaceToolStripMenuItem"
         Me.ImportWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.ImportWorkspaceToolStripMenuItem.Text = "Import workspace..."
@@ -617,12 +635,6 @@ Partial Class MainForm
         Me.ImportWorkspaceFile.Filter = "ZIP-File|*.zip"
         Me.ImportWorkspaceFile.RestoreDirectory = True
         Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
-        '
-        'ReloadUserTemplatesAndActionsToolStripMenuItem
-        '
-        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Name = "ReloadUserTemplatesAndActionsToolStripMenuItem"
-        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
-        Me.ReloadUserTemplatesAndActionsToolStripMenuItem.Text = "Reload user templates and actions"
         '
         'MainForm
         '

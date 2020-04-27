@@ -523,6 +523,23 @@
     <Content Include="Licenses\License_DockPanelSuite.txt" />
     <Content Include="Licenses\License_Gecko.txt" />
     <Content Include="Licenses\License_MainApp.txt" />
+    <None Include="Resources\icon-puzzle_16x16.png" />
+    <None Include="Resources\icon-refresh_16x16.png" />
+    <None Include="Resources\icon-repeat_16x16.png" />
+    <None Include="Resources\icon-user_16x16.png" />
+    <None Include="Resources\icon-archive_16x161.png" />
+    <None Include="Resources\icon-browser_16x16.png" />
+    <None Include="Resources\icon-grid_16x16.png" />
+    <None Include="Resources\icon-group_16x16.png" />
+    <None Include="Resources\icon-server_16x16.png" />
+    <None Include="Resources\icon-file_16x16.png" />
+    <None Include="Resources\icon-inbox_16x16.png" />
+    <None Include="Resources\icon-information_16x16.png" />
+    <None Include="Resources\icon-menu_16x16.png" />
+    <None Include="Resources\icon-upload_16x16.png" />
+    <None Include="Resources\icon-download_16x16.png" />
+    <None Include="Resources\icon-check-circle_16x16.png" />
+    <None Include="Resources\icon-search_16x16.png" />
     <Content Include="wizard_app.ico" />
   </ItemGroup>
   <ItemGroup>
