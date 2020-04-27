@@ -440,12 +440,6 @@ Public Class MainForm
         'Load custom actions
         LoadCustomActions()
 
-        If (Not UserSettings.CustomActions.Count = 0) Or (Not CustomItemsContext.Items.Count = 0) Then
-            'Load environment variables to custom actions class
-            CurrentLoadActionState = "Loading environment variables for custom actions..."
-            CustomActionsHandler._EnvironmentRuntimeVariables = EnvironmentManager.GetEnvironmentVarsFromPlugins(WindowManagerHandler.PluginManager.PluginCollection)
-        End If
-
         'Load custom actions (autostart)...
         CurrentLoadActionState = "Loading custom autostart actions..."
         CustomActionsAutostartHandler._ShowWarningOnCustomActions = UserSettings.ShowWarningOnCustomActions
@@ -471,16 +465,6 @@ Public Class MainForm
 
         'Load user templates (to load new window instance faster)
         LoadTemplates()
-
-        'Load pinned user templates (to create new form instances faster)
-        If UserSettings.LoadPinnedTemplates Then
-            CurrentLoadActionState = "Loading pinned user templates..."
-            If IsChild Then
-                ClonePinnedTemplatesFromParentToChild()
-            Else
-                LoadAllPinnedTemplates()
-            End If
-        End If
 
         'Set initial window state for raising windows state events
         LastWindowState = Me.WindowState
@@ -511,6 +495,16 @@ Public Class MainForm
             UserTemplateManager.CurrentTemplates = ParentInstance.UserTemplateManager.CurrentTemplates
         Else
             UserTemplateManager.CurrentTemplates = UserTemplateManager.GetTemplates(ApplicationSettings.UserTemplatesDir, WindowManagerHandler.PluginManager.PluginCollection)
+        End If
+
+        'Load pinned user templates (to create new form instances faster)
+        If UserSettings.LoadPinnedTemplates Then
+            CurrentLoadActionState = "Loading pinned user templates..."
+            If IsChild Then
+                ClonePinnedTemplatesFromParentToChild()
+            Else
+                LoadAllPinnedTemplates()
+            End If
         End If
     End Sub
 
@@ -549,6 +543,12 @@ Public Class MainForm
         If Not UserSettings.CustomActions.Count = 0 Or Not UserSettings.CentralCustomActions = "" Then
             'Load custom actions
             CustomActionsHandler.LoadCustomItems(CustomItemsContext)
+        End If
+
+        If (Not UserSettings.CustomActions.Count = 0) Or (Not CustomItemsContext.Items.Count = 0) Then
+            'Load environment variables to custom actions class
+            CurrentLoadActionState = "Loading environment variables for custom actions..."
+            CustomActionsHandler._EnvironmentRuntimeVariables = EnvironmentManager.GetEnvironmentVarsFromPlugins(WindowManagerHandler.PluginManager.PluginCollection)
         End If
     End Sub
 
@@ -1076,6 +1076,8 @@ Public Class MainForm
             pinnedtemplates = UserTemplateManager.GetPinnedTemplates(UserTemplateManager.CurrentTemplates)
 
             UserTemplateManager._CurrentPinnedTemplates = pinnedtemplates
+
+            ToolStripButton12.DropDownItems.Clear()
 
             If Not pinnedtemplates.Count = 0 Then
                 For index = 0 To pinnedtemplates.Count - 1
