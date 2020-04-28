@@ -22,6 +22,8 @@ Imports CSToolLogLib
     Public Property LauncherSyncNeedsElevation As Boolean = True
     Public Property LauncherDeleteFilesFromSyncPath As Boolean = True
     Public Property LauncherIncludeFolderCollection As New List(Of LauncherIncludeFolderEntry)
+    Public Property LauncherElevatedStartScriptCollection As New List(Of LauncherStartScriptEntry)
+    Public Property LauncherStartScriptCollection As New List(Of LauncherStartScriptEntry)
     Public Property NonPersistentFilesCollection As New List(Of NonPersistentFiles)
     Public Property LauncherCreateMainApplicationShortcutOnDesktop As Boolean = True
     Public Property LauncherMainAppStartMode As MainAppCommandlLineArgumentsMode = MainAppCommandlLineArgumentsMode.OnlyRunMainAppWithoutLocalWorkingDir
@@ -57,6 +59,10 @@ End Enum
 <Serializable> Public Class LauncherIncludeFolderEntry
     Public Property FolderName As String = ""
     Public Property Recursive As Boolean = True
+End Class
+
+<Serializable> Public Class LauncherStartScriptEntry
+    Public Property ScriptPath As String = ""
 End Class
 
 <Serializable> Public Class NonPersistentFiles

@@ -546,6 +546,9 @@ Public Class LoadingFrm
 
                 If IO.Directory.Exists(targetdir) Then
                     If SyncNeeded(True) Then
+                        SetLabelText(LoadingStateLbl, "Execute start scripts (elevated)...")
+                        ExecuteScripts(AppSettingsObj.LauncherElevatedStartScriptCollection)
+
                         If StartMainAppFromSourceNonElevated() = False Then
                             LauncherHelperInstance.ShowElevatedAppWarningMsg()
                         End If
@@ -561,6 +564,9 @@ Public Class LoadingFrm
                             Catch ex As Exception
                             End Try
 
+                            SetLabelText(LoadingStateLbl, "Execute start scripts (elevated)...")
+                            ExecuteScripts(AppSettingsObj.LauncherElevatedStartScriptCollection)
+
                             If SyncNeeded() = False Then
                                 'Start main app if target directory was first created.
                                 If StartMainAppFromSourceNonElevated() = False Then
@@ -575,6 +581,9 @@ Public Class LoadingFrm
                     End If
                 End If
                 If Not IsElevated Then
+                    SetLabelText(LoadingStateLbl, "Execute start scripts...")
+                    ExecuteScripts(AppSettingsObj.LauncherStartScriptCollection)
+
                     If AppSettingsObj.LauncherCreateMainApplicationShortcutOnDesktop Then
                         SetLabelText(LoadingStateLbl, "Create shortcut...")
                         CheckAndCreateDesktopShortcut()
@@ -621,6 +630,25 @@ Public Class LoadingFrm
                 Return False
             End If
         End If
+    End Function
+
+    Public Function ExecuteScripts(ByVal ScriptCollection As List(Of LauncherStartScriptEntry)) As Boolean
+        Try
+            If Not ScriptCollection.Count = 0 Then
+                For index = 0 To ScriptCollection.Count - 1
+                    If ScriptCollection(index).ScriptPath.EndsWith(".reg") Then
+                        Shell("regedit /s " & My.Resources.pathsep & Environment.ExpandEnvironmentVariables(ScriptCollection(index).ScriptPath) & My.Resources.pathsep, AppWinStyle.Hide, True)
+                    Else
+                        Shell(Environment.ExpandEnvironmentVariables(ScriptCollection(index).ScriptPath), AppWinStyle.Hide, True)
+                    End If
+                Next
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
     End Function
 
     Private Sub LoadingState_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles LoadingState.RunWorkerCompleted
