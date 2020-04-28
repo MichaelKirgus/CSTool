@@ -12,4 +12,5 @@
     Public Property RaiseURLRefreshIfHostnameChanged As Boolean = True
     Public Property ShowWebsiteTitleInWindowTitle As Boolean = True
     Public Property ShowNavigationToolbar As Boolean = True
+    Public Property IgnoreNoValidCertificate As Boolean = False
 End Class

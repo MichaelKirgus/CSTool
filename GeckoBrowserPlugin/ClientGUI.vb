@@ -33,6 +33,15 @@ Public Class ClientGUI
         End If
     End Sub
 
+    Sub Browser_Error(ByVal sender As Object, e As Gecko.Events.GeckoNSSErrorEventArgs) Handles WebBrowser1.NSSError
+        If e.Message.Contains("certificate") Then
+            If _Settings.IgnoreNoValidCertificate Then
+                Gecko.CertOverrideService.GetService().RememberValidityOverride(e.Uri, e.Certificate, Gecko.CertOverride.Untrusted, False)
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
     Private Sub ClientGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsNothing(_Settings) Then
             If Not _Settings.InitialTitle = "" Then
