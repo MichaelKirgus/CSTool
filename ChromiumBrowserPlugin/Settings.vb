@@ -16,6 +16,7 @@
     Public Property UseCustomAuthentificationPassword As String = ""
     Public Property ShowNavigationToolbar As Boolean = True
     Public Property CachePath As String = ""
+    Public Property BrowserLocale As String = ""
     Public Property PersistSessionCookies As Boolean = False
     Public Property IgnoreCertificateErrors As Boolean = False
     Public Property DisableGPURendering As Boolean = False

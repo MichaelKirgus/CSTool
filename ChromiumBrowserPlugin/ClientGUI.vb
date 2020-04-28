@@ -60,6 +60,9 @@ Public Class ClientGUI
                         settings.DisableGpuAcceleration()
                     End If
                     settings.WindowlessRenderingEnabled = _Settings.WindowlessRendering
+                    If Not _Settings.BrowserLocale = "" Then
+                        settings.AcceptLanguageList = _Settings.BrowserLocale
+                    End If
                 End If
 
                 CefSharp.Cef.Initialize(settings)

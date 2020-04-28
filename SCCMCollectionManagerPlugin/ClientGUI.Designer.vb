@@ -366,6 +366,7 @@ Partial Class ClientGUI
         'ToolStripTextBox3
         '
         Me.ToolStripTextBox3.Enabled = False
+        Me.ToolStripTextBox3.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.ToolStripTextBox3.Name = "ToolStripTextBox3"
         Me.ToolStripTextBox3.Size = New System.Drawing.Size(150, 25)
         '
@@ -782,6 +783,7 @@ Partial Class ClientGUI
         'ToolStripTextBox2
         '
         Me.ToolStripTextBox2.Enabled = False
+        Me.ToolStripTextBox2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.ToolStripTextBox2.Name = "ToolStripTextBox2"
         Me.ToolStripTextBox2.Size = New System.Drawing.Size(100, 25)
         '
@@ -989,6 +991,7 @@ Partial Class ClientGUI
         'ToolStripTextBox1
         '
         Me.ToolStripTextBox1.Enabled = False
+        Me.ToolStripTextBox1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
         Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 25)
         '
