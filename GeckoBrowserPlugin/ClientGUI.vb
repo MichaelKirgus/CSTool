@@ -34,9 +34,17 @@ Public Class ClientGUI
     End Sub
 
     Sub Browser_Error(ByVal sender As Object, e As Gecko.Events.GeckoNSSErrorEventArgs) Handles WebBrowser1.NSSError
-        If e.Message.Contains("certificate") Then
-            If _Settings.IgnoreNoValidCertificate Then
-                Gecko.CertOverrideService.GetService().RememberValidityOverride(e.Uri, e.Certificate, Gecko.CertOverride.Untrusted, False)
+        If _Settings.IgnoreNoValidCertificate Then
+            If e.ErrorCode = Gecko.NSSErrors.SEC_ERROR_BAD_SIGNATURE Or
+                e.ErrorCode = Gecko.NSSErrors.SEC_ERROR_CA_CERT_INVALID Or
+                e.ErrorCode = Gecko.NSSErrors.SEC_ERROR_EXPIRED_CERTIFICATE Or
+                e.ErrorCode = Gecko.NSSErrors.SEC_ERROR_EXPIRED_ISSUER_CERTIFICATE Or
+                e.ErrorCode = Gecko.NSSErrors.SEC_ERROR_UNTRUSTED_CERT Or
+                e.ErrorCode = Gecko.NSSErrors.SEC_ERROR_CERT_ADDR_MISMATCH Or
+                e.ErrorCode = Gecko.NSSErrors.SEC_ERROR_UNKNOWN_ISSUER Then
+
+                Gecko.CertOverrideService.GetService().RememberValidityOverride(e.Uri, e.Certificate, Gecko.CertOverride.Mismatch Or Gecko.CertOverride.Untrusted Or Gecko.CertOverride.Time, False)
+                WebBrowser1.Navigate(e.Uri.ToString)
                 e.Handled = True
             End If
         End If
