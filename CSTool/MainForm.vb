@@ -138,6 +138,12 @@ Public Class MainForm
                 If arglist(ind).ToLower = "/instancetag" Then
                     InstanceTag = (arglist(ind + 1))
                 End If
+                If arglist(ind).ToLower = "/lockfile" Then
+                    ApplicationSettings.LauncherLockfile = arglist(ind + 1)
+                End If
+                If arglist(ind).ToLower = "/ignorelockfile" Then
+                    ApplicationSettings.LauncherLockfile = ""
+                End If
             Next
 
             Return True
