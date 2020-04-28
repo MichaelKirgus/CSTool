@@ -27,6 +27,7 @@ Partial Class MainForm
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
@@ -96,14 +97,15 @@ Partial Class MainForm
         Me.DockingSuiteVS2015LightTheme = New WeifenLuo.WinFormsUI.Docking.VS2015LightTheme()
         Me.DockingSuiteVS2015BlueTheme = New WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme()
         Me.CSDockPanelHosting = New WeifenLuo.WinFormsUI.Docking.DockPanel()
-        Me.DockingMainMenuContext = New System.Windows.Forms.ContextMenuStrip()
+        Me.DockingMainMenuContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AddItemFromTemplatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VS2015DarkTheme1 = New WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme()
-        Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender()
+        Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(Me.components)
         Me.CheckHostOrIPAsync = New System.ComponentModel.BackgroundWorker()
-        Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip()
+        Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
+        Me.CheckForLockfile = New System.ComponentModel.BackgroundWorker()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -636,6 +638,11 @@ Partial Class MainForm
         Me.ImportWorkspaceFile.RestoreDirectory = True
         Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
         '
+        'CheckForLockfile
+        '
+        Me.CheckForLockfile.WorkerReportsProgress = True
+        Me.CheckForLockfile.WorkerSupportsCancellation = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -735,4 +742,5 @@ Partial Class MainForm
     Friend WithEvents ToolStripSeparator14 As ToolStripSeparator
     Friend WithEvents ResetUserProfileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReloadUserTemplatesAndActionsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CheckForLockfile As System.ComponentModel.BackgroundWorker
 End Class

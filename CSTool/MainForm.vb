@@ -486,6 +486,15 @@ Public Class MainForm
             PerformRaiseActions()
         End If
 
+        'Check if lockfile detection wanted
+        If Not IsChild Then
+            If Not ApplicationSettings.LauncherLockfile = "" Then
+                If Not CheckForLockfile.IsBusy Then
+                    CheckForLockfile.RunWorkerAsync()
+                End If
+            End If
+        End If
+
         CurrentLoadActionState = "Finished!"
     End Sub
 
@@ -616,6 +625,11 @@ Public Class MainForm
 
             'Flush log file (if enabled)
             LogManager.CloseStreams()
+
+            'Stop file lock worker
+            If CheckForLockfile.IsBusy Then
+                CheckForLockfile.CancelAsync()
+            End If
         End If
 
         'Delete temp. files
@@ -1285,5 +1299,44 @@ Public Class MainForm
         'Reload all external actions and templates
         LoadTemplates()
         LoadCustomActions()
+    End Sub
+
+    Private Sub CheckForLockfile_DoWork(sender As Object, e As DoWorkEventArgs) Handles CheckForLockfile.DoWork
+        Try
+            Do While e.Cancel = False
+                If Not ApplicationSettings.LauncherLockfile = "" Then
+                    If IO.File.Exists(ApplicationSettings.LauncherLockfile) Then
+                        Dim warningmsg As String
+                        warningmsg = IO.File.ReadAllText(ApplicationSettings.LauncherLockfile)
+                        If Not warningmsg = "" Then
+                            MsgBox(warningmsg, MsgBoxStyle.MsgBoxSetForeground)
+                        Else
+                            MsgBox("This application is currently not available.")
+                        End If
+
+                        e.Result = True
+
+                        Exit Do
+                    End If
+                End If
+
+                Dim waitcnt As Integer = 0
+                Do While e.Cancel = False And waitcnt > 60
+                    Threading.Thread.Sleep(1000)
+                    waitcnt += 1
+                Loop
+            Loop
+
+            e.Result = False
+        Catch ex As Exception
+            e.Result = False
+        End Try
+    End Sub
+
+    Private Sub CheckForLockfile_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles CheckForLockfile.RunWorkerCompleted
+        If e.Result Then
+            'Exit application
+            Me.Close()
+        End If
     End Sub
 End Class
