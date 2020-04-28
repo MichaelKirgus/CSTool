@@ -62,6 +62,14 @@ Public Class LoadingFrm
                 If arglist(ind).ToLower = "/skiprunningmainappcheck" Then
                     AppSettingsObj.LauncherCheckIfMainApplicationIsRunning = False
                 End If
+
+                If arglist(ind).ToLower = "/lockfile" Then
+                    AppSettingsObj.LauncherLockfile = arglist(ind + 1)
+                End If
+
+                If arglist(ind).ToLower = "/ignorelockfile" Then
+                    AppSettingsObj.LauncherLockfile = ""
+                End If
             Next
 
             Return True
@@ -495,6 +503,20 @@ Public Class LoadingFrm
                 AppSettingsHandler.SaveSettings(New ApplicationSettings, ApplicationSettingsFile)
             End If
             LoadAppSettings()
+            If Not AppSettingsObj.LauncherLockfile = "" Then
+                SetLabelText(LoadingStateLbl, "Check for lockfile...")
+                If IO.File.Exists(AppSettingsObj.LauncherLockfile) Then
+                    'Show message
+                    Dim warningmsg As String
+                    warningmsg = IO.File.ReadAllText(AppSettingsObj.LauncherLockfile)
+                    If Not warningmsg = "" Then
+                        MsgBox(warningmsg, MsgBoxStyle.Exclamation)
+                    Else
+                        MsgBox("This application is currently not available.")
+                    End If
+                    Exit Try
+                End If
+            End If
             If AppSettingsObj.DetectAppInstanceTagByParentDirectory Then
                 'Get parent directory and set instance tag
                 SetLabelText(LoadingStateLbl, "Detect application instance tag...")

@@ -29,6 +29,7 @@ Imports CSToolLogLib
     Public Property LauncherCheckIfMainApplicationIsRunning As Boolean = True
     Public Property LauncherCheckIfUserCanSaveSettings As Boolean = True
     Public Property LauncherCheckIfLauncherRunningFromValidWorkingDirectory As Boolean = True
+    Public Property LauncherLockfile As String = ".lock"
     Public Property LauncherPolicy As LauncherPolicyMode = LauncherPolicyMode.CheckForChangesAndAskUser
     Public Property LauncherAdditionalMainAppArguments As String = ""
     Public Property LauncherLogSettings As New LogSettings
