@@ -92,6 +92,7 @@ Partial Class LoadingFrm
         '
         'LoadingStateLbl
         '
+        Me.LoadingStateLbl.AutoEllipsis = True
         Me.LoadingStateLbl.BackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(245, Byte), Integer))
         Me.LoadingStateLbl.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.LoadingStateLbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
