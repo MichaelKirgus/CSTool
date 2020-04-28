@@ -122,6 +122,36 @@ Public Module ClientModule
                         FullUserName.ValueData = UserPrincipal.Current.DisplayName
                         EvProvider.EnvironmentVariables.Add(FullUserName)
                     End If
+                    If SettingsHandle.GetUsernameName Then
+                        Dim FullUsernameName As New EnvironmentEntry
+                        FullUsernameName.ValueName = "CurrentAppDomainFullUsernameName"
+                        FullUsernameName.ValueData = UserPrincipal.Current.Name
+                        EvProvider.EnvironmentVariables.Add(FullUsernameName)
+                    End If
+                    If SettingsHandle.GetUsernameMiddlename Then
+                        Dim FullUsernameMiddlename As New EnvironmentEntry
+                        FullUsernameMiddlename.ValueName = "CurrentAppDomainFullUsernameMiddlename"
+                        FullUsernameMiddlename.ValueData = UserPrincipal.Current.MiddleName
+                        EvProvider.EnvironmentVariables.Add(FullUsernameMiddlename)
+                    End If
+                    If SettingsHandle.GetUsernameGivenName Then
+                        Dim FullUsernameGivenName As New EnvironmentEntry
+                        FullUsernameGivenName.ValueName = "CurrentAppDomainFullUsernameGivenName"
+                        FullUsernameGivenName.ValueData = UserPrincipal.Current.MiddleName
+                        EvProvider.EnvironmentVariables.Add(FullUsernameGivenName)
+                    End If
+                    If SettingsHandle.GetUsernameSurname Then
+                        Dim FullUsernameSurname As New EnvironmentEntry
+                        FullUsernameSurname.ValueName = "CurrentAppDomainFullUsernameSurname"
+                        FullUsernameSurname.ValueData = UserPrincipal.Current.Surname
+                        EvProvider.EnvironmentVariables.Add(FullUsernameSurname)
+                    End If
+                    If SettingsHandle.GetUserMail Then
+                        Dim UserMail As New EnvironmentEntry
+                        UserMail.ValueName = "CurrentAppDomainUserMail"
+                        UserMail.ValueData = UserPrincipal.Current.EmailAddress
+                        EvProvider.EnvironmentVariables.Add(UserMail)
+                    End If
                     If SettingsHandle.GetUsernameSID Then
                         Dim UsernameSID As New EnvironmentEntry
                         UsernameSID.ValueName = "CurrentAppDomainUsernameSID"

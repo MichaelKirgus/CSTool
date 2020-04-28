@@ -5,6 +5,11 @@
 'Additional copyright notices in project base directory or main executable directory.
 <Serializable> Public Class SettingsClass
     Public Property GetFullUsername As Boolean = True
+    Public Property GetUsernameGivenName As Boolean = True
+    Public Property GetUsernameName As Boolean = True
+    Public Property GetUsernameMiddlename As Boolean = False
+    Public Property GetUsernameSurname As Boolean = True
+    Public Property GetUserMail As Boolean = False
     Public Property GetUsernameSID As Boolean = False
     Public Property GetUsernameEmployeeID As Boolean = False
     Public Property GetUsernameSAMAccountName As Boolean = False
