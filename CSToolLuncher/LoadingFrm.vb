@@ -648,7 +648,6 @@ Public Class LoadingFrm
         Catch ex As Exception
             Return False
         End Try
-
     End Function
 
     Private Sub LoadingState_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles LoadingState.RunWorkerCompleted
