@@ -1311,7 +1311,17 @@ Public Class MainForm
         Try
             Do While e.Cancel = False
                 If Not ApplicationSettings.LauncherLockfile = "" Then
+                    Dim islocked As Boolean = False
                     If IO.File.Exists(ApplicationSettings.LauncherLockfile) Then
+                        islocked = True
+                    End If
+                    'Search in launcher startup path (use profile path to detect)
+                    Dim profilesdirobj As New IO.DirectoryInfo(ApplicationSettings.UserProfileDir)
+                    If IO.File.Exists(profilesdirobj.Parent.FullName & "\" & ApplicationSettings.LauncherLockfile) Then
+                        islocked = True
+                    End If
+
+                    If islocked Then
                         Dim warningmsg As String
                         warningmsg = IO.File.ReadAllText(ApplicationSettings.LauncherLockfile)
                         If Not warningmsg = "" Then
@@ -1324,16 +1334,17 @@ Public Class MainForm
 
                         Exit Do
                     End If
+                Else
+                    e.Result = False
+                    Exit Try
                 End If
 
                 Dim waitcnt As Integer = 0
-                Do While e.Cancel = False And waitcnt > 60
+                Do While e.Cancel = False And waitcnt < 60
                     Threading.Thread.Sleep(1000)
                     waitcnt += 1
                 Loop
             Loop
-
-            e.Result = False
         Catch ex As Exception
             e.Result = False
         End Try
