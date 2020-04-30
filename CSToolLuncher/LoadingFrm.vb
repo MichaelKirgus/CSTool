@@ -17,6 +17,7 @@ Public Class LoadingFrm
     Public AppSettingsObj As New ApplicationSettings
     Public LauncherHelperInstance As New LauncherLib
     Private Delegate Sub SetLabelTextDelegate(ByVal LabelCtl As Label, ByVal TextStr As String)
+    Private Delegate Sub SetFormOpacityDelegate(ByVal FormCtl As Form, ByVal OpacityValue As Integer)
 
     Private Sub SetLabelText(ByVal LabelCtl As Label, ByVal TextStr As String)
         If LabelCtl.InvokeRequired Then
@@ -24,6 +25,15 @@ Public Class LoadingFrm
             LabelCtl.Invoke(ClearListViewObj, New Object() {LabelCtl, TextStr})
         Else
             LabelCtl.Text = TextStr
+        End If
+    End Sub
+
+    Private Sub SetFormOpacity(ByVal FormCtl As Form, ByVal OpacityValue As Integer)
+        If FormCtl.InvokeRequired Then
+            Dim FormOpacityObj As New SetLabelTextDelegate(AddressOf SetLabelText)
+            FormCtl.Invoke(FormOpacityObj, New Object() {FormCtl, OpacityValue})
+        Else
+            FormCtl.Opacity = OpacityValue
         End If
     End Sub
 
@@ -123,7 +133,9 @@ Public Class LoadingFrm
             elevatedproccess.StartInfo.UseShellExecute = True
             If elevatedproccess.Start() Then
                 SetLabelText(LoadingStateLbl, "Waiting...")
+                SetFormOpacity(Me, 0)
                 elevatedproccess.WaitForExit()
+                SetFormOpacity(Me, 100)
                 Threading.Thread.Sleep(500)
             Else
                 Return False
