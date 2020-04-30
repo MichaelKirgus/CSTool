@@ -9,6 +9,7 @@
     Public Property CheckSaveCredentailsOnLoginPrompt As Boolean = True
     Public Property CredentialLocation As CredentialLocationEnum = CredentialLocationEnum.UserAppData
     Public Property CredentialEncryptionType As EncryptionTypeEnum = EncryptionTypeEnum.AES256PSK
+    Public Property WindowsCredentialManagerTag As String = "CSToolSupportAdminADCredentials"
     Public Property DefaultUsername As String = ""
     Public Property UserAppDataFilename As String = "ADAdministrativeAccountCredentialData.dat"
     Public Property UserRegistrySubKey As String = ""

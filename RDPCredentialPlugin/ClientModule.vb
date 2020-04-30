@@ -24,7 +24,6 @@ Public Module ClientModule
         Public EnvironmentRuntimeVar As New List(Of KeyValuePair(Of String, String))
         Private LifetimePluginGUID As String = ""
         Public LogInstanceHandler As LogLib
-        Public CredentialKey As String = "RDPCredentials"
         Public WindowsCredentialMessage As String = "Additional login information is required to use this tool. Please enter your remote desktop credentials."
         Public WindowsCredentialCaption As String = "RDP Credentials"
 
@@ -342,13 +341,13 @@ Public Module ClientModule
                         LogInstanceHandler.WriteLogEntry("Load credentials from windows credential manager...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                         Dim savecred As Net.NetworkCredential = Nothing
                         Try
-                            savecred = CredentialManager.GetCredentials(CredentialKey)
+                            savecred = CredentialManager.GetCredentials(SettingsHandle.WindowsCredentialManagerTag)
                         Catch ex As Exception
                         End Try
                         If IsNothing(savecred) Then
                             LogInstanceHandler.WriteLogEntry("No credentials found, show windows-build-in login form...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                            savecred = CredentialManager.PromptForCredentials(CredentialKey, SettingsHandle.CheckSaveCredentailsOnLoginPrompt, WindowsCredentialMessage, WindowsCredentialCaption)
-                            CredentialManager.SaveCredentials(CredentialKey, savecred)
+                            savecred = CredentialManager.PromptForCredentials(SettingsHandle.WindowsCredentialManagerTag, SettingsHandle.CheckSaveCredentailsOnLoginPrompt, WindowsCredentialMessage, WindowsCredentialCaption)
+                            CredentialManager.SaveCredentials(SettingsHandle.WindowsCredentialManagerTag, savecred)
                         End If
                         LogInstanceHandler.WriteLogEntry("Successful getting credentials from login form.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                         result.Add(savecred.UserName)
@@ -472,8 +471,8 @@ Public Module ClientModule
                         savecred.UserName = Username
                         savecred.Password = Password
                         Dim result As ICredential
-                        result = CredentialManager.SaveCredentials(CredentialKey, savecred)
-                        If result.TargetName = CredentialKey Then
+                        result = CredentialManager.SaveCredentials(SettingsHandle.WindowsCredentialManagerTag, savecred)
+                        If result.TargetName = SettingsHandle.WindowsCredentialManagerTag Then
                             Return True
                         Else
                             Return False
@@ -553,7 +552,7 @@ Public Module ClientModule
         End Function
 
         Public Function GetCredential() As List(Of CredentialEntry) Implements ICSToolInterface.GetCredential
-            LoginCredHandle.CredentialKey = CredentialKey
+            LoginCredHandle.CredentialKey = SettingsHandle.WindowsCredentialManagerTag
             LoadPlugin()
             Dim newcredlist As New List(Of CredentialEntry)
             newcredlist.Add(LoginCredHandle)

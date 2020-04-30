@@ -25,7 +25,6 @@ Public Module ClientModule
         Public EnvironmentRuntimeVar As New List(Of KeyValuePair(Of String, String))
         Private LifetimePluginGUID As String = ""
         Public LogInstanceHandler As LogLib
-        Public CredentialKeyPart As String = "CustomCredentials"
         Public IsDisabled As Boolean = False
 
         Public Property CurrentLogInstance As LogLib Implements ICSToolInterface.CurrentLogInstance
@@ -513,7 +512,7 @@ Public Module ClientModule
                                 Dim custcred As New CredentialEntry
                                 Dim results As List(Of String)
                                 results = LoadCredentials(SettingsHandle.CustomCredentialsCollection(index))
-                                custcred.CredentialKey = CredentialKeyPart & SettingsHandle.CustomCredentialsCollection(index).CredentialKey
+                                custcred.CredentialKey = SettingsHandle.CredentialKeyPart & SettingsHandle.CustomCredentialsCollection(index).CredentialKey
 
                                 If Not results.Count = 0 Then
                                     custcred.Username = CredHandler.ConvertStringInSecureString(results(0))

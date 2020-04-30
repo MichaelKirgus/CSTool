@@ -6,6 +6,7 @@
 <Serializable> Public Class Settings
     Public Property Activated As Boolean = True
     Public Property CustomCredentialsCollection As New List(Of CustomCredentialEntry)
+    Public Property CredentialKeyPart As String = "CSToolCustomCredentials"
 
     <Serializable> Public Class CustomCredentialEntry
         Public Property CredentialKey As String = ""
