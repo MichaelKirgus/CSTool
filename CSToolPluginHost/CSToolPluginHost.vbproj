@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2F96C482-97A5-4143-AD68-0A50E2E1E6EB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>CSToolPluginHost.My.MyApplication</StartupObject>
+    <RootNamespace>CSToolPluginHost</RootNamespace>
+    <AssemblyName>CSToolPluginHost</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\CSTool\bin\x64\Debug\</OutputPath>
+    <DocumentationFile>CSToolPluginHost.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>CSToolPluginHost.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>wizard_app_mod_host_v2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-search_24x24.png" />
+    <None Include="Resources\icon-search_22x22.png" />
+    <None Include="Resources\icon-refresh_24x24.png" />
+    <None Include="Resources\icon-refresh_22x22.png" />
+    <Content Include="wizard_app_mod_host_v2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSToolApplicationSettingsLib\CSToolApplicationSettingsLib.vbproj">
+      <Project>{ede9dfbd-e2b2-4b14-a493-0ed999e9094a}</Project>
+      <Name>CSToolApplicationSettingsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolApplicationSettingsManager\CSToolApplicationSettingsManager.vbproj">
+      <Project>{a6aff011-b72d-43ec-86b2-f0c9359015c9}</Project>
+      <Name>CSToolApplicationSettingsManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolEnvironmentManager\CSToolEnvironmentManager.vbproj">
+      <Project>{7809b2c0-3ee5-4983-9fef-a11479aafd99}</Project>
+      <Name>CSToolEnvironmentManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolHostWindow\CSToolHostWindow.vbproj">
+      <Project>{6bac4415-9cc9-4ad9-812c-6d4158b9d731}</Project>
+      <Name>CSToolHostWindow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolPluginLib\CSToolPluginLib.vbproj">
+      <Project>{52f811ea-55d2-4375-b177-a93d76e72be0}</Project>
+      <Name>CSToolPluginLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolWindowManager\CSToolWindowManager.vbproj">
+      <Project>{64c88d9d-8b0c-4ccd-95d0-88656e17590a}</Project>
+      <Name>CSToolWindowManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolWindowsCredentialHelper\CSToolWindowsCredentialHelper.vbproj">
+      <Project>{5c70a093-f440-4646-adf7-9a95f2c2e548}</Project>
+      <Name>CSToolWindowsCredentialHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
+      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
+      <Name>WinFormsUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
