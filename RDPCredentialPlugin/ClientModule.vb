@@ -340,20 +340,20 @@ Public Module ClientModule
                         End Select
                     Case Settings.CredentialLocationEnum.WindowsCredentialManager
                         LogInstanceHandler.WriteLogEntry("Load credentials from windows credential manager...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                        Dim savecred As Net.NetworkCredential = Nothing
                         Try
-                            Dim savecred As New Net.NetworkCredential
                             savecred = CredentialManager.GetCredentials(CredentialKey)
-                            If IsNothing(savecred) Then
-                                LogInstanceHandler.WriteLogEntry("No credentials found, show windows-build-in login form...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                                savecred = CredentialManager.PromptForCredentials(CredentialKey, SettingsHandle.CheckSaveCredentailsOnLoginPrompt, WindowsCredentialMessage, WindowsCredentialCaption)
-                                CredentialManager.SaveCredentials(CredentialKey, savecred)
-                            End If
-                            LogInstanceHandler.WriteLogEntry("Successful getting credentials from login form.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                            result.Add(savecred.UserName)
-                            result.Add(savecred.Password)
-                            Return result
                         Catch ex As Exception
                         End Try
+                        If IsNothing(savecred) Then
+                            LogInstanceHandler.WriteLogEntry("No credentials found, show windows-build-in login form...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                            savecred = CredentialManager.PromptForCredentials(CredentialKey, SettingsHandle.CheckSaveCredentailsOnLoginPrompt, WindowsCredentialMessage, WindowsCredentialCaption)
+                            CredentialManager.SaveCredentials(CredentialKey, savecred)
+                        End If
+                        LogInstanceHandler.WriteLogEntry("Successful getting credentials from login form.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                        result.Add(savecred.UserName)
+                        result.Add(savecred.Password)
+                        Return result
                 End Select
 
                 Return New List(Of String)
