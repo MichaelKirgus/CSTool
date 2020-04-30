@@ -32,6 +32,24 @@ Public Class PluginHelper
         End Try
     End Function
 
+    Public Function LoadPluginFile(ByVal PluginFile As String) As Boolean
+        Try
+            If IO.File.Exists(PluginFile) Then
+                Dim myplugin As CSToolPluginLib.ICSToolInterface
+                myplugin = PluginConnector.LoadPlugIn(PluginFile)
+                PluginCollection.Add(myplugin)
+            End If
+
+            AssemblyCollection = PluginConnector.AssemblyCollection
+            TypeCollection = PluginConnector.TypeCollection
+
+            Return True
+        Catch ex As Exception
+            LastErrorObj = Err()
+            Return False
+        End Try
+    End Function
+
     Public Function CreateNewPluginInstance(ByVal PluginIndex As Integer) As CSToolPluginLib.ICSToolInterface
         Try
             Dim NewInterface As CSToolPluginLib.ICSToolInterface
