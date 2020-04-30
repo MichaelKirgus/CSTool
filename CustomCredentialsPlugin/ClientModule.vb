@@ -471,7 +471,13 @@ Public Module ClientModule
                         Dim savecred As New Net.NetworkCredential
                         savecred.UserName = Username
                         savecred.Password = Password
-                        Return CredentialManager.SaveCredentials(CredEntry.CredentialKey, savecred)
+                        Dim result As ICredential
+                        result = CredentialManager.SaveCredentials(CredEntry.CredentialKey, savecred)
+                        If result.TargetName = CredEntry.CredentialKey Then
+                            Return True
+                        Else
+                            Return False
+                        End If
                 End Select
 
                 Return False
