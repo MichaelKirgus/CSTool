@@ -106,6 +106,7 @@ Partial Class MainForm
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
         Me.CheckForLockfile = New System.ComponentModel.BackgroundWorker()
+        Me.RaiseActionsAsyncWorker = New System.ComponentModel.BackgroundWorker()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -643,6 +644,11 @@ Partial Class MainForm
         Me.CheckForLockfile.WorkerReportsProgress = True
         Me.CheckForLockfile.WorkerSupportsCancellation = True
         '
+        'RaiseActionsAsyncWorker
+        '
+        Me.RaiseActionsAsyncWorker.WorkerReportsProgress = True
+        Me.RaiseActionsAsyncWorker.WorkerSupportsCancellation = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -743,4 +749,5 @@ Partial Class MainForm
     Friend WithEvents ResetUserProfileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReloadUserTemplatesAndActionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CheckForLockfile As System.ComponentModel.BackgroundWorker
+    Friend WithEvents RaiseActionsAsyncWorker As System.ComponentModel.BackgroundWorker
 End Class

@@ -686,7 +686,15 @@ Public Class MainForm
         'Create environment variables cache and load it to all open gui plugin instances
         EnvironmentManager.SetEnvironmentVarsInPlugins(WindowManagerHandler.PluginManager.PluginCollection, CSDockPanelHosting.Contents, HostnameOrIP)
         'Raise actions
-        WindowManagerHandler.SendRaiseActionsToPlugins(HostnameOrIP)
+        If UserSettings.UseAsyncPluginMessaging Then
+            'Start background worker
+            If Not RaiseActionsAsyncWorker.IsBusy = True Then
+                RaiseActionsAsyncWorker.RunWorkerAsync(HostnameOrIP)
+            End If
+        Else
+            'Raise actions sync
+            WindowManagerHandler.SendRaiseActionsToPlugins(HostnameOrIP)
+        End If
         'Set environment vars to custom actions handler
         CustomActionsHandler._EnvironmentRuntimeVariables = EnvironmentManager.GetEnvironmentVarsFromPlugins(WindowManagerHandler.PluginManager.PluginCollection, HostnameOrIP)
         'Add client or ip to history (combobox-item)
@@ -1356,5 +1364,13 @@ Public Class MainForm
             'Exit application
             Me.Close()
         End If
+    End Sub
+
+    Private Sub RaiseActionsAsyncWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles RaiseActionsAsyncWorker.DoWork
+        'Raise actions async and wait
+        WindowManagerHandler.SendRaiseActionsToPluginsAsync(e.Argument)
+        Do While WindowManagerHandler.PluginActionRaiseInProgress
+            Threading.Thread.Sleep(10)
+        Loop
     End Sub
 End Class

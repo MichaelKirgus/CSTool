@@ -3,6 +3,7 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
+Imports System.ComponentModel
 Imports System.Drawing
 Imports System.IO.Compression
 Imports System.Windows
@@ -17,6 +18,8 @@ Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class WindowManager
     Public PluginManager As New PluginHelper
+    Public WithEvents PluginActionRaiseWorker As New BackgroundWorker
+    Public WithEvents PluginActionRefreshWorker As New BackgroundWorker
     Public _LogManager As LogLib
     Public _DockingContent As DockPanel
     Public _UserProfilePath As String = ""
@@ -25,6 +28,8 @@ Public Class WindowManager
     Public _CredentialEntries As List(Of CredentialEntry)
     Public _IsNonPersistent As Boolean = False
 
+    Private Delegate Function ActionRaiseWorkerDelegate(ByVal DockingContent As DockPanel, ByVal HostOrIP As String) As Boolean
+
     Public Property GUIPluginDir As String = My.Application.Info.DirectoryPath & "\GUIPlugins"
     Public Property CredentialPluginDir As String = My.Application.Info.DirectoryPath & "\CredentialPlugins"
     Public Property EnvironmentPluginDir As String = My.Application.Info.DirectoryPath & "\EnvironmentPlugins"
@@ -32,6 +37,17 @@ Public Class WindowManager
     Public LastAddedPluginName As String = ""
     Public LastAddedPluginGUID As String = ""
     Public LastAddedPluginInstanceGUID As String = ""
+    Public PluginActionRaiseInProgress As Boolean = False
+    Public PluginGUIRefreshInProgress As Boolean = False
+
+    Private Function ActionRaiseWorkerFunc(ByVal DockingContent As DockPanel, ByVal HostOrIP As String) As Boolean
+        If DockingContent.InvokeRequired Then
+            Dim ActionRaiseWorkerObj As New ActionRaiseWorkerDelegate(AddressOf ActionRaiseWorkerFunc)
+            Return DockingContent.Invoke(ActionRaiseWorkerObj, New Object() {DockingContent, HostOrIP})
+        Else
+            Return SendRaiseActionsToPlugins(HostOrIP)
+        End If
+    End Function
 
     Public Function InitAllPlugins() As Boolean
         Dim LoadEnvPluginsResult As Boolean
@@ -478,6 +494,24 @@ Public Class WindowManager
             Return False
         End Try
     End Function
+
+    Public Function SendRaiseActionsToPluginsAsync(ByVal HostnameOrIP As String) As Boolean
+        If PluginActionRaiseWorker.IsBusy = False Then
+            PluginActionRaiseInProgress = True
+            PluginActionRaiseWorker.RunWorkerAsync(HostnameOrIP)
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Sub DoRaiseActionWorkerThread(ByVal sender As Object, ByVal e As DoWorkEventArgs) Handles PluginActionRaiseWorker.DoWork
+        e.Result = ActionRaiseWorkerFunc(_DockingContent, e.Argument)
+    End Sub
+
+    Private Sub DoRaiseActionWorkerCompleted(ByVal sender As Object, ByVal e As RunWorkerCompletedEventArgs) Handles PluginActionRaiseWorker.RunWorkerCompleted
+        PluginActionRaiseInProgress = False
+    End Sub
 
     Public Function RefreshAllWindowTitlesToPlugins() As Boolean
         Try
