@@ -62,6 +62,9 @@ Public Class Form1
                 If arglist(ind).ToLower = "/userprofilepath" Then
                     UserProfilePath = (arglist(ind + 1))
                 End If
+                If arglist(ind).ToLower = "/nonpersistent" Then
+                    IsNonPersistent = True
+                End If
             Next
 
             Return True
