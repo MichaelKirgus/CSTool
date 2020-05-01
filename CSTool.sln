@@ -199,6 +199,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WindowsLogonEnvironmentPlug
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CSToolPluginHost", "CSToolPluginHost\CSToolPluginHost.vbproj", "{2F96C482-97A5-4143-AD68-0A50E2E1E6EB}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CSToolLogGUILib", "CSToolLogGUILib\CSToolLogGUILib.vbproj", "{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1573,6 +1575,26 @@ Global
 		{2F96C482-97A5-4143-AD68-0A50E2E1E6EB}.Release|x64.Build.0 = Release|Any CPU
 		{2F96C482-97A5-4143-AD68-0A50E2E1E6EB}.Release|x86.ActiveCfg = Release|Any CPU
 		{2F96C482-97A5-4143-AD68-0A50E2E1E6EB}.Release|x86.Build.0 = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|ARM.Build.0 = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|x64.Build.0 = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Debug|x86.Build.0 = Debug|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|ARM.Build.0 = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|ARM64.Build.0 = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|x64.ActiveCfg = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|x64.Build.0 = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|x86.ActiveCfg = Release|Any CPU
+		{A4D9A589-6435-4FBD-B8ED-82E2EA4A11E2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
