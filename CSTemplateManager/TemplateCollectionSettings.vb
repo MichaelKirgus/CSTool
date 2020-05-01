@@ -30,6 +30,8 @@ Public Class TemplateCollectionSettings
         DockBottom = 4
         DockRight = 5
         DockLeft = 6
+        StandaloneProcessWindow = 7
+        StandaloneNonPersistentProcessWindow = 8
     End Enum
 
     Public Function Clone() As Object Implements System.ICloneable.Clone
