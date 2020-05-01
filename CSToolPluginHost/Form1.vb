@@ -109,16 +109,28 @@ Public Class Form1
                 HostnameOrIPCtl.Text = InitHostname
                 WindowManagerHandler.SendRaiseActionsToPlugins(InitHostname)
             End If
+
+            SetWindowTitle(InitHostname)
         Else
             MsgBox("No valid command line arguments passed.", MsgBoxStyle.Exclamation)
         End If
     End Sub
 
     Public Sub SetWindowTitle(ByVal Clientname As String)
+        Dim pluginwindowtitle As String
+        pluginwindowtitle = WindowManagerHandler.GetAllDockingWindows(0).TabText
+
         If Clientname = "" Then
-            Me.Text = "CSTool"
+            If Not pluginwindowtitle = "" Then
+                Me.Text = pluginwindowtitle
+            Else
+                Me.Text = "CSTool"
+            End If
         Else
             Me.Text = Clientname.ToUpper
+            If Not pluginwindowtitle = "" Then
+                Me.Text += " - " & pluginwindowtitle
+            End If
         End If
         If IsNonPersistent Then
             Me.Text += " [Non-Persistent]"
@@ -142,5 +154,13 @@ Public Class Form1
         If IsNonPersistent = False Then
             WindowManagerHandler.SaveAllGUIPluginSettings(UserWorkspaceSetting)
         End If
+    End Sub
+
+    Private Sub CSDockPanelHosting_Paint(sender As Object, e As PaintEventArgs) Handles CSDockPanelHosting.Paint
+        SetWindowTitle(HostnameOrIPCtl.Text)
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        WindowManagerHandler.SendRaiseActionsToPlugins(HostnameOrIPCtl.Text)
     End Sub
 End Class
