@@ -163,6 +163,10 @@
       <Project>{6bac4415-9cc9-4ad9-812c-6d4158b9d731}</Project>
       <Name>CSToolHostWindow</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSToolLogGUILib\CSToolLogGUILib.vbproj">
+      <Project>{a4d9a589-6435-4fbd-b8ed-82e2ea4a11e2}</Project>
+      <Name>CSToolLogGUILib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSToolLogLib\CSToolLogLib.vbproj">
       <Project>{DF373DBF-733E-4E4D-8335-3D6D5FE447B2}</Project>
       <Name>CSToolLogLib</Name>
@@ -182,6 +186,10 @@
     <ProjectReference Include="..\CSToolWindowsCredentialHelper\CSToolWindowsCredentialHelper.vbproj">
       <Project>{5c70a093-f440-4646-adf7-9a95f2c2e548}</Project>
       <Name>CSToolWindowsCredentialHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\ThemeVS2015.csproj">
+      <Project>{007d4ac8-948f-4816-86ad-b9d1343672c1}</Project>
+      <Name>ThemeVS2015</Name>
     </ProjectReference>
     <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
       <Project>{C75532C4-765B-418E-B09B-46D36B2ABDB1}</Project>
