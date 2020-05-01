@@ -1,6 +1,7 @@
 ﻿Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
 Imports CSToolEnvironmentManager
+Imports CSToolLogGUILib
 Imports CSToolLogLib
 Imports CSToolWindowManager
 
@@ -120,5 +121,11 @@ Public Class Form1
 
     Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
         WindowManagerHandler.SendRefreshToPlugins(True)
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        Dim LogGUIInstance As New LogForm
+        LogGUIInstance._LogLibInstance = LogManager
+        LogGUIInstance.Show()
     End Sub
 End Class

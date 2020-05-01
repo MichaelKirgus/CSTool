@@ -144,6 +144,7 @@
     <None Include="Resources\icon-search_22x22.png" />
     <None Include="Resources\icon-refresh_24x24.png" />
     <None Include="Resources\icon-refresh_22x22.png" />
+    <None Include="Resources\icon-news_22x22.png" />
     <Content Include="wizard_app_mod_host_v2.ico" />
   </ItemGroup>
   <ItemGroup>
