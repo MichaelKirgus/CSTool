@@ -133,12 +133,12 @@ Public Class UserTemplateManager
                     Dim NewHostSpawnInstance As New StandaloneInstanceBuilder
                     Dim pluginpath As String
                     pluginpath = _parent.WindowManagerHandler.PluginManager.GetPluginFilepathFromInterfaceInstance(currplug)
-                    NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, tempsett, _parent.CurrentUserProfilePath, _parent.ApplicationSettings.EnvironmentPluginDir, _parent.ApplicationSettings.CredentialPluginDir, False, UserSettingName, _parent.InstanceTag, "", currtempobj.InitialWindowState)
+                    isok = NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, tempsett, _parent.CurrentUserProfilePath, _parent.ApplicationSettings.EnvironmentPluginDir, _parent.ApplicationSettings.CredentialPluginDir, False, UserSettingName, _parent.InstanceTag, "", currtempobj.InitialWindowState)
                 Case DefaultWindowStyleEnum.StandaloneNonPersistentProcessWindow
                     Dim NewHostSpawnInstance As New StandaloneInstanceBuilder
                     Dim pluginpath As String
                     pluginpath = _parent.WindowManagerHandler.PluginManager.GetPluginFilepathFromInterfaceInstance(currplug)
-                    NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, tempsett, _parent.CurrentUserProfilePath, _parent.ApplicationSettings.EnvironmentPluginDir, _parent.ApplicationSettings.CredentialPluginDir, True, UserSettingName, _parent.InstanceTag, "", currtempobj.InitialWindowState)
+                    isok = NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, tempsett, _parent.CurrentUserProfilePath, _parent.ApplicationSettings.EnvironmentPluginDir, _parent.ApplicationSettings.CredentialPluginDir, True, UserSettingName, _parent.InstanceTag, "", currtempobj.InitialWindowState)
             End Select
 
             Return isok
