@@ -1,6 +1,7 @@
 ﻿Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
 Imports CSToolEnvironmentManager
+Imports CSToolHostWindow
 Imports CSToolLogGUILib
 Imports CSToolLogLib
 Imports CSToolWindowManager
@@ -96,6 +97,11 @@ Public Class Form1
             WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, InitHostname, WindowManagerHandler.GetPluginsByType(CSToolPluginLib.ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)(0).PluginName,
                                                       WindowManagerHandler.PluginManager.PluginCollection, UserWorkspaceSetting, WeifenLuo.WinFormsUI.Docking.DockState.Document, False, PluginSettingsfile)
 
+            Dim HostWindow As DockingHostWindow
+            HostWindow = WindowManagerHandler.GetAllDockingWindows(0)
+            HostWindow.CloseButton = False
+            HostWindow.CloseButtonVisible = False
+
             If Not InitHostname = "" Then
                 HostnameOrIPCtl.Text = InitHostname
                 WindowManagerHandler.SendRaiseActionsToPlugins(InitHostname)
@@ -127,5 +133,11 @@ Public Class Form1
         Dim LogGUIInstance As New LogForm
         LogGUIInstance._LogLibInstance = LogManager
         LogGUIInstance.Show()
+    End Sub
+
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If IsNonPersistent = False Then
+            WindowManagerHandler.SaveAllGUIPluginSettings(UserWorkspaceSetting)
+        End If
     End Sub
 End Class
