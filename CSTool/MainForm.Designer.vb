@@ -101,7 +101,6 @@ Partial Class MainForm
         Me.AddItemFromTemplatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VS2015DarkTheme1 = New WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme()
         Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(Me.components)
-        Me.CheckHostOrIPAsync = New System.ComponentModel.BackgroundWorker()
         Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
         Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
@@ -693,7 +692,6 @@ Partial Class MainForm
     Friend WithEvents ToolStripButton8 As ToolStripSplitButton
     Friend WithEvents PluginSettingsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EnvironmentVariablesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents CheckHostOrIPAsync As System.ComponentModel.BackgroundWorker
     Friend WithEvents ToolStripButton3 As ToolStripSplitButton
     Friend WithEvents NewWindowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
