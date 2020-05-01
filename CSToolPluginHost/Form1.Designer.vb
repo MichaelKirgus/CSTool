@@ -34,6 +34,7 @@ Partial Class Form1
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.CSDockPanelHosting = New WeifenLuo.WinFormsUI.Docking.DockPanel()
         Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(Me.components)
+        Me.VS2015DarkTheme1 = New WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -97,9 +98,11 @@ Partial Class Form1
         Me.CSDockPanelHosting.DockBackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.CSDockPanelHosting.Location = New System.Drawing.Point(0, 29)
         Me.CSDockPanelHosting.Name = "CSDockPanelHosting"
+        Me.CSDockPanelHosting.Padding = New System.Windows.Forms.Padding(6)
+        Me.CSDockPanelHosting.ShowAutoHideContentOnHover = False
         Me.CSDockPanelHosting.Size = New System.Drawing.Size(933, 545)
         Me.CSDockPanelHosting.TabIndex = 2
-        Me.CSDockPanelHosting.Theme = Nothing
+        Me.CSDockPanelHosting.Theme = Me.VS2015DarkTheme1
         '
         'VisualStudioToolStripExtender1
         '
@@ -132,4 +135,5 @@ Partial Class Form1
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents CSDockPanelHosting As DockPanel
     Friend WithEvents VisualStudioToolStripExtender1 As VisualStudioToolStripExtender
+    Friend WithEvents VS2015DarkTheme1 As VS2015DarkTheme
 End Class

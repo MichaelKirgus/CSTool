@@ -12,7 +12,12 @@ Public Class Form1
     Public EnvironmentManager As New EnvironmentManager
 
     Public PluginFilePath As String = ""
+    Public PluginSettingsfile As String = ""
     Public UserWorkspaceSetting As String = "Default"
+    Public InstanceTag As String = ""
+    Public UserProfilePath As String = ""
+    Public InitHostname As String = ""
+    Public IsNonPersistent As Boolean = False
 
     Public Function ProccessCommandLineArgsAppBase(ByVal CmdArgs As String()) As Boolean
         Try
@@ -40,8 +45,20 @@ Public Class Form1
                 If arglist(ind).ToLower = "/plugin" Then
                     PluginFilePath = (arglist(ind + 1))
                 End If
+                If arglist(ind).ToLower = "/pluginsettings" Then
+                    PluginSettingsfile = (arglist(ind + 1))
+                End If
                 If arglist(ind).ToLower = "/workspace" Then
                     UserWorkspaceSetting = (arglist(ind + 1))
+                End If
+                If arglist(ind).ToLower = "/instancetag" Then
+                    InstanceTag = (arglist(ind + 1))
+                End If
+                If arglist(ind).ToLower = "/hostname" Then
+                    InitHostname = (arglist(ind + 1))
+                End If
+                If arglist(ind).ToLower = "/userprofilepath" Then
+                    UserProfilePath = (arglist(ind + 1))
                 End If
             Next
 
@@ -52,31 +69,56 @@ Public Class Form1
     End Function
 
     Private Sub HostnameOrIPCtl_KeyDown(sender As Object, e As KeyEventArgs)
-
-    End Sub
-
-    Private Sub SearchInNewWindowToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub SearchInNewInstanceToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub ToolStripButton4_Click_1(sender As Object, e As EventArgs)
-
+        WindowManagerHandler.SendRaiseActionsToPlugins(HostnameOrIPCtl.Text)
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LogManager.InitLogSystem()
         WindowManagerHandler._LogManager = LogManager
         ProccessCommandLineArgsAppBase(Environment.GetCommandLineArgs)
-        Dim EnvDirInfo As New IO.DirectoryInfo(ApplicationSettings.EnvironmentPluginDir)
-        Dim CredDirInfo As New IO.DirectoryInfo(ApplicationSettings.CredentialPluginDir)
-        WindowManagerHandler.EnvironmentPluginDir = EnvDirInfo.FullName
-        WindowManagerHandler.CredentialPluginDir = CredDirInfo.FullName
-        WindowManagerHandler.PluginManager.LoadPluginFile(PluginFilePath)
-        WindowManagerHandler._DockingContent = CSDockPanelHosting
 
+        If Not PluginFilePath = "" And Not PluginSettingsfile = "" And Not UserProfilePath = "" Then
+            WindowManagerHandler._UserSettingName = UserWorkspaceSetting
+            WindowManagerHandler._UserProfilePath = UserProfilePath
+            Dim EnvDirInfo As New IO.DirectoryInfo(ApplicationSettings.EnvironmentPluginDir)
+            Dim CredDirInfo As New IO.DirectoryInfo(ApplicationSettings.CredentialPluginDir)
+            WindowManagerHandler.EnvironmentPluginDir = EnvDirInfo.FullName
+            WindowManagerHandler.CredentialPluginDir = CredDirInfo.FullName
+            WindowManagerHandler.InitAllEnvironmentPlugins()
+            WindowManagerHandler.InitAllCredentialPlugins()
+            WindowManagerHandler.LoadEnvironmentPluginsSettings(UserWorkspaceSetting)
+            WindowManagerHandler.LoadCredentialPluginsSettings(UserWorkspaceSetting)
+            WindowManagerHandler._EnvironmentEntries = WindowManagerHandler.GetEnvironmentEntriesFromEnvironmentPlugins()
+            WindowManagerHandler._CredentialEntries = WindowManagerHandler.GetCredentialEntriesFromCredentialPlugins(WindowManagerHandler.PluginManager.PluginCollection, True)
+            WindowManagerHandler.PluginManager.LoadPluginFile(PluginFilePath)
+            WindowManagerHandler._DockingContent = CSDockPanelHosting
+            WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, InitHostname, WindowManagerHandler.GetPluginsByType(CSToolPluginLib.ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection)(0).PluginName,
+                                                      WindowManagerHandler.PluginManager.PluginCollection, UserWorkspaceSetting, WeifenLuo.WinFormsUI.Docking.DockState.Document, False, PluginSettingsfile)
+
+            If Not InitHostname = "" Then
+                HostnameOrIPCtl.Text = InitHostname
+                WindowManagerHandler.SendRaiseActionsToPlugins(InitHostname)
+            End If
+        Else
+            MsgBox("No valid command line arguments passed.", MsgBoxStyle.Exclamation)
+        End If
+    End Sub
+
+    Public Sub SetWindowTitle(ByVal Clientname As String)
+        If Clientname = "" Then
+            Me.Text = "CSTool"
+        Else
+            Me.Text = Clientname.ToUpper
+        End If
+        If IsNonPersistent Then
+            Me.Text += " [Non-Persistent]"
+        End If
+        If Not InstanceTag = "" Then
+            Me.Text += " - " & InstanceTag
+        End If
+    End Sub
+
+    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+        WindowManagerHandler.SendRefreshToPlugins(True)
     End Sub
 End Class
