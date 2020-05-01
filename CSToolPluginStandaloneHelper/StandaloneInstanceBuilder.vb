@@ -29,6 +29,8 @@
             End If
 
             newhost.StartInfo.WindowStyle = WindowState
+            newhost.StartInfo.Arguments = args
+
             If newhost.Start() Then
                 Return True
             Else
