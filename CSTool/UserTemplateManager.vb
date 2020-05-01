@@ -8,6 +8,7 @@ Imports CSTemplateManager
 Imports CSTemplateManager.TemplateCollectionSettings
 Imports CSToolHostWindow
 Imports CSToolPluginLib
+Imports CSToolPluginStandaloneHelper
 Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class UserTemplateManager
@@ -127,6 +128,17 @@ Public Class UserTemplateManager
                     isok = _parent.WindowManagerHandler.AddPluginWindowToGUI(DockingHost, _parent.HostnameOrIPCtl.Text, PluginName, TargetPluginCollection, UserSettingName, DockState.Unknown, True, tempsett,
                                                                                  currtempobj.ForceInitialRefresh, currtempobj.ForceInitialRaiseAction, currtempobj.InitialWindowSize.Width, currtempobj.InitialWindowSize.Height, currtempobj.InitialWindowLocation.X,
                                                                                  currtempobj.InitialWindowLocation.Y, currtempobj.InitialWindowState)
+
+                Case DefaultWindowStyleEnum.StandaloneProcessWindow
+                    Dim NewHostSpawnInstance As New StandaloneInstanceBuilder
+                    Dim pluginpath As String
+                    pluginpath = _parent.WindowManagerHandler.PluginManager.GetPluginFilepathFromInterfaceInstance(currplug)
+                    NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, tempsett, _parent.CurrentUserProfilePath, _parent.ApplicationSettings.EnvironmentPluginDir, _parent.ApplicationSettings.CredentialPluginDir, False, UserSettingName, _parent.InstanceTag, "", currtempobj.InitialWindowState)
+                Case DefaultWindowStyleEnum.StandaloneNonPersistentProcessWindow
+                    Dim NewHostSpawnInstance As New StandaloneInstanceBuilder
+                    Dim pluginpath As String
+                    pluginpath = _parent.WindowManagerHandler.PluginManager.GetPluginFilepathFromInterfaceInstance(currplug)
+                    NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, tempsett, _parent.CurrentUserProfilePath, _parent.ApplicationSettings.EnvironmentPluginDir, _parent.ApplicationSettings.CredentialPluginDir, True, UserSettingName, _parent.InstanceTag, "", currtempobj.InitialWindowState)
             End Select
 
             Return isok

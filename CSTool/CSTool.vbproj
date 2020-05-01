@@ -377,6 +377,10 @@
       <Project>{52F811EA-55D2-4375-B177-A93D76E72BE0}</Project>
       <Name>CSToolPluginLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSToolPluginStandaloneHelper\CSToolPluginStandaloneHelper.vbproj">
+      <Project>{1b269856-acd8-4da4-a413-59a0e7fa41d4}</Project>
+      <Name>CSToolPluginStandaloneHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSToolSendKeysHelper\CSToolSendKeysHelper.vbproj">
       <Project>{3c4ef0e4-76cd-42a8-b3f9-824315e872ca}</Project>
       <Name>CSToolSendKeysHelper</Name>
