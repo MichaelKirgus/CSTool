@@ -32,6 +32,23 @@ Public Class PluginHelper
         End Try
     End Function
 
+    Public Function GetPluginFilepathFromInterfaceInstance(ByVal InterfaceInstance As CSToolPluginLib.ICSToolInterface) As String
+        Try
+            If Not PluginCollection.Count = 0 And Not AssemblyCollection.Count = 0 Then
+                For index = 0 To PluginCollection.Count - 1
+                    If PluginCollection(index).PluginName = InterfaceInstance.PluginName Then
+                        Return AssemblyCollection(index).Location
+                    End If
+                Next
+                Return ""
+            Else
+                Return ""
+            End If
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
     Public Function LoadPluginFile(ByVal PluginFile As String) As Boolean
         Try
             If IO.File.Exists(PluginFile) Then
