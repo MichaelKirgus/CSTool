@@ -154,18 +154,6 @@
     <Compile Include="EnvironmentVarTesterFrm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogForm.Designer.vb">
-      <DependentUpon>LogForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="LogForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LogFormError.Designer.vb">
-      <DependentUpon>LogFormError.vb</DependentUpon>
-    </Compile>
-    <Compile Include="LogFormError.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="LogSettingsForm.Designer.vb">
       <DependentUpon>LogSettingsForm.vb</DependentUpon>
     </Compile>
@@ -252,12 +240,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnvironmentVarTesterFrm.resx">
       <DependentUpon>EnvironmentVarTesterFrm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LogForm.resx">
-      <DependentUpon>LogForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LogFormError.resx">
-      <DependentUpon>LogFormError.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogSettingsForm.resx">
       <DependentUpon>LogSettingsForm.vb</DependentUpon>

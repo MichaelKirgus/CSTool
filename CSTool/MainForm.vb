@@ -12,6 +12,7 @@ Imports CSToolApplicationSettingsManager
 Imports CSToolEnvironmentManager
 Imports CSToolHostWindow
 Imports CSToolLauncherLib
+Imports CSToolLogGUILib
 Imports CSToolLogLib
 Imports CSToolPingHelper
 Imports CSToolPluginLib
