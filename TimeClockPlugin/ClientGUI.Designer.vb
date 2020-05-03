@@ -31,19 +31,34 @@ Partial Class ClientGUI
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ClientGUI))
         Me.TimeClockPanel = New System.Windows.Forms.FlowLayoutPanel()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ResetTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResetNotificationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SimulateTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReCalculateTimesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SetSystemBootTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UseFirstAppStartupTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TotalWorktimeLbl = New System.Windows.Forms.TextBox()
         Me.StartWorktimeLbl = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LunchTimeCountdownLbl = New System.Windows.Forms.TextBox()
         Me.LunchTimeLbl = New System.Windows.Forms.TextBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.BreakfastCountdownLbl = New System.Windows.Forms.TextBox()
+        Me.BreakfastTimePickerCtl = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.WithoutBreaksCountdownLbl = New System.Windows.Forms.TextBox()
         Me.WithoutBreaksLbl = New System.Windows.Forms.TextBox()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.LaunchCountdownLbl = New System.Windows.Forms.TextBox()
+        Me.LunchTimePickerCtl = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.RegEndCountdownLbl = New System.Windows.Forms.TextBox()
         Me.RegEndLbl = New System.Windows.Forms.TextBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.CustomTimeCountdownLbl = New System.Windows.Forms.TextBox()
+        Me.CustomEndTimePickerCtl = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.MaxEndCountdownLbl = New System.Windows.Forms.TextBox()
         Me.MaxEndLbl = New System.Windows.Forms.TextBox()
@@ -52,35 +67,20 @@ Partial Class ClientGUI
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.CustomTimeCountdownLbl = New System.Windows.Forms.TextBox()
-        Me.CustomEndTimePickerCtl = New System.Windows.Forms.DateTimePicker()
-        Me.ResetTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResetNotificationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SimulateTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReCalculateTimesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SetSystemBootTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UseFirstAppStartupTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.BreakfastCountdownLbl = New System.Windows.Forms.TextBox()
-        Me.BreakfastTimePickerCtl = New System.Windows.Forms.DateTimePicker()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.LaunchCountdownLbl = New System.Windows.Forms.TextBox()
-        Me.LunchTimePickerCtl = New System.Windows.Forms.DateTimePicker()
         Me.TimeClockPanel.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
         Me.SuspendLayout()
         '
         'TimeClockPanel
@@ -90,8 +90,8 @@ Partial Class ClientGUI
         Me.TimeClockPanel.Controls.Add(Me.GroupBox1)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox2)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox7)
-        Me.TimeClockPanel.Controls.Add(Me.GroupBox5)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox8)
+        Me.TimeClockPanel.Controls.Add(Me.GroupBox5)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox3)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox6)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox4)
@@ -107,10 +107,52 @@ Partial Class ClientGUI
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(207, 142)
         '
+        'ResetTimeToolStripMenuItem
+        '
+        Me.ResetTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_x_circle_16x16
+        Me.ResetTimeToolStripMenuItem.Name = "ResetTimeToolStripMenuItem"
+        Me.ResetTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ResetTimeToolStripMenuItem.Text = "Reset time"
+        '
+        'ResetNotificationsToolStripMenuItem
+        '
+        Me.ResetNotificationsToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_announcement_16x16
+        Me.ResetNotificationsToolStripMenuItem.Name = "ResetNotificationsToolStripMenuItem"
+        Me.ResetNotificationsToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ResetNotificationsToolStripMenuItem.Text = "Reset notifications"
+        '
+        'SimulateTimeToolStripMenuItem
+        '
+        Me.SimulateTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_clock_16x16
+        Me.SimulateTimeToolStripMenuItem.Name = "SimulateTimeToolStripMenuItem"
+        Me.SimulateTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.SimulateTimeToolStripMenuItem.Text = "Set start time..."
+        '
+        'ReCalculateTimesToolStripMenuItem
+        '
+        Me.ReCalculateTimesToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_refresh_16x16
+        Me.ReCalculateTimesToolStripMenuItem.Name = "ReCalculateTimesToolStripMenuItem"
+        Me.ReCalculateTimesToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ReCalculateTimesToolStripMenuItem.Text = "Recalculate times"
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(203, 6)
+        '
+        'SetSystemBootTimeToolStripMenuItem
+        '
+        Me.SetSystemBootTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_moon_16x16
+        Me.SetSystemBootTimeToolStripMenuItem.Name = "SetSystemBootTimeToolStripMenuItem"
+        Me.SetSystemBootTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.SetSystemBootTimeToolStripMenuItem.Text = "Use system boot time"
+        '
+        'UseFirstAppStartupTimeToolStripMenuItem
+        '
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_browser_16x16
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Name = "UseFirstAppStartupTimeToolStripMenuItem"
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Text = "Use first app startup time"
         '
         'GroupBox1
         '
@@ -176,6 +218,40 @@ Partial Class ClientGUI
         Me.LunchTimeLbl.Size = New System.Drawing.Size(109, 22)
         Me.LunchTimeLbl.TabIndex = 0
         '
+        'GroupBox7
+        '
+        Me.GroupBox7.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.GroupBox7.Controls.Add(Me.BreakfastCountdownLbl)
+        Me.GroupBox7.Controls.Add(Me.BreakfastTimePickerCtl)
+        Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox7.Location = New System.Drawing.Point(245, 3)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(115, 66)
+        Me.GroupBox7.TabIndex = 6
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Breakfast"
+        '
+        'BreakfastCountdownLbl
+        '
+        Me.BreakfastCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BreakfastCountdownLbl.Location = New System.Drawing.Point(3, 40)
+        Me.BreakfastCountdownLbl.Name = "BreakfastCountdownLbl"
+        Me.BreakfastCountdownLbl.ReadOnly = True
+        Me.BreakfastCountdownLbl.Size = New System.Drawing.Size(109, 22)
+        Me.BreakfastCountdownLbl.TabIndex = 2
+        '
+        'BreakfastTimePickerCtl
+        '
+        Me.BreakfastTimePickerCtl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BreakfastTimePickerCtl.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.BreakfastTimePickerCtl.Location = New System.Drawing.Point(3, 18)
+        Me.BreakfastTimePickerCtl.Name = "BreakfastTimePickerCtl"
+        Me.BreakfastTimePickerCtl.ShowUpDown = True
+        Me.BreakfastTimePickerCtl.Size = New System.Drawing.Size(109, 22)
+        Me.BreakfastTimePickerCtl.TabIndex = 3
+        Me.BreakfastTimePickerCtl.Value = New Date(2020, 5, 3, 9, 30, 0, 0)
+        '
         'GroupBox5
         '
         Me.GroupBox5.ContextMenuStrip = Me.ContextMenuStrip1
@@ -183,7 +259,7 @@ Partial Class ClientGUI
         Me.GroupBox5.Controls.Add(Me.WithoutBreaksLbl)
         Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox5.Location = New System.Drawing.Point(366, 3)
+        Me.GroupBox5.Location = New System.Drawing.Point(3, 75)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(115, 66)
         Me.GroupBox5.TabIndex = 4
@@ -207,6 +283,40 @@ Partial Class ClientGUI
         Me.WithoutBreaksLbl.ReadOnly = True
         Me.WithoutBreaksLbl.Size = New System.Drawing.Size(109, 22)
         Me.WithoutBreaksLbl.TabIndex = 0
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.GroupBox8.Controls.Add(Me.LaunchCountdownLbl)
+        Me.GroupBox8.Controls.Add(Me.LunchTimePickerCtl)
+        Me.GroupBox8.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox8.Location = New System.Drawing.Point(366, 3)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(115, 66)
+        Me.GroupBox8.TabIndex = 7
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "Lunch"
+        '
+        'LaunchCountdownLbl
+        '
+        Me.LaunchCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.LaunchCountdownLbl.Location = New System.Drawing.Point(3, 40)
+        Me.LaunchCountdownLbl.Name = "LaunchCountdownLbl"
+        Me.LaunchCountdownLbl.ReadOnly = True
+        Me.LaunchCountdownLbl.Size = New System.Drawing.Size(109, 22)
+        Me.LaunchCountdownLbl.TabIndex = 2
+        '
+        'LunchTimePickerCtl
+        '
+        Me.LunchTimePickerCtl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.LunchTimePickerCtl.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.LunchTimePickerCtl.Location = New System.Drawing.Point(3, 18)
+        Me.LunchTimePickerCtl.Name = "LunchTimePickerCtl"
+        Me.LunchTimePickerCtl.ShowUpDown = True
+        Me.LunchTimePickerCtl.Size = New System.Drawing.Size(109, 22)
+        Me.LunchTimePickerCtl.TabIndex = 3
+        Me.LunchTimePickerCtl.Value = New Date(2020, 5, 3, 12, 30, 0, 0)
         '
         'GroupBox3
         '
@@ -239,6 +349,40 @@ Partial Class ClientGUI
         Me.RegEndLbl.ReadOnly = True
         Me.RegEndLbl.Size = New System.Drawing.Size(109, 22)
         Me.RegEndLbl.TabIndex = 0
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.GroupBox6.Controls.Add(Me.CustomTimeCountdownLbl)
+        Me.GroupBox6.Controls.Add(Me.CustomEndTimePickerCtl)
+        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox6.Location = New System.Drawing.Point(245, 75)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(115, 66)
+        Me.GroupBox6.TabIndex = 5
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Custom end"
+        '
+        'CustomTimeCountdownLbl
+        '
+        Me.CustomTimeCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.CustomTimeCountdownLbl.Location = New System.Drawing.Point(3, 40)
+        Me.CustomTimeCountdownLbl.Name = "CustomTimeCountdownLbl"
+        Me.CustomTimeCountdownLbl.ReadOnly = True
+        Me.CustomTimeCountdownLbl.Size = New System.Drawing.Size(109, 22)
+        Me.CustomTimeCountdownLbl.TabIndex = 2
+        '
+        'CustomEndTimePickerCtl
+        '
+        Me.CustomEndTimePickerCtl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.CustomEndTimePickerCtl.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.CustomEndTimePickerCtl.Location = New System.Drawing.Point(3, 18)
+        Me.CustomEndTimePickerCtl.Name = "CustomEndTimePickerCtl"
+        Me.CustomEndTimePickerCtl.ShowUpDown = True
+        Me.CustomEndTimePickerCtl.Size = New System.Drawing.Size(109, 22)
+        Me.CustomEndTimePickerCtl.TabIndex = 3
+        Me.CustomEndTimePickerCtl.Value = New Date(2020, 5, 3, 17, 0, 0, 0)
         '
         'GroupBox4
         '
@@ -322,150 +466,6 @@ Partial Class ClientGUI
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
         Me.NotifyIcon1.Text = "TimeClock"
         '
-        'GroupBox6
-        '
-        Me.GroupBox6.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.GroupBox6.Controls.Add(Me.CustomTimeCountdownLbl)
-        Me.GroupBox6.Controls.Add(Me.CustomEndTimePickerCtl)
-        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox6.Location = New System.Drawing.Point(245, 75)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(115, 66)
-        Me.GroupBox6.TabIndex = 5
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Custom end"
-        '
-        'CustomTimeCountdownLbl
-        '
-        Me.CustomTimeCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
-        Me.CustomTimeCountdownLbl.Location = New System.Drawing.Point(3, 40)
-        Me.CustomTimeCountdownLbl.Name = "CustomTimeCountdownLbl"
-        Me.CustomTimeCountdownLbl.ReadOnly = True
-        Me.CustomTimeCountdownLbl.Size = New System.Drawing.Size(109, 22)
-        Me.CustomTimeCountdownLbl.TabIndex = 2
-        '
-        'CustomEndTimePickerCtl
-        '
-        Me.CustomEndTimePickerCtl.Dock = System.Windows.Forms.DockStyle.Top
-        Me.CustomEndTimePickerCtl.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.CustomEndTimePickerCtl.Location = New System.Drawing.Point(3, 18)
-        Me.CustomEndTimePickerCtl.Name = "CustomEndTimePickerCtl"
-        Me.CustomEndTimePickerCtl.ShowUpDown = True
-        Me.CustomEndTimePickerCtl.Size = New System.Drawing.Size(109, 22)
-        Me.CustomEndTimePickerCtl.TabIndex = 3
-        Me.CustomEndTimePickerCtl.Value = New Date(2020, 5, 3, 17, 0, 0, 0)
-        '
-        'ResetTimeToolStripMenuItem
-        '
-        Me.ResetTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_x_circle_16x16
-        Me.ResetTimeToolStripMenuItem.Name = "ResetTimeToolStripMenuItem"
-        Me.ResetTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.ResetTimeToolStripMenuItem.Text = "Reset time"
-        '
-        'ResetNotificationsToolStripMenuItem
-        '
-        Me.ResetNotificationsToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_announcement_16x16
-        Me.ResetNotificationsToolStripMenuItem.Name = "ResetNotificationsToolStripMenuItem"
-        Me.ResetNotificationsToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.ResetNotificationsToolStripMenuItem.Text = "Reset notifications"
-        '
-        'SimulateTimeToolStripMenuItem
-        '
-        Me.SimulateTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_clock_16x16
-        Me.SimulateTimeToolStripMenuItem.Name = "SimulateTimeToolStripMenuItem"
-        Me.SimulateTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.SimulateTimeToolStripMenuItem.Text = "Set start time..."
-        '
-        'ReCalculateTimesToolStripMenuItem
-        '
-        Me.ReCalculateTimesToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_refresh_16x16
-        Me.ReCalculateTimesToolStripMenuItem.Name = "ReCalculateTimesToolStripMenuItem"
-        Me.ReCalculateTimesToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.ReCalculateTimesToolStripMenuItem.Text = "Recalculate times"
-        '
-        'SetSystemBootTimeToolStripMenuItem
-        '
-        Me.SetSystemBootTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_moon_16x16
-        Me.SetSystemBootTimeToolStripMenuItem.Name = "SetSystemBootTimeToolStripMenuItem"
-        Me.SetSystemBootTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.SetSystemBootTimeToolStripMenuItem.Text = "Use system boot time"
-        '
-        'UseFirstAppStartupTimeToolStripMenuItem
-        '
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_browser_16x16
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Name = "UseFirstAppStartupTimeToolStripMenuItem"
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Text = "Use first app startup time"
-        '
-        'GroupBox7
-        '
-        Me.GroupBox7.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.GroupBox7.Controls.Add(Me.BreakfastCountdownLbl)
-        Me.GroupBox7.Controls.Add(Me.BreakfastTimePickerCtl)
-        Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox7.Location = New System.Drawing.Point(245, 3)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(115, 66)
-        Me.GroupBox7.TabIndex = 6
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Breakfast"
-        '
-        'BreakfastCountdownLbl
-        '
-        Me.BreakfastCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
-        Me.BreakfastCountdownLbl.Location = New System.Drawing.Point(3, 40)
-        Me.BreakfastCountdownLbl.Name = "BreakfastCountdownLbl"
-        Me.BreakfastCountdownLbl.ReadOnly = True
-        Me.BreakfastCountdownLbl.Size = New System.Drawing.Size(109, 22)
-        Me.BreakfastCountdownLbl.TabIndex = 2
-        '
-        'BreakfastTimePickerCtl
-        '
-        Me.BreakfastTimePickerCtl.Dock = System.Windows.Forms.DockStyle.Top
-        Me.BreakfastTimePickerCtl.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.BreakfastTimePickerCtl.Location = New System.Drawing.Point(3, 18)
-        Me.BreakfastTimePickerCtl.Name = "BreakfastTimePickerCtl"
-        Me.BreakfastTimePickerCtl.ShowUpDown = True
-        Me.BreakfastTimePickerCtl.Size = New System.Drawing.Size(109, 22)
-        Me.BreakfastTimePickerCtl.TabIndex = 3
-        Me.BreakfastTimePickerCtl.Value = New Date(2020, 5, 3, 9, 30, 0, 0)
-        '
-        'GroupBox8
-        '
-        Me.GroupBox8.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.GroupBox8.Controls.Add(Me.LaunchCountdownLbl)
-        Me.GroupBox8.Controls.Add(Me.LunchTimePickerCtl)
-        Me.GroupBox8.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox8.Location = New System.Drawing.Point(3, 75)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(115, 66)
-        Me.GroupBox8.TabIndex = 7
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Lunch"
-        '
-        'LaunchCountdownLbl
-        '
-        Me.LaunchCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
-        Me.LaunchCountdownLbl.Location = New System.Drawing.Point(3, 40)
-        Me.LaunchCountdownLbl.Name = "LaunchCountdownLbl"
-        Me.LaunchCountdownLbl.ReadOnly = True
-        Me.LaunchCountdownLbl.Size = New System.Drawing.Size(109, 22)
-        Me.LaunchCountdownLbl.TabIndex = 2
-        '
-        'LunchTimePickerCtl
-        '
-        Me.LunchTimePickerCtl.Dock = System.Windows.Forms.DockStyle.Top
-        Me.LunchTimePickerCtl.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.LunchTimePickerCtl.Location = New System.Drawing.Point(3, 18)
-        Me.LunchTimePickerCtl.Name = "LunchTimePickerCtl"
-        Me.LunchTimePickerCtl.ShowUpDown = True
-        Me.LunchTimePickerCtl.Size = New System.Drawing.Size(109, 22)
-        Me.LunchTimePickerCtl.TabIndex = 3
-        Me.LunchTimePickerCtl.Value = New Date(2020, 5, 3, 12, 30, 0, 0)
-        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -480,22 +480,22 @@ Partial Class ClientGUI
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
