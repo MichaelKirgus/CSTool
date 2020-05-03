@@ -41,6 +41,7 @@ Partial Class WaitFrm
         Me.Label1.Size = New System.Drawing.Size(122, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Waiting for log threads..."
+        Me.Label1.UseWaitCursor = True
         '
         'PictureBox1
         '
@@ -51,6 +52,7 @@ Partial Class WaitFrm
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
+        Me.PictureBox1.UseWaitCursor = True
         '
         'WaitFrm
         '
@@ -66,6 +68,7 @@ Partial Class WaitFrm
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Wait..."
         Me.TopMost = True
+        Me.UseWaitCursor = True
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
