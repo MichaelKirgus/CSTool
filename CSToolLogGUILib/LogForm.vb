@@ -182,6 +182,9 @@ Public Class LogForm
                         Next
                         CurrentLoadedLinePos += ToLoadLines
                     End If
+                    If e.Cancel Then
+                        e.Result = False
+                    End If
                 End If
             End If
 
@@ -193,8 +196,10 @@ Public Class LogForm
 
     Private Sub LogRefreshWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles LogRefreshWorker.RunWorkerCompleted
         ToolStripButton1.Enabled = True
-        If Not LogWaitWorker.IsBusy Then
-            LogWaitWorker.RunWorkerAsync(RefreshInterval)
+        If e.Result Then
+            If Not LogWaitWorker.IsBusy Then
+                LogWaitWorker.RunWorkerAsync(RefreshInterval)
+            End If
         End If
     End Sub
 
@@ -204,9 +209,11 @@ Public Class LogForm
 
     Private Sub LogWaitWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles LogWaitWorker.RunWorkerCompleted
         If ToolStripButton2.Checked Then
-            If LogRefreshWorker.IsBusy = False Then
-                ToolStripButton1.Enabled = False
-                LogRefreshWorker.RunWorkerAsync()
+            If e.Cancelled = False Then
+                If LogRefreshWorker.IsBusy = False Then
+                    ToolStripButton1.Enabled = False
+                    LogRefreshWorker.RunWorkerAsync()
+                End If
             End If
         End If
     End Sub
@@ -300,5 +307,18 @@ Public Class LogForm
             End If
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub LogForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Dim waitfrminstance As New WaitFrm
+        waitfrminstance.Show()
+        Application.DoEvents()
+        LogWaitWorker.CancelAsync()
+        LogRefreshWorker.CancelAsync()
+        Do While LogRefreshWorker.IsBusy
+            Threading.Thread.Sleep(10)
+            Application.DoEvents()
+        Loop
+        waitfrminstance.Close()
     End Sub
 End Class
