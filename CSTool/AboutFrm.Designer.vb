@@ -47,6 +47,8 @@ Partial Class AboutFrm
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,6 +59,7 @@ Partial Class AboutFrm
         Me.TabPage4.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.TabPage6.SuspendLayout()
+        Me.TabPage7.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox2
@@ -143,6 +146,7 @@ Partial Class AboutFrm
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage6)
+        Me.TabControl1.Controls.Add(Me.TabPage7)
         Me.TabControl1.Location = New System.Drawing.Point(12, 112)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -286,6 +290,29 @@ Partial Class AboutFrm
         Me.TextBox6.Size = New System.Drawing.Size(536, 269)
         Me.TextBox6.TabIndex = 2
         '
+        'TabPage7
+        '
+        Me.TabPage7.Controls.Add(Me.TextBox7)
+        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage7.Name = "TabPage7"
+        Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage7.Size = New System.Drawing.Size(542, 275)
+        Me.TabPage7.TabIndex = 6
+        Me.TabPage7.Text = "Heroicons"
+        Me.TabPage7.UseVisualStyleBackColor = True
+        '
+        'TextBox7
+        '
+        Me.TextBox7.BackColor = System.Drawing.Color.White
+        Me.TextBox7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox7.Location = New System.Drawing.Point(3, 3)
+        Me.TextBox7.Multiline = True
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.ReadOnly = True
+        Me.TextBox7.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TextBox7.Size = New System.Drawing.Size(536, 269)
+        Me.TextBox7.TabIndex = 1
+        '
         'AboutFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -321,6 +348,8 @@ Partial Class AboutFrm
         Me.TabPage5.PerformLayout()
         Me.TabPage6.ResumeLayout(False)
         Me.TabPage6.PerformLayout()
+        Me.TabPage7.ResumeLayout(False)
+        Me.TabPage7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -345,4 +374,6 @@ Partial Class AboutFrm
     Friend WithEvents TextBox5 As TextBox
     Friend WithEvents TabPage6 As TabPage
     Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents TabPage7 As TabPage
+    Friend WithEvents TextBox7 As TextBox
 End Class
