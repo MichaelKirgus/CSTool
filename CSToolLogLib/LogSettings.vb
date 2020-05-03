@@ -5,6 +5,7 @@
 'Additional copyright notices in project base directory or main executable directory.
 <Serializable> Public Class LogSettings
     Public Property GlobalLogLevel As LogEntryLevelEnum = LogEntryLevelEnum.Debug
+    Public Property GlobalMaxLogCache As Integer = 20480
     Public Property LogToFile As Boolean = False
     Public Property LogToFilePath As String = "CSTool_Log.log"
     Public Property LogToFileBufferSize As Integer = 1024

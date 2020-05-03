@@ -170,6 +170,12 @@ Public Class LogLib
                         LastLogDebugMessage = ParseLogEntryToMessageString(LogCollection.Count - 1)
                 End Select
 
+                If Not LogSettings.GlobalMaxLogCache = -1 Then
+                    If LogSettings.GlobalMaxLogCache < LogCollection.Count Then
+                        ResetLogStore()
+                    End If
+                End If
+
                 Return True
             Else
                 Return False
