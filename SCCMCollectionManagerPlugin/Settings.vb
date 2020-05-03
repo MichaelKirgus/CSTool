@@ -20,6 +20,7 @@ Imports System.Management
     Public Property DeviceCollectionsFilter As New List(Of CollectionFilterEntry)
     Public Property AvailableCollectionsGroups As New List(Of CollectionGroupEntry)
     Public Property DeviceCollectionsGroups As New List(Of CollectionGroupEntry)
+    Public Property CloneCollectionsFilter As New List(Of CollectionFilterEntry)
     Public Property SortCollections As Boolean = True
     Public Property SortClientMemberships As Boolean = True
     Public Property RefreshClientPoliciesWMIExecScope As String = "\\%Clientname%\root\ccm"
@@ -36,6 +37,7 @@ Imports System.Management
     Public Property CustomWMIConnectionOptionsImpersonation As ImpersonationLevel = ImpersonationLevel.Default
     Public Property FilterCollectionsWithNoMembers As Boolean = False
     Public Property ShowDevicesAndUsernameSearchPanel As Boolean = True
+    Public Property ShowCloneCollectionsButton As Boolean = True
 End Class
 
 <Serializable> Public Class CollectionFilterEntry

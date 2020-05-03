@@ -515,6 +515,21 @@ Public Class ClientGUI
         End Try
     End Function
 
+    Public Function GetSpecificClientResourceID(ByVal Hostname As String) As String
+        Try
+            Dim GetClientnameResourceIDQuery = "SELECT ResourceID FROM SMS_R_System Where Name = '" & Hostname & "'"
+            Dim ResID As WqlQueryResultsObject = CurrentSMSConnection.QueryProcessor.ExecuteQuery(GetClientnameResourceIDQuery)
+
+            For Each item As WqlResultObject In ResID
+                Return item.PropertyList(item.PropertyNames(0))
+            Next
+
+            Return -1
+        Catch ex As Exception
+            Return -1
+        End Try
+    End Function
+
     Public Function GetAllClients() As WqlQueryResultsObject
         Try
             Return CurrentSMSConnection.QueryProcessor.ExecuteQuery("SELECT Name, LastLogonUserName, LastLogonTimestamp, MACAddresses, IPAddresses, ClientVersion FROM SMS_R_System")
@@ -1023,6 +1038,7 @@ Public Class ClientGUI
             LiveModeButton.Checked = _Settings.EnableLiveMode
             ToolStripButton15.Checked = _Settings.ShowDevicesAndUsernameSearchPanel
             SplitContainer4.Panel1Collapsed = Not _Settings.ShowDevicesAndUsernameSearchPanel
+            ToolStripButton16.Visible = _Settings.ShowCloneCollectionsButton
 
             SetUXThemeForAllListViews()
 
@@ -1881,5 +1897,90 @@ Public Class ClientGUI
         Else
             _Settings.SortCollections = False
         End If
+    End Sub
+
+    Private Sub CloneCollectionFromDeviceWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles CloneCollectionFromDeviceWorker.DoWork
+        Try
+            Dim arglist As List(Of String)
+            arglist = e.Argument
+
+            Dim GetCollectionQuery = "SELECT SMS_Collection.* FROM SMS_FullCollectionMembership, SMS_Collection where name = '" & arglist(0) & "' and SMS_FullCollectionMembership.CollectionID = SMS_Collection.CollectionID"
+            CurrentSMSClientCollectionMembership = CurrentSMSConnection.QueryProcessor.ExecuteQuery(GetCollectionQuery)
+
+            Dim collectionlist As New List(Of String)
+            Dim cloneobjlist As New List(Of WqlResultObject)
+
+            If Not _Settings.CloneCollectionsFilter.Count = 0 Then
+                For Each item As WqlResultObject In CurrentSMSClientCollectionMembership
+                    For index = 0 To _Settings.CloneCollectionsFilter.Count - 1
+                        If _Settings.CloneCollectionsFilter(index).Enabled Then
+                            If item.PropertyList("Name").Contains(_Settings.CloneCollectionsFilter(index).FilterText) Then
+                                collectionlist.Add(item.PropertyList("CollectionID"))
+                                cloneobjlist.Add(item)
+                            End If
+                        End If
+                    Next
+                Next
+            Else
+                For Each item As WqlResultObject In CurrentSMSClientCollectionMembership
+                    collectionlist.Add(item.PropertyList("CollectionID"))
+                Next
+            End If
+
+            Dim destinationclientres As String
+            destinationclientres = GetSpecificClientResourceID(arglist(1))
+
+            For index = 0 To collectionlist.Count - 1
+                If AddToCollection(collectionlist(index), destinationclientres, arglist(1), CurrentSMSConnection) Then
+                    Dim qq As New ListViewItem
+                    qq.Text = cloneobjlist(index).PropertyList("Name")
+                    qq.SubItems.Add(cloneobjlist(index).PropertyList("MemberCount"))
+                    qq.SubItems.Add(cloneobjlist(index).PropertyList("CollectionID"))
+                    qq.SubItems.Add(cloneobjlist(index).PropertyList("Comment"))
+                    qq.SubItems.Add(cloneobjlist(index).PropertyList("CollectionType"))
+                    qq.Tag = cloneobjlist(index)
+                    qq.ImageIndex = 1
+                    qq.BackColor = Color.LightGreen
+
+                    AddListViewItem(ListView4, qq)
+                End If
+            Next
+
+            If LiveModeButton.Checked Then
+                ForceRefreshPolicies(arglist(1), True, IsClientPackageStateReceived)
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub CloneCollectionFromDeviceWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles CloneCollectionFromDeviceWorker.RunWorkerCompleted
+        TriggerClientCollectionMembershipsWorker()
+        SetOptimalListViewStyle()
+    End Sub
+
+    Private Sub ToolStripButton16_Click(sender As Object, e As EventArgs) Handles ToolStripButton16.Click
+        Try
+            Dim arglist As New List(Of String)
+            arglist.Add(ListView5.SelectedItems(0).Text)
+            arglist.Add(ToolStripTextBox2.Text)
+
+            If arglist(0).ToLower = arglist(1).ToLower Then
+                MsgBox("Cannot clone client to itself!", MsgBoxStyle.Exclamation)
+                Exit Try
+            End If
+
+            Dim clonemsgresult As MsgBoxResult
+            clonemsgresult = MsgBox("Do you want to clone the collections from device " & arglist(0) & " to device " & arglist(1) & "?", MsgBoxStyle.YesNo)
+
+            If clonemsgresult = MsgBoxResult.Yes Then
+                If Not CloneCollectionFromDeviceWorker.IsBusy Then
+                    CloneCollectionFromDeviceWorker.RunWorkerAsync(arglist)
+                Else
+                    MsgBox("System is busy, please wait.", MsgBoxStyle.Exclamation)
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox("No target device selected!", MsgBoxStyle.Exclamation)
+        End Try
     End Sub
 End Class

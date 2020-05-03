@@ -109,6 +109,7 @@ Partial Class ClientGUI
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton13 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton16 = New System.Windows.Forms.ToolStripButton()
         Me.SMSCollectionSplashLabel = New System.Windows.Forms.Label()
         Me.SMSCollectionSplash = New System.Windows.Forms.PictureBox()
         Me.ListView2 = New System.Windows.Forms.ListView()
@@ -150,6 +151,7 @@ Partial Class ClientGUI
         Me.CollectSMSCollectionsWorker = New System.ComponentModel.BackgroundWorker()
         Me.GetAllClientsWorker = New System.ComponentModel.BackgroundWorker()
         Me.ConnectToSMSMServerWorker = New System.ComponentModel.BackgroundWorker()
+        Me.CloneCollectionFromDeviceWorker = New System.ComponentModel.BackgroundWorker()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -767,7 +769,7 @@ Partial Class ClientGUI
         'ToolStrip2
         '
         Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.ToolStripTextBox2, Me.ToolStripSeparator2, Me.ToolStripButton1, Me.ToolStripButton6, Me.ToolStripSeparator3, Me.ToolStripButton3, Me.LiveModeButton, Me.ToolStripButton5, Me.ToolStripButton13, Me.ToolStripButton15})
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.ToolStripTextBox2, Me.ToolStripSeparator2, Me.ToolStripButton1, Me.ToolStripButton6, Me.ToolStripSeparator3, Me.ToolStripButton3, Me.LiveModeButton, Me.ToolStripButton5, Me.ToolStripButton13, Me.ToolStripButton15, Me.ToolStripButton16})
         Me.ToolStrip2.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.Size = New System.Drawing.Size(777, 25)
@@ -873,6 +875,15 @@ Partial Class ClientGUI
         Me.ToolStripButton15.Name = "ToolStripButton15"
         Me.ToolStripButton15.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton15.Text = "Show search device/username panel"
+        '
+        'ToolStripButton16
+        '
+        Me.ToolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton16.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_duplicate_16x16
+        Me.ToolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton16.Name = "ToolStripButton16"
+        Me.ToolStripButton16.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton16.Text = "Duplicate collections from device (up) to device (down)"
         '
         'SMSCollectionSplashLabel
         '
@@ -1162,6 +1173,11 @@ Partial Class ClientGUI
         Me.ConnectToSMSMServerWorker.WorkerReportsProgress = True
         Me.ConnectToSMSMServerWorker.WorkerSupportsCancellation = True
         '
+        'CloneCollectionFromDeviceWorker
+        '
+        Me.CloneCollectionFromDeviceWorker.WorkerReportsProgress = True
+        Me.CloneCollectionFromDeviceWorker.WorkerSupportsCancellation = True
+        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1336,4 +1352,6 @@ Partial Class ClientGUI
     Friend WithEvents ToolStripButton15 As ToolStripButton
     Friend WithEvents ClientItemMenu As ContextMenuStrip
     Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
+    Friend WithEvents ToolStripButton16 As ToolStripButton
+    Friend WithEvents CloneCollectionFromDeviceWorker As System.ComponentModel.BackgroundWorker
 End Class
