@@ -99,7 +99,7 @@ Public Class ClientGUI
             LunchTime = StartTime.AddMinutes(_Settings.NormalWorktimeMaxSpan).AddMinutes(_Settings.StartWorktimeOffset)
             RegularEndTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.NormalWorktimeSpan).AddMinutes(_Settings.NormalWorktimeBreakfastSpan).AddMinutes(_Settings.NormalWorktimeLunchSpan).AddMinutes(_Settings.EndWorktimeOffset)
             MaxEndTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.MaxWorktimeSpan).AddMinutes(_Settings.NormalWorktimeBreakfastSpan).AddMinutes(_Settings.NormalWorktimeLunchSpan).AddMinutes(_Settings.MaxWorktimeAdditionalBreakSpan).AddMinutes(_Settings.EndWorktimeOffset)
-            WithoutBreaksTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.NormalWorktimeSpan).AddMinutes(_Settings.EndWorktimeOffset)
+            WithoutBreaksTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.NormalWorktimeMaxSpan).AddMinutes(_Settings.EndWorktimeOffset)
 
             LunchTimeLbl.Text = LunchTime.ToShortTimeString
             RegEndLbl.Text = RegularEndTime.ToShortTimeString
