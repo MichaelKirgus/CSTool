@@ -16,6 +16,7 @@ Public Class ClientGUI
     Public RegularEndTime As Date
     Public MaxEndTime As Date
     Public WithoutBreaksTime As Date
+    Public CustomEndTime As Date
 
     Delegate Sub SetTextBoxTextDelegate(ByVal TextBoxCtl As TextBox, ByVal text As String)
     Delegate Sub SetProgressbarValueDelegate(ByVal ProgressCtl As ProgressBar, ByVal value As Integer)
@@ -100,6 +101,7 @@ Public Class ClientGUI
             RegularEndTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.NormalWorktimeSpan).AddMinutes(_Settings.NormalWorktimeBreakfastSpan).AddMinutes(_Settings.NormalWorktimeLunchSpan).AddMinutes(_Settings.EndWorktimeOffset)
             MaxEndTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.MaxWorktimeSpan).AddMinutes(_Settings.NormalWorktimeBreakfastSpan).AddMinutes(_Settings.NormalWorktimeLunchSpan).AddMinutes(_Settings.MaxWorktimeAdditionalBreakSpan).AddMinutes(_Settings.EndWorktimeOffset)
             WithoutBreaksTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.NormalWorktimeMaxSpan).AddMinutes(_Settings.EndWorktimeOffset)
+            CustomEndTime = New Date(DateAndTime.Now.Year, DateAndTime.Now.Month, DateAndTime.Now.Day, _Settings.CustomEndTime.Hour, _Settings.CustomEndTime.Minute, _Settings.CustomEndTime.Second)
 
             LunchTimeLbl.Text = LunchTime.ToShortTimeString
             RegEndLbl.Text = RegularEndTime.ToShortTimeString
@@ -186,6 +188,7 @@ Public Class ClientGUI
                 SetTextboxText(MaxEndCountdownLbl, MaxEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
                 SetTextboxText(WithoutBreaksCountdownLbl, WithoutBreaksTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
                 SetTextboxText(TotalWorktimeLbl, DateAndTime.Now.Subtract(StartTime).ToString("g").Split(",")(0).Replace("-", "+ "))
+                SetTextboxText(CustomTimeCountdownLbl, CustomEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
 
                 If DateAndTime.Now.Subtract(StartTime).TotalSeconds <= ProgressBar1.Maximum Then
                     SetProgressbarValue(ProgressBar1, DateAndTime.Now.Subtract(StartTime).TotalSeconds)
@@ -217,6 +220,8 @@ Public Class ClientGUI
             Me.ParentForm.Text = _Settings.WindowTitle
         End If
         GroupBox2.Visible = _Settings.ShowBreakfast
+        GroupBox6.Visible = _Settings.ShowCustomEndTime
+        CustomEndTimePickerCtl.Value = _Settings.CustomEndTime
         CalculateStaticTimes(False)
         If Not BackgroundWorker1.IsBusy Then
             BackgroundWorker1.RunWorkerAsync()
@@ -249,5 +254,11 @@ Public Class ClientGUI
         StartTime = GetStartTimestamp(_Settings.WorktimeTag)
         CalculateStaticTimes(True)
         ClearNotificationFireState()
+    End Sub
+
+    Private Sub CustomEndTimePickerCtl_ValueChanged(sender As Object, e As EventArgs) Handles CustomEndTimePickerCtl.ValueChanged
+        CustomEndTime = CustomEndTimePickerCtl.Value
+        _Settings.CustomEndTime = CustomEndTimePickerCtl.Value
+        CalculateStaticTimes(True)
     End Sub
 End Class

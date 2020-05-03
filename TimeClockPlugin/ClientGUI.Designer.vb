@@ -57,6 +57,9 @@ Partial Class ClientGUI
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.CustomTimeCountdownLbl = New System.Windows.Forms.TextBox()
+        Me.CustomEndTimePickerCtl = New System.Windows.Forms.DateTimePicker()
         Me.TimeClockPanel.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -68,6 +71,7 @@ Partial Class ClientGUI
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'TimeClockPanel
@@ -79,6 +83,7 @@ Partial Class ClientGUI
         Me.TimeClockPanel.Controls.Add(Me.GroupBox5)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox3)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox4)
+        Me.TimeClockPanel.Controls.Add(Me.GroupBox6)
         Me.TimeClockPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TimeClockPanel.Location = New System.Drawing.Point(0, 0)
         Me.TimeClockPanel.Name = "TimeClockPanel"
@@ -341,6 +346,39 @@ Partial Class ClientGUI
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
         Me.NotifyIcon1.Text = "TimeClock"
         '
+        'GroupBox6
+        '
+        Me.GroupBox6.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.GroupBox6.Controls.Add(Me.CustomTimeCountdownLbl)
+        Me.GroupBox6.Controls.Add(Me.CustomEndTimePickerCtl)
+        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox6.Location = New System.Drawing.Point(245, 75)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(115, 66)
+        Me.GroupBox6.TabIndex = 5
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Custom end"
+        '
+        'CustomTimeCountdownLbl
+        '
+        Me.CustomTimeCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.CustomTimeCountdownLbl.Location = New System.Drawing.Point(3, 40)
+        Me.CustomTimeCountdownLbl.Name = "CustomTimeCountdownLbl"
+        Me.CustomTimeCountdownLbl.ReadOnly = True
+        Me.CustomTimeCountdownLbl.Size = New System.Drawing.Size(109, 22)
+        Me.CustomTimeCountdownLbl.TabIndex = 2
+        '
+        'CustomEndTimePickerCtl
+        '
+        Me.CustomEndTimePickerCtl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.CustomEndTimePickerCtl.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.CustomEndTimePickerCtl.Location = New System.Drawing.Point(3, 18)
+        Me.CustomEndTimePickerCtl.Name = "CustomEndTimePickerCtl"
+        Me.CustomEndTimePickerCtl.ShowUpDown = True
+        Me.CustomEndTimePickerCtl.Size = New System.Drawing.Size(109, 22)
+        Me.CustomEndTimePickerCtl.TabIndex = 3
+        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -365,6 +403,8 @@ Partial Class ClientGUI
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -397,4 +437,7 @@ Partial Class ClientGUI
     Friend WithEvents ResetNotificationsToolStripMenuItem As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents UseFirstAppStartupTimeToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GroupBox6 As Windows.Forms.GroupBox
+    Friend WithEvents CustomTimeCountdownLbl As Windows.Forms.TextBox
+    Friend WithEvents CustomEndTimePickerCtl As Windows.Forms.DateTimePicker
 End Class
