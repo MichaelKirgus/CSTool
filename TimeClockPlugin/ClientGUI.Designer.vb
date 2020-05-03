@@ -27,16 +27,10 @@ Partial Class ClientGUI
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ClientGUI))
         Me.TimeClockPanel = New System.Windows.Forms.FlowLayoutPanel()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ResetTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResetNotificationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SimulateTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SetSystemBootTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UseFirstAppStartupTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TotalWorktimeLbl = New System.Windows.Forms.TextBox()
         Me.StartWorktimeLbl = New System.Windows.Forms.TextBox()
@@ -56,10 +50,16 @@ Partial Class ClientGUI
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.CustomTimeCountdownLbl = New System.Windows.Forms.TextBox()
         Me.CustomEndTimePickerCtl = New System.Windows.Forms.DateTimePicker()
+        Me.ResetTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResetNotificationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SimulateTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReCalculateTimesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetSystemBootTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UseFirstAppStartupTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TimeClockPanel.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -92,49 +92,14 @@ Partial Class ClientGUI
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResetTimeToolStripMenuItem, Me.ResetNotificationsToolStripMenuItem, Me.SimulateTimeToolStripMenuItem, Me.ToolStripSeparator2, Me.SetSystemBootTimeToolStripMenuItem, Me.UseFirstAppStartupTimeToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResetTimeToolStripMenuItem, Me.ResetNotificationsToolStripMenuItem, Me.SimulateTimeToolStripMenuItem, Me.ReCalculateTimesToolStripMenuItem, Me.ToolStripSeparator2, Me.SetSystemBootTimeToolStripMenuItem, Me.UseFirstAppStartupTimeToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(207, 120)
-        '
-        'ResetTimeToolStripMenuItem
-        '
-        Me.ResetTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_x_circle_16x16
-        Me.ResetTimeToolStripMenuItem.Name = "ResetTimeToolStripMenuItem"
-        Me.ResetTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.ResetTimeToolStripMenuItem.Text = "Reset time"
-        '
-        'ResetNotificationsToolStripMenuItem
-        '
-        Me.ResetNotificationsToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_announcement_16x16
-        Me.ResetNotificationsToolStripMenuItem.Name = "ResetNotificationsToolStripMenuItem"
-        Me.ResetNotificationsToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.ResetNotificationsToolStripMenuItem.Text = "Reset notifications"
-        '
-        'SimulateTimeToolStripMenuItem
-        '
-        Me.SimulateTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_clock_16x16
-        Me.SimulateTimeToolStripMenuItem.Name = "SimulateTimeToolStripMenuItem"
-        Me.SimulateTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.SimulateTimeToolStripMenuItem.Text = "Set start time..."
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(207, 164)
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(203, 6)
-        '
-        'SetSystemBootTimeToolStripMenuItem
-        '
-        Me.SetSystemBootTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_moon_16x16
-        Me.SetSystemBootTimeToolStripMenuItem.Name = "SetSystemBootTimeToolStripMenuItem"
-        Me.SetSystemBootTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.SetSystemBootTimeToolStripMenuItem.Text = "Use system boot time"
-        '
-        'UseFirstAppStartupTimeToolStripMenuItem
-        '
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_browser_16x16
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Name = "UseFirstAppStartupTimeToolStripMenuItem"
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
-        Me.UseFirstAppStartupTimeToolStripMenuItem.Text = "Use first app startup time"
         '
         'GroupBox1
         '
@@ -379,6 +344,48 @@ Partial Class ClientGUI
         Me.CustomEndTimePickerCtl.Size = New System.Drawing.Size(109, 22)
         Me.CustomEndTimePickerCtl.TabIndex = 3
         '
+        'ResetTimeToolStripMenuItem
+        '
+        Me.ResetTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_x_circle_16x16
+        Me.ResetTimeToolStripMenuItem.Name = "ResetTimeToolStripMenuItem"
+        Me.ResetTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ResetTimeToolStripMenuItem.Text = "Reset time"
+        '
+        'ResetNotificationsToolStripMenuItem
+        '
+        Me.ResetNotificationsToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_announcement_16x16
+        Me.ResetNotificationsToolStripMenuItem.Name = "ResetNotificationsToolStripMenuItem"
+        Me.ResetNotificationsToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ResetNotificationsToolStripMenuItem.Text = "Reset notifications"
+        '
+        'SimulateTimeToolStripMenuItem
+        '
+        Me.SimulateTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_clock_16x16
+        Me.SimulateTimeToolStripMenuItem.Name = "SimulateTimeToolStripMenuItem"
+        Me.SimulateTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.SimulateTimeToolStripMenuItem.Text = "Set start time..."
+        '
+        'ReCalculateTimesToolStripMenuItem
+        '
+        Me.ReCalculateTimesToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_refresh_16x16
+        Me.ReCalculateTimesToolStripMenuItem.Name = "ReCalculateTimesToolStripMenuItem"
+        Me.ReCalculateTimesToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ReCalculateTimesToolStripMenuItem.Text = "Recalculate times"
+        '
+        'SetSystemBootTimeToolStripMenuItem
+        '
+        Me.SetSystemBootTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_moon_16x16
+        Me.SetSystemBootTimeToolStripMenuItem.Name = "SetSystemBootTimeToolStripMenuItem"
+        Me.SetSystemBootTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.SetSystemBootTimeToolStripMenuItem.Text = "Use system boot time"
+        '
+        'UseFirstAppStartupTimeToolStripMenuItem
+        '
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Image = Global.TimeClockPlugin.My.Resources.Resources.icon_browser_16x16
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Name = "UseFirstAppStartupTimeToolStripMenuItem"
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.UseFirstAppStartupTimeToolStripMenuItem.Text = "Use first app startup time"
+        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -440,4 +447,5 @@ Partial Class ClientGUI
     Friend WithEvents GroupBox6 As Windows.Forms.GroupBox
     Friend WithEvents CustomTimeCountdownLbl As Windows.Forms.TextBox
     Friend WithEvents CustomEndTimePickerCtl As Windows.Forms.DateTimePicker
+    Friend WithEvents ReCalculateTimesToolStripMenuItem As Windows.Forms.ToolStripMenuItem
 End Class

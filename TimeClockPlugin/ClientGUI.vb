@@ -103,6 +103,10 @@ Public Class ClientGUI
             WithoutBreaksTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.NormalWorktimeMaxSpan).AddMinutes(_Settings.EndWorktimeOffset)
             CustomEndTime = New Date(DateAndTime.Now.Year, DateAndTime.Now.Month, DateAndTime.Now.Day, _Settings.CustomEndTime.Hour, _Settings.CustomEndTime.Minute, _Settings.CustomEndTime.Second)
 
+            If _Settings.CalculateCustomEndTimeWithOffsets Then
+                CustomEndTime = CustomEndTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.EndWorktimeOffset)
+            End If
+
             LunchTimeLbl.Text = LunchTime.ToShortTimeString
             RegEndLbl.Text = RegularEndTime.ToShortTimeString
             MaxEndLbl.Text = MaxEndTime.ToShortTimeString
@@ -259,6 +263,10 @@ Public Class ClientGUI
     Private Sub CustomEndTimePickerCtl_ValueChanged(sender As Object, e As EventArgs) Handles CustomEndTimePickerCtl.ValueChanged
         CustomEndTime = CustomEndTimePickerCtl.Value
         _Settings.CustomEndTime = CustomEndTimePickerCtl.Value
+        CalculateStaticTimes(True)
+    End Sub
+
+    Private Sub ReCalculateTimesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReCalculateTimesToolStripMenuItem.Click
         CalculateStaticTimes(True)
     End Sub
 End Class

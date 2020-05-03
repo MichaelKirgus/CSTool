@@ -10,7 +10,6 @@ Imports System.Windows.Forms
     Public Property ShowBreakfast As Boolean = False
     Public Property ShowCustomEndTime As Boolean = True
     Public Property CalculateCustomEndTimeWithOffsets As Boolean = False
-    Public Property SaveCustomEndTime As Boolean = True
     Public Property CustomEndTime As New Date
     Public Property UseSystemBootupTime As Boolean = True
     Public Property UseLocalFileTimestampIfOlder As Boolean = True
