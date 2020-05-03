@@ -8,9 +8,14 @@ Imports System.Windows.Forms
 <Serializable> Public Class Settings
     Public Property WindowTitle As String = ""
     Public Property ShowBreakfast As Boolean = False
+    Public Property ShowCustomBreakfast As Boolean = True
+    Public Property ShowCustomLunch As Boolean = True
     Public Property ShowCustomEndTime As Boolean = True
     Public Property CalculateCustomEndTimeWithOffsets As Boolean = False
-    Public Property CustomEndTime As New Date
+    Public Property UseCustomEndTimeAsNormalWorkimeEnd As Boolean = False
+    Public Property CustomEndTime As Date = New Date(2020, 5, 1, 17, 0, 0)
+    Public Property CustomBreakfast As Date = New Date(2020, 5, 1, 9, 30, 0)
+    Public Property CustomLunch As Date = New Date(2020, 5, 1, 12, 30, 0)
     Public Property UseSystemBootupTime As Boolean = True
     Public Property UseLocalFileTimestampIfOlder As Boolean = True
     Public Property NormalWorktimeSpan As Integer = 450

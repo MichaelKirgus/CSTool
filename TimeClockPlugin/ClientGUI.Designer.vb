@@ -27,9 +27,10 @@ Partial Class ClientGUI
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ClientGUI))
         Me.TimeClockPanel = New System.Windows.Forms.FlowLayoutPanel()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TotalWorktimeLbl = New System.Windows.Forms.TextBox()
@@ -50,7 +51,7 @@ Partial Class ClientGUI
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.ProgressBar2 = New System.Windows.Forms.ProgressBar()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
-        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon()
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.CustomTimeCountdownLbl = New System.Windows.Forms.TextBox()
         Me.CustomEndTimePickerCtl = New System.Windows.Forms.DateTimePicker()
@@ -60,6 +61,12 @@ Partial Class ClientGUI
         Me.ReCalculateTimesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetSystemBootTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UseFirstAppStartupTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.BreakfastCountdownLbl = New System.Windows.Forms.TextBox()
+        Me.BreakfastTimePickerCtl = New System.Windows.Forms.DateTimePicker()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.LaunchCountdownLbl = New System.Windows.Forms.TextBox()
+        Me.LunchTimePickerCtl = New System.Windows.Forms.DateTimePicker()
         Me.TimeClockPanel.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -72,6 +79,8 @@ Partial Class ClientGUI
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
         Me.SuspendLayout()
         '
         'TimeClockPanel
@@ -80,21 +89,23 @@ Partial Class ClientGUI
         Me.TimeClockPanel.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TimeClockPanel.Controls.Add(Me.GroupBox1)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox2)
+        Me.TimeClockPanel.Controls.Add(Me.GroupBox7)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox5)
+        Me.TimeClockPanel.Controls.Add(Me.GroupBox8)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox3)
-        Me.TimeClockPanel.Controls.Add(Me.GroupBox4)
         Me.TimeClockPanel.Controls.Add(Me.GroupBox6)
+        Me.TimeClockPanel.Controls.Add(Me.GroupBox4)
         Me.TimeClockPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TimeClockPanel.Location = New System.Drawing.Point(0, 0)
         Me.TimeClockPanel.Name = "TimeClockPanel"
-        Me.TimeClockPanel.Size = New System.Drawing.Size(368, 148)
+        Me.TimeClockPanel.Size = New System.Drawing.Size(488, 148)
         Me.TimeClockPanel.TabIndex = 0
         '
         'ContextMenuStrip1
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResetTimeToolStripMenuItem, Me.ResetNotificationsToolStripMenuItem, Me.SimulateTimeToolStripMenuItem, Me.ReCalculateTimesToolStripMenuItem, Me.ToolStripSeparator2, Me.SetSystemBootTimeToolStripMenuItem, Me.UseFirstAppStartupTimeToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(207, 164)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(207, 142)
         '
         'ToolStripSeparator2
         '
@@ -172,7 +183,7 @@ Partial Class ClientGUI
         Me.GroupBox5.Controls.Add(Me.WithoutBreaksLbl)
         Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox5.Location = New System.Drawing.Point(245, 3)
+        Me.GroupBox5.Location = New System.Drawing.Point(366, 3)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(115, 66)
         Me.GroupBox5.TabIndex = 4
@@ -204,7 +215,7 @@ Partial Class ClientGUI
         Me.GroupBox3.Controls.Add(Me.RegEndLbl)
         Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(3, 75)
+        Me.GroupBox3.Location = New System.Drawing.Point(124, 75)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(115, 66)
         Me.GroupBox3.TabIndex = 2
@@ -236,7 +247,7 @@ Partial Class ClientGUI
         Me.GroupBox4.Controls.Add(Me.MaxEndLbl)
         Me.GroupBox4.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox4.Location = New System.Drawing.Point(124, 75)
+        Me.GroupBox4.Location = New System.Drawing.Point(366, 75)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(115, 66)
         Me.GroupBox4.TabIndex = 3
@@ -275,8 +286,8 @@ Partial Class ClientGUI
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.ProgressBar2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(368, 16)
-        Me.SplitContainer1.SplitterDistance = 287
+        Me.SplitContainer1.Size = New System.Drawing.Size(488, 16)
+        Me.SplitContainer1.SplitterDistance = 380
         Me.SplitContainer1.SplitterWidth = 2
         Me.SplitContainer1.TabIndex = 5
         '
@@ -286,7 +297,7 @@ Partial Class ClientGUI
         Me.ProgressBar1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressBar1.Location = New System.Drawing.Point(0, 0)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(287, 16)
+        Me.ProgressBar1.Size = New System.Drawing.Size(380, 16)
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.ProgressBar1.TabIndex = 6
         '
@@ -296,7 +307,7 @@ Partial Class ClientGUI
         Me.ProgressBar2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ProgressBar2.Location = New System.Drawing.Point(0, 0)
         Me.ProgressBar2.Name = "ProgressBar2"
-        Me.ProgressBar2.Size = New System.Drawing.Size(79, 16)
+        Me.ProgressBar2.Size = New System.Drawing.Size(106, 16)
         Me.ProgressBar2.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.ProgressBar2.TabIndex = 7
         '
@@ -343,6 +354,7 @@ Partial Class ClientGUI
         Me.CustomEndTimePickerCtl.ShowUpDown = True
         Me.CustomEndTimePickerCtl.Size = New System.Drawing.Size(109, 22)
         Me.CustomEndTimePickerCtl.TabIndex = 3
+        Me.CustomEndTimePickerCtl.Value = New Date(2020, 5, 3, 17, 0, 0, 0)
         '
         'ResetTimeToolStripMenuItem
         '
@@ -386,6 +398,74 @@ Partial Class ClientGUI
         Me.UseFirstAppStartupTimeToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.UseFirstAppStartupTimeToolStripMenuItem.Text = "Use first app startup time"
         '
+        'GroupBox7
+        '
+        Me.GroupBox7.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.GroupBox7.Controls.Add(Me.BreakfastCountdownLbl)
+        Me.GroupBox7.Controls.Add(Me.BreakfastTimePickerCtl)
+        Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox7.Location = New System.Drawing.Point(245, 3)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(115, 66)
+        Me.GroupBox7.TabIndex = 6
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Breakfast"
+        '
+        'BreakfastCountdownLbl
+        '
+        Me.BreakfastCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BreakfastCountdownLbl.Location = New System.Drawing.Point(3, 40)
+        Me.BreakfastCountdownLbl.Name = "BreakfastCountdownLbl"
+        Me.BreakfastCountdownLbl.ReadOnly = True
+        Me.BreakfastCountdownLbl.Size = New System.Drawing.Size(109, 22)
+        Me.BreakfastCountdownLbl.TabIndex = 2
+        '
+        'BreakfastTimePickerCtl
+        '
+        Me.BreakfastTimePickerCtl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.BreakfastTimePickerCtl.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.BreakfastTimePickerCtl.Location = New System.Drawing.Point(3, 18)
+        Me.BreakfastTimePickerCtl.Name = "BreakfastTimePickerCtl"
+        Me.BreakfastTimePickerCtl.ShowUpDown = True
+        Me.BreakfastTimePickerCtl.Size = New System.Drawing.Size(109, 22)
+        Me.BreakfastTimePickerCtl.TabIndex = 3
+        Me.BreakfastTimePickerCtl.Value = New Date(2020, 5, 3, 9, 30, 0, 0)
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.GroupBox8.Controls.Add(Me.LaunchCountdownLbl)
+        Me.GroupBox8.Controls.Add(Me.LunchTimePickerCtl)
+        Me.GroupBox8.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox8.Location = New System.Drawing.Point(3, 75)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(115, 66)
+        Me.GroupBox8.TabIndex = 7
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "Lunch"
+        '
+        'LaunchCountdownLbl
+        '
+        Me.LaunchCountdownLbl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.LaunchCountdownLbl.Location = New System.Drawing.Point(3, 40)
+        Me.LaunchCountdownLbl.Name = "LaunchCountdownLbl"
+        Me.LaunchCountdownLbl.ReadOnly = True
+        Me.LaunchCountdownLbl.Size = New System.Drawing.Size(109, 22)
+        Me.LaunchCountdownLbl.TabIndex = 2
+        '
+        'LunchTimePickerCtl
+        '
+        Me.LunchTimePickerCtl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.LunchTimePickerCtl.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.LunchTimePickerCtl.Location = New System.Drawing.Point(3, 18)
+        Me.LunchTimePickerCtl.Name = "LunchTimePickerCtl"
+        Me.LunchTimePickerCtl.ShowUpDown = True
+        Me.LunchTimePickerCtl.Size = New System.Drawing.Size(109, 22)
+        Me.LunchTimePickerCtl.TabIndex = 3
+        Me.LunchTimePickerCtl.Value = New Date(2020, 5, 3, 12, 30, 0, 0)
+        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -393,7 +473,7 @@ Partial Class ClientGUI
         Me.Controls.Add(Me.TimeClockPanel)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "ClientGUI"
-        Me.Size = New System.Drawing.Size(368, 164)
+        Me.Size = New System.Drawing.Size(488, 164)
         Me.TimeClockPanel.ResumeLayout(False)
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
@@ -412,6 +492,10 @@ Partial Class ClientGUI
         Me.SplitContainer1.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -448,4 +532,10 @@ Partial Class ClientGUI
     Friend WithEvents CustomTimeCountdownLbl As Windows.Forms.TextBox
     Friend WithEvents CustomEndTimePickerCtl As Windows.Forms.DateTimePicker
     Friend WithEvents ReCalculateTimesToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GroupBox7 As Windows.Forms.GroupBox
+    Friend WithEvents BreakfastCountdownLbl As Windows.Forms.TextBox
+    Friend WithEvents BreakfastTimePickerCtl As Windows.Forms.DateTimePicker
+    Friend WithEvents GroupBox8 As Windows.Forms.GroupBox
+    Friend WithEvents LaunchCountdownLbl As Windows.Forms.TextBox
+    Friend WithEvents LunchTimePickerCtl As Windows.Forms.DateTimePicker
 End Class

@@ -17,6 +17,8 @@ Public Class ClientGUI
     Public MaxEndTime As Date
     Public WithoutBreaksTime As Date
     Public CustomEndTime As Date
+    Public CustomBreakfast As Date
+    Public CustomLunch As Date
 
     Delegate Sub SetTextBoxTextDelegate(ByVal TextBoxCtl As TextBox, ByVal text As String)
     Delegate Sub SetProgressbarValueDelegate(ByVal ProgressCtl As ProgressBar, ByVal value As Integer)
@@ -101,10 +103,16 @@ Public Class ClientGUI
             RegularEndTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.NormalWorktimeSpan).AddMinutes(_Settings.NormalWorktimeBreakfastSpan).AddMinutes(_Settings.NormalWorktimeLunchSpan).AddMinutes(_Settings.EndWorktimeOffset)
             MaxEndTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.MaxWorktimeSpan).AddMinutes(_Settings.NormalWorktimeBreakfastSpan).AddMinutes(_Settings.NormalWorktimeLunchSpan).AddMinutes(_Settings.MaxWorktimeAdditionalBreakSpan).AddMinutes(_Settings.EndWorktimeOffset)
             WithoutBreaksTime = StartTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.NormalWorktimeMaxSpan).AddMinutes(_Settings.EndWorktimeOffset)
+
             CustomEndTime = New Date(DateAndTime.Now.Year, DateAndTime.Now.Month, DateAndTime.Now.Day, _Settings.CustomEndTime.Hour, _Settings.CustomEndTime.Minute, _Settings.CustomEndTime.Second)
+            CustomBreakfast = New Date(DateAndTime.Now.Year, DateAndTime.Now.Month, DateAndTime.Now.Day, _Settings.CustomBreakfast.Hour, _Settings.CustomBreakfast.Minute, _Settings.CustomBreakfast.Second)
+            CustomLunch = New Date(DateAndTime.Now.Year, DateAndTime.Now.Month, DateAndTime.Now.Day, _Settings.CustomLunch.Hour, _Settings.CustomLunch.Minute, _Settings.CustomLunch.Second)
 
             If _Settings.CalculateCustomEndTimeWithOffsets Then
                 CustomEndTime = CustomEndTime.AddMinutes(_Settings.StartWorktimeOffset).AddMinutes(_Settings.EndWorktimeOffset)
+            End If
+            If _Settings.UseCustomEndTimeAsNormalWorkimeEnd Then
+                RegularEndTime = CustomEndTime
             End If
 
             LunchTimeLbl.Text = LunchTime.ToShortTimeString
@@ -193,6 +201,8 @@ Public Class ClientGUI
                 SetTextboxText(WithoutBreaksCountdownLbl, WithoutBreaksTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
                 SetTextboxText(TotalWorktimeLbl, DateAndTime.Now.Subtract(StartTime).ToString("g").Split(",")(0).Replace("-", "+ "))
                 SetTextboxText(CustomTimeCountdownLbl, CustomEndTime.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
+                SetTextboxText(BreakfastCountdownLbl, CustomBreakfast.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
+                SetTextboxText(LaunchCountdownLbl, CustomLunch.Subtract(DateAndTime.Now).ToString("g").Split(",")(0).Replace("-", "+ "))
 
                 If DateAndTime.Now.Subtract(StartTime).TotalSeconds <= ProgressBar1.Maximum Then
                     SetProgressbarValue(ProgressBar1, DateAndTime.Now.Subtract(StartTime).TotalSeconds)
@@ -225,8 +235,13 @@ Public Class ClientGUI
         End If
         GroupBox2.Visible = _Settings.ShowBreakfast
         GroupBox6.Visible = _Settings.ShowCustomEndTime
-        CustomEndTimePickerCtl.Value = _Settings.CustomEndTime
+        GroupBox7.Visible = _Settings.ShowCustomBreakfast
+        GroupBox8.Visible = _Settings.ShowCustomLunch
         CalculateStaticTimes(False)
+        CustomEndTimePickerCtl.Value = _Settings.CustomEndTime
+        BreakfastTimePickerCtl.Value = _Settings.CustomBreakfast
+        LunchTimePickerCtl.Value = _Settings.CustomLunch
+
         If Not BackgroundWorker1.IsBusy Then
             BackgroundWorker1.RunWorkerAsync()
         End If
@@ -261,12 +276,30 @@ Public Class ClientGUI
     End Sub
 
     Private Sub CustomEndTimePickerCtl_ValueChanged(sender As Object, e As EventArgs) Handles CustomEndTimePickerCtl.ValueChanged
-        CustomEndTime = CustomEndTimePickerCtl.Value
-        _Settings.CustomEndTime = CustomEndTimePickerCtl.Value
-        CalculateStaticTimes(True)
+        If Not IsNothing(_Settings) Then
+            CustomEndTime = CustomEndTimePickerCtl.Value
+            _Settings.CustomEndTime = CustomEndTimePickerCtl.Value
+            CalculateStaticTimes(True)
+        End If
     End Sub
 
     Private Sub ReCalculateTimesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReCalculateTimesToolStripMenuItem.Click
         CalculateStaticTimes(True)
+    End Sub
+
+    Private Sub BreakfastTimePickerCtl_ValueChanged(sender As Object, e As EventArgs) Handles BreakfastTimePickerCtl.ValueChanged
+        If Not IsNothing(_Settings) Then
+            CustomBreakfast = BreakfastTimePickerCtl.Value
+            _Settings.CustomBreakfast = BreakfastTimePickerCtl.Value
+            CalculateStaticTimes(True)
+        End If
+    End Sub
+
+    Private Sub LunchTimePickerCtl_ValueChanged(sender As Object, e As EventArgs) Handles LunchTimePickerCtl.ValueChanged
+        If Not IsNothing(_Settings) Then
+            CustomLunch = LunchTimePickerCtl.Value
+            _Settings.CustomLunch = LunchTimePickerCtl.Value
+            CalculateStaticTimes(True)
+        End If
     End Sub
 End Class
