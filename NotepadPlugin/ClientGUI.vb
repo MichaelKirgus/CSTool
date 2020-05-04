@@ -55,4 +55,8 @@ Public Class ClientGUI
             End If
         End If
     End Sub
+
+    Private Sub ClientGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadFileAtStart()
+    End Sub
 End Class

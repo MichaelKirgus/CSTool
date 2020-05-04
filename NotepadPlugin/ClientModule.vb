@@ -241,7 +241,6 @@ Public Module ClientModule
         End Function
 
         Public Function LoadPlugin() As Boolean Implements ICSToolInterface.LoadPlugin
-            GUIHandle.LoadFileAtStart()
             Return True
         End Function
 
