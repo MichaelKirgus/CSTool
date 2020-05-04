@@ -505,6 +505,60 @@ Public Class WindowManager
         End Try
     End Function
 
+    Public Function RemoveStaleGUIPluginFiles(Optional ByVal UserSettingName As String = "Default", Optional ThreadSpinWait As Integer = 0) As Boolean
+        Try
+            _LogManager.WriteLogEntry("Check for stale plugin settings at user setting " & _UserSettingName & " ...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+
+            Dim validinstanceguids As New List(Of String)
+
+            For index = 0 To _DockingContent.Contents.Count - 1
+                Try
+                    Dim HostingWindowObj As DockContent
+                    HostingWindowObj = _DockingContent.Contents(index)
+                    Dim DockHostWindowsObj As DockingHostWindow
+                    DockHostWindowsObj = HostingWindowObj
+                    Dim PluginInterfaceObj As CSToolPluginLib.ICSToolInterface
+                    PluginInterfaceObj = HostingWindowObj.Tag
+                    If Not IsNothing(PluginInterfaceObj) Then
+                        validinstanceguids.Add(DockHostWindowsObj.InstanceGUID)
+                    End If
+                Catch ex As Exception
+                End Try
+            Next
+
+            Dim allpluginsettings As String()
+            allpluginsettings = IO.Directory.GetFiles(_UserProfilePath & "\" & UserSettingName)
+
+            For index = 0 To allpluginsettings.Count - 1
+                Threading.Thread.Sleep(ThreadSpinWait)
+                Dim currsettings As New IO.FileInfo(allpluginsettings(index))
+                If currsettings.Name.Contains("_") And currsettings.Extension.ToLower = ".xml" Then
+                    Dim isok As Boolean = False
+
+                    For index2 = 0 To validinstanceguids.Count - 1
+                        If currsettings.Name.Contains(validinstanceguids(index2)) Then
+                            isok = True
+                        End If
+                    Next
+
+                    If isok = False Then
+                        _LogManager.WriteLogEntry("File " & allpluginsettings(index) & " is stale, remove it...", Me.GetType, LogEntryTypeEnum.Warning, LogEntryLevelEnum.Debug)
+                        IO.File.Delete(allpluginsettings(index))
+                    Else
+                        _LogManager.WriteLogEntry("File " & allpluginsettings(index) & " is ok, leave it.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                    End If
+                End If
+            Next
+
+            _LogManager.WriteLogEntry("Successful checked for stale plugin settings at user setting " & _UserSettingName & " ...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+
+            Return True
+        Catch ex As Exception
+            _LogManager.WriteLogEntry("Error.", Me.GetType, LogEntryTypeEnum.ErrorL, LogEntryLevelEnum.Debug, Err)
+            Return False
+        End Try
+    End Function
+
     Public Function SendRaiseActionsToPluginsAsync(ByVal HostnameOrIP As String) As Boolean
         _LogManager.WriteLogEntry("Send hostname/IP " & HostnameOrIP & " asynchronous to plugins...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
 
