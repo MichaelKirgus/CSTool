@@ -526,6 +526,20 @@ Public Class WindowManager
                 End Try
             Next
 
+            Dim environmentplugs As List(Of ICSToolInterface)
+            environmentplugs = GetPluginsByType(ICSToolInterface.PluginTypeEnum.EnvironmentManager, PluginManager.PluginCollection)
+
+            For index = 0 To environmentplugs.Count - 1
+                validinstanceguids.Add(environmentplugs(index).PluginGUID)
+            Next
+
+            Dim credentialplugs As List(Of ICSToolInterface)
+            credentialplugs = GetPluginsByType(ICSToolInterface.PluginTypeEnum.CredentialManager, PluginManager.PluginCollection)
+
+            For index = 0 To credentialplugs.Count - 1
+                validinstanceguids.Add(credentialplugs(index).PluginGUID)
+            Next
+
             Dim allpluginsettings As String()
             allpluginsettings = IO.Directory.GetFiles(_UserProfilePath & "\" & UserSettingName)
 
