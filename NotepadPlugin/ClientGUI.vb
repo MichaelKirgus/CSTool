@@ -44,6 +44,7 @@ Public Class ClientGUI
     Public Sub RefreshGUI()
         If Not _Settings.WindowTitle = "" Then
             _ParentInstance.CurrentWindowTitle = _Settings.WindowTitle
+            Me.ParentForm.Text = _Settings.WindowTitle
         End If
     End Sub
 
