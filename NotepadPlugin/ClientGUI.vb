@@ -58,5 +58,8 @@ Public Class ClientGUI
 
     Private Sub ClientGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadFileAtStart()
+        If Not _Settings.InitialText = "" Then
+            RichTextBox1.Text = _Settings.InitialText
+        End If
     End Sub
 End Class
