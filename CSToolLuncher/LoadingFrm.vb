@@ -30,7 +30,7 @@ Public Class LoadingFrm
 
     Private Sub SetFormOpacity(ByVal FormCtl As Form, ByVal OpacityValue As Integer)
         If FormCtl.InvokeRequired Then
-            Dim FormOpacityObj As New SetLabelTextDelegate(AddressOf SetLabelText)
+            Dim FormOpacityObj As New SetFormOpacityDelegate(AddressOf SetFormOpacity)
             FormCtl.Invoke(FormOpacityObj, New Object() {FormCtl, OpacityValue})
         Else
             FormCtl.Opacity = OpacityValue
