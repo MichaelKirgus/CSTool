@@ -222,6 +222,7 @@ Public Module ClientModule
         End Function
 
         Public Function RefreshGUI() As Boolean Implements ICSToolInterface.RefreshGUI
+            GUIHandle.RefreshGUI()
             Return True
         End Function
 
@@ -238,10 +239,12 @@ Public Module ClientModule
         End Function
 
         Public Function LoadPlugin() As Boolean Implements ICSToolInterface.LoadPlugin
+            GUIHandle.LoadFileAtStart()
             Return True
         End Function
 
         Public Function UnloadPlugin() As Boolean Implements ICSToolInterface.UnloadPlugin
+            GUIHandle.SaveFileAtExit()
             Return True
         End Function
 

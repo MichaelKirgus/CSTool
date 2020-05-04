@@ -159,5 +159,17 @@
   <ItemGroup>
     <None Include="Resources\text-field.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-download_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-upload_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-clock_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-file-blank_16x16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -4,5 +4,8 @@
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
 <Serializable> Public Class Settings
+    Public Property WindowTitle As String = ""
     Public Property InitialText As String = ""
+    Public Property InitialFile As String = ""
+    Public Property SaveFileChangesAtExit As Boolean = False
 End Class
