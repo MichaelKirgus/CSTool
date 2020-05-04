@@ -6,7 +6,7 @@
 Imports CSToolLogLib.LogSettings
 
 Public Class ClientGUI
-    Public _Settings As Settings
+    Public _Settings As SettingsClass
     Public _ParentInstance As CSToolPluginLib.ICSToolInterface
     Public LastFilename As String = ""
     Private Sub SaveToFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToFileToolStripMenuItem.Click

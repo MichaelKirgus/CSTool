@@ -16,7 +16,7 @@ Public Module ClientModule
         Implements ICSToolInterface
 
         Public GUIHandle As New ClientGUI
-        Public SettingsHandle As New Settings
+        Public SettingsHandle As New SettingsClass
         Public EnvironmentRuntimeVar As New List(Of KeyValuePair(Of String, String))
         Private LifetimePluginGUID As String = ""
         Private WasGUILoaded As Boolean = False
@@ -211,7 +211,7 @@ Public Module ClientModule
         Public Function LoadPluginSettings(Optional Filename As String = "") As Boolean Implements ICSToolInterface.LoadPluginSettings
             Try
                 Dim objStreamReader As New StreamReader(Filename)
-                Dim p2 As New Settings
+                Dim p2 As New SettingsClass
                 Dim x As New XmlSerializer(p2.GetType)
                 p2 = x.Deserialize(objStreamReader)
                 objStreamReader.Close()
@@ -251,7 +251,7 @@ Public Module ClientModule
         End Function
 
         Public Function GetNewSettingsOnjectInstance() As Object Implements ICSToolInterface.GetNewSettingsObjectInstance
-            Return New Settings
+            Return New SettingsClass
         End Function
 
         Public Function GetNewUserControlOnjectInstance() As UserControl Implements ICSToolInterface.GetNewUserControlObjectInstance
