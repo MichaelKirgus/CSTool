@@ -431,6 +431,8 @@ Public Class WindowManager
 
     Public Function SaveAllGUIPluginSettings(Optional ByVal UserSettingName As String = "Default", Optional ByVal ForceSave As Boolean = False) As Boolean
         Try
+            _LogManager.WriteLogEntry("Enumerate " & _DockingContent.Contents.Count & " GUI plugins...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+
             For index = 0 To _DockingContent.Contents.Count - 1
                 Try
                     Dim HostingWindowObj As DockContent
@@ -445,8 +447,11 @@ Public Class WindowManager
                         If Not IsNothing(PluginInterfaceObj) Then
                             If PluginInterfaceObj.PluginType = ICSToolInterface.PluginTypeEnum.GUIWindow Then
                                 If ForceSave Or PluginInterfaceObj.PluginSettingsChanged Then
+                                    _LogManager.WriteLogEntry("Save settings from " & PluginInterfaceObj.PluginName & " to file.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                                     PluginInterfaceObj.SavePluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginInterfaceObj.PluginGUID & "_" & DockHostWindowsObj.InstanceGUID & ".xml")
                                     PluginInterfaceObj.PluginSettingsChanged = False
+                                Else
+                                    _LogManager.WriteLogEntry("Skip save settings from " & PluginInterfaceObj.PluginName & " to file.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                                 End If
                             End If
                         End If
@@ -457,6 +462,7 @@ Public Class WindowManager
 
             Return False
         Catch ex As Exception
+            _LogManager.WriteLogEntry("Error.", Me.GetType, LogEntryTypeEnum.ErrorL, LogEntryLevelEnum.Debug, Err)
             Return False
         End Try
     End Function
@@ -464,10 +470,13 @@ Public Class WindowManager
     Public Function SendRaiseActionsToPlugins(ByVal HostnameOrIP As String) As Boolean
         Try
             'First raise actions to environment plugins
+            _LogManager.WriteLogEntry("Send hostname/IP " & HostnameOrIP & " to environment plugins...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
             Dim EnvPlugs As List(Of CSToolPluginLib.ICSToolInterface)
             EnvPlugs = GetPluginsByType(ICSToolInterface.PluginTypeEnum.EnvironmentManager, PluginManager.PluginCollection)
 
+            _LogManager.WriteLogEntry("Enumerate " & EnvPlugs.Count & " environment plugins...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
             For index = 0 To EnvPlugs.Count - 1
+                _LogManager.WriteLogEntry("Get result from " & EnvPlugs(index).PluginName & " environment plugin...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                 EnvPlugs(index).RaiseActions(HostnameOrIP)
             Next
 
@@ -477,10 +486,10 @@ Public Class WindowManager
                     HostingWindowObj = _DockingContent.Contents(index)
                     Dim PluginInterfaceObj As CSToolPluginLib.ICSToolInterface
                     PluginInterfaceObj = HostingWindowObj.Tag
-
                     If Not IsNothing(PluginInterfaceObj) Then
                         If PluginInterfaceObj.SupportsRaisingActions Then
                             If PluginInterfaceObj.RaisingActionsEnabled Then
+                                _LogManager.WriteLogEntry("Send hostname/IP " & HostnameOrIP & " to GUI plugin " & PluginInterfaceObj.PluginName & " ...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                                 PluginInterfaceObj.RaiseActions(HostnameOrIP)
                             End If
                         End If
@@ -491,16 +500,22 @@ Public Class WindowManager
 
             Return False
         Catch ex As Exception
+            _LogManager.WriteLogEntry("Error.", Me.GetType, LogEntryTypeEnum.ErrorL, LogEntryLevelEnum.Debug, Err)
             Return False
         End Try
     End Function
 
     Public Function SendRaiseActionsToPluginsAsync(ByVal HostnameOrIP As String) As Boolean
+        _LogManager.WriteLogEntry("Send hostname/IP " & HostnameOrIP & " asynchronous to plugins...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+
         If PluginActionRaiseWorker.IsBusy = False Then
+            _LogManager.WriteLogEntry("Asynchronous worker is not busy, start thread.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
             PluginActionRaiseInProgress = True
             PluginActionRaiseWorker.RunWorkerAsync(HostnameOrIP)
+            _LogManager.WriteLogEntry("Thread successfully started.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
             Return True
         Else
+            _LogManager.WriteLogEntry("Error.", Me.GetType, LogEntryTypeEnum.ErrorL, LogEntryLevelEnum.Debug, Err)
             Return False
         End If
     End Function
@@ -544,6 +559,7 @@ Public Class WindowManager
                         PluginInterfaceObj = HostingWindowObj.Tag
 
                         If Not IsNothing(PluginInterfaceObj) Then
+                            _LogManager.WriteLogEntry("Refresh GUI plugin " & PluginInterfaceObj.PluginName & " ...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                             PluginInterfaceObj.RefreshGUI()
                         End If
                     Catch ex As Exception
@@ -553,6 +569,7 @@ Public Class WindowManager
 
             Return False
         Catch ex As Exception
+            _LogManager.WriteLogEntry("Error.", Me.GetType, LogEntryTypeEnum.ErrorL, LogEntryLevelEnum.Debug, Err)
             Return False
         End Try
     End Function
