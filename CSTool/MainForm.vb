@@ -502,6 +502,13 @@ Public Class MainForm
             End If
         End If
 
+        'Start worker for remove stale settings from settings folder
+        If Not IsChild And Not IsNonPersistent And RestoreSettings Then
+            If Not RemoveStaleSettings.IsBusy Then
+                RemoveStaleSettings.RunWorkerAsync()
+            End If
+        End If
+
         CurrentLoadActionState = "Finished!"
     End Sub
 
@@ -636,6 +643,11 @@ Public Class MainForm
             'Stop file lock worker
             If CheckForLockfile.IsBusy Then
                 CheckForLockfile.CancelAsync()
+            End If
+
+            'Stop remove stale settings worker
+            If RemoveStaleSettings.IsBusy Then
+                RemoveStaleSettings.CancelAsync()
             End If
         End If
 
@@ -1372,5 +1384,9 @@ Public Class MainForm
         Do While WindowManagerHandler.PluginActionRaiseInProgress
             Threading.Thread.Sleep(10)
         Loop
+    End Sub
+
+    Private Sub RemoveStaleSettings_DoWork(sender As Object, e As DoWorkEventArgs) Handles RemoveStaleSettings.DoWork
+        WindowManagerHandler.RemoveStaleGUIPluginFiles(WindowManagerHandler._UserSettingName)
     End Sub
 End Class
