@@ -80,6 +80,8 @@ Public Module ClientModule
 
         Public ReadOnly Property UserControl As Windows.Forms.UserControl Implements ICSToolInterface.UserControl
             Get
+                GUIHandle._Settings = SettingsHandle
+                GUIHandle._ParentInstance = Me
                 Return GUIHandle
             End Get
         End Property
