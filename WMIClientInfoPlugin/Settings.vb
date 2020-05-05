@@ -8,6 +8,7 @@ Imports CSToolWMIHelper
 
 <Serializable> Public Class Settings
     Public Property RaiseActions As Boolean = True
+    Public Property ResetGUIBeforeGetData As Boolean = True
     Public Property CurrentLoggedOnUserSize As Integer = 214
     Public Property CurrentManufacturerSize As Integer = 214
     Public Property CurrentModelSize As Integer = 214

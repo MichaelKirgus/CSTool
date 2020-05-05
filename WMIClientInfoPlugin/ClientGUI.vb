@@ -52,6 +52,11 @@ Public Class ClientGUI
         CurrentIPHostname = IPOrHostname
         CurrentIsRefresh = IsRefresh
 
+        If _Settings.ResetGUIBeforeGetData Then
+            SetAllBuildInItemsToLoading()
+            ResetItems()
+        End If
+
         If Not IsRefresh Then
             SetAllBuildInItemsToLoading()
             SetLoadingState()
