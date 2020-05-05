@@ -26,6 +26,7 @@ Imports System.Management
     Public Property CacheResults As Boolean = True
     Public Property GetCurrentUserOverWMI As Boolean = True
     Public Property RefreshADInformation As Boolean = True
+    Public Property ResetGUIBeforeGetData As Boolean = True
     Public Property RefreshADInformationInterval As Integer = 1000
     Public Property WMICurrentLoggedOnUserSection As String = "Win32_ComputerSystem"
     Public Property WMICurrentLoggedOnUserClassName As String = "UserName"

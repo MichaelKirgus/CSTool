@@ -24,6 +24,10 @@ Public Class ClientGUI
     Public Sub RaiseAction(ByVal IPOrHostname As String, Optional ByVal IsRefresh As Boolean = False)
         CurrentIPHostname = IPOrHostname
 
+        If _Settings.ResetGUIBeforeGetData Then
+            ResetItems()
+        End If
+
         If Not IPOrHostname = "" Then
             If Not _Settings.LDAPInfoEntryCollection.Count = 0 Then
                 If _Settings.GetCurrentUserOverWMI Then
