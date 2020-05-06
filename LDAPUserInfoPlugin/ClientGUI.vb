@@ -24,7 +24,7 @@ Public Class ClientGUI
     Public Sub RaiseAction(ByVal IPOrHostname As String, Optional ByVal IsRefresh As Boolean = False)
         CurrentIPHostname = IPOrHostname
 
-        If _Settings.ResetGUIBeforeGetData Then
+        If _Settings.ResetGUIBeforeGetData And Not IsRefresh Then
             ResetItems()
         End If
 
