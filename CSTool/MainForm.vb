@@ -43,6 +43,7 @@ Public Class MainForm
     Public ParentInstance As MainForm = Nothing
     Public IsNonPersistent As Boolean = False
     Public RestoreSettings As Boolean = True
+    Public SettingsSaved As Boolean = False
     Public LastWindowState As FormWindowState = FormWindowState.Normal
     Public InstanceTag As String = ""
 
@@ -604,6 +605,7 @@ Public Class MainForm
                         res = MsgBox("One or more child windows are open. Do you want to close the application?", vbYesNo)
                         If res = MsgBoxResult.No Then
                             'Cancel exit application
+                            SavingAppForm.Close()
                             Return False
                         End If
                     End If
@@ -763,28 +765,35 @@ Public Class MainForm
     End Sub
 
     Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If Not e.CloseReason = CloseReason.ApplicationExitCall And Not SaveSettingsAsyncWorker.IsBusy Then
-            Dim isok As Boolean = False
-            If ExitWithoutWarning.Checked Then
-                isok = True
-            Else
-                Dim msgresult As MsgBoxResult
-                msgresult = MsgBox("Quit application?", MsgBoxStyle.YesNo)
-                If msgresult = MsgBoxResult.Yes Then
-                    isok = True
-                End If
-            End If
-
-            If isok Then
+        If e.CloseReason = CloseReason.FormOwnerClosing Or e.CloseReason = CloseReason.WindowsShutDown Or e.CloseReason = CloseReason.TaskManagerClosing Or e.CloseReason = CloseReason.None Or e.CloseReason = CloseReason.UserClosing Then
+            If Not SettingsSaved Then
                 If Not SaveSettingsAsyncWorker.IsBusy Then
-                    SaveSettingsAsyncWorker.RunWorkerAsync(isok)
+                    Dim isok As Boolean = False
+                    If ExitWithoutWarning.Checked Then
+                        isok = True
+                    Else
+                        Dim msgresult As MsgBoxResult
+                        msgresult = MsgBox("Quit application?", MsgBoxStyle.YesNo)
+                        If msgresult = MsgBoxResult.Yes Then
+                            isok = True
+                        End If
+                    End If
+
+                    If isok Then
+                        If Not SaveSettingsAsyncWorker.IsBusy Then
+                            If IsChild Then
+                                SaveSettingsAsyncWorker.RunWorkerAsync(1)
+                            Else
+                                SaveSettingsAsyncWorker.RunWorkerAsync(0)
+                            End If
+                        End If
+                    End If
+
+                    e.Cancel = True
+                Else
+                    e.Cancel = False
                 End If
             End If
-
-            e.Cancel = True
-        End If
-        If SaveSettingsAsyncWorker.IsBusy Then
-            e.Cancel = True
         End If
     End Sub
 
@@ -1395,12 +1404,30 @@ Public Class MainForm
     End Sub
 
     Private Sub SaveSettingsAsyncWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles SaveSettingsAsyncWorker.DoWork
-        e.Result = CloseForm()
+        Dim closemode As Integer
+        closemode = e.Argument
+        Dim resultlist As New List(Of Object)
+        resultlist.Add(CloseForm())
+        resultlist.Add(closemode)
+
+        e.Result = resultlist
     End Sub
 
     Private Sub SaveSettingsAsyncWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles SaveSettingsAsyncWorker.RunWorkerCompleted
-        If e.Result Then
-            Application.Exit()
+        Dim resultlist As List(Of Object)
+        resultlist = e.Result
+
+        If resultlist(0) Then
+            If resultlist(1) = 0 Then
+                SettingsSaved = True
+                Application.Exit()
+            End If
+            If resultlist(1) = 1 Then
+                SettingsSaved = True
+                Me.Close()
+            End If
+        Else
+            SettingsSaved = False
         End If
     End Sub
 End Class
