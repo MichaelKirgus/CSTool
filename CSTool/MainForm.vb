@@ -976,7 +976,7 @@ Public Class MainForm
             newins.IsChild = True
             newins.ParentInstance = Me
 
-            newins.Show(Me)
+            newins.Show()
             If Not HostOrIP = "" Then
                 newins.HostnameOrIPCtl.Text = HostOrIP
                 newins.PerformRaiseActions()
