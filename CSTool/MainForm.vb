@@ -592,7 +592,6 @@ Public Class MainForm
     Public Function CloseForm() As Boolean
         Dim SavingAppForm As New SavingFrm
         SavingAppForm.Show()
-        Application.DoEvents()
 
         If Not IsNonPersistent Then
             If Not CloseChildsWithoutWarningToolStripMenuItem.Checked And IsChild = False Then
@@ -764,22 +763,27 @@ Public Class MainForm
     End Sub
 
     Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Dim isok As Boolean = False
-        If ExitWithoutWarning.Checked Then
-            isok = True
-        Else
-            Dim msgresult As MsgBoxResult
-            msgresult = MsgBox("Quit application?", MsgBoxStyle.YesNo)
-            If msgresult = MsgBoxResult.Yes Then
+        If Not e.CloseReason = CloseReason.ApplicationExitCall And Not SaveSettingsAsyncWorker.IsBusy Then
+            Dim isok As Boolean = False
+            If ExitWithoutWarning.Checked Then
                 isok = True
+            Else
+                Dim msgresult As MsgBoxResult
+                msgresult = MsgBox("Quit application?", MsgBoxStyle.YesNo)
+                If msgresult = MsgBoxResult.Yes Then
+                    isok = True
+                End If
             End If
-        End If
 
-        If isok Then
-            If Not CloseForm() Then
-                e.Cancel = True
+            If isok Then
+                If Not SaveSettingsAsyncWorker.IsBusy Then
+                    SaveSettingsAsyncWorker.RunWorkerAsync(isok)
+                End If
             End If
-        Else
+
+            e.Cancel = True
+        End If
+        If SaveSettingsAsyncWorker.IsBusy Then
             e.Cancel = True
         End If
     End Sub
@@ -1388,5 +1392,15 @@ Public Class MainForm
 
     Private Sub RemoveStaleSettings_DoWork(sender As Object, e As DoWorkEventArgs) Handles RemoveStaleSettings.DoWork
         WindowManagerHandler.RemoveStaleGUIPluginFiles(WindowManagerHandler._UserSettingName)
+    End Sub
+
+    Private Sub SaveSettingsAsyncWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles SaveSettingsAsyncWorker.DoWork
+        e.Result = CloseForm()
+    End Sub
+
+    Private Sub SaveSettingsAsyncWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles SaveSettingsAsyncWorker.RunWorkerCompleted
+        If e.Result Then
+            Application.Exit()
+        End If
     End Sub
 End Class

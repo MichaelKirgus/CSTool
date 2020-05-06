@@ -134,6 +134,7 @@ Partial Class SavingFrm
         Me.Name = "SavingFrm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Saving settings..."
+        Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.UseWaitCursor = True
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()

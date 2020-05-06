@@ -107,6 +107,7 @@ Partial Class MainForm
         Me.CheckForLockfile = New System.ComponentModel.BackgroundWorker()
         Me.RaiseActionsAsyncWorker = New System.ComponentModel.BackgroundWorker()
         Me.RemoveStaleSettings = New System.ComponentModel.BackgroundWorker()
+        Me.SaveSettingsAsyncWorker = New System.ComponentModel.BackgroundWorker()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -654,6 +655,11 @@ Partial Class MainForm
         Me.RemoveStaleSettings.WorkerReportsProgress = True
         Me.RemoveStaleSettings.WorkerSupportsCancellation = True
         '
+        'SaveSettingsAsyncWorker
+        '
+        Me.SaveSettingsAsyncWorker.WorkerReportsProgress = True
+        Me.SaveSettingsAsyncWorker.WorkerSupportsCancellation = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -755,4 +761,5 @@ Partial Class MainForm
     Friend WithEvents CheckForLockfile As System.ComponentModel.BackgroundWorker
     Friend WithEvents RaiseActionsAsyncWorker As System.ComponentModel.BackgroundWorker
     Friend WithEvents RemoveStaleSettings As System.ComponentModel.BackgroundWorker
+    Friend WithEvents SaveSettingsAsyncWorker As System.ComponentModel.BackgroundWorker
 End Class
