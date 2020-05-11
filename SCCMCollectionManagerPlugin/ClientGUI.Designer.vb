@@ -122,6 +122,9 @@ Partial Class ClientGUI
         Me.ZuweisenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ObjekteigenschaftenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SortAscendingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SortDescendingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportInDateiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
@@ -946,9 +949,9 @@ Partial Class ClientGUI
         '
         'AddMemberContextMenu
         '
-        Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem, Me.ToolStripSeparator5, Me.ExportInDateiToolStripMenuItem})
+        Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem, Me.ToolStripSeparator10, Me.SortAscendingToolStripMenuItem, Me.SortDescendingToolStripMenuItem, Me.ToolStripSeparator5, Me.ExportInDateiToolStripMenuItem})
         Me.AddMemberContextMenu.Name = "ContextMenuStrip1"
-        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 98)
+        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 170)
         '
         'ZuweisenToolStripMenuItem
         '
@@ -970,6 +973,25 @@ Partial Class ClientGUI
         Me.ObjekteigenschaftenToolStripMenuItem.Name = "ObjekteigenschaftenToolStripMenuItem"
         Me.ObjekteigenschaftenToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.ObjekteigenschaftenToolStripMenuItem.Text = "Item properties..."
+        '
+        'ToolStripSeparator10
+        '
+        Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(269, 6)
+        '
+        'SortAscendingToolStripMenuItem
+        '
+        Me.SortAscendingToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_cheveron_up_16x16
+        Me.SortAscendingToolStripMenuItem.Name = "SortAscendingToolStripMenuItem"
+        Me.SortAscendingToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
+        Me.SortAscendingToolStripMenuItem.Text = "Sort ascending"
+        '
+        'SortDescendingToolStripMenuItem
+        '
+        Me.SortDescendingToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_cheveron_down_16x16
+        Me.SortDescendingToolStripMenuItem.Name = "SortDescendingToolStripMenuItem"
+        Me.SortDescendingToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
+        Me.SortDescendingToolStripMenuItem.Text = "Sort descending"
         '
         'ToolStripSeparator5
         '
@@ -1354,4 +1376,7 @@ Partial Class ClientGUI
     Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
     Friend WithEvents ToolStripButton16 As ToolStripButton
     Friend WithEvents CloneCollectionFromDeviceWorker As System.ComponentModel.BackgroundWorker
+    Friend WithEvents ToolStripSeparator10 As ToolStripSeparator
+    Friend WithEvents SortAscendingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SortDescendingToolStripMenuItem As ToolStripMenuItem
 End Class

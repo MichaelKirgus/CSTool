@@ -199,9 +199,9 @@ Public Class ClientGUI
         End Try
     End Function
 
-    Public Function SortListView(ByVal ListViewCtl As ListView) As Boolean
+    Public Function SortListView(ByVal ListViewCtl As ListView, Optional ByVal SortOrderValue As SortOrder = SortOrder.Ascending) As Boolean
         Try
-            ListViewCtl.Sorting = SortOrder.Ascending
+            ListViewCtl.Sorting = SortOrderValue
             ListViewCtl.Sort()
 
             Return True
@@ -1982,5 +1982,13 @@ Public Class ClientGUI
         Catch ex As Exception
             MsgBox("No target device selected!", MsgBoxStyle.Exclamation)
         End Try
+    End Sub
+
+    Private Sub SortAscendingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortAscendingToolStripMenuItem.Click
+        SortListView(ListView2, SortOrder.Ascending)
+    End Sub
+
+    Private Sub SortDescendingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortDescendingToolStripMenuItem.Click
+        SortListView(ListView2, SortOrder.Descending)
     End Sub
 End Class
