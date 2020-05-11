@@ -596,6 +596,7 @@ Public Class MainForm
     Public Function CloseForm() As Boolean
         Dim SavingAppForm As New SavingFrm
         SavingAppForm.Show()
+        Application.DoEvents()
 
         If Not IsNonPersistent Then
             If Not CloseChildsWithoutWarningToolStripMenuItem.Checked And IsChild = False Then
