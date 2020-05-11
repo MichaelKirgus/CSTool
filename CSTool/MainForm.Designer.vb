@@ -108,6 +108,8 @@ Partial Class MainForm
         Me.RaiseActionsAsyncWorker = New System.ComponentModel.BackgroundWorker()
         Me.RemoveStaleSettings = New System.ComponentModel.BackgroundWorker()
         Me.SaveSettingsAsyncWorker = New System.ComponentModel.BackgroundWorker()
+        Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
+        Me.NewProcessWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -219,7 +221,7 @@ Partial Class MainForm
         '
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton3.DropDownButtonWidth = 15
-        Me.ToolStripButton3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewIndependentWindowToolStripMenuItem, Me.NewWindowToolStripMenuItem, Me.ToolStripSeparator6, Me.DockdocumentToolStripMenuItem, Me.DockleftToolStripMenuItem, Me.DockrightToolStripMenuItem, Me.DockbottomToolStripMenuItem, Me.DocktopToolStripMenuItem})
+        Me.ToolStripButton3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewIndependentWindowToolStripMenuItem, Me.NewWindowToolStripMenuItem, Me.ToolStripSeparator6, Me.DockdocumentToolStripMenuItem, Me.DockleftToolStripMenuItem, Me.DockrightToolStripMenuItem, Me.DockbottomToolStripMenuItem, Me.DocktopToolStripMenuItem, Me.ToolStripSeparator15, Me.NewProcessWindowToolStripMenuItem})
         Me.ToolStripButton3.Image = Global.CSTool.My.Resources.Resources.icon_plus_square_22x22
         Me.ToolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
@@ -230,48 +232,48 @@ Partial Class MainForm
         'NewIndependentWindowToolStripMenuItem
         '
         Me.NewIndependentWindowToolStripMenuItem.Name = "NewIndependentWindowToolStripMenuItem"
-        Me.NewIndependentWindowToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.NewIndependentWindowToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.NewIndependentWindowToolStripMenuItem.Text = "New independent window"
         '
         'NewWindowToolStripMenuItem
         '
         Me.NewWindowToolStripMenuItem.Name = "NewWindowToolStripMenuItem"
-        Me.NewWindowToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.NewWindowToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.NewWindowToolStripMenuItem.Text = "New window"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(224, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(236, 6)
         '
         'DockdocumentToolStripMenuItem
         '
         Me.DockdocumentToolStripMenuItem.Name = "DockdocumentToolStripMenuItem"
-        Me.DockdocumentToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.DockdocumentToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.DockdocumentToolStripMenuItem.Text = "Dock (document)"
         '
         'DockleftToolStripMenuItem
         '
         Me.DockleftToolStripMenuItem.Name = "DockleftToolStripMenuItem"
-        Me.DockleftToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.DockleftToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.DockleftToolStripMenuItem.Text = "Dock (left)"
         '
         'DockrightToolStripMenuItem
         '
         Me.DockrightToolStripMenuItem.Name = "DockrightToolStripMenuItem"
-        Me.DockrightToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.DockrightToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.DockrightToolStripMenuItem.Text = "Dock (right)"
         '
         'DockbottomToolStripMenuItem
         '
         Me.DockbottomToolStripMenuItem.Name = "DockbottomToolStripMenuItem"
-        Me.DockbottomToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.DockbottomToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.DockbottomToolStripMenuItem.Text = "Dock (bottom)"
         '
         'DocktopToolStripMenuItem
         '
         Me.DocktopToolStripMenuItem.Name = "DocktopToolStripMenuItem"
-        Me.DocktopToolStripMenuItem.Size = New System.Drawing.Size(227, 22)
+        Me.DocktopToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.DocktopToolStripMenuItem.Text = "Dock (top)"
         '
         'ToolStripButton6
@@ -660,6 +662,17 @@ Partial Class MainForm
         Me.SaveSettingsAsyncWorker.WorkerReportsProgress = True
         Me.SaveSettingsAsyncWorker.WorkerSupportsCancellation = True
         '
+        'ToolStripSeparator15
+        '
+        Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
+        Me.ToolStripSeparator15.Size = New System.Drawing.Size(236, 6)
+        '
+        'NewProcessWindowToolStripMenuItem
+        '
+        Me.NewProcessWindowToolStripMenuItem.Name = "NewProcessWindowToolStripMenuItem"
+        Me.NewProcessWindowToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
+        Me.NewProcessWindowToolStripMenuItem.Text = "Standalone process window"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -762,4 +775,6 @@ Partial Class MainForm
     Friend WithEvents RaiseActionsAsyncWorker As System.ComponentModel.BackgroundWorker
     Friend WithEvents RemoveStaleSettings As System.ComponentModel.BackgroundWorker
     Friend WithEvents SaveSettingsAsyncWorker As System.ComponentModel.BackgroundWorker
+    Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
+    Friend WithEvents NewProcessWindowToolStripMenuItem As ToolStripMenuItem
 End Class

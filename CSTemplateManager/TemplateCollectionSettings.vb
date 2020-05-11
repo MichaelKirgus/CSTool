@@ -19,6 +19,7 @@ Public Class TemplateCollectionSettings
     Public Property ForceInitialRaiseAction As Boolean = False
     Public Property ForceInitialRefresh As Boolean = False
     Public Property PinToShortcutMenu As Boolean = False
+    Public Property MasterTemplate As Boolean = False
 
     Public PluginName As String = ""
 

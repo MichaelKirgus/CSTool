@@ -7,6 +7,7 @@
 Imports System.ComponentModel
 Imports CSCustomActionHelper
 Imports CSTemplateManager
+Imports CSTemplateManager.TemplateCollectionSettings
 Imports CSToolApplicationSettingsLib
 Imports CSToolApplicationSettingsManager
 Imports CSToolEnvironmentManager
@@ -16,10 +17,12 @@ Imports CSToolLogGUILib
 Imports CSToolLogLib
 Imports CSToolPingHelper
 Imports CSToolPluginLib
+Imports CSToolPluginStandaloneHelper
 Imports CSToolSettingsConsoleLib
 Imports CSToolUserSettingsLib
 Imports CSToolUserSettingsManager
 Imports CSToolWindowManager
+Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class MainForm
     Public LogManager As New LogLib
@@ -844,28 +847,83 @@ Public Class MainForm
         End Select
     End Sub
 
+    Public Function AddItemToWorkspace(ByVal AddType As DockState, ByVal PluginName As String, Optional HostOrIP As String = "", Optional ByVal IndependentWindow As Boolean = False, Optional Override As Boolean = False, Optional OverrideStyle As DefaultWindowStyleEnum = DefaultWindowStyleEnum.DockDocument, Optional OverrideWindowState As ProcessWindowStyle = ProcessWindowStyle.Normal)
+        Dim InitTemplate As TemplateCollectionSettings
+        InitTemplate = UserTemplateManager.GetMasterTemplateFromCollection(UserTemplateManager.CurrentTemplates, ToolStripComboBox1.SelectedItem)
+        If InitTemplate.TemplateName = "" Then
+            'No initial template found, load empty settings
+            If Override Then
+                Select Case OverrideStyle
+                    Case DefaultWindowStyleEnum.DockBottom
+                        Return WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostOrIP, PluginName, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, DockState.DockBottom)
+                    Case DefaultWindowStyleEnum.DockDocument
+                        Return WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostOrIP, PluginName, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, DockState.Document)
+                    Case DefaultWindowStyleEnum.DockLeft
+                        Return WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostOrIP, PluginName, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, DockState.DockLeft)
+                    Case DefaultWindowStyleEnum.DockRight
+                        Return WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostOrIP, PluginName, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, DockState.DockRight)
+                    Case DefaultWindowStyleEnum.DockTop
+                        Return WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostOrIP, PluginName, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, DockState.DockTop)
+                    Case DefaultWindowStyleEnum.FloatWindow
+                        Return WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostOrIP, PluginName, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, DockState.Float)
+                    Case DefaultWindowStyleEnum.IndependentWindow
+                        Return WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostOrIP, PluginName, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, DockState.Unknown, True)
+                    Case DefaultWindowStyleEnum.StandaloneNonPersistentProcessWindow
+                        Dim NewHostSpawnInstance As New StandaloneInstanceBuilder
+                        Dim pluginpath As String
+                        pluginpath = WindowManagerHandler.PluginManager.GetPluginFilepathFromInterfaceInstance(WindowManagerHandler.GetPluginByName(PluginName, WindowManagerHandler.PluginManager.PluginCollection))
+                        Return NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, "", CurrentUserProfilePath, ApplicationSettings.EnvironmentPluginDir, ApplicationSettings.CredentialPluginDir, True, WindowManagerHandler._UserSettingName, InstanceTag, "", OverrideWindowState)
+                    Case DefaultWindowStyleEnum.StandaloneProcessWindow
+                        Dim NewHostSpawnInstance As New StandaloneInstanceBuilder
+                        Dim pluginpath As String
+                        pluginpath = WindowManagerHandler.PluginManager.GetPluginFilepathFromInterfaceInstance(WindowManagerHandler.GetPluginByName(PluginName, WindowManagerHandler.PluginManager.PluginCollection))
+                        Return NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, "", CurrentUserProfilePath, ApplicationSettings.EnvironmentPluginDir, ApplicationSettings.CredentialPluginDir, False, WindowManagerHandler._UserSettingName, InstanceTag, "", OverrideWindowState)
+                    Case Else
+                        Return False
+                End Select
+            Else
+                Return WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostOrIP, PluginName, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, AddType, IndependentWindow)
+            End If
+        Else
+            'Initial template found
+            Dim PluginInstance As ICSToolInterface
+            Dim TemplatePluginFile As String
+            PluginInstance = WindowManagerHandler.GetPluginByName(PluginName, WindowManagerHandler.PluginManager.PluginCollection)
+            TemplatePluginFile = UserTemplateManager.GetPluginTemplateSettingsFilePath(ApplicationSettings.UserTemplatesDir, PluginInstance, InitTemplate)
+
+            Dim TemplateManager As New UserTemplateManager
+            TemplateManager._parent = Me
+
+            If Override Then
+                Return TemplateManager.AddItemFromTemplateToWorkspace(InitTemplate.TemplateGUID, CSDockPanelHosting, InitTemplate.PluginName, WindowManagerHandler.GetPluginsByType(ICSToolInterface.PluginTypeEnum.GUIWindow, WindowManagerHandler.PluginManager.PluginCollection), WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, OverrideStyle)
+            Else
+                Return WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostOrIP, PluginName, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, AddType, IndependentWindow, TemplatePluginFile)
+            End If
+        End If
+    End Function
+
     Private Sub NewWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewWindowToolStripMenuItem.Click
-        WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostnameOrIPCtl.Text, ToolStripComboBox1.SelectedItem, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, WeifenLuo.WinFormsUI.Docking.DockState.Float)
+        AddItemToWorkspace(DockState.Float, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text)
     End Sub
 
     Private Sub ToolStripButton3_ButtonClick(sender As Object, e As EventArgs) Handles ToolStripButton3.ButtonClick
-        WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostnameOrIPCtl.Text, ToolStripComboBox1.SelectedItem, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName)
+        AddItemToWorkspace(DockState.Document, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text)
     End Sub
 
     Private Sub DockleftToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DockleftToolStripMenuItem.Click
-        WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostnameOrIPCtl.Text, ToolStripComboBox1.SelectedItem, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, WeifenLuo.WinFormsUI.Docking.DockState.DockLeft)
+        AddItemToWorkspace(DockState.DockLeft, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text)
     End Sub
 
     Private Sub DockrightToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DockrightToolStripMenuItem.Click
-        WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostnameOrIPCtl.Text, ToolStripComboBox1.SelectedItem, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, WeifenLuo.WinFormsUI.Docking.DockState.DockRight)
+        AddItemToWorkspace(DockState.DockRight, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text)
     End Sub
 
     Private Sub DockbottomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DockbottomToolStripMenuItem.Click
-        WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostnameOrIPCtl.Text, ToolStripComboBox1.SelectedItem, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, WeifenLuo.WinFormsUI.Docking.DockState.DockBottom)
+        AddItemToWorkspace(DockState.DockBottom, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text)
     End Sub
 
     Private Sub DocktopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DocktopToolStripMenuItem.Click
-        WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostnameOrIPCtl.Text, ToolStripComboBox1.SelectedItem, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, WeifenLuo.WinFormsUI.Docking.DockState.DockTop)
+        AddItemToWorkspace(DockState.DockTop, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text)
     End Sub
 
     Private Sub MainForm_ResizeBegin(sender As Object, e As EventArgs) Handles MyBase.ResizeBegin
@@ -905,11 +963,11 @@ Public Class MainForm
     End Sub
 
     Private Sub NewIndependentWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewIndependentWindowToolStripMenuItem.Click
-        WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostnameOrIPCtl.Text, ToolStripComboBox1.SelectedItem, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, WeifenLuo.WinFormsUI.Docking.DockState.Unknown, True)
+        AddItemToWorkspace(DockState.Unknown, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text, True)
     End Sub
 
     Private Sub DockdocumentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DockdocumentToolStripMenuItem.Click
-        WindowManagerHandler.AddPluginWindowToGUI(CSDockPanelHosting, HostnameOrIPCtl.Text, ToolStripComboBox1.SelectedItem, WindowManagerHandler.PluginManager.PluginCollection, WindowManagerHandler._UserSettingName, WeifenLuo.WinFormsUI.Docking.DockState.Document)
+        AddItemToWorkspace(DockState.Document, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text)
     End Sub
 
     Private Sub MainForm_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
@@ -1429,5 +1487,9 @@ Public Class MainForm
         Else
             SettingsSaved = False
         End If
+    End Sub
+
+    Private Sub NewProcessWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewProcessWindowToolStripMenuItem.Click
+        AddItemToWorkspace(DockState.Unknown, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text, False, True, DefaultWindowStyleEnum.StandaloneProcessWindow)
     End Sub
 End Class

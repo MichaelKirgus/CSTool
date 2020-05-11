@@ -72,6 +72,32 @@ Public Class TemplateManager
         End Try
     End Function
 
+    Public Function GetMasterTemplateFromCollection(ByVal Collection As List(Of TemplateCollectionEntry), ByVal PluginName As String) As TemplateCollectionSettings
+        Try
+            If Not Collection.Count = 0 Then
+                For index = 0 To Collection.Count - 1
+                    If Not Collection(index).PluginTemplates.Count = 0 Then
+                        For plugind = 0 To Collection(index).PluginTemplates.Count - 1
+                            If Collection(index).PluginTemplates(plugind).MasterTemplate Then
+                                Collection(index).PluginTemplates(plugind).PluginName = Collection(index).PluginName
+                                If Collection(index).PluginTemplates(plugind).PluginName = PluginName Then
+                                    Return Collection(index).PluginTemplates(plugind)
+                                End If
+                            End If
+                        Next
+                    Else
+                        Return New TemplateCollectionSettings
+                    End If
+                Next
+            End If
+
+            Return New TemplateCollectionSettings
+        Catch ex As Exception
+            Return New TemplateCollectionSettings
+        End Try
+    End Function
+
+
     Public Function RefreshTemplateInCollection(ByVal Collection As List(Of TemplateCollectionEntry), ByVal TemplateGUID As String, ByVal TemplateSettingsObj As TemplateCollectionSettings) As Boolean
         Try
             If Not Collection.Count = 0 Then
