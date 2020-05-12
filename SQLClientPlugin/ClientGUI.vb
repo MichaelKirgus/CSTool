@@ -443,6 +443,13 @@ Public Class ClientGUI
     End Function
 
     Public Sub RefreshGUI()
+        If Not IsNothing(_Settings) Then
+            If Not _Settings.InitialTitle = "" Then
+                _ParentInstance.CurrentWindowTitle = _Settings.InitialTitle
+                Me.ParentForm.Text = _Settings.InitialTitle
+            End If
+        End If
+
         SetGUIState()
         LoadItems()
 
