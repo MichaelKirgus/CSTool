@@ -512,6 +512,7 @@
     <Content Include="Licenses\License_Chromium.txt" />
     <Content Include="Licenses\License_DockPanelSuite.txt" />
     <Content Include="Licenses\License_Gecko.txt" />
+    <Content Include="Licenses\License_Heroicons.txt" />
     <Content Include="Licenses\License_MainApp.txt" />
     <None Include="Resources\icon-puzzle_16x16.png" />
     <None Include="Resources\icon-refresh_16x16.png" />
