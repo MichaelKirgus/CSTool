@@ -22,6 +22,7 @@ Public Class ClientGUI
     Public CurrentIPHostname As String = ""
     Public IsDBConnected As Boolean = False
     Public FirstLoad As Boolean = True
+    Public IsPluginDisposed As Boolean = False
     Private Delegate Sub AddListViewItemDelegate(ByVal ListViewCtl As ListView, ListViewItemCtl As ListViewItem, ByVal EnsureVisible As Boolean)
     Private Delegate Sub AddListViewColumnDelegate(ByVal ListViewCtl As ListView, ListViewItemCtl As ColumnHeader)
     Private Delegate Sub RemoveListViewItemDelegate(ByVal ListViewCtl As ListView, ListViewItemCtl As ListViewItem)
@@ -431,6 +432,7 @@ Public Class ClientGUI
     End Function
 
     Public Sub UnloadPlugin()
+        IsPluginDisposed = True
         CloseConnectionToDB()
         IsDBConnected = False
     End Sub
@@ -495,27 +497,29 @@ Public Class ClientGUI
     End Function
 
     Public Sub RefreshGUI()
-        If Not IsNothing(_Settings) Then
+        If Not IsNothing(_Settings) And Not IsPluginDisposed Then
             If Not _Settings.InitialTitle = "" Then
                 _ParentInstance.CurrentWindowTitle = _Settings.InitialTitle
                 Me.ParentForm.Text = _Settings.InitialTitle
             End If
 
-            SetGUIState()
-            LoadItems()
+            If Not Me.Disposing Then
+                SetGUIState()
+                LoadItems()
 
-            If Not GetSQLDataAsync.IsBusy Then
-                LoadImage.Visible = True
-                If IsDBConnected Then
-                    GetSQLDataAsync.RunWorkerAsync()
-                Else
-                    If ConnectToDB() Then
-                        IsDBConnected = True
+                If Not GetSQLDataAsync.IsBusy Then
+                    LoadImage.Visible = True
+                    If IsDBConnected Then
                         GetSQLDataAsync.RunWorkerAsync()
                     Else
-                        IsDBConnected = False
-                        ConnectionClosed.Visible = True
-                        LoadImage.Visible = False
+                        If ConnectToDB() Then
+                            IsDBConnected = True
+                            GetSQLDataAsync.RunWorkerAsync()
+                        Else
+                            IsDBConnected = False
+                            ConnectionClosed.Visible = True
+                            LoadImage.Visible = False
+                        End If
                     End If
                 End If
             End If
@@ -541,24 +545,26 @@ Public Class ClientGUI
     End Sub
 
     Private Sub LoadDataInGUI_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles LoadDataInGUI.RunWorkerCompleted
-        If e.Result = True Then
-            If _Settings.AutoResizeColumns Then
-                _ParentInstance.CurrentLogInstance.WriteLogEntry("Auto-Size columns in ListView...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                ListView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
-            End If
-            If _Settings.SelectFirstRow And (Not ListView1.Items.Count = 0) Then
-                ListView1.Items(0).Selected = True
-            End If
-            If _Settings.ShowErrorIfNoRow And ListView1.Items.Count = 0 Then
+        If Not Me.Disposing And Not IsPluginDisposed Then
+            If e.Result = True Then
+                If _Settings.AutoResizeColumns Then
+                    _ParentInstance.CurrentLogInstance.WriteLogEntry("Auto-Size columns in ListView...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                    ListView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+                End If
+                If _Settings.SelectFirstRow And (Not ListView1.Items.Count = 0) Then
+                    ListView1.Items(0).Selected = True
+                End If
+                If _Settings.ShowErrorIfNoRow And ListView1.Items.Count = 0 Then
+                    ConnectionClosed.Visible = True
+                    LoadImage.Visible = False
+                Else
+                    ConnectionClosed.Visible = False
+                    LoadImage.Visible = False
+                End If
+            Else
                 ConnectionClosed.Visible = True
                 LoadImage.Visible = False
-            Else
-                ConnectionClosed.Visible = False
-                LoadImage.Visible = False
             End If
-        Else
-            ConnectionClosed.Visible = True
-            LoadImage.Visible = False
         End If
     End Sub
 
