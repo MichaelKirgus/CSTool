@@ -21,6 +21,7 @@ Public Class ClientGUI
     Public CredHandler As New CredentialHandler
     Public CurrentIPHostname As String = ""
     Public IsDBConnected As Boolean = False
+    Public FirstLoad As Boolean = True
     Private Delegate Sub AddListViewItemDelegate(ByVal ListViewCtl As ListView, ListViewItemCtl As ListViewItem, ByVal EnsureVisible As Boolean)
     Private Delegate Sub AddListViewColumnDelegate(ByVal ListViewCtl As ListView, ListViewItemCtl As ColumnHeader)
     Private Delegate Sub RemoveListViewItemDelegate(ByVal ListViewCtl As ListView, ListViewItemCtl As ListViewItem)
@@ -211,11 +212,34 @@ Public Class ClientGUI
                 End If
             End If
 
+            If Not _Settings.FirstLoadDelay = 0 Then
+                If FirstLoad Then
+                    FirstLoad = False
+                    _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: First start delay...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                    Threading.Thread.Sleep(_Settings.FirstLoadDelay)
+                End If
+            End If
+            If Not FirstLoad Then
+                If Not _Settings.SQLQueryDelay = 0 Then
+                    _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Query delay...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                    Threading.Thread.Sleep(_Settings.SQLQueryDelay)
+                End If
+            End If
+
             If _Settings.UseCustomSQLCredentials Then
                 _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Using custom credentials to log-in...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                 Dim secstr As SecureString
                 secstr = CredHandler.ConvertStringInSecureString(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.CustomSQLCredentialsPassword))
                 secstr.MakeReadOnly()
+
+                If Not IsNothing(SQLConnection) Then
+                    Try
+                        SQLConnection.Close()
+                        SQLConnection = Nothing
+                    Catch ex As Exception
+                        _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Error closing DB connection.", Me.GetType, LogEntryTypeEnum.ErrorL, LogEntryLevelEnum.Debug, Err)
+                    End Try
+                End If
 
                 SQLCredential = New SqlCredential(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.CustomSQLCredentialsUsername), secstr)
                 SQLConnection = New SqlConnection(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.SQLConnectionString), SQLCredential)
@@ -241,6 +265,7 @@ Public Class ClientGUI
             Dim itms As New List(Of List(Of Object))
             _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Building SQL-Command...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
             Dim command As New SqlCommand(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.SQLSelectString), SQLConnection)
+            command.CommandTimeout = _Settings.SQLCommandTimeout
             _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Execute query " & command.CommandText, Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
             Dim reader As SqlDataReader = command.ExecuteReader()
             _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Execute query " & command.CommandText & " successful.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
@@ -448,23 +473,23 @@ Public Class ClientGUI
                 _ParentInstance.CurrentWindowTitle = _Settings.InitialTitle
                 Me.ParentForm.Text = _Settings.InitialTitle
             End If
-        End If
 
-        SetGUIState()
-        LoadItems()
+            SetGUIState()
+            LoadItems()
 
-        If Not GetSQLDataAsync.IsBusy Then
-            LoadImage.Visible = True
-            If IsDBConnected Then
-                GetSQLDataAsync.RunWorkerAsync()
-            Else
-                If ConnectToDB() Then
-                    IsDBConnected = True
+            If Not GetSQLDataAsync.IsBusy Then
+                LoadImage.Visible = True
+                If IsDBConnected Then
                     GetSQLDataAsync.RunWorkerAsync()
                 Else
-                    IsDBConnected = False
-                    ConnectionClosed.Visible = True
-                    LoadImage.Visible = False
+                    If ConnectToDB() Then
+                        IsDBConnected = True
+                        GetSQLDataAsync.RunWorkerAsync()
+                    Else
+                        IsDBConnected = False
+                        ConnectionClosed.Visible = True
+                        LoadImage.Visible = False
+                    End If
                 End If
             End If
         End If

@@ -18,12 +18,15 @@ Imports System.Windows.Forms
     Public Property CustomSQLCredentialsUsername As String = ""
     Public Property CustomSQLCredentialsPassword As String = ""
     Public Property SQLSelectString As String = "SELECT * FROM MYTABLE"
+    Public Property SQLCommandTimeout As Integer = 3000
     Public Property AutoCreatingColumns As Boolean = True
     Public Property CustomColumnCollection As List(Of CustomColumn)
     Public Property AutoResizeColumns As Boolean = True
     Public Property SelectFirstRow As Boolean = True
     Public Property ShowErrorIfNoRow As Boolean = True
     Public Property NullValue As String = "(null)"
+    Public Property FirstLoadDelay As Integer = 0
+    Public Property SQLQueryDelay As Integer = 0
     Public Property ResultStyle As ResultStyleEnum = ResultStyleEnum.ShowOnlyColumns
     Public Property SplitViewStyle As Orientation = Orientation.Horizontal
     Public Property GroupTextCollection As List(Of CustomGroupEntry)
