@@ -848,7 +848,7 @@ Public Class MainForm
         End Select
     End Sub
 
-    Public Function AddItemToWorkspace(ByVal AddType As DockState, ByVal PluginName As String, Optional HostOrIP As String = "", Optional ByVal IndependentWindow As Boolean = False, Optional Override As Boolean = False, Optional OverrideStyle As DefaultWindowStyleEnum = DefaultWindowStyleEnum.DockDocument, Optional OverrideWindowState As ProcessWindowStyle = ProcessWindowStyle.Normal)
+    Public Function AddItemToWorkspace(ByVal AddType As DockState, ByVal PluginName As String, Optional HostOrIP As String = "", Optional ByVal IndependentWindow As Boolean = False, Optional Override As Boolean = False, Optional OverrideStyle As DefaultWindowStyleEnum = DefaultWindowStyleEnum.DockDocument, Optional OverrideWindowState As ProcessWindowStyle = ProcessWindowStyle.Normal) As Boolean
         Dim InitTemplate As TemplateCollectionSettings
         InitTemplate = UserTemplateManager.GetMasterTemplateFromCollection(UserTemplateManager.CurrentTemplates, ToolStripComboBox1.SelectedItem)
         If InitTemplate.TemplateName = "" Then
