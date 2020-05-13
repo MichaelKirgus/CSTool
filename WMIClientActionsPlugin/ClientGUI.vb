@@ -286,24 +286,29 @@ Public Class ClientGUI
             _ParentInstance.CurrentLogInstance.WriteLogEntry("Load custom actions...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
             ContextMenuStripCtl.Items.Clear()
 
-            For Each itm As CustomItem In _Settings.CustomItemsCollection
-                Try
-                    Dim rr As ToolStripItem
-                    rr = ContextMenuStripCtl.Items.Add(itm.Name)
-                    If Not itm.IconPath = "" Then
-                        Try
-                            Dim tt As Image
-                            tt = Image.FromFile(itm.IconPath)
-                            rr.Image = tt
-                        Catch ex As Exception
-                        End Try
-                    End If
+            If Not _Settings.CustomItemsCollection.Count = 0 Then
+                Button5.Enabled = True
+                For Each itm As CustomItem In _Settings.CustomItemsCollection
+                    Try
+                        Dim rr As ToolStripItem
+                        rr = ContextMenuStripCtl.Items.Add(itm.Name)
+                        If Not itm.IconPath = "" Then
+                            Try
+                                Dim tt As Image
+                                tt = Image.FromFile(itm.IconPath)
+                                rr.Image = tt
+                            Catch ex As Exception
+                            End Try
+                        End If
 
-                    rr.Tag = itm
-                    AddHandler rr.Click, AddressOf ClickCustomItemEntry
-                Catch ex As Exception
-                End Try
-            Next
+                        rr.Tag = itm
+                        AddHandler rr.Click, AddressOf ClickCustomItemEntry
+                    Catch ex As Exception
+                    End Try
+                Next
+            Else
+                Button5.Enabled = False
+            End If
 
             _ParentInstance.CurrentLogInstance.WriteLogEntry("Load custom actions successful.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
 
