@@ -14,7 +14,7 @@ Imports CSToolPluginLib
 Public Module ClientModule
     Public Class Client
         Implements ICSToolInterface
-        Public SettingsHandle As New Settings
+        Public SettingsHandle As New SettingsClass
         Public EnvironmentProviderHandler As New EnvironmentProvider
         Private LifetimePluginGUID As String = ""
         Private FirstLoad As Boolean = True
@@ -117,105 +117,114 @@ Public Module ClientModule
             Get
                 If FirstLoad Then
                     EnvironmentProviderHandler.IsProviderReadOnly = True
-                    If IO.File.Exists(Environment.ExpandEnvironmentVariables("%ProgramFiles%\TightVNC\tvnviewer.exe")) Then
-                        Dim CurrentTightVNCViewerFilename As New EnvironmentEntry
-                        CurrentTightVNCViewerFilename.ValueName = "CurrentTightVNCViewerFilename"
-                        CurrentTightVNCViewerFilename.ValueData = Environment.ExpandEnvironmentVariables("%ProgramFiles%\TightVNC\tvnviewer.exe")
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(CurrentTightVNCViewerFilename)
+                    If SettingsHandle.GetCurrentTightVNCViewerVersion Then
+                        If IO.File.Exists(Environment.ExpandEnvironmentVariables(SettingsHandle.TightVNCViewerExecutablePath)) Then
+                            Dim CurrentTightVNCViewerFilename As New EnvironmentEntry
+                            CurrentTightVNCViewerFilename.ValueName = "CurrentTightVNCViewerFilename"
+                            CurrentTightVNCViewerFilename.ValueData = Environment.ExpandEnvironmentVariables(SettingsHandle.TightVNCViewerExecutablePath)
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(CurrentTightVNCViewerFilename)
 
-                        Dim CurrentTightVNCViewerVersion As New EnvironmentEntry
-                        CurrentTightVNCViewerVersion.ValueName = "CurrentTightVNCViewerVersion"
-                        Dim oo As FileVersionInfo
-                        oo = FileVersionInfo.GetVersionInfo(Environment.ExpandEnvironmentVariables("%ProgramFiles%\TightVNC\tvnviewer.exe"))
-                        CurrentTightVNCViewerVersion.ValueData = Environment.ExpandEnvironmentVariables(oo.FileVersion.ToString())
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(CurrentTightVNCViewerVersion)
-                    Else
+                            Dim CurrentTightVNCViewerVersion As New EnvironmentEntry
+                            CurrentTightVNCViewerVersion.ValueName = "CurrentTightVNCViewerVersion"
+                            Dim oo As FileVersionInfo
+                            oo = FileVersionInfo.GetVersionInfo(Environment.ExpandEnvironmentVariables(SettingsHandle.TightVNCViewerExecutablePath))
+                            CurrentTightVNCViewerVersion.ValueData = Environment.ExpandEnvironmentVariables(oo.FileVersion.ToString())
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(CurrentTightVNCViewerVersion)
+                        End If
                     End If
-                    If IO.File.Exists(Environment.ExpandEnvironmentVariables("%ProgramFiles%\uvnc bvba\UltraVNC\vncviewer.exe")) Then
-                        Dim CurrentUltraVNCViewerFilename As New EnvironmentEntry
-                        CurrentUltraVNCViewerFilename.ValueName = "CurrentUltraVNCViewerFilename"
-                        CurrentUltraVNCViewerFilename.ValueData = Environment.ExpandEnvironmentVariables("%ProgramFiles%\uvnc bvba\UltraVNC\vncviewer.exe")
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(CurrentUltraVNCViewerFilename)
+                    If SettingsHandle.GetCurrentUltraVNCViewerVersion Then
+                        If IO.File.Exists(Environment.ExpandEnvironmentVariables(SettingsHandle.UltraVNCViewerExecutablePath)) Then
+                            Dim CurrentUltraVNCViewerFilename As New EnvironmentEntry
+                            CurrentUltraVNCViewerFilename.ValueName = "CurrentUltraVNCViewerFilename"
+                            CurrentUltraVNCViewerFilename.ValueData = Environment.ExpandEnvironmentVariables(SettingsHandle.UltraVNCViewerExecutablePath)
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(CurrentUltraVNCViewerFilename)
 
-                        Dim CurrentUltraVNCViewerVersion As New EnvironmentEntry
-                        CurrentUltraVNCViewerVersion.ValueName = "CurrentUltraVNCViewerVersion"
-                        Dim oo As FileVersionInfo
-                        oo = FileVersionInfo.GetVersionInfo(Environment.ExpandEnvironmentVariables("%ProgramFiles%\uvnc bvba\UltraVNC\vncviewer.exe"))
-                        CurrentUltraVNCViewerVersion.ValueData = Environment.ExpandEnvironmentVariables(oo.FileVersion.ToString())
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(CurrentUltraVNCViewerVersion)
+                            Dim CurrentUltraVNCViewerVersion As New EnvironmentEntry
+                            CurrentUltraVNCViewerVersion.ValueName = "CurrentUltraVNCViewerVersion"
+                            Dim oo As FileVersionInfo
+                            oo = FileVersionInfo.GetVersionInfo(Environment.ExpandEnvironmentVariables(SettingsHandle.UltraVNCViewerExecutablePath))
+                            CurrentUltraVNCViewerVersion.ValueData = Environment.ExpandEnvironmentVariables(oo.FileVersion.ToString())
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(CurrentUltraVNCViewerVersion)
+                        End If
                     End If
+                    If SettingsHandle.GetTightVNCServiceState Then
+                        Try
+                            Dim jj As New ServiceController(SettingsHandle.TightVNCServiceName)
+                            Dim IsTightVNCServerServiceInstalled As New EnvironmentEntry
+                            Dim IsTightVNCServerServiceRunning As New EnvironmentEntry
+                            IsTightVNCServerServiceRunning.ValueName = "IsTightVNCServerServiceRunning"
 
-                    Try
-                        Dim jj As New ServiceController("tvnserver")
-                        Dim IsTightVNCServerServiceInstalled As New EnvironmentEntry
-                        Dim IsTightVNCServerServiceRunning As New EnvironmentEntry
-                        IsTightVNCServerServiceRunning.ValueName = "IsTightVNCServerServiceRunning"
+                            If jj.Status = ServiceControllerStatus.Running Then
+                                IsTightVNCServerServiceRunning.ValueData = "true"
+                            Else
+                                IsTightVNCServerServiceRunning.ValueData = "false"
+                            End If
+                            IsTightVNCServerServiceInstalled.ValueName = "IsTightVNCServerServiceInstalled"
+                            IsTightVNCServerServiceInstalled.ValueData = "true"
 
-                        If jj.Status = ServiceControllerStatus.Running Then
-                            IsTightVNCServerServiceRunning.ValueData = "true"
-                        Else
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(IsTightVNCServerServiceInstalled)
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(IsTightVNCServerServiceRunning)
+                        Catch ex As Exception
+                            Dim IsTightVNCServerServiceInstalled As New EnvironmentEntry
+                            IsTightVNCServerServiceInstalled.ValueName = "IsTightVNCServerServiceInstalled"
+                            IsTightVNCServerServiceInstalled.ValueData = "false"
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(IsTightVNCServerServiceInstalled)
+                            Dim IsTightVNCServerServiceRunning As New EnvironmentEntry
+                            IsTightVNCServerServiceRunning.ValueName = "IsTightVNCServerServiceRunning"
                             IsTightVNCServerServiceRunning.ValueData = "false"
-                        End If
-                        IsTightVNCServerServiceInstalled.ValueName = "IsTightVNCServerServiceInstalled"
-                        IsTightVNCServerServiceInstalled.ValueData = "true"
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(IsTightVNCServerServiceRunning)
+                        End Try
+                    End If
+                    If SettingsHandle.GetUltraVNCServiceState Then
+                        Try
+                            Dim jj As New ServiceController(SettingsHandle.UltraVNCServiceName)
+                            Dim IsUltraVNCServerServiceInstalled As New EnvironmentEntry
+                            Dim IsUltraVNCServerServiceRunning As New EnvironmentEntry
+                            IsUltraVNCServerServiceRunning.ValueName = "IsUltraVNCServerServiceRunning"
 
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(IsTightVNCServerServiceInstalled)
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(IsTightVNCServerServiceRunning)
-                    Catch ex As Exception
-                        Dim IsTightVNCServerServiceInstalled As New EnvironmentEntry
-                        IsTightVNCServerServiceInstalled.ValueName = "IsTightVNCServerServiceInstalled"
-                        IsTightVNCServerServiceInstalled.ValueData = "false"
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(IsTightVNCServerServiceInstalled)
-                        Dim IsTightVNCServerServiceRunning As New EnvironmentEntry
-                        IsTightVNCServerServiceRunning.ValueName = "IsTightVNCServerServiceRunning"
-                        IsTightVNCServerServiceRunning.ValueData = "false"
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(IsTightVNCServerServiceRunning)
-                    End Try
+                            If jj.Status = ServiceControllerStatus.Running Then
+                                IsUltraVNCServerServiceRunning.ValueData = "true"
+                            Else
+                                IsUltraVNCServerServiceRunning.ValueData = "false"
+                            End If
+                            IsUltraVNCServerServiceInstalled.ValueName = "IsUltraVNCServerServiceInstalled"
+                            IsUltraVNCServerServiceInstalled.ValueData = "true"
 
-                    Try
-                        Dim jj As New ServiceController("uvnc_service")
-                        Dim IsUltraVNCServerServiceInstalled As New EnvironmentEntry
-                        Dim IsUltraVNCServerServiceRunning As New EnvironmentEntry
-                        IsUltraVNCServerServiceRunning.ValueName = "IsUltraVNCServerServiceRunning"
-
-                        If jj.Status = ServiceControllerStatus.Running Then
-                            IsUltraVNCServerServiceRunning.ValueData = "true"
-                        Else
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(IsUltraVNCServerServiceInstalled)
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(IsUltraVNCServerServiceRunning)
+                        Catch ex As Exception
+                            Dim IsUltraVNCServerServiceInstalled As New EnvironmentEntry
+                            IsUltraVNCServerServiceInstalled.ValueName = "IsUltraVNCServerServiceInstalled"
+                            IsUltraVNCServerServiceInstalled.ValueData = "false"
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(IsUltraVNCServerServiceInstalled)
+                            Dim IsUltraVNCServerServiceRunning As New EnvironmentEntry
+                            IsUltraVNCServerServiceRunning.ValueName = "IsUltraVNCServerServiceRunning"
                             IsUltraVNCServerServiceRunning.ValueData = "false"
-                        End If
-                        IsUltraVNCServerServiceInstalled.ValueName = "IsUltraVNCServerServiceInstalled"
-                        IsUltraVNCServerServiceInstalled.ValueData = "true"
-
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(IsUltraVNCServerServiceInstalled)
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(IsUltraVNCServerServiceRunning)
-                    Catch ex As Exception
-                        Dim IsUltraVNCServerServiceInstalled As New EnvironmentEntry
-                        IsUltraVNCServerServiceInstalled.ValueName = "IsUltraVNCServerServiceInstalled"
-                        IsUltraVNCServerServiceInstalled.ValueData = "false"
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(IsUltraVNCServerServiceInstalled)
-                        Dim IsUltraVNCServerServiceRunning As New EnvironmentEntry
-                        IsUltraVNCServerServiceRunning.ValueName = "IsUltraVNCServerServiceRunning"
-                        IsUltraVNCServerServiceRunning.ValueData = "false"
-                        EnvironmentProviderHandler.EnvironmentVariables.Add(IsUltraVNCServerServiceRunning)
-                    End Try
-
-                    Dim UltraVNCServiceName As New EnvironmentEntry
-                    UltraVNCServiceName.ValueName = "UltraVNCServiceName"
-                    UltraVNCServiceName.ValueData = "uvnc_service"
-                    EnvironmentProviderHandler.EnvironmentVariables.Add(UltraVNCServiceName)
-                    Dim TightVNCServiceName As New EnvironmentEntry
-                    TightVNCServiceName.ValueName = "TightVNCServiceName"
-                    TightVNCServiceName.ValueData = "tvnserver"
-                    EnvironmentProviderHandler.EnvironmentVariables.Add(TightVNCServiceName)
-
-                    Dim KeyEnter As New EnvironmentEntry
-                    KeyEnter.ValueName = "KEY_ENTER"
-                    KeyEnter.ValueData = "{ENTER}"
-                    EnvironmentProviderHandler.EnvironmentVariables.Add(KeyEnter)
-                    Dim KeyTab As New EnvironmentEntry
-                    KeyTab.ValueName = "KEY_TAB"
-                    KeyTab.ValueData = "{TAB}"
-                    EnvironmentProviderHandler.EnvironmentVariables.Add(KeyTab)
+                            EnvironmentProviderHandler.EnvironmentVariables.Add(IsUltraVNCServerServiceRunning)
+                        End Try
+                    End If
+                    If SettingsHandle.GetUltraVNCServiceName Then
+                        Dim UltraVNCServiceName As New EnvironmentEntry
+                        UltraVNCServiceName.ValueName = "UltraVNCServiceName"
+                        UltraVNCServiceName.ValueData = SettingsHandle.UltraVNCServiceName
+                        EnvironmentProviderHandler.EnvironmentVariables.Add(UltraVNCServiceName)
+                    End If
+                    If SettingsHandle.GetTightVNCServiceName Then
+                        Dim TightVNCServiceName As New EnvironmentEntry
+                        TightVNCServiceName.ValueName = "TightVNCServiceName"
+                        TightVNCServiceName.ValueData = SettingsHandle.TightVNCServiceName
+                        EnvironmentProviderHandler.EnvironmentVariables.Add(TightVNCServiceName)
+                    End If
+                    If SettingsHandle.ReturnKeyboardControl Then
+                        Dim KeyEnter As New EnvironmentEntry
+                        KeyEnter.ValueName = "KEY_ENTER"
+                        KeyEnter.ValueData = "{ENTER}"
+                        EnvironmentProviderHandler.EnvironmentVariables.Add(KeyEnter)
+                        Dim KeyTab As New EnvironmentEntry
+                        KeyTab.ValueName = "KEY_TAB"
+                        KeyTab.ValueData = "{TAB}"
+                        EnvironmentProviderHandler.EnvironmentVariables.Add(KeyTab)
+                    End If
 
                     FirstLoad = False
                     Return EnvironmentProviderHandler
@@ -296,11 +305,31 @@ Public Module ClientModule
         End Sub
 
         Public Function SavePluginSettings(Optional Filename As String = "") As Boolean Implements ICSToolInterface.SavePluginSettings
-            Return True
+            Try
+                Dim XML As New XmlSerializer(SettingsClass.GetType)
+                Dim FS As New FileStream(Filename, FileMode.Create)
+                XML.Serialize(FS, SettingsHandle)
+                FS.Close()
+
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
         End Function
 
         Public Function LoadPluginSettings(Optional Filename As String = "") As Boolean Implements ICSToolInterface.LoadPluginSettings
-            Return True
+            Try
+                Dim objStreamReader As New StreamReader(Filename)
+                Dim p2 As New SettingsClass
+                Dim x As New XmlSerializer(p2.GetType)
+                p2 = x.Deserialize(objStreamReader)
+                objStreamReader.Close()
+
+                SettingsHandle = p2
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
         End Function
 
         Public Function RefreshGUI() As Boolean Implements ICSToolInterface.RefreshGUI
