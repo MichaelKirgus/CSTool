@@ -438,10 +438,12 @@ Public Class ClientGUI
     Public Sub RaiseAction(ByVal IPorHostname As String)
         CurrentIPHostname = IPorHostname
 
-        If _Settings.RaiseActions Then
-            If Not (_Settings.UseCustomSQLCredentials = True And _Settings.CustomSQLCredentialsUsername = "") Then
-                If Not _Settings.SQLConnectionString = "" And Not _Settings.SQLSelectString = "" Then
-                    RefreshGUI()
+        If Not IsNothing(_Settings) Then
+            If _Settings.RaiseActions Then
+                If Not (_Settings.UseCustomSQLCredentials = True And _Settings.CustomSQLCredentialsUsername = "") Then
+                    If Not _Settings.SQLConnectionString = "" And Not _Settings.SQLSelectString = "" Then
+                        RefreshGUI()
+                    End If
                 End If
             End If
         End If
