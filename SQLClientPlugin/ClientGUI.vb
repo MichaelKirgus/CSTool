@@ -396,7 +396,9 @@ Public Class ClientGUI
     Public Function CloseConnectionToDB() As Boolean
         Try
             _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Close connection...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-            SQLConnection.Close()
+            If Not IsNothing(SQLConnection) Then
+                SQLConnection.Close()
+            End If
             _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Close connection successful.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
             Return True
         Catch ex As Exception

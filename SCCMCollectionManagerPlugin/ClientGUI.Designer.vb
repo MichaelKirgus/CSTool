@@ -951,7 +951,7 @@ Partial Class ClientGUI
         '
         Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem, Me.ToolStripSeparator10, Me.SortAscendingToolStripMenuItem, Me.SortDescendingToolStripMenuItem, Me.ToolStripSeparator5, Me.ExportInDateiToolStripMenuItem})
         Me.AddMemberContextMenu.Name = "ContextMenuStrip1"
-        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 170)
+        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 148)
         '
         'ZuweisenToolStripMenuItem
         '

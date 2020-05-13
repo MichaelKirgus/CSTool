@@ -20,7 +20,7 @@ Imports System.Windows.Forms
     Public Property SQLSelectString As String = "SELECT * FROM MYTABLE"
     Public Property SQLCommandTimeout As Integer = 3000
     Public Property AutoCreatingColumns As Boolean = True
-    Public Property CustomColumnCollection As List(Of CustomColumn)
+    Public Property CustomColumnCollection As New List(Of CustomColumn)
     Public Property AutoResizeColumns As Boolean = True
     Public Property SelectFirstRow As Boolean = True
     Public Property ShowErrorIfNoRow As Boolean = True
@@ -29,7 +29,7 @@ Imports System.Windows.Forms
     Public Property SQLQueryDelay As Integer = 0
     Public Property ResultStyle As ResultStyleEnum = ResultStyleEnum.ShowOnlyColumns
     Public Property SplitViewStyle As Orientation = Orientation.Horizontal
-    Public Property GroupTextCollection As List(Of CustomGroupEntry)
+    Public Property GroupTextCollection As New List(Of CustomGroupEntry)
 End Class
 
 <Serializable> Public Enum ResultStyleEnum As Integer
