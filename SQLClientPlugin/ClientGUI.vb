@@ -33,21 +33,27 @@ Public Class ClientGUI
     Private Delegate Sub AddGroupToListViewDelegate(ByVal ListViewCtl As ListView, ByVal GroupItem As ListViewGroup)
 
     Private Sub AddGroupToListView(ByVal ListViewCtl As ListView, ByVal GroupItem As ListViewGroup)
-        If ListViewCtl.InvokeRequired Then
-            Dim AddGroupToListViewObj As New AddGroupToListViewDelegate(AddressOf AddGroupToListView)
-            ListViewCtl.Invoke(AddGroupToListViewObj, New Object() {ListViewCtl, GroupItem})
-        Else
-            ListViewCtl.Groups.Add(GroupItem)
-        End If
+        Try
+            If ListViewCtl.InvokeRequired Then
+                Dim AddGroupToListViewObj As New AddGroupToListViewDelegate(AddressOf AddGroupToListView)
+                ListViewCtl.Invoke(AddGroupToListViewObj, New Object() {ListViewCtl, GroupItem})
+            Else
+                ListViewCtl.Groups.Add(GroupItem)
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub SetGroupOfListViewItem(ByVal ListViewCtl As ListView, ByVal GroupListItem As ListViewItem, ByVal GroupItem As ListViewGroup)
-        If ListViewCtl.InvokeRequired Then
-            Dim SetGroupOfListViewItemObj As New SetGroupOfListViewItemDelegate(AddressOf SetGroupOfListViewItem)
-            ListViewCtl.Invoke(SetGroupOfListViewItemObj, New Object() {ListViewCtl, GroupListItem, GroupItem})
-        Else
-            ListViewCtl.Items(ListViewCtl.Items.IndexOf(GroupListItem)).Group = GroupItem
-        End If
+        Try
+            If ListViewCtl.InvokeRequired Then
+                Dim SetGroupOfListViewItemObj As New SetGroupOfListViewItemDelegate(AddressOf SetGroupOfListViewItem)
+                ListViewCtl.Invoke(SetGroupOfListViewItemObj, New Object() {ListViewCtl, GroupListItem, GroupItem})
+            Else
+                ListViewCtl.Items(ListViewCtl.Items.IndexOf(GroupListItem)).Group = GroupItem
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
     Private Function GetItemFromIndex(ByVal ListViewCtl As ListView, ByVal Index As Integer) As ListViewItem
         If ListViewCtl.InvokeRequired Then
@@ -60,14 +66,17 @@ Public Class ClientGUI
     End Function
 
     Private Sub ClearListView(ByVal ListViewCtl As ListView)
-        If ListViewCtl.InvokeRequired Then
-            Dim ClearListViewObj As New BeginUpdateListViewDelegate(AddressOf ClearListView)
-            ListViewCtl.Invoke(ClearListViewObj, New Object() {ListViewCtl})
-        Else
-            ListViewCtl.Columns.Clear()
-            ListViewCtl.Items.Clear()
-            ListViewCtl.Groups.Clear()
-        End If
+        Try
+            If ListViewCtl.InvokeRequired Then
+                Dim ClearListViewObj As New BeginUpdateListViewDelegate(AddressOf ClearListView)
+                ListViewCtl.Invoke(ClearListViewObj, New Object() {ListViewCtl})
+            Else
+                ListViewCtl.Columns.Clear()
+                ListViewCtl.Items.Clear()
+                ListViewCtl.Groups.Clear()
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub BeginUpdateListView(ByVal ListViewCtl As ListView)
@@ -95,34 +104,43 @@ Public Class ClientGUI
     End Sub
 
     Private Sub AddListViewItem(ByVal ListViewCtl As ListView, ListViewItemCtl As ListViewItem, Optional ByVal EnsureVisible As Boolean = False)
-        If ListViewCtl.InvokeRequired Then
-            Dim delAddListViewItem As New AddListViewItemDelegate(AddressOf AddListViewItem)
-            ListViewCtl.Invoke(delAddListViewItem, New Object() {ListViewCtl, ListViewItemCtl, EnsureVisible})
-        Else
-            Dim lvi As New ListViewItem(Text)
-            ListViewCtl.Items.Add(ListViewItemCtl)
-            If EnsureVisible Then
-                ListViewCtl.EnsureVisible(ListViewCtl.Items.Count - 1)
+        Try
+            If ListViewCtl.InvokeRequired Then
+                Dim delAddListViewItem As New AddListViewItemDelegate(AddressOf AddListViewItem)
+                ListViewCtl.Invoke(delAddListViewItem, New Object() {ListViewCtl, ListViewItemCtl, EnsureVisible})
+            Else
+                Dim lvi As New ListViewItem(Text)
+                ListViewCtl.Items.Add(ListViewItemCtl)
+                If EnsureVisible Then
+                    ListViewCtl.EnsureVisible(ListViewCtl.Items.Count - 1)
+                End If
             End If
-        End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub AddListViewColumn(ByVal ListViewCtl As ListView, ListViewColumnCtl As ColumnHeader)
-        If ListViewCtl.InvokeRequired Then
-            Dim delAddListViewColumn As New AddListViewColumnDelegate(AddressOf AddListViewColumn)
-            ListViewCtl.Invoke(delAddListViewColumn, New Object() {ListViewCtl, ListViewColumnCtl})
-        Else
-            ListViewCtl.Columns.Add(ListViewColumnCtl)
-        End If
+        Try
+            If ListViewCtl.InvokeRequired Then
+                Dim delAddListViewColumn As New AddListViewColumnDelegate(AddressOf AddListViewColumn)
+                ListViewCtl.Invoke(delAddListViewColumn, New Object() {ListViewCtl, ListViewColumnCtl})
+            Else
+                ListViewCtl.Columns.Add(ListViewColumnCtl)
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub RemoveListViewItem(ByVal ListViewCtl As ListView, ListViewItemCtl As ListViewItem)
-        If ListViewCtl.InvokeRequired Then
-            Dim delRemoveListViewItem As New RemoveListViewItemDelegate(AddressOf RemoveListViewItem)
-            ListViewCtl.Invoke(delRemoveListViewItem, New Object() {ListViewCtl, ListViewItemCtl})
-        Else
-            ListViewCtl.Items.Remove(ListViewItemCtl)
-        End If
+        Try
+            If ListViewCtl.InvokeRequired Then
+                Dim delRemoveListViewItem As New RemoveListViewItemDelegate(AddressOf RemoveListViewItem)
+                ListViewCtl.Invoke(delRemoveListViewItem, New Object() {ListViewCtl, ListViewItemCtl})
+            Else
+                ListViewCtl.Items.Remove(ListViewItemCtl)
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     <DllImport("uxtheme", CharSet:=CharSet.Unicode)>
