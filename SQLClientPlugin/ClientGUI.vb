@@ -343,64 +343,69 @@ Public Class ClientGUI
             BeginUpdateListView(ListView1)
             ClearListView(ListView1)
 
-            If Not Data.Count = 0 Then
-                _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: SQL data ist not empty, loading " & Data(0).Count & " columns and " & Data.Count & " rows...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+            If Not IsNothing(Data) And Not IsNothing(_Settings) Then
+                If Not Data.Count = 0 Then
+                    _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: SQL data ist not empty, loading " & Data(0).Count & " columns and " & Data.Count & " rows...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
 
-                If _Settings.AutoCreatingColumns Then
-                    For index = 0 To Data(0).Count - 1
-                        Dim col As New ColumnHeader
-                        col.Name = index
-                        If Not Convert.IsDBNull(Data(0)(index)) Then
-                            col.Text = Data(0)(index)
-                        Else
-                            col.Text = _Settings.NullValue
-                        End If
-                        AddListViewColumn(ListView1, col)
-                    Next
-                Else
-                    If Not _Settings.CustomColumnCollection.Count = 0 Then
-                        For index = 0 To _Settings.CustomColumnCollection.Count - 1
-                            Dim colitm As New ColumnHeader
-                            colitm.Name = _Settings.CustomColumnCollection(index).Name
-                            colitm.Text = _Settings.CustomColumnCollection(index).ColumnHeaderText
-                            colitm.Width = _Settings.CustomColumnCollection(index).ColumnWidth
-                            If Not _Settings.CustomColumnCollection(index).DisplayIndex = -1 Then
-                                colitm.DisplayIndex = _Settings.CustomColumnCollection(index).DisplayIndex
+                    If _Settings.AutoCreatingColumns Then
+                        For index = 0 To Data(0).Count - 1
+                            Dim col As New ColumnHeader
+                            col.Name = index
+                            If Not Convert.IsDBNull(Data(0)(index)) Then
+                                col.Text = Data(0)(index)
+                            Else
+                                col.Text = _Settings.NullValue
                             End If
-                            colitm.TextAlign = _Settings.CustomColumnCollection(index).TextAlign
-                            AddListViewColumn(ListView1, colitm)
+                            AddListViewColumn(ListView1, col)
                         Next
+                    Else
+                        If Not _Settings.CustomColumnCollection.Count = 0 Then
+                            For index = 0 To _Settings.CustomColumnCollection.Count - 1
+                                Dim colitm As New ColumnHeader
+                                colitm.Name = _Settings.CustomColumnCollection(index).Name
+                                colitm.Text = _Settings.CustomColumnCollection(index).ColumnHeaderText
+                                colitm.Width = _Settings.CustomColumnCollection(index).ColumnWidth
+                                If Not _Settings.CustomColumnCollection(index).DisplayIndex = -1 Then
+                                    colitm.DisplayIndex = _Settings.CustomColumnCollection(index).DisplayIndex
+                                End If
+                                colitm.TextAlign = _Settings.CustomColumnCollection(index).TextAlign
+                                AddListViewColumn(ListView1, colitm)
+                            Next
+                        End If
                     End If
+
+                    _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Loading SQL columns successful.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+
+                    For index = 1 To Data.Count - 1
+                        Dim rowitm As New ListViewItem
+                        rowitm.Name = index
+
+                        If Not Convert.IsDBNull(Data(index)(0)) Then
+                            rowitm.Text = Data(index)(0)
+                        End If
+
+                        If Data(index).Count > 1 Then
+                            For colind = 1 To Data(index).Count - 1
+                                If Not Convert.IsDBNull(Data(index)(colind)) Then
+                                    rowitm.SubItems.Add(Data(index)(colind))
+                                Else
+                                    rowitm.SubItems.Add(_Settings.NullValue)
+                                End If
+                            Next
+                        End If
+
+                        AddListViewItem(ListView1, rowitm)
+                    Next
                 End If
 
-                _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Loading SQL columns successful.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Loading SQL rows successful.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
 
-                For index = 1 To Data.Count - 1
-                    Dim rowitm As New ListViewItem
-                    rowitm.Name = index
-
-                    If Not Convert.IsDBNull(Data(index)(0)) Then
-                        rowitm.Text = Data(index)(0)
-                    End If
-
-                    If Data(index).Count > 1 Then
-                        For colind = 1 To Data(index).Count - 1
-                            If Not Convert.IsDBNull(Data(index)(colind)) Then
-                                rowitm.SubItems.Add(Data(index)(colind))
-                            Else
-                                rowitm.SubItems.Add(_Settings.NullValue)
-                            End If
-                        Next
-                    End If
-
-                    AddListViewItem(ListView1, rowitm)
-                Next
+                EndUpdateListView(ListView1)
+                Return True
+            Else
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Error access SQL settings values.", Me.GetType, LogEntryTypeEnum.ErrorL, LogEntryLevelEnum.Debug, Err)
+                Return False
             End If
-
-            _ParentInstance.CurrentLogInstance.WriteLogEntry("SQL: Loading SQL rows successful.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-
-            EndUpdateListView(ListView1)
-            Return True
         Catch ex As Exception
             Try
                 EndUpdateListView(ListView1)
