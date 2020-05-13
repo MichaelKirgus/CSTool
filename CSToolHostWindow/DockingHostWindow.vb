@@ -119,6 +119,7 @@ Public Class DockingHostWindow
         'Save plugin settings
         If Not _IsNonPersistent Then
             If AllowCloseToolStripMenuItem.Checked Then
+                FileSystemWatcher1.EnableRaisingEvents = False
                 If Not e.CloseReason = CloseReason.UserClosing Then
                     PluginHandler.UnloadPlugin()
 
