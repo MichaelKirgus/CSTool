@@ -246,6 +246,7 @@ Public Module ClientModule
         End Function
 
         Public Function UnloadPlugin() As Boolean Implements ICSToolInterface.UnloadPlugin
+            GUIHandle.UnloadPlugin()
             Return True
         End Function
 

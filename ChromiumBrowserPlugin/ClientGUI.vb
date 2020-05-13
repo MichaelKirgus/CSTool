@@ -7,6 +7,7 @@ Imports System.Drawing
 Imports System.Text
 Imports System.Windows.Forms
 Imports CefSharp
+Imports CefSharp.Internals
 Imports CefSharp.WinForms
 Imports CSToolEnvironmentManager
 
@@ -246,6 +247,14 @@ Public Class ClientGUI
                     e.Handled = True
                     e.SuppressKeyPress = True
                 End If
+            End If
+        End If
+    End Sub
+
+    Public Sub UnloadPlugin()
+        If Not IsNothing(browser) Then
+            If browser.IsBrowserInitialized Then
+                browser.Stop()
             End If
         End If
     End Sub
