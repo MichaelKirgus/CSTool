@@ -109,7 +109,9 @@ Public Class ClientGUI
         GroupBox1.Width = _Settings.CPUUsageSize
         GroupBox2.Width = _Settings.SystemMemorySize
         GroupBox3.Width = _Settings.BatterySize
+        GroupBox4.Width = _Settings.PageFileSize
         GroupBox3.Visible = _Settings.ShowWMIBatteryCharge
+        GroupBox4.Visible = _Settings.ShowPageFileInfo
     End Sub
 
     Private Sub GetPerformanceWMIData_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles GetPerformanceWMIData.DoWork
