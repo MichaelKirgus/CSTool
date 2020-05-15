@@ -422,6 +422,10 @@
       <Project>{9ed8dbb2-b501-4797-8ce1-04dddad6ef8c}</Project>
       <Name>CSToolWMIHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSWorkspaceTemplateManager\CSWorkspaceTemplateManager.vbproj">
+      <Project>{3bb82795-d94c-42f4-beb9-b8a3c9b806aa}</Project>
+      <Name>CSWorkspaceTemplateManager</Name>
+    </ProjectReference>
     <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\ThemeVS2015.csproj">
       <Project>{007d4ac8-948f-4816-86ad-b9d1343672c1}</Project>
       <Name>ThemeVS2015</Name>
