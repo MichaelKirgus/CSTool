@@ -14,6 +14,7 @@ Imports CSToolLogLib
     Public Property UserProfileDir As String = "Profiles"
     Public Property UserTemplatesDir As String = "UserPluginTemplates"
     Public Property UserInitialTemplateDir As String = "UserInitialTemplate"
+    Public Property UserWorkspaceTemplatesDir As String = "UserWorkspaceTemplatesDir"
     Public Property UseUserDomainInFolderStructure As Boolean = False
     Public Property EnableLauncherSync As Boolean = False
     Public Property LauncherSyncPath As String = "%ProgramFiles%\Michael Kirgus\CSTool"

@@ -230,6 +230,12 @@
     <Compile Include="WorkspaceManager.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="WorkspaceTemplateForm.Designer.vb">
+      <DependentUpon>WorkspaceTemplateForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WorkspaceTemplateForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutFrm.resx">
@@ -276,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WorkspaceManager.resx">
       <DependentUpon>WorkspaceManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkspaceTemplateForm.resx">
+      <DependentUpon>WorkspaceTemplateForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

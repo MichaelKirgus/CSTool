@@ -149,6 +149,9 @@ Public Class MainForm
                 If arglist(ind).ToLower = "/ignorelockfile" Then
                     ApplicationSettings.LauncherLockfile = ""
                 End If
+                If arglist(ind).ToLower = "/userworkspacetemplatesdir" Then
+                    ApplicationSettings.UserWorkspaceTemplatesDir = (arglist(ind + 1))
+                End If
             Next
 
             Return True

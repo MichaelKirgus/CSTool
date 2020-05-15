@@ -475,7 +475,8 @@ Public Class LoadingFrm
         result = "/appsettingspath " & My.Resources.pathsep & Application.StartupPath & "\AppSettings.xml" & My.Resources.pathsep &
             " /usertemplatesdir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserTemplatesDir & My.Resources.pathsep &
             " /userinitialtemplatedir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserInitialTemplateDir & My.Resources.pathsep &
-            " /userprofiledir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserProfileDir & My.Resources.pathsep
+            " /userprofiledir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserProfileDir & My.Resources.pathsep &
+            " /userworkspacetemplatesdir " & My.Resources.pathsep & Application.StartupPath & "\" & AppSettingsObj.UserWorkspaceTemplatesDir & My.Resources.pathsep
 
         If Not AppSettingsObj.MainAppInstanceTag = "" Then
             result += " /instancetag " & My.Resources.pathsep & AppSettingsObj.MainAppInstanceTag & My.Resources.pathsep

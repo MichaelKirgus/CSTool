@@ -33,6 +33,7 @@ Imports CSToolLogLib
     Public Property CustomAutostartActions As New List(Of CustomActionEntry)
     Public Property ShowWarningOnCustomActions As Boolean = True
     Public Property UseAsyncPluginMessaging As Boolean = True
+    Public Property ShowWorkplaceTemplateForm As Boolean = True
 
     Public Function Clone() As Object Implements System.ICloneable.Clone
         Return MemberwiseClone()
