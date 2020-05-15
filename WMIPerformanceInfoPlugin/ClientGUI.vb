@@ -229,12 +229,12 @@ Public Class ClientGUI
             If _Settings.ShowWMIBatteryCharge Then
                 offsetcnt += 1
                 If Not resultobj(3) = "" Then
-                    Dim currlevel As Integer
-                    currlevel = 100 - resultobj(3)
+                    Dim remaining As Integer
+                    remaining = 100 - resultobj(3)
 
                     BatteryLevelBar.Style = ProgressBarStyle.Continuous
-                    BatteryLevelBar.Value = currlevel
-                    BatteryLevelLbl.Text = resultobj(3) & " remaining, " & currlevel & " % full"
+                    BatteryLevelBar.Value = resultobj(3)
+                    BatteryLevelLbl.Text = remaining & " % to full, " & resultobj(3) & " %"
                 Else
                     BatteryLevelBar.Style = ProgressBarStyle.Continuous
                     BatteryLevelBar.Value = 0
