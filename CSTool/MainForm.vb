@@ -1496,4 +1496,10 @@ Public Class MainForm
     Private Sub NewProcessWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewProcessWindowToolStripMenuItem.Click
         AddItemToWorkspace(DockState.Unknown, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text, False, True, DefaultWindowStyleEnum.StandaloneProcessWindow)
     End Sub
+
+    Private Sub ToolStripButton13_Click(sender As Object, e As EventArgs) Handles ToolStripButton13.Click
+        Dim worktemplatemngr As New WorkspaceTemplateForm
+        worktemplatemngr._parent = Me
+        worktemplatemngr.ShowDialog()
+    End Sub
 End Class

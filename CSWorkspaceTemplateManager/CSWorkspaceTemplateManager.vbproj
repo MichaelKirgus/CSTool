@@ -65,6 +65,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WorkspaceTemplateClass.vb" />
     <Compile Include="WorkspaceTemplateManager.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -100,6 +101,16 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSToolUserSettingsLib\CSToolUserSettingsLib.vbproj">
+      <Project>{0bfe04e6-071c-4624-ad64-5898b4c19681}</Project>
+      <Name>CSToolUserSettingsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSToolUserSettingsManager\CSToolUserSettingsManager.vbproj">
+      <Project>{750fd8a4-3e8e-435c-ae22-7a44f08e977a}</Project>
+      <Name>CSToolUserSettingsManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

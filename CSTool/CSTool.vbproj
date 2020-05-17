@@ -544,6 +544,7 @@
     <None Include="Resources\icon-download_16x16.png" />
     <None Include="Resources\icon-check-circle_16x16.png" />
     <None Include="Resources\icon-search_16x16.png" />
+    <None Include="Resources\workspace_company_22x22.png" />
     <Content Include="wizard_app.ico" />
   </ItemGroup>
   <ItemGroup>

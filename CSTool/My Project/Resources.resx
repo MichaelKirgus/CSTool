@@ -124,6 +124,9 @@
   <data name="Microsoft-1.5s-125px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Microsoft-1.5s-125px.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon-minus-square_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-minus-square_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon-user-minus_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-user-minus_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -169,8 +172,8 @@
   <data name="icon-upload_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-upload_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-minus-square_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-minus-square_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="document-open-folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-open-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-puzzle_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-puzzle_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -265,9 +268,6 @@
   <data name="icon-view_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-view_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document-open-folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document-open-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon-archive_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-archive_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -322,6 +322,9 @@
   <data name="go-next-5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\go-next-5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon-search_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-search_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon-x-circle_64x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-x-circle_64x64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -346,7 +349,7 @@
   <data name="cstool_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cstool_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-search_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-search_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="workspace_company_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\workspace_company_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
