@@ -121,11 +121,8 @@
   <data name="document-decrypt-3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-decrypt-3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Microsoft-1.5s-125px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Microsoft-1.5s-125px.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon-minus-square_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-minus-square_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="workspace_company_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\workspace_company_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-user-minus_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-user-minus_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -144,6 +141,9 @@
   </data>
   <data name="icon-information_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-information_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Microsoft-1.5s-125px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Microsoft-1.5s-125px.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-edit_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-edit_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,8 +172,8 @@
   <data name="icon-upload_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-upload_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document-open-folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\document-open-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-minus-square_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-minus-square_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-puzzle_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-puzzle_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -195,6 +195,9 @@
   </data>
   <data name="view-right-new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\view-right-new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-desktop_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-desktop_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit-add-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit-add-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -267,6 +270,9 @@
   </data>
   <data name="icon-view_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-view_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document-open-folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-open-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-archive_16x161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-archive_16x161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -349,7 +355,7 @@
   <data name="cstool_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cstool_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="workspace_company_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\workspace_company_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-desktop_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-desktop_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

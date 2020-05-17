@@ -5,6 +5,7 @@
 'Additional copyright notices in project base directory or main executable directory.
 Imports System.CodeDom.Compiler
 Imports System.Runtime.InteropServices
+Imports CSToolUserSettingsLib
 Imports CSWorkspaceTemplateManager
 
 Public Class WorkspaceTemplateForm
@@ -18,6 +19,7 @@ Public Class WorkspaceTemplateForm
     Public WorkspaceTemplateHandler As New WorkspaceTemplateManager
     Public _parent As MainForm
     Public ModeSwitch As LoadMode = LoadMode.FromUserProfile
+    Public WorkspaceSettingsFile As String = ""
     Public WorkspaceProfileIndex As Integer = 0
 
     Public Enum LoadMode As Integer
@@ -25,6 +27,7 @@ Public Class WorkspaceTemplateForm
         FromGlobalWorkspaceNonPersistent = 1
         AddFromGlobalWorkspace = 2
         AddNewEmptyWorkspaceToProfile = 3
+        AddInitialWorkspaceToProfile = 4
     End Enum
 
 
@@ -145,6 +148,8 @@ Public Class WorkspaceTemplateForm
         LoadImage1.Visible = False
 
         ListView1.Items(0).Selected = True
+        CheckBox1.Enabled = True
+        CheckBox2.Enabled = True
     End Sub
 
     Private Sub LoadGlobalTemplates_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles LoadGlobalTemplates.DoWork
@@ -174,20 +179,33 @@ Public Class WorkspaceTemplateForm
                 curritem = ListView1.SelectedItems(0)
 
                 If curritem.Group.Header = ListView1.Groups(0).Header Then
-                    PictureBox1.Image = ImageList1.Images(0)
+                    PictureBox1.Image = ImageList1.Images(1)
                     WorkspaceNameLbl.Text = curritem.Text
                     TextBox1.Text = curritem.SubItems(1).Text
+
+                    If _parent.UserSettings.LastSettingName = curritem.Text Then
+                        CheckBox2.Checked = True
+                    Else
+                        CheckBox2.Checked = False
+                    End If
+
                     WorkspaceProfileIndex = curritem.SubItems(2).Text
                     LoadImage2.Visible = False
-                    If curritem.Tag = 0 Then
-                        ComboBox1.Enabled = False
-                        ModeSwitch = LoadMode.FromUserProfile
-                    Else
-                        ComboBox1.Enabled = True
-                        ComboBox1.SelectedIndex = 1
-                        ModeSwitch = LoadMode.AddNewEmptyWorkspaceToProfile
-                        PictureBox1.Image = ImageList1.Images(1)
-                    End If
+                    Select Case curritem.Tag
+                        Case 0
+                            ComboBox1.Enabled = False
+                            ModeSwitch = LoadMode.FromUserProfile
+                        Case 1
+                            ComboBox1.Enabled = True
+                            ComboBox1.SelectedIndex = 1
+                            ModeSwitch = LoadMode.AddNewEmptyWorkspaceToProfile
+                            PictureBox1.Image = ImageList1.Images(0)
+                        Case 2
+                            ComboBox1.Enabled = True
+                            ComboBox1.SelectedIndex = 1
+                            ModeSwitch = LoadMode.AddInitialWorkspaceToProfile
+                            PictureBox1.Image = ImageList1.Images(3)
+                    End Select
                 End If
                 If curritem.Group.Header = ListView1.Groups(1).Header Then
                     Dim templateobj As WorkspaceTemplateClass
@@ -196,9 +214,16 @@ Public Class WorkspaceTemplateForm
                     ComboBox1.Enabled = True
                     ComboBox1.SelectedIndex = 0
                     ModeSwitch = LoadMode.FromGlobalWorkspaceNonPersistent
+                    WorkspaceSettingsFile = templateobj.TemplateUserSettingsPath
 
                     WorkspaceNameLbl.Text = curritem.Text
                     TextBox1.Text = templateobj.TemplateDescription
+
+                    If _parent.UserSettings.LastSettingName = curritem.Text Then
+                        CheckBox2.Checked = True
+                    Else
+                        CheckBox2.Checked = False
+                    End If
 
                     If Not LoadThumbnail.IsBusy Then
                         LoadImage2.Visible = True
@@ -227,5 +252,142 @@ Public Class WorkspaceTemplateForm
 
     Private Sub LoadThumbnail_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles LoadThumbnail.RunWorkerCompleted
         LoadImage2.Visible = False
+    End Sub
+
+    Private Sub ListView1_DoubleClick(sender As Object, e As EventArgs) Handles ListView1.DoubleClick
+        Button1.PerformClick()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Select Case ModeSwitch
+            Case LoadMode.FromUserProfile
+                If WorkspaceProfileIndex = 0 Then
+                    _parent.OpenNewWindow(False, "Default", _parent.HostnameOrIPCtl.Text)
+                Else
+                    _parent.OpenNewWindow(False, _parent.UserSettings.UserTemplates(WorkspaceProfileIndex).SettingName, _parent.HostnameOrIPCtl.Text)
+                End If
+            Case LoadMode.AddNewEmptyWorkspaceToProfile
+                Dim newclass As New UserSettings
+                newclass.TemplateName = "New Workspace"
+                newclass.TemplateDescription = "New created workspace at " & DateAndTime.Now
+                Dim newclassguid As String
+                newclassguid = Guid.NewGuid.ToString
+                newclass.SettingName = newclassguid
+
+                _parent.UserSettings.UserTemplates.Add(newclass)
+
+                If CheckBox2.Checked Then
+                    _parent.UserSettings.LastSettingName = _parent.UserSettings.UserTemplates(_parent.UserSettings.UserTemplates.Count - 1).SettingName
+                End If
+
+                _parent.SaveSettings()
+
+                _parent.SpawnNewProcessInstance(_parent.UserSettings.UserTemplates(_parent.UserSettings.UserTemplates.Count - 1).SettingName, False, _parent.HostnameOrIPCtl.Text)
+            Case LoadMode.AddInitialWorkspaceToProfile
+                Dim newclass As UserSettings
+                newclass = _parent.UserSettingManager.LoadSettings(_parent.ApplicationSettings.UserInitialTemplateDir & "\UserSettings.xml")
+
+                If GetDuplicateWorkspace(newclass).TemplateName = newclass.TemplateName Then
+                    Dim overridemsg As New MsgBoxResult
+                    overridemsg = MsgBox("The template " & newclass.TemplateName & " already exists in your profile. Do you want to override it?", MsgBoxStyle.YesNo)
+                    If overridemsg = MsgBoxResult.Yes Then
+                        My.Computer.FileSystem.DeleteDirectory(_parent.CurrentUserProfilePath & "\" & newclass.SettingName, FileIO.DeleteDirectoryOption.DeleteAllContents)
+                    Else
+                        Exit Sub
+                    End If
+                End If
+
+                My.Computer.FileSystem.CopyDirectory(_parent.ApplicationSettings.UserInitialTemplateDir, _parent.CurrentUserProfilePath, True)
+
+                Dim newclassguid As String
+                newclassguid = Guid.NewGuid.ToString
+                newclass.SettingName = newclassguid
+
+                _parent.UserSettings.UserTemplates.Add(newclass)
+
+                If CheckBox2.Checked Then
+                    _parent.UserSettings.LastSettingName = _parent.UserSettings.UserTemplates(_parent.UserSettings.UserTemplates.Count - 1).SettingName
+                End If
+
+                _parent.SaveSettings()
+
+                _parent.SpawnNewProcessInstance(_parent.UserSettings.UserTemplates(_parent.UserSettings.UserTemplates.Count - 1).SettingName, False, _parent.HostnameOrIPCtl.Text)
+            Case LoadMode.AddFromGlobalWorkspace
+                Dim newclass As UserSettings
+                newclass = _parent.UserSettingManager.LoadSettings(WorkspaceSettingsFile)
+
+                If GetDuplicateWorkspace(newclass).TemplateName = newclass.TemplateName Then
+                    Dim overridemsg As New MsgBoxResult
+                    overridemsg = MsgBox("The template " & newclass.TemplateName & " already exists in your profile. Do you want to override it?", MsgBoxStyle.YesNo)
+                    If overridemsg = MsgBoxResult.Yes Then
+                        My.Computer.FileSystem.DeleteDirectory(_parent.CurrentUserProfilePath & "\" & newclass.SettingName, FileIO.DeleteDirectoryOption.DeleteAllContents)
+                        _parent.UserSettings.UserTemplates.Remove(GetDuplicateWorkspace(newclass))
+                    Else
+                        Exit Sub
+                    End If
+                End If
+
+                Dim newclassguid As String
+                newclassguid = Guid.NewGuid.ToString
+                newclass.SettingName = newclassguid
+
+                Dim dirinfobj As New IO.FileInfo(WorkspaceSettingsFile)
+
+                My.Computer.FileSystem.CopyDirectory(dirinfobj.DirectoryName, _parent.CurrentUserProfilePath & "\" & newclassguid)
+                _parent.UserSettings.UserTemplates.Add(newclass)
+
+                If CheckBox2.Checked Then
+                    _parent.UserSettings.LastSettingName = _parent.UserSettings.UserTemplates(_parent.UserSettings.UserTemplates.Count - 1).SettingName
+                End If
+
+                _parent.SaveSettings()
+
+                _parent.SpawnNewProcessInstance(_parent.UserSettings.UserTemplates(_parent.UserSettings.UserTemplates.Count - 1).SettingName, False, _parent.HostnameOrIPCtl.Text)
+            Case LoadMode.FromGlobalWorkspaceNonPersistent
+                Dim newclass As UserSettings
+                newclass = _parent.UserSettingManager.LoadSettings(WorkspaceSettingsFile)
+                Dim newclassguid As String
+                newclassguid = Guid.NewGuid.ToString
+                newclass.SettingName = newclassguid
+                newclass.TemplateName += " (non-persistent)"
+
+                Dim dirinfobj As New IO.FileInfo(WorkspaceSettingsFile)
+
+                My.Computer.FileSystem.CopyDirectory(dirinfobj.DirectoryName, _parent.CurrentUserProfilePath & "\" & newclassguid)
+                _parent.UserSettings.UserTemplates.Add(newclass)
+
+                _parent.OpenNewWindow(False, _parent.UserSettings.UserTemplates(_parent.UserSettings.UserTemplates.Count - 1).SettingName, _parent.HostnameOrIPCtl.Text)
+                _parent.UserSettings.UserTemplates.Remove(_parent.UserSettings.UserTemplates(_parent.UserSettings.UserTemplates.Count - 1))
+                My.Computer.FileSystem.DeleteDirectory(_parent.CurrentUserProfilePath & "\" & newclassguid, FileIO.DeleteDirectoryOption.DeleteAllContents)
+        End Select
+    End Sub
+
+    Public Function GetDuplicateWorkspace(ByVal UserSettingsClass As UserSettings) As UserSettings
+        Try
+            If Not _parent.UserSettings.UserTemplates.Count = 0 Then
+                For index = 0 To _parent.UserSettings.UserTemplates.Count - 1
+                    If _parent.UserSettings.UserTemplates(index).TemplateName = UserSettingsClass.TemplateName Then
+                        Return _parent.UserSettings.UserTemplates(index)
+                    End If
+                Next
+            End If
+
+            Return New UserSettings
+        Catch ex As Exception
+            Return New UserSettings
+        End Try
+    End Function
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        If ComboBox1.Enabled Then
+            If ComboBox1.SelectedIndex = 0 Then
+                ModeSwitch = LoadMode.FromGlobalWorkspaceNonPersistent
+                CheckBox2.Checked = False
+                CheckBox2.Enabled = False
+            Else
+                ModeSwitch = LoadMode.AddFromGlobalWorkspace
+                CheckBox2.Enabled = True
+            End If
+        End If
     End Sub
 End Class

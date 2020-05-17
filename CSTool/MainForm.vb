@@ -517,6 +517,11 @@ Public Class MainForm
         End If
 
         CurrentLoadActionState = "Finished!"
+
+        'Should template manager window opened?
+        If UserSettings.ShowWorkplaceTemplateForm Then
+            OpenWorkspaceTemplateFormSub()
+        End If
     End Sub
 
     Public Sub LoadTemplates()
@@ -1497,9 +1502,13 @@ Public Class MainForm
         AddItemToWorkspace(DockState.Unknown, ToolStripComboBox1.SelectedItem, HostnameOrIPCtl.Text, False, True, DefaultWindowStyleEnum.StandaloneProcessWindow)
     End Sub
 
-    Private Sub ToolStripButton13_Click(sender As Object, e As EventArgs) Handles ToolStripButton13.Click
+    Public Sub OpenWorkspaceTemplateFormSub()
         Dim worktemplatemngr As New WorkspaceTemplateForm
         worktemplatemngr._parent = Me
         worktemplatemngr.ShowDialog()
+    End Sub
+
+    Private Sub ToolStripButton13_Click(sender As Object, e As EventArgs) Handles ToolStripButton13.Click
+        OpenWorkspaceTemplateFormSub()
     End Sub
 End Class

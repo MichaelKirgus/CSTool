@@ -111,6 +111,7 @@ Partial Class MainForm
         Me.SaveSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
@@ -120,7 +121,7 @@ Partial Class MainForm
         '
         Me.ToolStrip1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.HostnameOrIPCtl, Me.ToolStripButton1, Me.ToolStripButton4, Me.ToolStripSeparator2, Me.ToolStripButton2, Me.ToolStripSeparator3, Me.ToolStripComboBox1, Me.ToolStripButton12, Me.ToolStripButton3, Me.ToolStripButton6, Me.ToolStripSeparator4, Me.ToolStripButton13, Me.ToolStripButton11, Me.ToolStripButton5, Me.ToolStripButton7, Me.ToolStripSeparator1, Me.ToolStripButton8, Me.ToolStripSeparator5, Me.ToolStripButton9, Me.ToolStripButton10})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.HostnameOrIPCtl, Me.ToolStripButton1, Me.ToolStripButton4, Me.ToolStripSeparator2, Me.ToolStripButton2, Me.ToolStripSeparator3, Me.ToolStripComboBox1, Me.ToolStripButton12, Me.ToolStripButton3, Me.ToolStripButton6, Me.ToolStripSeparator4, Me.ToolStripButton13, Me.ToolStripSeparator16, Me.ToolStripButton11, Me.ToolStripButton5, Me.ToolStripButton7, Me.ToolStripSeparator1, Me.ToolStripButton8, Me.ToolStripSeparator5, Me.ToolStripButton9, Me.ToolStripButton10})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -428,7 +429,7 @@ Partial Class MainForm
         'ToolStripButton13
         '
         Me.ToolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton13.Image = Global.CSTool.My.Resources.Resources.workspace_company_22x22
+        Me.ToolStripButton13.Image = Global.CSTool.My.Resources.Resources.icon_desktop_22x22
         Me.ToolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton13.Name = "ToolStripButton13"
@@ -548,7 +549,7 @@ Partial Class MainForm
         '
         'WorkplaceSettingsToolStripMenuItem
         '
-        Me.WorkplaceSettingsToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_browser_16x16
+        Me.WorkplaceSettingsToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_desktop_16x16
         Me.WorkplaceSettingsToolStripMenuItem.Name = "WorkplaceSettingsToolStripMenuItem"
         Me.WorkplaceSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.WorkplaceSettingsToolStripMenuItem.Text = "Workplace settings..."
@@ -684,6 +685,11 @@ Partial Class MainForm
         Me.ToolStripButton10.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton10.Text = "Lock/unlock workspace"
         '
+        'ToolStripSeparator16
+        '
+        Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
+        Me.ToolStripSeparator16.Size = New System.Drawing.Size(6, 29)
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -789,4 +795,5 @@ Partial Class MainForm
     Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
     Friend WithEvents NewProcessWindowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripButton13 As ToolStripButton
+    Friend WithEvents ToolStripSeparator16 As ToolStripSeparator
 End Class

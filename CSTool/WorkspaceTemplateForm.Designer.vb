@@ -30,8 +30,9 @@ Partial Class WorkspaceTemplateForm
         Me.components = New System.ComponentModel.Container()
         Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Workspaces in Profile", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Global Workspaces", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Default (saved)", "Default user workspace", "0"}, 1)
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"New empty workspace", "Add new empty workspace to user profile", "0"}, 0)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Default", "Default user workspace", "0"}, 1)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Initial template", "Add initial template to profile", "0"}, 3)
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"New empty workspace", "Add new empty workspace to user profile", "0"}, 0)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(WorkspaceTemplateForm))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.ListView1 = New System.Windows.Forms.ListView()
@@ -44,14 +45,15 @@ Partial Class WorkspaceTemplateForm
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.WorkspaceNameLbl = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.LoadGlobalTemplates = New System.ComponentModel.BackgroundWorker()
         Me.LoadProfileTemplates = New System.ComponentModel.BackgroundWorker()
-        Me.LoadImage1 = New System.Windows.Forms.PictureBox()
-        Me.LoadImage2 = New System.Windows.Forms.PictureBox()
         Me.LoadThumbnail = New System.ComponentModel.BackgroundWorker()
         Me.LoadWait = New System.ComponentModel.BackgroundWorker()
+        Me.LoadImage1 = New System.Windows.Forms.PictureBox()
+        Me.LoadImage2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -66,9 +68,9 @@ Partial Class WorkspaceTemplateForm
         Me.SplitContainer3.Panel2.SuspendLayout()
         Me.SplitContainer3.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoadImage1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoadImage2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -102,8 +104,10 @@ Partial Class WorkspaceTemplateForm
         ListViewItem1.Group = ListViewGroup1
         ListViewItem1.Tag = "0"
         ListViewItem2.Group = ListViewGroup1
-        ListViewItem2.Tag = "1"
-        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2})
+        ListViewItem2.Tag = "2"
+        ListViewItem3.Group = ListViewGroup1
+        ListViewItem3.Tag = "1"
+        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3})
         Me.ListView1.LargeImageList = Me.ImageList1
         Me.ListView1.Location = New System.Drawing.Point(0, 0)
         Me.ListView1.Name = "ListView1"
@@ -119,9 +123,11 @@ Partial Class WorkspaceTemplateForm
         Me.ImageList1.Images.SetKeyName(0, "icon-browser_128x128.png")
         Me.ImageList1.Images.SetKeyName(1, "workspace_user.png")
         Me.ImageList1.Images.SetKeyName(2, "workspace_company.png")
+        Me.ImageList1.Images.SetKeyName(3, "workspace_initial.png")
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.CheckBox2)
         Me.Panel1.Controls.Add(Me.ComboBox1)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.CheckBox1)
@@ -219,16 +225,6 @@ Partial Class WorkspaceTemplateForm
         Me.WorkspaceNameLbl.TabIndex = 0
         Me.WorkspaceNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 27)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(356, 312)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
         'ComboBox1
         '
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -249,6 +245,16 @@ Partial Class WorkspaceTemplateForm
         '
         Me.LoadProfileTemplates.WorkerReportsProgress = True
         Me.LoadProfileTemplates.WorkerSupportsCancellation = True
+        '
+        'LoadThumbnail
+        '
+        Me.LoadThumbnail.WorkerReportsProgress = True
+        Me.LoadThumbnail.WorkerSupportsCancellation = True
+        '
+        'LoadWait
+        '
+        Me.LoadWait.WorkerReportsProgress = True
+        Me.LoadWait.WorkerSupportsCancellation = True
         '
         'LoadImage1
         '
@@ -272,18 +278,30 @@ Partial Class WorkspaceTemplateForm
         Me.LoadImage2.TabIndex = 6
         Me.LoadImage2.TabStop = False
         '
-        'LoadThumbnail
+        'PictureBox1
         '
-        Me.LoadThumbnail.WorkerReportsProgress = True
-        Me.LoadThumbnail.WorkerSupportsCancellation = True
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 27)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(356, 312)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
         '
-        'LoadWait
+        'CheckBox2
         '
-        Me.LoadWait.WorkerReportsProgress = True
-        Me.LoadWait.WorkerSupportsCancellation = True
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Enabled = False
+        Me.CheckBox2.Location = New System.Drawing.Point(365, 8)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(159, 17)
+        Me.CheckBox2.TabIndex = 3
+        Me.CheckBox2.Text = "Load this workspace default"
+        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'WorkspaceTemplateForm
         '
+        Me.AcceptButton = Me.Button1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
@@ -308,9 +326,9 @@ Partial Class WorkspaceTemplateForm
         CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer3.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LoadImage1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LoadImage2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -334,4 +352,5 @@ Partial Class WorkspaceTemplateForm
     Friend WithEvents LoadImage2 As PictureBox
     Friend WithEvents LoadThumbnail As System.ComponentModel.BackgroundWorker
     Friend WithEvents LoadWait As System.ComponentModel.BackgroundWorker
+    Friend WithEvents CheckBox2 As CheckBox
 End Class
