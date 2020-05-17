@@ -163,7 +163,9 @@ Public Class WorkspaceTemplateForm
                     globitm.Text = globitems(index).TemplateName
                     globitm.Tag = globitems(index)
                     globitm.ImageIndex = 2
-                    globitm.Group = ListView1.Groups(2)
+                    globitm.Group = ListView1.Groups(1)
+
+                    AddListViewItem(ListView1, globitm)
                 Next
             End If
         Catch ex As Exception
