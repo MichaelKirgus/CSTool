@@ -107,6 +107,8 @@ Public Class WorkspaceTemplateForm
     End Sub
 
     Private Sub WorkspaceTemplateForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CheckBox1.Checked = _parent.UserSettings.ShowWorkplaceTemplateForm
+
         SetUXThemeForAllListViews()
         BeginUpdateListView(ListView1)
 
@@ -391,5 +393,9 @@ Public Class WorkspaceTemplateForm
                 CheckBox2.Enabled = True
             End If
         End If
+    End Sub
+
+    Private Sub WorkspaceTemplateForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        _parent.UserSettings.ShowWorkplaceTemplateForm = CheckBox1.Checked
     End Sub
 End Class

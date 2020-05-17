@@ -50,10 +50,10 @@ Partial Class WorkspaceTemplateForm
         Me.LoadProfileTemplates = New System.ComponentModel.BackgroundWorker()
         Me.LoadThumbnail = New System.ComponentModel.BackgroundWorker()
         Me.LoadWait = New System.ComponentModel.BackgroundWorker()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.LoadImage1 = New System.Windows.Forms.PictureBox()
         Me.LoadImage2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -256,6 +256,17 @@ Partial Class WorkspaceTemplateForm
         Me.LoadWait.WorkerReportsProgress = True
         Me.LoadWait.WorkerSupportsCancellation = True
         '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Enabled = False
+        Me.CheckBox2.Location = New System.Drawing.Point(365, 8)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(159, 17)
+        Me.CheckBox2.TabIndex = 3
+        Me.CheckBox2.Text = "Load this workspace default"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
         'LoadImage1
         '
         Me.LoadImage1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -287,17 +298,6 @@ Partial Class WorkspaceTemplateForm
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Enabled = False
-        Me.CheckBox2.Location = New System.Drawing.Point(365, 8)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(159, 17)
-        Me.CheckBox2.TabIndex = 3
-        Me.CheckBox2.Text = "Load this workspace default"
-        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'WorkspaceTemplateForm
         '
