@@ -69,6 +69,7 @@ Public Class AppSettingsFrm
         If IO.File.Exists(AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile) Then
             PropertyGrid5.SelectedObject = UserSettingsHandler.LoadSettings(AppSettingsObj.UserInitialTemplateDir & "\" & UserSettingsHandler.UserSettingsFile)
         End If
+        WasChanged = False
     End Sub
 
     Private Sub PropertyGrid2_PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs) Handles PropertyGrid2.PropertyValueChanged
