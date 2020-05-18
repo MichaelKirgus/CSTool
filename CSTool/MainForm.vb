@@ -1543,12 +1543,16 @@ Public Class MainForm
         ToolStripButton1.Visible = UserSettings.MainFormGUISettings.ShowHostnameIPSearchIcon
         ToolStripButton4.Visible = UserSettings.MainFormGUISettings.ShowHostnameIPRefreshIcon
         ToolStripButton2.Visible = UserSettings.MainFormGUISettings.ShowCustomActionIcon
+        ToolStripSeparator2.Visible = UserSettings.MainFormGUISettings.ShowCustomActionIcon
         ToolStripButton12.Visible = UserSettings.MainFormGUISettings.ShowTemplateManagerIcon
         ToolStripButton3.Visible = UserSettings.MainFormGUISettings.ShowAddItemIcon
         ToolStripComboBox1.Visible = UserSettings.MainFormGUISettings.ShowAddItemIcon
+        ToolStripSeparator3.Visible = UserSettings.MainFormGUISettings.ShowAddItemIcon
         ToolStripButton6.Visible = UserSettings.MainFormGUISettings.ShowRemoveItemIcon
         ToolStripButton13.Visible = UserSettings.MainFormGUISettings.ShowWorkspaceTemplateManagerIcon
+        ToolStripSeparator4.Visible = UserSettings.MainFormGUISettings.ShowWorkspaceTemplateManagerIcon
         ToolStripButton11.Visible = UserSettings.MainFormGUISettings.ShowWindowManagerIcon
+        ToolStripSeparator16.Visible = UserSettings.MainFormGUISettings.ShowWindowManagerIcon
         ToolStripButton5.Visible = UserSettings.MainFormGUISettings.ShowNewInstanceIcon
         ToolStripButton9.Visible = UserSettings.MainFormGUISettings.ShowUserProfileManagerIcon
         ToolStripButton10.Visible = UserSettings.MainFormGUISettings.ShowLockunlockWorkpsaceIcon
@@ -1589,6 +1593,7 @@ Public Class MainForm
 
     Private Sub ShowCustomActionIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowCustomActionIconToolStripMenuItem.Click
         ToolStripButton2.Visible = ShowCustomActionIconToolStripMenuItem.Checked
+        ToolStripSeparator2.Visible = ShowCustomActionIconToolStripMenuItem.Checked
     End Sub
 
     Private Sub ShowTemplateManagerIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowTemplateManagerIconToolStripMenuItem.Click
@@ -1598,6 +1603,7 @@ Public Class MainForm
     Private Sub ShowAddItemIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowAddItemIconToolStripMenuItem.Click
         ToolStripButton3.Visible = ShowAddItemIconToolStripMenuItem.Checked
         ToolStripComboBox1.Visible = ShowAddItemIconToolStripMenuItem.Checked
+        ToolStripSeparator3.Visible = ShowAddItemIconToolStripMenuItem.Checked
     End Sub
 
     Private Sub ShowRemoveItemIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowRemoveItemIconToolStripMenuItem.Click
@@ -1606,10 +1612,12 @@ Public Class MainForm
 
     Private Sub ShowWorkspaceTemplateManagerIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowWorkspaceTemplateManagerIconToolStripMenuItem.Click
         ToolStripButton13.Visible = ShowWorkspaceTemplateManagerIconToolStripMenuItem.Checked
+        ToolStripSeparator4.Visible = ShowWorkspaceTemplateManagerIconToolStripMenuItem.Checked
     End Sub
 
     Private Sub ShowWindowManagerIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowWindowManagerIconToolStripMenuItem.Click
         ToolStripButton11.Visible = ShowWindowManagerIconToolStripMenuItem.Checked
+        ToolStripSeparator16.Visible = ShowWindowManagerIconToolStripMenuItem.Checked
     End Sub
 
     Private Sub ShowNewInstanceIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowNewInstanceIconToolStripMenuItem.Click
