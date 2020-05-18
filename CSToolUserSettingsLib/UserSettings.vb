@@ -34,6 +34,7 @@ Imports CSToolLogLib
     Public Property ShowWarningOnCustomActions As Boolean = True
     Public Property UseAsyncPluginMessaging As Boolean = True
     Public Property ShowWorkplaceTemplateForm As Boolean = False
+    Public Property MainFormGUISettings As New UserMainFormGUISettings
 
     Public Function Clone() As Object Implements System.ICloneable.Clone
         Return MemberwiseClone()

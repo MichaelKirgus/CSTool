@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="CentralCustomActions.vb" />
     <Compile Include="PluginSettings.vb" />
+    <Compile Include="UserMainFormGUISettings.vb" />
     <Compile Include="UserSettings.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

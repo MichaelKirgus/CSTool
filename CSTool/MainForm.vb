@@ -483,6 +483,10 @@ Public Class MainForm
         'Set initial window state for raising windows state events
         LastWindowState = Me.WindowState
 
+        'Set buttons and icons settings from workspace settings
+        CurrentLoadActionState = "Set GUI items state..."
+        LoadGUIStateFromUserSettings()
+
         'Resume form and controls events
         IsFormLoading = False
         CSDockPanelHosting.CausesValidation = True
@@ -1510,5 +1514,117 @@ Public Class MainForm
 
     Private Sub ToolStripButton13_Click(sender As Object, e As EventArgs) Handles ToolStripButton13.Click
         OpenWorkspaceTemplateFormSub()
+    End Sub
+
+    Private Sub ControlVisibleMenuItemsContext_Opening(sender As Object, e As CancelEventArgs) Handles ControlVisibleMenuItemsContext.Opening
+        ShowGUIStateAtContextMenu()
+    End Sub
+
+    Public Sub ShowGUIStateAtContextMenu()
+        ShowHostnameIPLabelToolStripMenuItem.Checked = ToolStripLabel1.Visible
+        ShowHostnameIPTextboxToolStripMenuItem.Checked = HostnameOrIPCtl.Visible
+        ShowHostnameIPSearchIconToolStripMenuItem.Checked = ToolStripButton1.Visible
+        ShowHostnameIPRefreshIconToolStripMenuItem.Checked = ToolStripButton4.Visible
+        ShowCustomActionIconToolStripMenuItem.Checked = ToolStripButton2.Visible
+        ShowTemplateManagerIconToolStripMenuItem.Checked = ToolStripButton12.Visible
+        ShowAddItemIconToolStripMenuItem.Checked = ToolStripButton3.Visible
+        ShowAddItemIconToolStripMenuItem.Checked = ToolStripComboBox1.Visible
+        ShowRemoveItemIconToolStripMenuItem.Checked = ToolStripButton6.Visible
+        ShowWorkspaceTemplateManagerIconToolStripMenuItem.Checked = ToolStripButton13.Visible
+        ShowWindowManagerIconToolStripMenuItem.Checked = ToolStripButton11.Visible
+        ShowNewInstanceIconToolStripMenuItem.Checked = ToolStripButton5.Visible
+        ShowUserProfileManagerIconToolStripMenuItem.Checked = ToolStripButton9.Visible
+        ShowLockunlockWorkpsaceIconToolStripMenuItem.Checked = ToolStripButton10.Visible
+    End Sub
+
+    Public Sub LoadGUIStateFromUserSettings()
+        ToolStripLabel1.Visible = UserSettings.MainFormGUISettings.ShowHostnameIPLabel
+        HostnameOrIPCtl.Visible = UserSettings.MainFormGUISettings.ShowHostnameIPTextbox
+        ToolStripButton1.Visible = UserSettings.MainFormGUISettings.ShowHostnameIPSearchIcon
+        ToolStripButton4.Visible = UserSettings.MainFormGUISettings.ShowHostnameIPRefreshIcon
+        ToolStripButton2.Visible = UserSettings.MainFormGUISettings.ShowCustomActionIcon
+        ToolStripButton12.Visible = UserSettings.MainFormGUISettings.ShowTemplateManagerIcon
+        ToolStripButton3.Visible = UserSettings.MainFormGUISettings.ShowAddItemIcon
+        ToolStripComboBox1.Visible = UserSettings.MainFormGUISettings.ShowAddItemIcon
+        ToolStripButton6.Visible = UserSettings.MainFormGUISettings.ShowRemoveItemIcon
+        ToolStripButton13.Visible = UserSettings.MainFormGUISettings.ShowWorkspaceTemplateManagerIcon
+        ToolStripButton11.Visible = UserSettings.MainFormGUISettings.ShowWindowManagerIcon
+        ToolStripButton5.Visible = UserSettings.MainFormGUISettings.ShowNewInstanceIcon
+        ToolStripButton9.Visible = UserSettings.MainFormGUISettings.ShowUserProfileManagerIcon
+        ToolStripButton10.Visible = UserSettings.MainFormGUISettings.ShowLockunlockWorkpsaceIcon
+    End Sub
+
+    Public Sub WriteGUIStateToUserSettings()
+        UserSettings.MainFormGUISettings.ShowHostnameIPLabel = ToolStripLabel1.Visible
+        UserSettings.MainFormGUISettings.ShowHostnameIPTextbox = HostnameOrIPCtl.Visible
+        UserSettings.MainFormGUISettings.ShowHostnameIPSearchIcon = ToolStripButton1.Visible
+        UserSettings.MainFormGUISettings.ShowHostnameIPRefreshIcon = ToolStripButton4.Visible
+        UserSettings.MainFormGUISettings.ShowCustomActionIcon = ToolStripButton2.Visible
+        UserSettings.MainFormGUISettings.ShowTemplateManagerIcon = ToolStripButton12.Visible
+        UserSettings.MainFormGUISettings.ShowAddItemIcon = ToolStripButton3.Visible
+        UserSettings.MainFormGUISettings.ShowAddItemIcon = ToolStripComboBox1.Visible
+        UserSettings.MainFormGUISettings.ShowRemoveItemIcon = ToolStripButton6.Visible
+        UserSettings.MainFormGUISettings.ShowWorkspaceTemplateManagerIcon = ToolStripButton13.Visible
+        UserSettings.MainFormGUISettings.ShowWindowManagerIcon = ToolStripButton11.Visible
+        UserSettings.MainFormGUISettings.ShowNewInstanceIcon = ToolStripButton5.Visible
+        UserSettings.MainFormGUISettings.ShowUserProfileManagerIcon = ToolStripButton9.Visible
+        UserSettings.MainFormGUISettings.ShowLockunlockWorkpsaceIcon = ToolStripButton10.Visible
+    End Sub
+
+    Private Sub ShowHostnameIPTextboxToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowHostnameIPTextboxToolStripMenuItem.Click
+        HostnameOrIPCtl.Visible = ShowHostnameIPTextboxToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowHostnameIPLabelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowHostnameIPLabelToolStripMenuItem.Click
+        ToolStripLabel1.Visible = ShowHostnameIPLabelToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowHostnameIPSearchIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowHostnameIPSearchIconToolStripMenuItem.Click
+        ToolStripButton1.Visible = ShowHostnameIPSearchIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowHostnameIPRefreshIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowHostnameIPRefreshIconToolStripMenuItem.Click
+        ToolStripButton4.Visible = ShowHostnameIPRefreshIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowCustomActionIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowCustomActionIconToolStripMenuItem.Click
+        ToolStripButton2.Visible = ShowCustomActionIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowTemplateManagerIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowTemplateManagerIconToolStripMenuItem.Click
+        ToolStripButton12.Visible = ShowTemplateManagerIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowAddItemIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowAddItemIconToolStripMenuItem.Click
+        ToolStripButton3.Visible = ShowAddItemIconToolStripMenuItem.Checked
+        ToolStripComboBox1.Visible = ShowAddItemIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowRemoveItemIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowRemoveItemIconToolStripMenuItem.Click
+        ToolStripButton6.Visible = ShowRemoveItemIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowWorkspaceTemplateManagerIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowWorkspaceTemplateManagerIconToolStripMenuItem.Click
+        ToolStripButton13.Visible = ShowWorkspaceTemplateManagerIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowWindowManagerIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowWindowManagerIconToolStripMenuItem.Click
+        ToolStripButton11.Visible = ShowWindowManagerIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowNewInstanceIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowNewInstanceIconToolStripMenuItem.Click
+        ToolStripButton5.Visible = ShowNewInstanceIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowUserProfileManagerIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowUserProfileManagerIconToolStripMenuItem.Click
+        ToolStripButton9.Visible = ShowUserProfileManagerIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ShowLockunlockWorkpsaceIconToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShowLockunlockWorkpsaceIconToolStripMenuItem.Click
+        ToolStripButton10.Visible = ShowLockunlockWorkpsaceIconToolStripMenuItem.Checked
+    End Sub
+
+    Private Sub ControlVisibleMenuItemsContext_Closing(sender As Object, e As ToolStripDropDownClosingEventArgs) Handles ControlVisibleMenuItemsContext.Closing
+        WriteGUIStateToUserSettings()
     End Sub
 End Class

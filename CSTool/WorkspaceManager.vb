@@ -276,4 +276,8 @@ Public Class WorkspaceManager
             End If
         End If
     End Sub
+
+    Private Sub WorkspaceManager_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        _parent.LoadGUIStateFromUserSettings()
+    End Sub
 End Class

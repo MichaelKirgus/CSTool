@@ -32,31 +32,14 @@ Partial Class MainForm
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.HostnameOrIPCtl = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.DockingSuiteVS2015LightTheme = New WeifenLuo.WinFormsUI.Docking.VS2015LightTheme()
-        Me.DockingSuiteVS2015BlueTheme = New WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme()
-        Me.CSDockPanelHosting = New WeifenLuo.WinFormsUI.Docking.DockPanel()
-        Me.DockingMainMenuContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.VS2015DarkTheme1 = New WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme()
-        Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(Me.components)
-        Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
-        Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
-        Me.CheckForLockfile = New System.ComponentModel.BackgroundWorker()
-        Me.RaiseActionsAsyncWorker = New System.ComponentModel.BackgroundWorker()
-        Me.RemoveStaleSettings = New System.ComponentModel.BackgroundWorker()
-        Me.SaveSettingsAsyncWorker = New System.ComponentModel.BackgroundWorker()
-        Me.AddItemFromTemplatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripSplitButton()
         Me.SearchInNewWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SearchInNewInstanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripButton12 = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripSplitButton()
         Me.NewIndependentWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -76,7 +59,9 @@ Partial Class MainForm
         Me.CloseAllWindowsfloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.CloseAllWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton13 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton11 = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
@@ -89,6 +74,7 @@ Partial Class MainForm
         Me.ResetUserProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton8 = New System.Windows.Forms.ToolStripSplitButton()
         Me.PluginSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TemplateSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -109,16 +95,51 @@ Partial Class MainForm
         Me.ExitWithoutWarning = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseChildsWithoutWarningToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
+        Me.DockingSuiteVS2015LightTheme = New WeifenLuo.WinFormsUI.Docking.VS2015LightTheme()
+        Me.DockingSuiteVS2015BlueTheme = New WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme()
+        Me.CSDockPanelHosting = New WeifenLuo.WinFormsUI.Docking.DockPanel()
+        Me.DockingMainMenuContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddItemFromTemplatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VS2015DarkTheme1 = New WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme()
+        Me.VisualStudioToolStripExtender1 = New WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(Me.components)
+        Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ExportWorkspaceFile = New System.Windows.Forms.SaveFileDialog()
+        Me.ImportWorkspaceFile = New System.Windows.Forms.OpenFileDialog()
+        Me.CheckForLockfile = New System.ComponentModel.BackgroundWorker()
+        Me.RaiseActionsAsyncWorker = New System.ComponentModel.BackgroundWorker()
+        Me.RemoveStaleSettings = New System.ComponentModel.BackgroundWorker()
+        Me.SaveSettingsAsyncWorker = New System.ComponentModel.BackgroundWorker()
+        Me.ControlVisibleMenuItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ShowHostnameIPLabelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowHostnameIPTextboxToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowHostnameIPSearchIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowHostnameIPRefreshIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ShowCustomActionIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ShowTemplateManagerIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowAddItemIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowRemoveItemIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator19 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ShowWorkspaceTemplateManagerIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ShowWindowManagerIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowNewInstanceIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator21 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ShowUserProfileManagerIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowLockunlockWorkpsaceIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.DockingMainMenuContext.SuspendLayout()
+        Me.ControlVisibleMenuItemsContext.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.ContextMenuStrip = Me.ControlVisibleMenuItemsContext
         Me.ToolStrip1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.HostnameOrIPCtl, Me.ToolStripButton1, Me.ToolStripButton4, Me.ToolStripSeparator2, Me.ToolStripButton2, Me.ToolStripSeparator3, Me.ToolStripComboBox1, Me.ToolStripButton12, Me.ToolStripButton3, Me.ToolStripButton6, Me.ToolStripSeparator4, Me.ToolStripButton13, Me.ToolStripSeparator16, Me.ToolStripButton11, Me.ToolStripButton5, Me.ToolStripButton7, Me.ToolStripSeparator1, Me.ToolStripButton8, Me.ToolStripSeparator5, Me.ToolStripButton9, Me.ToolStripButton10})
@@ -145,115 +166,6 @@ Partial Class MainForm
         Me.HostnameOrIPCtl.ToolTipText = "Please enter hostname or ip-address." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Shortcuts:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ENTF: Clear hostname/ip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "F5: " &
     "Refresh GUI" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "F9: Open new instance with entered hostname/ip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "F10: Open new windo" &
     "w with entered hostname/ip"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 29)
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 29)
-        '
-        'ToolStripComboBox1
-        '
-        Me.ToolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ToolStripComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
-        Me.ToolStripComboBox1.Size = New System.Drawing.Size(199, 29)
-        Me.ToolStripComboBox1.ToolTipText = "Choose window plugin"
-        '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 29)
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 29)
-        '
-        'ToolStripSeparator5
-        '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 29)
-        '
-        'CSDockPanelHosting
-        '
-        Me.CSDockPanelHosting.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(238, Byte), Integer), CType(CType(242, Byte), Integer))
-        Me.CSDockPanelHosting.CausesValidation = False
-        Me.CSDockPanelHosting.ContextMenuStrip = Me.DockingMainMenuContext
-        Me.CSDockPanelHosting.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CSDockPanelHosting.DockBackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.CSDockPanelHosting.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CSDockPanelHosting.Location = New System.Drawing.Point(0, 29)
-        Me.CSDockPanelHosting.Margin = New System.Windows.Forms.Padding(4)
-        Me.CSDockPanelHosting.Name = "CSDockPanelHosting"
-        Me.CSDockPanelHosting.Padding = New System.Windows.Forms.Padding(6)
-        Me.CSDockPanelHosting.ShowAutoHideContentOnHover = False
-        Me.CSDockPanelHosting.ShowDocumentIcon = True
-        Me.CSDockPanelHosting.Size = New System.Drawing.Size(1007, 538)
-        Me.CSDockPanelHosting.TabIndex = 3
-        Me.CSDockPanelHosting.Theme = Me.VS2015DarkTheme1
-        '
-        'DockingMainMenuContext
-        '
-        Me.DockingMainMenuContext.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddItemFromTemplatesToolStripMenuItem})
-        Me.DockingMainMenuContext.Name = "DockingMainMenuContext"
-        Me.DockingMainMenuContext.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.DockingMainMenuContext.Size = New System.Drawing.Size(251, 26)
-        '
-        'VisualStudioToolStripExtender1
-        '
-        Me.VisualStudioToolStripExtender1.DefaultRenderer = Nothing
-        '
-        'CustomItemsContext
-        '
-        Me.CustomItemsContext.Name = "CustomItemsContext"
-        Me.CustomItemsContext.Size = New System.Drawing.Size(61, 4)
-        '
-        'ExportWorkspaceFile
-        '
-        Me.ExportWorkspaceFile.DefaultExt = "zip"
-        Me.ExportWorkspaceFile.Filter = "ZIP-File|*.zip"
-        Me.ExportWorkspaceFile.RestoreDirectory = True
-        '
-        'ImportWorkspaceFile
-        '
-        Me.ImportWorkspaceFile.DefaultExt = "zip"
-        Me.ImportWorkspaceFile.Filter = "ZIP-File|*.zip"
-        Me.ImportWorkspaceFile.RestoreDirectory = True
-        Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
-        '
-        'CheckForLockfile
-        '
-        Me.CheckForLockfile.WorkerReportsProgress = True
-        Me.CheckForLockfile.WorkerSupportsCancellation = True
-        '
-        'RaiseActionsAsyncWorker
-        '
-        Me.RaiseActionsAsyncWorker.WorkerReportsProgress = True
-        Me.RaiseActionsAsyncWorker.WorkerSupportsCancellation = True
-        '
-        'RemoveStaleSettings
-        '
-        Me.RemoveStaleSettings.WorkerReportsProgress = True
-        Me.RemoveStaleSettings.WorkerSupportsCancellation = True
-        '
-        'SaveSettingsAsyncWorker
-        '
-        Me.SaveSettingsAsyncWorker.WorkerReportsProgress = True
-        Me.SaveSettingsAsyncWorker.WorkerSupportsCancellation = True
-        '
-        'AddItemFromTemplatesToolStripMenuItem
-        '
-        Me.AddItemFromTemplatesToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_archive_16x16
-        Me.AddItemFromTemplatesToolStripMenuItem.Name = "AddItemFromTemplatesToolStripMenuItem"
-        Me.AddItemFromTemplatesToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Insert
-        Me.AddItemFromTemplatesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
-        Me.AddItemFromTemplatesToolStripMenuItem.Text = "Add item from templates..."
         '
         'ToolStripButton1
         '
@@ -289,6 +201,11 @@ Partial Class MainForm
         Me.ToolStripButton4.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton4.Text = "Refresh all windows"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 29)
+        '
         'ToolStripButton2
         '
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -298,6 +215,19 @@ Partial Class MainForm
         Me.ToolStripButton2.Name = "ToolStripButton2"
         Me.ToolStripButton2.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton2.Text = "Get custom actions"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 29)
+        '
+        'ToolStripComboBox1
+        '
+        Me.ToolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ToolStripComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
+        Me.ToolStripComboBox1.Size = New System.Drawing.Size(199, 29)
+        Me.ToolStripComboBox1.ToolTipText = "Choose window plugin"
         '
         'ToolStripButton12
         '
@@ -426,6 +356,11 @@ Partial Class MainForm
         Me.CloseAllWindowsToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
         Me.CloseAllWindowsToolStripMenuItem.Text = "Close all windows"
         '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 29)
+        '
         'ToolStripButton13
         '
         Me.ToolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -435,6 +370,11 @@ Partial Class MainForm
         Me.ToolStripButton13.Name = "ToolStripButton13"
         Me.ToolStripButton13.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton13.Text = "Workspace template manager"
+        '
+        'ToolStripSeparator16
+        '
+        Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
+        Me.ToolStripSeparator16.Size = New System.Drawing.Size(6, 29)
         '
         'ToolStripButton11
         '
@@ -519,6 +459,12 @@ Partial Class MainForm
         Me.ToolStripButton7.Name = "ToolStripButton7"
         Me.ToolStripButton7.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton7.Text = "Info"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 29)
         '
         'ToolStripButton8
         '
@@ -664,6 +610,11 @@ Partial Class MainForm
         Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(278, 22)
         Me.SaveSettingsToolStripMenuItem.Text = "Save settings"
         '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 29)
+        '
         'ToolStripButton9
         '
         Me.ToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -685,10 +636,203 @@ Partial Class MainForm
         Me.ToolStripButton10.Size = New System.Drawing.Size(26, 26)
         Me.ToolStripButton10.Text = "Lock/unlock workspace"
         '
-        'ToolStripSeparator16
+        'CSDockPanelHosting
         '
-        Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
-        Me.ToolStripSeparator16.Size = New System.Drawing.Size(6, 29)
+        Me.CSDockPanelHosting.BackColor = System.Drawing.Color.FromArgb(CType(CType(238, Byte), Integer), CType(CType(238, Byte), Integer), CType(CType(242, Byte), Integer))
+        Me.CSDockPanelHosting.CausesValidation = False
+        Me.CSDockPanelHosting.ContextMenuStrip = Me.DockingMainMenuContext
+        Me.CSDockPanelHosting.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CSDockPanelHosting.DockBackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.CSDockPanelHosting.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CSDockPanelHosting.Location = New System.Drawing.Point(0, 29)
+        Me.CSDockPanelHosting.Margin = New System.Windows.Forms.Padding(4)
+        Me.CSDockPanelHosting.Name = "CSDockPanelHosting"
+        Me.CSDockPanelHosting.Padding = New System.Windows.Forms.Padding(6)
+        Me.CSDockPanelHosting.ShowAutoHideContentOnHover = False
+        Me.CSDockPanelHosting.ShowDocumentIcon = True
+        Me.CSDockPanelHosting.Size = New System.Drawing.Size(1007, 538)
+        Me.CSDockPanelHosting.TabIndex = 3
+        Me.CSDockPanelHosting.Theme = Me.VS2015DarkTheme1
+        '
+        'DockingMainMenuContext
+        '
+        Me.DockingMainMenuContext.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddItemFromTemplatesToolStripMenuItem})
+        Me.DockingMainMenuContext.Name = "DockingMainMenuContext"
+        Me.DockingMainMenuContext.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.DockingMainMenuContext.Size = New System.Drawing.Size(251, 26)
+        '
+        'AddItemFromTemplatesToolStripMenuItem
+        '
+        Me.AddItemFromTemplatesToolStripMenuItem.Image = Global.CSTool.My.Resources.Resources.icon_archive_16x16
+        Me.AddItemFromTemplatesToolStripMenuItem.Name = "AddItemFromTemplatesToolStripMenuItem"
+        Me.AddItemFromTemplatesToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Insert
+        Me.AddItemFromTemplatesToolStripMenuItem.Size = New System.Drawing.Size(250, 22)
+        Me.AddItemFromTemplatesToolStripMenuItem.Text = "Add item from templates..."
+        '
+        'VisualStudioToolStripExtender1
+        '
+        Me.VisualStudioToolStripExtender1.DefaultRenderer = Nothing
+        '
+        'CustomItemsContext
+        '
+        Me.CustomItemsContext.Name = "CustomItemsContext"
+        Me.CustomItemsContext.Size = New System.Drawing.Size(61, 4)
+        '
+        'ExportWorkspaceFile
+        '
+        Me.ExportWorkspaceFile.DefaultExt = "zip"
+        Me.ExportWorkspaceFile.Filter = "ZIP-File|*.zip"
+        Me.ExportWorkspaceFile.RestoreDirectory = True
+        '
+        'ImportWorkspaceFile
+        '
+        Me.ImportWorkspaceFile.DefaultExt = "zip"
+        Me.ImportWorkspaceFile.Filter = "ZIP-File|*.zip"
+        Me.ImportWorkspaceFile.RestoreDirectory = True
+        Me.ImportWorkspaceFile.SupportMultiDottedExtensions = True
+        '
+        'CheckForLockfile
+        '
+        Me.CheckForLockfile.WorkerReportsProgress = True
+        Me.CheckForLockfile.WorkerSupportsCancellation = True
+        '
+        'RaiseActionsAsyncWorker
+        '
+        Me.RaiseActionsAsyncWorker.WorkerReportsProgress = True
+        Me.RaiseActionsAsyncWorker.WorkerSupportsCancellation = True
+        '
+        'RemoveStaleSettings
+        '
+        Me.RemoveStaleSettings.WorkerReportsProgress = True
+        Me.RemoveStaleSettings.WorkerSupportsCancellation = True
+        '
+        'SaveSettingsAsyncWorker
+        '
+        Me.SaveSettingsAsyncWorker.WorkerReportsProgress = True
+        Me.SaveSettingsAsyncWorker.WorkerSupportsCancellation = True
+        '
+        'ControlVisibleMenuItemsContext
+        '
+        Me.ControlVisibleMenuItemsContext.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowHostnameIPLabelToolStripMenuItem, Me.ShowHostnameIPTextboxToolStripMenuItem, Me.ShowHostnameIPSearchIconToolStripMenuItem, Me.ShowHostnameIPRefreshIconToolStripMenuItem, Me.ToolStripSeparator17, Me.ShowCustomActionIconToolStripMenuItem, Me.ToolStripSeparator18, Me.ShowTemplateManagerIconToolStripMenuItem, Me.ShowAddItemIconToolStripMenuItem, Me.ShowRemoveItemIconToolStripMenuItem, Me.ToolStripSeparator19, Me.ShowWorkspaceTemplateManagerIconToolStripMenuItem, Me.ToolStripSeparator20, Me.ShowWindowManagerIconToolStripMenuItem, Me.ShowNewInstanceIconToolStripMenuItem, Me.ToolStripSeparator21, Me.ShowUserProfileManagerIconToolStripMenuItem, Me.ShowLockunlockWorkpsaceIconToolStripMenuItem})
+        Me.ControlVisibleMenuItemsContext.Name = "ControlVisibleMenuItemsContext"
+        Me.ControlVisibleMenuItemsContext.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.ControlVisibleMenuItemsContext.Size = New System.Drawing.Size(313, 342)
+        '
+        'ShowHostnameIPLabelToolStripMenuItem
+        '
+        Me.ShowHostnameIPLabelToolStripMenuItem.CheckOnClick = True
+        Me.ShowHostnameIPLabelToolStripMenuItem.Name = "ShowHostnameIPLabelToolStripMenuItem"
+        Me.ShowHostnameIPLabelToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowHostnameIPLabelToolStripMenuItem.Text = "Show ""Hostname/IP"" label"
+        '
+        'ShowHostnameIPTextboxToolStripMenuItem
+        '
+        Me.ShowHostnameIPTextboxToolStripMenuItem.CheckOnClick = True
+        Me.ShowHostnameIPTextboxToolStripMenuItem.Name = "ShowHostnameIPTextboxToolStripMenuItem"
+        Me.ShowHostnameIPTextboxToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowHostnameIPTextboxToolStripMenuItem.Text = "Show ""Hostname/IP"" text box"
+        '
+        'ShowHostnameIPSearchIconToolStripMenuItem
+        '
+        Me.ShowHostnameIPSearchIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowHostnameIPSearchIconToolStripMenuItem.Name = "ShowHostnameIPSearchIconToolStripMenuItem"
+        Me.ShowHostnameIPSearchIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowHostnameIPSearchIconToolStripMenuItem.Text = "Show ""Hostanme/IP"" search icon"
+        '
+        'ShowHostnameIPRefreshIconToolStripMenuItem
+        '
+        Me.ShowHostnameIPRefreshIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowHostnameIPRefreshIconToolStripMenuItem.Name = "ShowHostnameIPRefreshIconToolStripMenuItem"
+        Me.ShowHostnameIPRefreshIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowHostnameIPRefreshIconToolStripMenuItem.Text = "Show ""Hotsname/IP"" refresh icon"
+        '
+        'ToolStripSeparator17
+        '
+        Me.ToolStripSeparator17.Name = "ToolStripSeparator17"
+        Me.ToolStripSeparator17.Size = New System.Drawing.Size(309, 6)
+        '
+        'ShowCustomActionIconToolStripMenuItem
+        '
+        Me.ShowCustomActionIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowCustomActionIconToolStripMenuItem.Name = "ShowCustomActionIconToolStripMenuItem"
+        Me.ShowCustomActionIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowCustomActionIconToolStripMenuItem.Text = "Show custom action icon"
+        '
+        'ToolStripSeparator18
+        '
+        Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
+        Me.ToolStripSeparator18.Size = New System.Drawing.Size(309, 6)
+        '
+        'ShowTemplateManagerIconToolStripMenuItem
+        '
+        Me.ShowTemplateManagerIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowTemplateManagerIconToolStripMenuItem.Name = "ShowTemplateManagerIconToolStripMenuItem"
+        Me.ShowTemplateManagerIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowTemplateManagerIconToolStripMenuItem.Text = "Show template manager icon"
+        '
+        'ShowAddItemIconToolStripMenuItem
+        '
+        Me.ShowAddItemIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowAddItemIconToolStripMenuItem.Name = "ShowAddItemIconToolStripMenuItem"
+        Me.ShowAddItemIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowAddItemIconToolStripMenuItem.Text = "Show ""Add item"" icon + plugin selection box"
+        '
+        'ShowRemoveItemIconToolStripMenuItem
+        '
+        Me.ShowRemoveItemIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowRemoveItemIconToolStripMenuItem.Name = "ShowRemoveItemIconToolStripMenuItem"
+        Me.ShowRemoveItemIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowRemoveItemIconToolStripMenuItem.Text = "Show ""Remove item"" icon"
+        '
+        'ToolStripSeparator19
+        '
+        Me.ToolStripSeparator19.Name = "ToolStripSeparator19"
+        Me.ToolStripSeparator19.Size = New System.Drawing.Size(309, 6)
+        '
+        'ShowWorkspaceTemplateManagerIconToolStripMenuItem
+        '
+        Me.ShowWorkspaceTemplateManagerIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowWorkspaceTemplateManagerIconToolStripMenuItem.Name = "ShowWorkspaceTemplateManagerIconToolStripMenuItem"
+        Me.ShowWorkspaceTemplateManagerIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowWorkspaceTemplateManagerIconToolStripMenuItem.Text = "Show workspace template manager icon"
+        '
+        'ToolStripSeparator20
+        '
+        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
+        Me.ToolStripSeparator20.Size = New System.Drawing.Size(309, 6)
+        '
+        'ShowWindowManagerIconToolStripMenuItem
+        '
+        Me.ShowWindowManagerIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowWindowManagerIconToolStripMenuItem.Name = "ShowWindowManagerIconToolStripMenuItem"
+        Me.ShowWindowManagerIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowWindowManagerIconToolStripMenuItem.Text = "Show window manager icon"
+        '
+        'ShowNewInstanceIconToolStripMenuItem
+        '
+        Me.ShowNewInstanceIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowNewInstanceIconToolStripMenuItem.Name = "ShowNewInstanceIconToolStripMenuItem"
+        Me.ShowNewInstanceIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowNewInstanceIconToolStripMenuItem.Text = "Show new instance icon"
+        '
+        'ToolStripSeparator21
+        '
+        Me.ToolStripSeparator21.Name = "ToolStripSeparator21"
+        Me.ToolStripSeparator21.Size = New System.Drawing.Size(309, 6)
+        '
+        'ShowUserProfileManagerIconToolStripMenuItem
+        '
+        Me.ShowUserProfileManagerIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowUserProfileManagerIconToolStripMenuItem.Name = "ShowUserProfileManagerIconToolStripMenuItem"
+        Me.ShowUserProfileManagerIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowUserProfileManagerIconToolStripMenuItem.Text = "Show user profile manager icon"
+        '
+        'ShowLockunlockWorkpsaceIconToolStripMenuItem
+        '
+        Me.ShowLockunlockWorkpsaceIconToolStripMenuItem.CheckOnClick = True
+        Me.ShowLockunlockWorkpsaceIconToolStripMenuItem.Name = "ShowLockunlockWorkpsaceIconToolStripMenuItem"
+        Me.ShowLockunlockWorkpsaceIconToolStripMenuItem.Size = New System.Drawing.Size(312, 22)
+        Me.ShowLockunlockWorkpsaceIconToolStripMenuItem.Text = "Show lock/unlock workpsace icon"
         '
         'MainForm
         '
@@ -709,6 +853,7 @@ Partial Class MainForm
         Me.ToolStrip1.PerformLayout()
         CType(Me.CSDockPanelHosting, System.ComponentModel.ISupportInitialize).EndInit()
         Me.DockingMainMenuContext.ResumeLayout(False)
+        Me.ControlVisibleMenuItemsContext.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -796,4 +941,23 @@ Partial Class MainForm
     Friend WithEvents NewProcessWindowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripButton13 As ToolStripButton
     Friend WithEvents ToolStripSeparator16 As ToolStripSeparator
+    Friend WithEvents ControlVisibleMenuItemsContext As ContextMenuStrip
+    Friend WithEvents ShowHostnameIPLabelToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowHostnameIPTextboxToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowHostnameIPSearchIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowHostnameIPRefreshIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator17 As ToolStripSeparator
+    Friend WithEvents ShowCustomActionIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator18 As ToolStripSeparator
+    Friend WithEvents ShowTemplateManagerIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowAddItemIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowRemoveItemIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator19 As ToolStripSeparator
+    Friend WithEvents ShowWorkspaceTemplateManagerIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
+    Friend WithEvents ShowWindowManagerIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowNewInstanceIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator21 As ToolStripSeparator
+    Friend WithEvents ShowUserProfileManagerIconToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowLockunlockWorkpsaceIconToolStripMenuItem As ToolStripMenuItem
 End Class
