@@ -145,6 +145,16 @@ Public Class ClientGUI
     Public Sub RefreshGUI()
         SetToolStripVisible(ToolStripContainer1, _Settings.ShowNavigationToolbar)
 
+        If Not IsNothing(_Settings) Then
+            If Not IsNothing(browser) Then
+                If browser.IsBrowserInitialized Then
+                    If Not IsNothing(browser.BrowserSettings) Then
+                        browser.BrowserSettings.AcceptLanguageList = _Settings.BrowserLocale
+                    End If
+                End If
+            End If
+        End If
+
         If Not _Settings.InitialURL = "" Then
             If _Settings.UseCustomAuthentification Then
                 If browser.IsBrowserInitialized Then

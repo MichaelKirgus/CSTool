@@ -131,7 +131,7 @@
       <Project>{52f811ea-55d2-4375-b177-a93d76e72be0}</Project>
       <Name>CSToolPluginLib</Name>
     </ProjectReference>
-    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
+    <ProjectReference Include="..\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
       <Project>{C75532C4-765B-418E-B09B-46D36B2ABDB1}</Project>
       <Name>WinFormsUI</Name>
     </ProjectReference>

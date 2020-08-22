@@ -6,7 +6,6 @@
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports CSToolLogLib
-Imports WeifenLuo.WinFormsUI.Docking
 
 Public Interface ICSToolInterface
     'Functions

@@ -159,10 +159,6 @@
       <Project>{52F811EA-55D2-4375-B177-A93D76E72BE0}</Project>
       <Name>CSToolPluginLib</Name>
     </ProjectReference>
-    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
-      <Project>{C75532C4-765B-418E-B09B-46D36B2ABDB1}</Project>
-      <Name>WinFormsUI</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\internet-web-browser-5.ico" />

@@ -133,10 +133,6 @@
       <Project>{DF373DBF-733E-4E4D-8335-3D6D5FE447B2}</Project>
       <Name>CSToolLogLib</Name>
     </ProjectReference>
-    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
-      <Project>{C75532C4-765B-418E-B09B-46D36B2ABDB1}</Project>
-      <Name>WinFormsUI</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

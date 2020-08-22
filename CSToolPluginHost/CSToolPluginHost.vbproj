@@ -188,14 +188,6 @@
       <Project>{5c70a093-f440-4646-adf7-9a95f2c2e548}</Project>
       <Name>CSToolWindowsCredentialHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\ThemeVS2015.csproj">
-      <Project>{007d4ac8-948f-4816-86ad-b9d1343672c1}</Project>
-      <Name>ThemeVS2015</Name>
-    </ProjectReference>
-    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
-      <Project>{C75532C4-765B-418E-B09B-46D36B2ABDB1}</Project>
-      <Name>WinFormsUI</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

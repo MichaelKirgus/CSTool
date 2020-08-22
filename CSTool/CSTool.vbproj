@@ -113,12 +113,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="WeifenLuo.WinFormsUI.Docking">
-      <HintPath>O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
-    </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2015">
-      <HintPath>O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\obj\Debug\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -426,15 +420,15 @@
       <Project>{3bb82795-d94c-42f4-beb9-b8a3c9b806aa}</Project>
       <Name>CSWorkspaceTemplateManager</Name>
     </ProjectReference>
-    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\ThemeVS2015.csproj">
+    <ProjectReference Include="..\dockpanelsuite-master\WinFormsUI\ThemeVS2015.csproj">
       <Project>{007d4ac8-948f-4816-86ad-b9d1343672c1}</Project>
       <Name>ThemeVS2015</Name>
     </ProjectReference>
-    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
+    <ProjectReference Include="..\dockpanelsuite-master\WinFormsUI\WinFormsUI.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>WinFormsUI</Name>
     </ProjectReference>
-    <ProjectReference Include="O:\Eigene Dokumente\Visual Studio 2019\External_Projects\XML Editor\Xml Editor\Xml Editor.csproj">
+    <ProjectReference Include="..\XML Editor\Xml Editor\Xml Editor.csproj">
       <Project>{5fbb3ad1-697c-4b05-b1d4-da1b83b84b13}</Project>
       <Name>Xml Editor</Name>
     </ProjectReference>
@@ -551,19 +545,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AdysTech.CredentialManager">
-      <Version>2.0.0</Version>
+      <Version>2.2.0</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>79.1.360</Version>
+      <Version>84.3.10-pre</Version>
     </PackageReference>
     <PackageReference Include="Geckofx60.64">
-      <Version>60.0.44</Version>
+      <Version>60.0.47</Version>
     </PackageReference>
     <PackageReference Include="Geckofx60.64.Windows">
-      <Version>0.11.0</Version>
+      <Version>0.14.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Forms.UI.Controls.WebView">
-      <Version>6.0.1</Version>
+      <Version>6.1.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -47,11 +47,11 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Geckofx-Core, Version=60.0.44.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
-      <HintPath>..\packages\Geckofx60.64.60.0.44\lib\net45\Geckofx-Core.dll</HintPath>
+    <Reference Include="Geckofx-Core, Version=60.0.47.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
+      <HintPath>..\packages\Geckofx60.64.60.0.47\lib\net45\Geckofx-Core.dll</HintPath>
     </Reference>
-    <Reference Include="Geckofx-Winforms, Version=60.0.44.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
-      <HintPath>..\packages\Geckofx60.64.60.0.44\lib\net45\Geckofx-Winforms.dll</HintPath>
+    <Reference Include="Geckofx-Winforms, Version=60.0.47.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
+      <HintPath>..\packages\Geckofx60.64.60.0.47\lib\net45\Geckofx-Winforms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -132,9 +132,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\firefox-2.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +153,13 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-bookmark_22x22.png" />
+    <None Include="Resources\icon-refresh_22x22.png" />
+    <None Include="Resources\icon-cheveron-right_22x22.png" />
+    <None Include="Resources\icon-cheveron-left_22x22.png" />
+    <None Include="Resources\icon-book_22x22.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Firefox\AccessibleHandler.dll" />
@@ -176,20 +183,15 @@
     <Content Include="Firefox\qipcap64.dll" />
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
-    <None Include="Resources\icon-bookmark_22x22.png" />
-    <None Include="Resources\icon-refresh_22x22.png" />
-    <None Include="Resources\icon-cheveron-right_22x22.png" />
-    <None Include="Resources\icon-cheveron-left_22x22.png" />
-    <None Include="Resources\icon-book_22x22.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
-  <Import Project="..\packages\Geckofx60.64.60.0.44\build\Geckofx60.64.targets" Condition="Exists('..\packages\Geckofx60.64.60.0.44\build\Geckofx60.64.targets')" />
+  <Import Project="..\packages\Geckofx60.32.Windows.0.14.0\build\Geckofx60.32.Windows.targets" Condition="Exists('..\packages\Geckofx60.32.Windows.0.14.0\build\Geckofx60.32.Windows.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Geckofx60.64.60.0.44\build\Geckofx60.64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx60.64.60.0.44\build\Geckofx60.64.targets'))" />
-    <Error Condition="!Exists('..\packages\Geckofx60.32.Windows.0.11.0\build\Geckofx60.32.Windows.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx60.32.Windows.0.11.0\build\Geckofx60.32.Windows.targets'))" />
+    <Error Condition="!Exists('..\packages\Geckofx60.32.Windows.0.14.0\build\Geckofx60.32.Windows.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx60.32.Windows.0.14.0\build\Geckofx60.32.Windows.targets'))" />
+    <Error Condition="!Exists('..\packages\Geckofx60.64.60.0.47\build\Geckofx60.64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx60.64.60.0.47\build\Geckofx60.64.targets'))" />
   </Target>
-  <Import Project="..\packages\Geckofx60.32.Windows.0.11.0\build\Geckofx60.32.Windows.targets" Condition="Exists('..\packages\Geckofx60.32.Windows.0.11.0\build\Geckofx60.32.Windows.targets')" />
+  <Import Project="..\packages\Geckofx60.64.60.0.47\build\Geckofx60.64.targets" Condition="Exists('..\packages\Geckofx60.64.60.0.47\build\Geckofx60.64.targets')" />
 </Project>

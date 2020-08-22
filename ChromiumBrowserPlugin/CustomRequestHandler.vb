@@ -57,4 +57,8 @@ Public Class CustomRequestHandler
     Private Sub IRequestHandler_OnRenderProcessTerminated(chromiumWebBrowser As IWebBrowser, browser As IBrowser, status As CefTerminationStatus) Implements IRequestHandler.OnRenderProcessTerminated
         Throw New NotImplementedException()
     End Sub
+
+    Public Sub OnDocumentAvailableInMainFrame(chromiumWebBrowser As IWebBrowser, browser As IBrowser) Implements IRequestHandler.OnDocumentAvailableInMainFrame
+        Throw New NotImplementedException()
+    End Sub
 End Class

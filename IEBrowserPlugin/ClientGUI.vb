@@ -6,7 +6,6 @@
 Imports System.Drawing
 Imports System.Text
 Imports CSToolEnvironmentManager
-Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class ClientGUI
     Public _Settings As Settings
