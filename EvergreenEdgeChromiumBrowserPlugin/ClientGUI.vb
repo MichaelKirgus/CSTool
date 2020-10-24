@@ -97,7 +97,7 @@ Public Class ClientGUI
     End Sub
 
     Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
-        WebView1.Refresh()
+        'WebView1.Refresh()
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
