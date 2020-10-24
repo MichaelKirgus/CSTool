@@ -40,11 +40,11 @@ Public Class ClientGUI
         Try
             If Not CefSharp.Cef.IsInitialized Then
                 If Not IsNothing(_Settings) Then
-                    If _Settings.ChromiumExtensions.Count = 0 Then
-                        For index = 0 To _Settings.ChromiumExtensions.Count - 1
-                            settings.RegisterExtension(New V8Extension(_Settings.ChromiumExtensions(index).Name, _Settings.ChromiumExtensions(index).JavascriptCode))
-                        Next
-                    End If
+                    'If _Settings.ChromiumExtensions.Count = 0 Then
+                    '    For index = 0 To _Settings.ChromiumExtensions.Count - 1
+                    '        settings.RegisterExtension(New V8Extension(_Settings.ChromiumExtensions(index).Name, _Settings.ChromiumExtensions(index).JavascriptCode))
+                    '    Next
+                    'End If
                     settings.IgnoreCertificateErrors = _Settings.IgnoreCertificateErrors
                     If Not _Settings.CachePath = "" Then
                         settings.CachePath = _Settings.CachePath
