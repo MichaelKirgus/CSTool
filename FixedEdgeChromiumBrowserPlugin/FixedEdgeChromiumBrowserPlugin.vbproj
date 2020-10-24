@@ -127,6 +127,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CSToolEnvironmentManager\CSToolEnvironmentManager.vbproj">
+      <Project>{7809B2C0-3EE5-4983-9FEF-A11479AAFD99}</Project>
+      <Name>CSToolEnvironmentManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSToolLogLib\CSToolLogLib.vbproj">
       <Project>{DF373DBF-733E-4E4D-8335-3D6D5FE447B2}</Project>
       <Name>CSToolLogLib</Name>
