@@ -7,6 +7,7 @@
     Public Property Hostname As String = ""
     Public Property Description As String = ""
     Public Property CheckHost As Boolean = True
+    Public Property PingTimeout As Integer = 100
 
     Public Property EtablishConnectionAtStart As Boolean = False
     Public Property ConnectionTimeout As Integer = 10

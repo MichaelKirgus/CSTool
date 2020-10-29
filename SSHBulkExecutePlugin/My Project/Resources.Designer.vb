@@ -73,6 +73,16 @@ Namespace My.Resources
         '''<summary>
         '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property icon_cheveron_right_22x22() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("icon-cheveron-right_22x22", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property icon_clock_22x22() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("icon-clock_22x22", resourceCulture)
@@ -96,6 +106,26 @@ Namespace My.Resources
         Friend ReadOnly Property icon_plus_circle_22x22() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("icon-plus-circle_22x22", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property icon_view_22x22() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("icon-view_22x22", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property icon_x_circle_22x22() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("icon-x-circle_22x22", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

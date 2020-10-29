@@ -45,8 +45,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Renci.SshNet, Version=2020.0.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
-      <HintPath>..\packages\SSH.NET.2020.0.0-beta1\lib\net40\Renci.SshNet.dll</HintPath>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -82,6 +82,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClientRes.resx</DependentUpon>
     </Compile>
+    <Compile Include="ExecuteCtl.Designer.vb">
+      <DependentUpon>ExecuteCtl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ExecuteCtl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -111,6 +117,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ClientRes.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExecuteCtl.resx">
+      <DependentUpon>ExecuteCtl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -128,12 +137,12 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\icon-check-circle_22x22.png" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +163,10 @@
       <Project>{DF373DBF-733E-4E4D-8335-3D6D5FE447B2}</Project>
       <Name>CSToolLogLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSToolPingHelper\CSToolPingHelper.vbproj">
+      <Project>{2F8AD7CB-F746-4972-A5C6-72BFF1A51809}</Project>
+      <Name>CSToolPingHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSToolPluginLib\CSToolPluginLib.vbproj">
       <Project>{52F811EA-55D2-4375-B177-A93D76E72BE0}</Project>
       <Name>CSToolPluginLib</Name>
@@ -161,6 +174,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\gksu-root-terminal.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-view_22x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-x-circle_22x22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-cheveron-right_22x22.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
