@@ -47,6 +47,15 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.674.0, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.674-prerelease\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.674.0, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.674-prerelease\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.674.0, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.674-prerelease\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -115,6 +124,141 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\87.0.664.8.manifest" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Extensions\external_extensions.json" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\icudtl.dat" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\af.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\am.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ar.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\as.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\az.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\be.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\bg.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\bn-IN.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\bn.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\bs.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ca-Es-VALENCIA.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ca.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\chr.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\cs.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\cy.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\da.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\de.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\de.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\es.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\fr.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\it.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\ja.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\ko.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\pt-BR.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\ru.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\zh-CN.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\devtools\zh-TW.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\el.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\en-GB.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\en-US.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\es-419.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\es.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\et.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\eu.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\fa.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\fi.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\fil.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\fr-CA.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\fr.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ga.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\gd.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\gl.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\gu.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\he.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\hi.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\hr.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\hu.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\hy.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\id.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\is.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\it.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ja.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ka.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\kk.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\km.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\kn.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ko.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\kok.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ky.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\lb.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\lo.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\lt.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\lv.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\mi.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\mk.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ml.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\mn.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\mr.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ms.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\mt.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\nb.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ne.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\nl.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\nn.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\or.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\pa.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\pl.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\prs.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\pt-BR.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\pt-PT.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\qu.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ro.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ru.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\sd.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\si.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\sk.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\sl.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\sq.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\sr-Cyrl-BA.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\sr-Latn-RS.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\sr.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\sv.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\sw.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ta.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\te.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\th.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\tk.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\tr.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\tt.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ug.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\uk.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\ur.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\uz-Latn.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\vi.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\zh-CN.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Locales\zh-TW.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\MEIPreload\manifest.json" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\MEIPreload\preloaded_data.pb" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\MLModels\autofill_labeling.onnx" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\MLModels\autofill_labeling_email.onnx" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\MLModels\nexturl.onnx" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\msedge.dll.sig" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\msedgewebview2.exe.sig" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\msedge_100_percent.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\msedge_200_percent.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\nacl_irt_x86_64.nexe" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\resources.pak" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\show_third_party_software_licenses.bat" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\Advertising" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\Analytics" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\CompatExceptions" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\Content" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\Cryptomining" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\Entities" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\Fingerprinting" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\LICENSE" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\manifest.json" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\Other" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\Trust Protection Lists\Social" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\v8_context_snapshot.bin" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\WidevineCdm\manifest.json" />
+    <None Include="MicrosoftWebView2FixedVersionRuntime_64\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll.sig" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -140,6 +284,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\internet-web-browser-2.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -157,5 +302,52 @@
   <ItemGroup>
     <None Include="Resources\icon-refresh_22x22.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\concrt140.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\d3dcompiler_47.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\dual_engine_adapter_x64.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\EBWebView\x64\EmbeddedBrowserWebView.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\EBWebView\x86\EmbeddedBrowserWebView.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\eventlog_provider.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\learning_tools.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\libEGL.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\libGLESv2.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\libsmartscreen.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\microsoft_apis.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\microsoft_shell_integration.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\mip_core.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\mip_protection_sdk.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\MLModels\autofill_labeling_features.txt" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\MLModels\autofill_labeling_features_email.txt" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\mojo_core.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\msedge.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\msedgewebview2.exe" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\msedge_elf.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\msvcp140.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\Notifications\SoftLandingAssetDark.gif" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\Notifications\SoftLandingAssetLight.gif" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\notification_helper.exe" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\oneauth.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\oneds.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\onnxruntime.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\onramp.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\PlayReadyCdm\_platform_specific\win_x64\playreadycdm.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\swiftshader\libEGL.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\swiftshader\libGLESv2.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\telclient.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\vccorlib140.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\vcruntime140.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\vcruntime140_1.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\wdag.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll" />
+    <Content Include="MicrosoftWebView2FixedVersionRuntime_64\wns_push_client.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.674-prerelease\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.674-prerelease\build\Microsoft.Web.WebView2.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.674-prerelease\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.674-prerelease\build\Microsoft.Web.WebView2.targets'))" />
+  </Target>
 </Project>

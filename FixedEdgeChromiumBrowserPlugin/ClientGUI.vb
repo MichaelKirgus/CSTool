@@ -7,6 +7,8 @@ Imports System.Drawing
 Imports System.Text
 Imports CSToolEnvironmentManager
 Imports CSToolLogLib.LogSettings
+Imports Microsoft.Web.WebView2.Core
+Imports Microsoft.Web.WebView2.WinForms
 
 Public Class ClientGUI
     Public _Settings As Settings
@@ -22,18 +24,9 @@ Public Class ClientGUI
                 If Not IPOrHostname = "" Then
                     If Not _Settings.RaiseActionURL = "" Then
                         If _Settings.RaiseURLRefreshIfHostnameChanged Then
-                            If _Settings.UseCustomAuthentification Then
-                                Dim userName As String = EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.UseCustomAuthentificationUsername)
-                                Dim password As String = EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.UseCustomAuthentificationPassword)
-                                Dim hdr As String = "Authorization: Basic " & Convert.ToBase64String(Encoding.ASCII.GetBytes(userName & ":" & password)) & System.Environment.NewLine
-                                Dim newuri As New Uri(String.Format(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.RaiseActionURL), userName, password))
-                                _ParentInstance.CurrentLogInstance.WriteLogEntry("Action: Navigate to " & newuri.AbsolutePath & " - With basic authentication", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                                'WebView1.Navigate(newuri)
-                            Else
-                                Dim newuri As New Uri(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.RaiseActionURL))
-                                _ParentInstance.CurrentLogInstance.WriteLogEntry("Action: Navigate to " & newuri.AbsolutePath & " - Without authentication", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                                'WebView1.Navigate(newuri)
-                            End If
+                            Dim newuri As New Uri(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.RaiseActionURL))
+                            _ParentInstance.CurrentLogInstance.WriteLogEntry("Action: Navigate to " & newuri.AbsolutePath & " - Without authentication", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                            WebView2.Source = newuri
                         End If
                     End If
                 End If
@@ -44,23 +37,13 @@ Public Class ClientGUI
     End Sub
     Public Sub RefreshGUI()
         ToolStripContainer1.TopToolStripPanelVisible = _Settings.ShowNavigationToolbar
-        'WebView1.IsJavaScriptEnabled = _Settings.EnableJavaScript
-        'WebView1.IsIndexedDBEnabled = _Settings.EnableIndexedDB
+        WebView2.CoreWebView2.Settings.IsScriptEnabled = _Settings.EnableJavaScript
 
         Try
-            If _Settings.UseCustomAuthentification Then
-                Dim userName As String = EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.UseCustomAuthentificationUsername)
-                Dim password As String = EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.UseCustomAuthentificationPassword)
-                Dim hdr As String = "Authorization: Basic " & Convert.ToBase64String(Encoding.ASCII.GetBytes(userName & ":" & password)) & System.Environment.NewLine
-                Dim newuri As New Uri(String.Format(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.InitialURL), userName, password))
-                _ParentInstance.CurrentLogInstance.WriteLogEntry("Refresh: Navigate to " & newuri.AbsolutePath & " - With basic authentication", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                'WebView1.Navigate(newuri)
-            Else
-                If Not _Settings.InitialURL = "" Then
-                    Dim newuri As New Uri(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.InitialURL))
-                    _ParentInstance.CurrentLogInstance.WriteLogEntry("Refresh: Navigate to " & newuri.AbsolutePath & " - Without authentication", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                    'WebView1.Navigate(newuri)
-                End If
+            If Not _Settings.InitialURL = "" Then
+                Dim newuri As New Uri(EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.InitialURL))
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("Refresh: Navigate to " & newuri.AbsolutePath & " - Without authentication", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                WebView2.Source = newuri
             End If
         Catch ex As Exception
             _ParentInstance.CurrentLogInstance.WriteLogEntry("Navigate to URI: Error.", Me.GetType, LogEntryTypeEnum.ErrorL, LogEntryLevelEnum.Debug, Err)
@@ -69,6 +52,12 @@ Public Class ClientGUI
 
     Private Sub ClientGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not IsNothing(_Settings) Then
+            Dim cproper As New CoreWebView2CreationProperties
+            cproper.BrowserExecutableFolder = "MicrosoftWebView2FixedVersionRuntime_64"
+            cproper.Language = _Settings.BrowserLanguage
+
+            WebView2.CreationProperties = cproper
+
             If Not _Settings.InitialTitle = "" Then
                 Me.ParentForm.Text = _Settings.InitialTitle
                 _ParentInstance.CurrentWindowTitle = _Settings.InitialTitle
@@ -80,13 +69,15 @@ Public Class ClientGUI
         End If
     End Sub
 
-    'Private Sub WebBrowser1_DocumentCompleted(sender As Object, e As WebViewControlNavigationCompletedEventArgs) Handles WebView1.NavigationCompleted
-    '    If _Settings.ShowWebsiteTitleInWindowTitle Then
-    '        ToolStripComboBox1.Text = e.Uri.ToString
-    '        _ParentInstance.CurrentWindowTitle = WebView1.DocumentTitle
-    '        ParentForm.Text = WebView1.DocumentTitle
-    '    End If
-    'End Sub
+    Private Sub WebBrowser1_DocumentCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles WebView2.NavigationCompleted
+        If _Settings.ShowWebsiteTitleInWindowTitle Then
+            If e.IsSuccess Then
+                ToolStripComboBox1.Text = WebView2.CoreWebView2.Source
+                _ParentInstance.CurrentWindowTitle = WebView2.CoreWebView2.DocumentTitle
+                ParentForm.Text = WebView2.CoreWebView2.DocumentTitle
+            End If
+        End If
+    End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
 

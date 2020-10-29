@@ -11,10 +11,7 @@
     Public Property LoadURLAtStart As Boolean = True
     Public Property RaiseURLRefreshIfHostnameChanged As Boolean = True
     Public Property ShowWebsiteTitleInWindowTitle As Boolean = True
-    Public Property UseCustomAuthentification As Boolean = False
-    Public Property UseCustomAuthentificationUsername As String = ""
-    Public Property UseCustomAuthentificationPassword As String = ""
     Public Property ShowNavigationToolbar As Boolean = True
     Public Property EnableJavaScript As Boolean = True
-    Public Property EnableIndexedDB As Boolean = True
+    Public Property BrowserLanguage As String = ""
 End Class
