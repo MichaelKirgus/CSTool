@@ -36,7 +36,9 @@ Partial Class ClientGUI
         Me.LeftToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.ContentPanel = New System.Windows.Forms.ToolStripContentPanel()
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+        Me.WebView2 = New Microsoft.Web.WebView2.WinForms.WebView2()
         Me.ToolStrip1.SuspendLayout()
+        Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         Me.ToolStripContainer1.SuspendLayout()
         Me.SuspendLayout()
@@ -91,7 +93,7 @@ Partial Class ClientGUI
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 29)
         '
         'ToolStripButton1
         '
@@ -116,7 +118,7 @@ Partial Class ClientGUI
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 29)
         '
         'ToolStripComboBox1
         '
@@ -125,7 +127,7 @@ Partial Class ClientGUI
         Me.ToolStripComboBox1.DropDownWidth = 250
         Me.ToolStripComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
-        Me.ToolStripComboBox1.Size = New System.Drawing.Size(300, 25)
+        Me.ToolStripComboBox1.Size = New System.Drawing.Size(300, 29)
         '
         'RightToolStripPanel
         '
@@ -152,6 +154,7 @@ Partial Class ClientGUI
         '
         'ToolStripContainer1.ContentPanel
         '
+        Me.ToolStripContainer1.ContentPanel.Controls.Add(Me.WebView2)
         Me.ToolStripContainer1.ContentPanel.Size = New System.Drawing.Size(730, 416)
         Me.ToolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ToolStripContainer1.Location = New System.Drawing.Point(0, 0)
@@ -164,6 +167,17 @@ Partial Class ClientGUI
         '
         Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip1)
         '
+        'WebView2
+        '
+        Me.WebView2.CreationProperties = Nothing
+        Me.WebView2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.WebView2.Location = New System.Drawing.Point(0, 0)
+        Me.WebView2.Name = "WebView2"
+        Me.WebView2.Size = New System.Drawing.Size(730, 416)
+        Me.WebView2.TabIndex = 0
+        Me.WebView2.Text = "WebView21"
+        Me.WebView2.ZoomFactor = 1.0R
+        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -173,6 +187,7 @@ Partial Class ClientGUI
         Me.Size = New System.Drawing.Size(730, 445)
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        Me.ToolStripContainer1.ContentPanel.ResumeLayout(False)
         Me.ToolStripContainer1.TopToolStripPanel.ResumeLayout(False)
         Me.ToolStripContainer1.TopToolStripPanel.PerformLayout()
         Me.ToolStripContainer1.ResumeLayout(False)
@@ -195,4 +210,5 @@ Partial Class ClientGUI
     Friend WithEvents LeftToolStripPanel As Windows.Forms.ToolStripPanel
     Friend WithEvents ContentPanel As Windows.Forms.ToolStripContentPanel
     Friend WithEvents ToolStripContainer1 As Windows.Forms.ToolStripContainer
+    Friend WithEvents WebView2 As Microsoft.Web.WebView2.WinForms.WebView2
 End Class

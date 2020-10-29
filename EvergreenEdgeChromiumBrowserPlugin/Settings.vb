@@ -16,5 +16,5 @@
     Public Property UseCustomAuthentificationPassword As String = ""
     Public Property ShowNavigationToolbar As Boolean = True
     Public Property EnableJavaScript As Boolean = True
-    Public Property EnableIndexedDB As Boolean = True
+    Public Property BrowserLanguage As String = ""
 End Class
