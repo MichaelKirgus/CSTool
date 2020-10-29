@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ClientGUI
     Inherits System.Windows.Forms.UserControl
 
     'UserControl überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,10 @@ Partial Class ClientGUI
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer()
+        Me.WebView2 = New Microsoft.Web.WebView2.WinForms.WebView2()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
@@ -31,7 +32,6 @@ Partial Class ClientGUI
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
-        Me.WebView2 = New Microsoft.Web.WebView2.WinForms.WebView2()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         Me.ToolStripContainer1.SuspendLayout()
@@ -55,6 +55,17 @@ Partial Class ClientGUI
         'ToolStripContainer1.TopToolStripPanel
         '
         Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip1)
+        '
+        'WebView2
+        '
+        Me.WebView2.CreationProperties = Nothing
+        Me.WebView2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.WebView2.Location = New System.Drawing.Point(0, 0)
+        Me.WebView2.Name = "WebView2"
+        Me.WebView2.Size = New System.Drawing.Size(546, 324)
+        Me.WebView2.TabIndex = 0
+        Me.WebView2.Text = "WebView21"
+        Me.WebView2.ZoomFactor = 1.0R
         '
         'ToolStrip1
         '
@@ -125,17 +136,6 @@ Partial Class ClientGUI
         Me.ToolStripComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
         Me.ToolStripComboBox1.Size = New System.Drawing.Size(300, 29)
-        '
-        'WebView2
-        '
-        Me.WebView2.CreationProperties = Nothing
-        Me.WebView2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.WebView2.Location = New System.Drawing.Point(0, 0)
-        Me.WebView2.Name = "WebView2"
-        Me.WebView2.Size = New System.Drawing.Size(546, 324)
-        Me.WebView2.TabIndex = 0
-        Me.WebView2.Text = "WebView21"
-        Me.WebView2.ZoomFactor = 1.0R
         '
         'ClientGUI
         '

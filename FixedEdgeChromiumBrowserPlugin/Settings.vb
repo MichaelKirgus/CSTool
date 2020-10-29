@@ -13,5 +13,6 @@
     Public Property ShowWebsiteTitleInWindowTitle As Boolean = True
     Public Property ShowNavigationToolbar As Boolean = True
     Public Property EnableJavaScript As Boolean = True
+    Public Property BrowserExecutableFolder As String = "MicrosoftWebView2FixedVersionRuntime_64"
     Public Property BrowserLanguage As String = ""
 End Class
