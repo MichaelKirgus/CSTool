@@ -340,5 +340,5 @@ ASALocalRun/
 healthchecksdb
 
 #Exclude EdgeChromium runtime folders
-Microsoft.WebView2.FixedVersionRuntime.87.0.664.8.x64/**
-MicrosoftWebView2FixedVersionRuntime_64/**
+Microsoft.WebView2.FixedVersionRuntime.87.0.664.8.x64/
+MicrosoftWebView2FixedVersionRuntime_64/
