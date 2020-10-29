@@ -98,6 +98,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="SSHExecuteItem.vb" />
+    <Compile Include="SSHHostItem.vb" />
+    <Compile Include="SSHManager.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientGUI.resx">
