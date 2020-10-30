@@ -14,6 +14,8 @@ Public Class ClientGUI
     Public EnvManager As New EnvironmentManager
     Public CurrentIPHostname As String = ""
 
+    Public StoredSSHConnections As New List(Of SSHManager)
+
     Private Delegate Sub AddListViewItemDelegate(ByVal ListViewCtl As ListView, ListViewItemCtl As ListViewItem, ByVal EnsureVisible As Boolean)
     Private Delegate Sub RemoveListViewItemDelegate(ByVal ListViewCtl As ListView, ListViewItemCtl As ListViewItem)
     Private Delegate Sub BeginUpdateListViewDelegate(ByVal ListViewCtl As ListView)
@@ -113,6 +115,15 @@ Public Class ClientGUI
     Public Sub RefreshGUI()
         LoadHostsToView()
         LoadCommandsToView()
+
+        If _Settings.ReCheckAllHostsAfterSettingsChange Then
+            If _Settings.PingAllHostsAtStart Then
+                If Not PingHosts.IsBusy Then
+                    ToolStripButton3.Enabled = False
+                    PingHosts.RunWorkerAsync(True)
+                End If
+            End If
+        End If
     End Sub
 
     Public Sub LoadHostsToView()
@@ -133,6 +144,14 @@ Public Class ClientGUI
                     End If
 
                     bb.SubItems.Add(_Settings.HostCollection(index).SSHLoginUsername)
+
+                    If _Settings.HostCollection(index).EstablishConnectionAtStart Then
+                        bb.SubItems.Add("Pending...")
+                    Else
+                        bb.SubItems.Add("No connection")
+                    End If
+
+                    bb.SubItems.Add("None")
                     bb.SubItems.Add("None")
 
                     ListView1.Items.Add(bb)
@@ -172,7 +191,7 @@ Public Class ClientGUI
         If _Settings.PingAllHostsAtStart Then
             If Not PingHosts.IsBusy Then
                 ToolStripButton3.Enabled = False
-                PingHosts.RunWorkerAsync()
+                PingHosts.RunWorkerAsync(True)
             End If
         End If
     End Sub
@@ -180,7 +199,7 @@ Public Class ClientGUI
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
         If Not PingHosts.IsBusy Then
             ToolStripButton3.Enabled = False
-            PingHosts.RunWorkerAsync()
+            PingHosts.RunWorkerAsync(False)
         End If
     End Sub
 
@@ -202,12 +221,26 @@ Public Class ClientGUI
                     End If
                 Next
             End If
+
+            e.Result = e.Argument
         Catch ex As Exception
         End Try
     End Sub
 
     Private Sub PingHosts_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles PingHosts.RunWorkerCompleted
         ToolStripButton3.Enabled = True
+
+        If e.Result Then
+            If OpenSSHConnection.IsBusy = False Then
+                ToolStripButton5.Enabled = False
+                OpenSSHConnection.RunWorkerAsync(e.Result)
+            End If
+        Else
+            If CloseSSHConnections.IsBusy = False Then
+                ToolStripButton6.Enabled = False
+                CloseSSHConnections.RunWorkerAsync(e.Result)
+            End If
+        End If
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
@@ -217,30 +250,53 @@ Public Class ClientGUI
                     Dim hostcnt As Integer
                     hostcnt = ListView1.SelectedItems.Count
 
-                    Dim msgboxres As MsgBoxResult
-                    msgboxres = MsgBox("Do you want to execute the command on " & hostcnt & " hosts?", MsgBoxStyle.YesNo)
+                    Dim isok As Boolean = False
+                    If ToolStripButton2.Checked Then
+                        Dim msgboxres As MsgBoxResult
+                        msgboxres = MsgBox("Do you want to execute the command on " & hostcnt & " hosts?", MsgBoxStyle.YesNo)
 
-                    If msgboxres = MsgBoxResult.Yes Then
+                        If msgboxres = MsgBoxResult.Yes Then
+                            isok = True
+                        End If
+                    Else
+                        isok = True
+                    End If
+
+                    If isok Then
                         FlowLayoutPanel1.SuspendLayout()
 
-                        For Each selitm As ListViewItem In ListView1.SelectedItems
+                        For index = 0 To ListView1.SelectedItems.Count - 1
                             Dim CommandCtl As New ExecuteCtl
                             Dim ExCommandItm As SSHExecuteItem
                             ExCommandItm = _Settings.CommandCollection(ToolStripComboBox1.SelectedIndex)
 
                             CommandCtl._Commands.Add(ExCommandItm)
-                            CommandCtl._HostInfoObj = _Settings.HostCollection(selitm.Index)
+                            CommandCtl._HostInfoObj = _Settings.HostCollection(ListView1.SelectedItems(index).Index)
                             CommandCtl._ParentListViewCtl = ListView1
-                            CommandCtl._ParentListViewItemIndex = selitm.Index
+                            CommandCtl._ParentListViewItemIndex = ListView1.SelectedItems(index).Index
 
-                            Dim SSHManagerObj As New SSHManager
-                            SSHManagerObj.Init(_Settings.HostCollection(selitm.Index))
+                            Dim NeedNewSession As Boolean = True
+                            If Not IsNothing(StoredSSHConnections(index)) Then
+                                If Not IsNothing(StoredSSHConnections(index).SSHClientSession.IsConnected) Then
+                                    If StoredSSHConnections(index).SSHClientSession.IsConnected Then
+                                        CommandCtl.SSHConnectionManager = StoredSSHConnections(index)
+                                        NeedNewSession = False
+                                    End If
+                                End If
+                            End If
 
-                            CommandCtl.SSHConnectionManager = SSHManagerObj
+                            If _Settings.HostCollection(ListView1.SelectedItems(index).Index).AllowExecute Then
+                                If NeedNewSession Then
+                                    Dim SSHManagerObj As New SSHManager
+                                    SSHManagerObj.Init(_Settings.HostCollection(ListView1.SelectedItems(index).Index))
 
-                            FlowLayoutPanel1.Controls.Add(CommandCtl)
+                                    CommandCtl.SSHConnectionManager = SSHManagerObj
+                                End If
 
-                            CommandCtl.Width = FlowLayoutPanel1.Width - 8
+                                FlowLayoutPanel1.Controls.Add(CommandCtl)
+
+                                CommandCtl.Width = FlowLayoutPanel1.Width - 10
+                            End If
                         Next
 
                         FlowLayoutPanel1.ResumeLayout()
@@ -250,5 +306,108 @@ Public Class ClientGUI
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub OpenSSHConnection_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles OpenSSHConnection.DoWork
+        Try
+            StoredSSHConnections.Clear()
+
+            If Not _Settings.HostCollection.Count = 0 Then
+                For index = 0 To _Settings.HostCollection.Count - 1
+                    If _Settings.HostCollection(index).EstablishConnectionAtStart Then
+                        Dim OpenConnection As Boolean = False
+
+                        If Not _Settings.HostCollection(index).TryEstablishConnectionIfNoPing Then
+                            Dim PingHandler As New PingHelper
+                            Dim pingres As Boolean
+                            pingres = PingHandler.Ping(_Settings.HostCollection(index).Hostname, _Settings.HostCollection(index).PingTimeout)
+
+                            If pingres Then
+                                OpenConnection = True
+                            End If
+                        Else
+                            OpenConnection = True
+                        End If
+
+                        If OpenConnection Then
+                            UpdateListViewItemByIndex(ListView1, index, 4, "Connecting...")
+
+                            Dim SSHManagerObj As New SSHManager
+                            SSHManagerObj.Init(_Settings.HostCollection(index))
+
+                            StoredSSHConnections.Add(SSHManagerObj)
+
+                            If SSHManagerObj.SSHClientSession.IsConnected Then
+                                UpdateListViewItemByIndex(ListView1, index, 4, "Connected")
+                            Else
+                                UpdateListViewItemByIndex(ListView1, index, 4, "Error")
+                            End If
+
+                            UpdateListViewItemByIndex(ListView1, index, 6, SSHManagerObj.SSHHostFingerprint)
+                        Else
+                            UpdateListViewItemByIndex(ListView1, index, 4, "No ping")
+
+                            StoredSSHConnections.Add(Nothing)
+                        End If
+                    Else
+                        StoredSSHConnections.Add(Nothing)
+                    End If
+                Next
+            End If
+
+            e.Result = e.Argument
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+        If Not OpenSSHConnection.IsBusy Then
+            OpenSSHConnection.RunWorkerAsync()
+        End If
+    End Sub
+
+    Private Sub OpenSSHConnection_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles OpenSSHConnection.RunWorkerCompleted
+        ToolStripButton5.Enabled = True
+    End Sub
+
+    Private Sub CloseSSHConnections_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles CloseSSHConnections.DoWork
+        Try
+            If Not StoredSSHConnections.Count = 0 Then
+                For index = 0 To StoredSSHConnections.Count - 1
+                    If Not IsNothing(StoredSSHConnections(index)) Then
+                        If StoredSSHConnections(index).SSHClientSession.IsConnected Then
+                            UpdateListViewItemByIndex(ListView1, index, 4, "Close...")
+
+                            If StoredSSHConnections(index).CloseConnection(True) Then
+                                UpdateListViewItemByIndex(ListView1, index, 4, "No connection")
+                            Else
+                                UpdateListViewItemByIndex(ListView1, index, 4, "Error")
+                            End If
+                        End If
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+        End Try
+
+        e.Result = e.Argument
+    End Sub
+
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
+        If CloseSSHConnections.IsBusy = False Then
+            ToolStripButton6.Enabled = False
+            CloseSSHConnections.RunWorkerAsync()
+        End If
+    End Sub
+
+    Private Sub CloseSSHConnections_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles CloseSSHConnections.RunWorkerCompleted
+        ToolStripButton6.Enabled = True
+
+        If e.Result Then
+            If OpenSSHConnection.IsBusy = False Then
+                ToolStripButton5.Enabled = False
+                OpenSSHConnection.RunWorkerAsync(e.Result)
+            End If
+        End If
     End Sub
 End Class

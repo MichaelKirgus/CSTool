@@ -6,6 +6,7 @@
 <Serializable> Public Class Settings
     Public Property RaiseActions As Boolean = False
     Public Property PingAllHostsAtStart As Boolean = True
+    Public Property ReCheckAllHostsAfterSettingsChange As Boolean = True
     Public Property HostCollection As New List(Of SSHHostItem)
     Public Property CommandCollection As New List(Of SSHExecuteItem)
 End Class

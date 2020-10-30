@@ -3,10 +3,12 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
+Imports System.Text
 Imports Renci.SshNet
 
 Public Class SSHManager
     Public WithEvents SSHClientSession As Renci.SshNet.SshClient = Nothing
+    Public SSHHostFingerprint As String = ""
     Public LastError As Exception
     Public CurrentAsyncResult As IAsyncResult = Nothing
     Public OutputConsoleResults As New List(Of String)
@@ -71,7 +73,21 @@ Public Class SSHManager
             End If
 
             SSHConnObj.Timeout = New TimeSpan(0, 0, HostInfo.ConnectionTimeout)
-            SSHConnObj.Encoding = System.Text.Encoding.UTF8
+
+            Select Case HostInfo.SessionEncoding
+                Case SSHHostItem.SessionEncodingEnum.UTF8
+                    SSHConnObj.Encoding = System.Text.Encoding.UTF8
+                Case SSHHostItem.SessionEncodingEnum.UTF32
+                    SSHConnObj.Encoding = System.Text.Encoding.UTF32
+                Case SSHHostItem.SessionEncodingEnum.UTF7
+                    SSHConnObj.Encoding = System.Text.Encoding.UTF7
+                Case SSHHostItem.SessionEncodingEnum.ASCII
+                    SSHConnObj.Encoding = System.Text.Encoding.ASCII
+                Case SSHHostItem.SessionEncodingEnum.BigEndianUnicode
+                    SSHConnObj.Encoding = System.Text.Encoding.BigEndianUnicode
+                Case SSHHostItem.SessionEncodingEnum.Unicode
+                    SSHConnObj.Encoding = System.Text.Encoding.Unicode
+            End Select
 
             Return SSHConnObj
         Catch ex As Exception
@@ -101,7 +117,7 @@ Public Class SSHManager
 
             If WaitForExit Then
                 execobj.Execute()
-                OutputConsoleResults.Add(execobj.Result)
+                OutputConsoleResults.Add(execobj.Result.Replace(vbCrLf, vbNewLine).Replace(vbCr, vbNewLine).Replace(vbLf, vbNewLine))
                 OutputExitCodeResults.Add(execobj.ExitStatus)
             Else
                 CurrentAsyncResult = execobj.BeginExecute
@@ -136,5 +152,22 @@ Public Class SSHManager
 
     Public Sub ConnectionSessionError(ByVal sender As Object, ByVal e As Common.ExceptionEventArgs) Handles SSHClientSession.ErrorOccurred
         LastError = e.Exception
+    End Sub
+    Public Shared Function ConvertFingerprintToByteArray(ByVal fingerprint As String) As Byte()
+        Return fingerprint.Split(":"c).[Select](Function(s) Convert.ToByte(s, 16)).ToArray()
+    End Function
+
+    Public Function GetReadableFingerprintFromByteArray(ByVal ByteArray As Byte()) As String
+        Dim fingerPrint = New StringBuilder(ByteArray.Length * 2)
+
+        For Each b In ByteArray
+            fingerPrint.AppendFormat("{0:x2}", b)
+        Next
+
+        Return fingerPrint.ToString
+    End Function
+
+    Public Sub ConnectionSessionHostKeyReceived(ByVal sender As Object, ByVal e As Common.HostKeyEventArgs) Handles SSHClientSession.HostKeyReceived
+        SSHHostFingerprint = GetReadableFingerprintFromByteArray(e.FingerPrint)
     End Sub
 End Class

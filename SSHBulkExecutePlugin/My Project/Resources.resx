@@ -118,8 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="icon-link_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-link_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon-x-circle_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-x-circle_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-announcement_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-announcement_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-clock_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-clock_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,10 +139,16 @@
   <data name="icon-view_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-view_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-check-circle_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-check-circle_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-desktop_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-desktop_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-cheveron-right_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-cheveron-right_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-check-circle_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-check-circle_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-moon_22x22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-moon_22x22.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

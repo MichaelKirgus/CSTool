@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Drawing
+Imports System.Windows.Forms
 
 Public Class ExecuteCtl
     Public _ParentListViewItemIndex As Integer = 0
@@ -52,11 +53,13 @@ Public Class ExecuteCtl
             Next
 
             TextBox1.Text = output
-            _ParentListViewCtl.Items(_ParentListViewItemIndex).SubItems(4).Text = resultlist(resultlist.Count - 1)
+            _ParentListViewCtl.Items(_ParentListViewItemIndex).SubItems(5).Text = resultlist(resultlist.Count - 1)
         Else
             TextBox1.Text = "No output." & vbNewLine & vbNewLine & SSHConnectionManager.LastError.Message
-            _ParentListViewCtl.Items(_ParentListViewItemIndex).SubItems(4).Text = "No output."
+            _ParentListViewCtl.Items(_ParentListViewItemIndex).SubItems(5).Text = "No output."
         End If
+
+        Me.BackColor = Color.FromKnownColor(KnownColor.LightGreen)
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click

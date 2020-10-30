@@ -51,6 +51,7 @@ Partial Class ExecuteCtl
         '
         'ProgressBar1
         '
+        Me.ProgressBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ProgressBar1.Location = New System.Drawing.Point(340, 2)
         Me.ProgressBar1.MarqueeAnimationSpeed = 60
         Me.ProgressBar1.Name = "ProgressBar1"
@@ -63,6 +64,7 @@ Partial Class ExecuteCtl
         Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox1.BackColor = System.Drawing.SystemColors.Window
+        Me.TextBox1.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TextBox1.Location = New System.Drawing.Point(3, 34)
         Me.TextBox1.Multiline = True
@@ -87,6 +89,7 @@ Partial Class ExecuteCtl
         '
         'Button1
         '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.Image = Global.SSHBulkExecutePlugin.My.Resources.Resources.icon_view_22x22
         Me.Button1.Location = New System.Drawing.Point(454, 2)
         Me.Button1.Name = "Button1"
