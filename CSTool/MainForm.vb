@@ -294,7 +294,10 @@ Public Class MainForm
                 If IO.Directory.Exists(ApplicationSettings.UserInitialTemplateDir) Then
                     'Copy content to new user profile path
                     CurrentLoadActionState = "Copy user settings..."
-                    My.Computer.FileSystem.CopyDirectory(ApplicationSettings.UserInitialTemplateDir, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername), True)
+
+                    My.Computer.FileSystem.CopyDirectory(ApplicationSettings.UserInitialTemplateDir & "\Default", UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername))
+
+                    'My.Computer.FileSystem.CopyDirectory(ApplicationSettings.UserInitialTemplateDir, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername), True)
                     If IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettingManager.UserSettingsFile) Then
                         'We found a valid initial user settings file...
                         CurrentLoadActionState = "Apply initial user settings..."
@@ -321,8 +324,8 @@ Public Class MainForm
             LogManager.ReInitLogSystem()
 
             'Create user (default) template folder if not exists
-            If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettings.SettingName) Then
-                IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False) & "\" & UserSettings.SettingName)
+            If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername)) Then
+                IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False))
             End If
 
             'Set global user settings variable
@@ -330,27 +333,29 @@ Public Class MainForm
             CurrentUserProfilePath = dirinf.FullName
 
             'Set user profile in window manager
+            'This profile is the default.
             CurrentLoadActionState = "Loading user settings in window manager..."
-            WindowManagerHandler._UserProfilePath = UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername)
+            WindowManagerHandler._UserProfilePath = UserSettingManager.GetInitUserSettingsPath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure)
 
             If Not CurrentUserSettingName = "" Then
                 'Create (default) user settings folder if not exists
-                If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & CurrentUserSettingName) Then
-                    IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & CurrentUserSettingName)
+                If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, CurrentUserSettingName)) Then
+                    IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, CurrentUserSettingName))
                 End If
                 'Create (default) docking layout file if not exists
-                If Not IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & CurrentUserSettingName & "\Layout.xml") Then
+                IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, CurrentUserSettingName))
+                If Not IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\Layout.xml") Then
                     WindowManagerHandler.SaveWindowLayoutToXML("Layout.xml", True, CurrentUserSettingName)
                 End If
                 'Set specific user setting tag (if instance or window was spawned from parent)
                 WindowManagerHandler._UserSettingName = CurrentUserSettingName
             Else
                 'Create (default) user settings folder if not exists
-                If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettings.SettingName) Then
-                    IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettings.SettingName)
+                If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername)) Then
+                    IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername))
                 End If
                 'Create (default) docking layout file if not exists
-                If Not IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettings.SettingName & "\Layout.xml") Then
+                If Not IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\Layout.xml") Then
                     WindowManagerHandler.SaveWindowLayoutToXML()
                 End If
                 'Set last user setting to window manager (to restore settings)
@@ -411,7 +416,7 @@ Public Class MainForm
             CurrentUserProfilePath = dirinf.FullName
 
             'Set user profile in window manager
-            WindowManagerHandler._UserProfilePath = UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername)
+            WindowManagerHandler._UserProfilePath = UserSettingManager.GetInitUserSettingsPath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure)
 
             'Set last user setting to window manager (to restore settings)
             WindowManagerHandler._UserSettingName = UserSettings.LastSettingName
@@ -441,7 +446,7 @@ Public Class MainForm
 
         If RestoreSettings Then
             'Load last user setting (template)
-            If IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & WindowManagerHandler._UserSettingName & "\Layout.xml") Then
+            If IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, WindowManagerHandler._UserSettingName) & "\Layout.xml") Then
                 CurrentLoadActionState = "Loading workspace layout..."
                 WindowManagerHandler.LoadWindowLayoutFromXML("Layout.xml", True, WindowManagerHandler._UserSettingName)
             End If
@@ -1104,9 +1109,9 @@ Public Class MainForm
 
     Public Function RestoreLastClosedWindow() As Boolean
         Try
-            If IO.Directory.Exists(CurrentUserProfilePath & "\" & UserSettings.SettingName & "\BIN") Then
+            If IO.Directory.Exists(CurrentUserProfilePath & "\BIN") Then
                 Dim files As String()
-                files = IO.Directory.GetFiles(CurrentUserProfilePath & "\" & UserSettings.SettingName & "\BIN")
+                files = IO.Directory.GetFiles(CurrentUserProfilePath & "\BIN")
                 If Not files.Count = 0 Then
                     Dim bininf As New IO.FileInfo(files(0))
                     Dim plugguid As String
@@ -1144,7 +1149,8 @@ Public Class MainForm
         Try
             If PurgeUserProfile Then
                 'Delete user profile
-                My.Computer.FileSystem.DeleteDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername), FileIO.DeleteDirectoryOption.DeleteAllContents)
+                Dim parentDir As New IO.DirectoryInfo(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername))
+                My.Computer.FileSystem.DeleteDirectory(parentDir.Parent.FullName, FileIO.DeleteDirectoryOption.DeleteAllContents)
 
                 'Ensure that no settings will be saved if application exits
                 IsNonPersistent = True
@@ -1158,7 +1164,7 @@ Public Class MainForm
             Else
                 'Delete workspace folder in user profile
                 Dim workspacedir As String
-                workspacedir = UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & WorkspaceToReset
+                workspacedir = UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, WorkspaceToReset)
 
                 If IO.Directory.Exists(workspacedir) Then
                     My.Computer.FileSystem.DeleteDirectory(workspacedir, FileIO.DeleteDirectoryOption.DeleteAllContents)

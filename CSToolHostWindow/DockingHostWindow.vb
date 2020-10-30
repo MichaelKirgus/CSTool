@@ -131,11 +131,11 @@ Public Class DockingHostWindow
 
                     Try
                         'Save settings to recycle bin
-                        If Not IO.Directory.Exists(_UserProfilePath & "\" & SettingsKey & "\BIN") Then
-                            IO.Directory.CreateDirectory(_UserProfilePath & "\" & SettingsKey & "\BIN")
+                        If Not IO.Directory.Exists(_UserProfilePath & "\" & "\BIN") Then
+                            IO.Directory.CreateDirectory(_UserProfilePath & "\BIN")
                         Else
                             Dim files As String()
-                            files = IO.Directory.GetFiles(_UserProfilePath & "\" & SettingsKey & "\BIN")
+                            files = IO.Directory.GetFiles(_UserProfilePath & "\BIN")
                             If Not files.Count = 0 Then
                                 For index = 0 To files.Count - 1
                                     Try
@@ -145,7 +145,7 @@ Public Class DockingHostWindow
                                 Next
                             End If
                         End If
-                        PluginHandler.SavePluginSettings(_UserProfilePath & "\" & SettingsKey & "\BIN\" & PluginHandler.PluginGUID & ".xml")
+                        PluginHandler.SavePluginSettings(_UserProfilePath & "\BIN\" & PluginHandler.PluginGUID & ".xml")
                     Catch ex As Exception
                     End Try
 

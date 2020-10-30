@@ -368,7 +368,7 @@ Public Class WindowManager
         Try
             Dim settingsdir As String
             If SettingName = "Default" Then
-                settingsdir = _UserProfilePath & "\" & _UserSettingName
+                settingsdir = _UserProfilePath
             Else
                 settingsdir = _UserProfilePath & "\" & SettingName
             End If
@@ -384,7 +384,7 @@ Public Class WindowManager
         Try
             Dim settingsdir As String
             If SettingName = "Default" Then
-                settingsdir = _UserProfilePath & "\" & _UserSettingName
+                settingsdir = _UserProfilePath
             Else
                 settingsdir = _UserProfilePath & "\" & SettingName
             End If
@@ -448,7 +448,7 @@ Public Class WindowManager
                             If PluginInterfaceObj.PluginType = ICSToolInterface.PluginTypeEnum.GUIWindow Then
                                 If ForceSave Or PluginInterfaceObj.PluginSettingsChanged Then
                                     _LogManager.WriteLogEntry("Save settings from " & PluginInterfaceObj.PluginName & " to file.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                                    PluginInterfaceObj.SavePluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginInterfaceObj.PluginGUID & "_" & DockHostWindowsObj.InstanceGUID & ".xml")
+                                    PluginInterfaceObj.SavePluginSettings(_UserProfilePath & "\" & PluginInterfaceObj.PluginGUID & "_" & DockHostWindowsObj.InstanceGUID & ".xml")
                                     PluginInterfaceObj.PluginSettingsChanged = False
                                 Else
                                     _LogManager.WriteLogEntry("Skip save settings from " & PluginInterfaceObj.PluginName & " to file.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
@@ -541,7 +541,7 @@ Public Class WindowManager
             Next
 
             Dim allpluginsettings As String()
-            allpluginsettings = IO.Directory.GetFiles(_UserProfilePath & "\" & UserSettingName)
+            allpluginsettings = IO.Directory.GetFiles(_UserProfilePath)
 
             For index = 0 To allpluginsettings.Count - 1
                 Threading.Thread.Sleep(ThreadSpinWait)
@@ -668,7 +668,7 @@ Public Class WindowManager
                     HostWindow.AppInit = True
                     HostWindow.Tag = plugin
                     HostWindow._UserProfilePath = _UserProfilePath
-                    HostWindow._PluginSettingsFile = _UserProfilePath & "\" & UserSettingName & "\" & plugin.PluginGUID & "_" & HostWindow.InstanceGUID & ".xml"
+                    HostWindow._PluginSettingsFile = _UserProfilePath & "\" & plugin.PluginGUID & "_" & HostWindow.InstanceGUID & ".xml"
                     HostWindow._IsNonPersistent = _IsNonPersistent
 
                     plugin.CurrentLogInstance = New LogLib
@@ -704,7 +704,7 @@ Public Class WindowManager
                     HostWindow.AppInit = True
                     HostWindow.Tag = plugin
                     HostWindow._UserProfilePath = _UserProfilePath
-                    HostWindow._PluginSettingsFile = _UserProfilePath & "\" & UserSettingName & "\" & plugin.PluginGUID & "_" & HostWindow.InstanceGUID & ".xml"
+                    HostWindow._PluginSettingsFile = _UserProfilePath & "\" & plugin.PluginGUID & "_" & HostWindow.InstanceGUID & ".xml"
                     HostWindow._IsNonPersistent = _IsNonPersistent
 
                     plugin.CurrentLogInstance = _LogManager
@@ -751,7 +751,7 @@ Public Class WindowManager
     Public Function SaveWindowLayoutToXML(Optional ByVal FileName As String = "Layout.xml", Optional ByVal UseDefinedUserSettingsFolder As Boolean = True, Optional ByVal UserSettingName As String = "Default") As Boolean
         Try
             If UseDefinedUserSettingsFolder Then
-                _DockingContent.SaveAsXml(_UserProfilePath & "\" & UserSettingName & "\" & FileName)
+                _DockingContent.SaveAsXml(_UserProfilePath & "\" & FileName)
             Else
                 _DockingContent.SaveAsXml(FileName)
             End If
@@ -769,7 +769,7 @@ Public Class WindowManager
             ddc = New WeifenLuo.WinFormsUI.Docking.DeserializeDockContent(AddressOf Get_content)
 
             If UseDefinedUserSettingsFolder Then
-                _DockingContent.LoadFromXml(_UserProfilePath & "\" & UserSettingName & "\" & FileName, ddc)
+                _DockingContent.LoadFromXml(_UserProfilePath & "\" & FileName, ddc)
             Else
                 _DockingContent.LoadFromXml(FileName, ddc)
             End If
@@ -784,7 +784,7 @@ Public Class WindowManager
         Try
             For index = 0 To PluginManager.PluginCollection.Count - 1
                 If PluginManager.PluginCollection(index).PluginType = CSToolPluginLib.ICSToolInterface.PluginTypeEnum.EnvironmentManager Then
-                    PluginManager.PluginCollection(index).LoadPluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginManager.PluginCollection(index).PluginGUID & "_" & PluginManager.PluginCollection(index).PluginName & ".xml")
+                    PluginManager.PluginCollection(index).LoadPluginSettings(_UserProfilePath & "\" & PluginManager.PluginCollection(index).PluginGUID & "_" & PluginManager.PluginCollection(index).PluginName & ".xml")
                 End If
             Next
 
@@ -799,7 +799,7 @@ Public Class WindowManager
             For index = 0 To PluginManager.PluginCollection.Count - 1
                 If PluginManager.PluginCollection(index).PluginType = CSToolPluginLib.ICSToolInterface.PluginTypeEnum.CredentialManager Then
                     PluginManager.PluginCollection(index).CurrentLogInstance = _LogManager
-                    PluginManager.PluginCollection(index).LoadPluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginManager.PluginCollection(index).PluginGUID & "_" & PluginManager.PluginCollection(index).PluginName & ".xml")
+                    PluginManager.PluginCollection(index).LoadPluginSettings(_UserProfilePath & "\" & PluginManager.PluginCollection(index).PluginGUID & "_" & PluginManager.PluginCollection(index).PluginName & ".xml")
                     PluginManager.PluginCollection(index).LoadPlugin()
                 End If
             Next
@@ -812,14 +812,14 @@ Public Class WindowManager
 
     Public Function LoadEnvironmentPluginSettings(ByVal PluginInterface As CSToolPluginLib.ICSToolInterface, Optional ByVal UserSettingName As String = "Default") As Boolean
         Try
-            Return PluginInterface.LoadPluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginInterface.PluginGUID & "_" & PluginInterface.PluginName & ".xml")
+            Return PluginInterface.LoadPluginSettings(_UserProfilePath & "\" & PluginInterface.PluginGUID & "_" & PluginInterface.PluginName & ".xml")
         Catch ex As Exception
             Return False
         End Try
     End Function
     Public Function SaveEnvironmentPluginSettings(ByVal PluginInterface As CSToolPluginLib.ICSToolInterface, Optional ByVal UserSettingName As String = "Default") As Boolean
         Try
-            Return PluginInterface.SavePluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginInterface.PluginGUID & "_" & PluginInterface.PluginName & ".xml")
+            Return PluginInterface.SavePluginSettings(_UserProfilePath & "\" & PluginInterface.PluginGUID & "_" & PluginInterface.PluginName & ".xml")
         Catch ex As Exception
             Return False
         End Try
@@ -830,7 +830,7 @@ Public Class WindowManager
         Try
             For index = 0 To PluginManager.PluginCollection.Count - 1
                 If PluginManager.PluginCollection(index).PluginType = CSToolPluginLib.ICSToolInterface.PluginTypeEnum.EnvironmentManager Then
-                    PluginManager.PluginCollection(index).SavePluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginManager.PluginCollection(index).PluginGUID & "_" & PluginManager.PluginCollection(index).PluginName & ".xml")
+                    PluginManager.PluginCollection(index).SavePluginSettings(_UserProfilePath & "\" & PluginManager.PluginCollection(index).PluginGUID & "_" & PluginManager.PluginCollection(index).PluginName & ".xml")
                 End If
             Next
 
@@ -844,7 +844,7 @@ Public Class WindowManager
         Try
             For index = 0 To PluginManager.PluginCollection.Count - 1
                 If PluginManager.PluginCollection(index).PluginType = CSToolPluginLib.ICSToolInterface.PluginTypeEnum.CredentialManager Then
-                    PluginManager.PluginCollection(index).SavePluginSettings(_UserProfilePath & "\" & UserSettingName & "\" & PluginManager.PluginCollection(index).PluginGUID & "_" & PluginManager.PluginCollection(index).PluginName & ".xml")
+                    PluginManager.PluginCollection(index).SavePluginSettings(_UserProfilePath & "\" & PluginManager.PluginCollection(index).PluginGUID & "_" & PluginManager.PluginCollection(index).PluginName & ".xml")
                 End If
             Next
 
@@ -872,7 +872,7 @@ Public Class WindowManager
 
             If ContentPlugin.PluginType = ICSToolInterface.PluginTypeEnum.GUIWindow Then
                 DockWindow.PluginHandler = ContentPlugin
-                DockWindow._PluginSettingsFile = _UserProfilePath & "\" & _UserSettingName & "\" & ContentPlugin.PluginGUID & "_" & DockWindow.InstanceGUID & ".xml"
+                DockWindow._PluginSettingsFile = _UserProfilePath & "\" & ContentPlugin.PluginGUID & "_" & DockWindow.InstanceGUID & ".xml"
                 _LogManager.WriteLogEntry("Load plugin " & ContentPlugin.PluginName & " with GUID " & ContentPlugin.PluginGUID & " and settings " & _UserProfilePath & "\" & _UserSettingName & "\" & ContentPlugin.PluginGUID & "_" & DockWindow.InstanceGUID & ".xml", GetType(WindowManager), LogEntryTypeEnum.Info, LogEntryLevelEnum.Advanced)
                 ContentPlugin.LoadPlugin()
 

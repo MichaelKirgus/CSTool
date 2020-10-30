@@ -65,35 +65,52 @@ Public Class UserSettingsManager
         End Try
     End Function
 
-    Public Function GetUserSettingsFilePath(ByVal BasePath As String, ByVal UseDomain As Boolean, Optional ByVal WithFilename As Boolean = True, Optional ByVal OverridingUsername As String = "") As String
+    Public Function GetUserSettingsFilePath(ByVal BasePath As String, ByVal UseDomain As Boolean, Optional ByVal WithFilename As Boolean = True, Optional ByVal OverridingUsername As String = "", Optional ByVal UserSettingName As String = "Default") As String
         'Loading user settings
         If OverridingUsername = "" Then
             If WithFilename Then
                 If UseDomain Then
-                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower & "\" & UserSettingsFile
+                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower & "\" & UserSettingName & "\" & UserSettingsFile
                 Else
-                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower & "\" & UserSettingsFile
+                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower & "\" & UserSettingName & "\" & UserSettingsFile
                 End If
             Else
                 If UseDomain Then
-                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower
+                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower & "\" & UserSettingName
                 Else
-                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower
+                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower & "\" & UserSettingName
                 End If
             End If
         Else
             If WithFilename Then
                 If UseDomain Then
-                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & OverridingUsername & "\" & UserSettingsFile
+                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & OverridingUsername & "\" & UserSettingName & "\" & UserSettingsFile
                 Else
-                    Return BasePath & "\" & OverridingUsername & "\" & UserSettingsFile
+                    Return BasePath & "\" & OverridingUsername & "\" & UserSettingName & "\" & UserSettingsFile
                 End If
             Else
                 If UseDomain Then
-                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & OverridingUsername
+                    Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & OverridingUsername & "\" & UserSettingName
                 Else
-                    Return BasePath & "\" & OverridingUsername
+                    Return BasePath & "\" & OverridingUsername & "\" & UserSettingName
                 End If
+            End If
+        End If
+    End Function
+
+    Public Function GetInitUserSettingsPath(ByVal BasePath As String, ByVal UseDomain As Boolean, Optional ByVal OverridingUsername As String = "", Optional ByVal UserSettingName As String = "Default") As String
+        'Loading user settings
+        If OverridingUsername = "" Then
+            If UseDomain Then
+                Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower & "\" & UserSettingName
+            Else
+                Return BasePath & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower & "\" & UserSettingName
+            End If
+        Else
+            If UseDomain Then
+                Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & OverridingUsername & "\" & UserSettingName
+            Else
+                Return BasePath & "\" & OverridingUsername & "\" & UserSettingName
             End If
         End If
     End Function

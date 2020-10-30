@@ -8,19 +8,15 @@ Imports CSToolUserSettingsManager
 
 Public Class WorkspaceManager
     Public _parent As MainForm
+    Public UserSettingsFilename As String = "UserSettings.xml"
+    Public ProfilePath As String = ""
 
     Private Sub WorkspaceManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        AddDefaultWorkspaceToGUI()
+        Dim ParentDir As New IO.DirectoryInfo(_parent.CurrentUserProfilePath)
+        ProfilePath = ParentDir.Parent.FullName
+
         LoadCustomWorkspacesToGUI()
         ListView1.Items(0).Selected = True
-    End Sub
-
-    Public Sub AddDefaultWorkspaceToGUI()
-        Dim itm As New ListViewItem
-        itm.Text = _parent.UserSettings.TemplateName
-        itm.SubItems.Add(_parent.UserSettings.TemplateDescription)
-        itm.Checked = True
-        ListView1.Items.Add(itm)
     End Sub
 
     Public Sub AddNewWorkspaceToGUI(ByVal CloneFromItem As Boolean)
@@ -40,26 +36,38 @@ Public Class WorkspaceManager
                 itm.SubItems.Add(cloneobj.TemplateDescription)
                 itm.Checked = cloneobj.Autostart
 
+                Dim newdirguid As String
+                newdirguid = Guid.NewGuid.ToString
+
                 If ListView1.SelectedItems(0).Index = 0 Then
                     Dim Folderstr As String
-                    Folderstr = _parent.CurrentUserProfilePath & "\Default"
-                    My.Computer.FileSystem.CopyDirectory(Folderstr, _parent.CurrentUserProfilePath & "\" & itm.Text)
+                    Folderstr = _parent.CurrentUserProfilePath
+                    My.Computer.FileSystem.CopyDirectory(Folderstr, ProfilePath & "\" & newdirguid)
                 Else
                     Dim Folderstr As String
-                    Folderstr = _parent.CurrentUserProfilePath & "\" & _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1).TemplateName
-                    My.Computer.FileSystem.CopyDirectory(Folderstr, _parent.CurrentUserProfilePath & "\" & itm.Text)
+                    Folderstr = ProfilePath & "\" & _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1).TemplateName
+                    My.Computer.FileSystem.CopyDirectory(Folderstr, ProfilePath & "\" & newdirguid)
                 End If
 
-                _parent.UserSettings.UserTemplates.Add(cloneobj)
+                _parent.UserSettingManager.SaveSettings(cloneobj, ProfilePath & "\" & newdirguid & "\" & UserSettingsFilename)
+                itm.Tag = newdirguid
             Else
                 Dim newclass As New UserSettings
                 newclass.TemplateName = "New Workspace"
+                newclass.LastSettingName = "New Workspace"
+                newclass.SettingName = "New Workspace"
 
                 itm.Text = "New Workspace"
                 itm.SubItems.Add("")
                 itm.Checked = False
 
-                _parent.UserSettings.UserTemplates.Add(newclass)
+                Dim newdirguid As String
+                newdirguid = Guid.NewGuid.ToString
+
+                My.Computer.FileSystem.CreateDirectory(ProfilePath & "\" & newdirguid)
+                _parent.UserSettingManager.SaveSettings(newclass, ProfilePath & "\" & newdirguid & "\" & UserSettingsFilename)
+
+                itm.Tag = newdirguid
             End If
 
             ListView1.Items.Add(itm)
@@ -71,10 +79,8 @@ Public Class WorkspaceManager
     Public Function RemoveWorkspaceFromGUI(ByVal index As Integer) As Boolean
         Try
             Dim Folderstr As String
-            Folderstr = _parent.CurrentUserProfilePath & "\" & _parent.UserSettings.UserTemplates(index).TemplateName
+            Folderstr = ProfilePath & "\" & ListView1.Items(index).Tag
             My.Computer.FileSystem.DeleteDirectory(Folderstr, FileIO.DeleteDirectoryOption.DeleteAllContents)
-            _parent.UserSettings.UserTemplates.RemoveAt(index)
-            ListView1.Items.RemoveAt(ListView1.SelectedItems(0).Index)
 
             Return True
         Catch ex As Exception
@@ -82,23 +88,19 @@ Public Class WorkspaceManager
         End Try
     End Function
 
-
     Public Function SaveWorkspaceItemSettings(ByVal index As Integer, ByVal TemplateName As String, ByVal TemplateDescription As String, ByVal Autostart As Boolean) As Boolean
         Try
             If Not index = 0 Then
-                If Not TemplateName = _parent.UserSettings.UserTemplates(index - 1).TemplateName Then
-                    Dim Folderstr As String
-                    Folderstr = _parent.CurrentUserProfilePath & "\" & _parent.UserSettings.UserTemplates(index - 1).TemplateName
-                    If IO.Directory.Exists(Folderstr) Then
-                        My.Computer.FileSystem.RenameDirectory(Folderstr, TemplateName)
-                    End If
-                End If
+                Dim Folderstr As String
+                Folderstr = ProfilePath & "\" & ListView1.Items(index).Tag & "\" & UserSettingsFilename
 
-                _parent.UserSettings.UserTemplates(index - 1).TemplateName = TemplateName
-                _parent.UserSettings.UserTemplates(index - 1).SettingName = TemplateName
-                _parent.UserSettings.UserTemplates(index - 1).LastSettingName = TemplateName
-                _parent.UserSettings.UserTemplates(index - 1).TemplateDescription = TemplateDescription
-                _parent.UserSettings.UserTemplates(index - 1).Autostart = Autostart
+                Dim settingsobj As UserSettings
+                settingsobj = PropertyGrid1.SelectedObject
+                settingsobj.TemplateDescription = TemplateDescription
+                settingsobj.TemplateName = TemplateName
+                settingsobj.Autostart = Autostart
+
+                _parent.UserSettingManager.SaveSettings(settingsobj, Folderstr)
             End If
 
             Return True
@@ -110,13 +112,25 @@ Public Class WorkspaceManager
     Public Sub LoadCustomWorkspacesToGUI()
         Try
             ListView1.BeginUpdate()
+            ListView1.Items.Clear()
 
-            If Not _parent.UserSettings.UserTemplates.Count = 0 Then
-                For index = 0 To _parent.UserSettings.UserTemplates.Count - 1
+            Dim dircoll As New IO.DirectoryInfo(ProfilePath)
+
+            Dim dircollarray As IO.DirectoryInfo()
+            dircollarray = dircoll.GetDirectories
+
+            If Not dircollarray.Count = 0 Then
+                For index = 0 To dircollarray.Count - 1
+                    Dim settingspath As String
+                    settingspath = dircollarray(index).FullName & "\" & UserSettingsFilename
+                    Dim settingsobj As UserSettings
+                    settingsobj = _parent.UserSettingManager.LoadSettings(settingspath)
+
                     Dim itm As New ListViewItem
-                    itm.Text = _parent.UserSettings.UserTemplates(index).TemplateName
-                    itm.SubItems.Add(_parent.UserSettings.UserTemplates(index).TemplateDescription)
-                    itm.Checked = _parent.UserSettings.UserTemplates(index).Autostart
+                    itm.Text = settingsobj.TemplateName
+                    itm.SubItems.Add(settingsobj.TemplateDescription)
+                    itm.Checked = settingsobj.Autostart
+                    itm.Tag = dircollarray(index).Name
                     ListView1.Items.Add(itm)
                 Next
             End If
@@ -147,22 +161,20 @@ Public Class WorkspaceManager
                     GroupBox1.Enabled = True
                     GroupBox2.Enabled = True
                     CheckBox1.Enabled = True
-                    CheckBox1.Checked = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1).Autostart
-                    TextBox1.Text = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1).TemplateName
-                    TextBox2.Text = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1).TemplateDescription
-                    PropertyGrid1.SelectedObject = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1)
+
+                    Dim Folderstr As String
+                    Folderstr = ProfilePath & "\" & ListView1.SelectedItems(0).Tag
+                    Dim settingsobj As UserSettings
+                    settingsobj = _parent.UserSettingManager.LoadSettings(Folderstr & "\" & UserSettingsFilename)
+
+                    CheckBox1.Checked = settingsobj.Autostart
+                    TextBox1.Text = settingsobj.TemplateName
+                    TextBox2.Text = settingsobj.TemplateDescription
+                    PropertyGrid1.SelectedObject = settingsobj
                 End If
             End If
         Catch ex As Exception
         End Try
-    End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-
-    End Sub
-
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
-
     End Sub
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
@@ -170,9 +182,6 @@ Public Class WorkspaceManager
             If Not IsNothing(ListView1.SelectedItems) And Not ListView1.SelectedItems.Count = 0 Then
                 ListView1.SelectedItems(0).Checked = CheckBox1.Checked
                 SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
-                If Not ListView1.SelectedItems(0).Index = 0 Then
-                    PropertyGrid1.SelectedObject = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1)
-                End If
             End If
         Catch ex As Exception
         End Try
@@ -183,7 +192,9 @@ Public Class WorkspaceManager
     End Sub
 
     Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
-        RemoveWorkspaceFromGUI(ListView1.SelectedItems(0).Index - 1)
+        RemoveWorkspaceFromGUI(ListView1.SelectedItems(0).Index)
+        LoadCustomWorkspacesToGUI()
+        ListView1.Items(0).Selected = True
     End Sub
 
     Private Sub ListView1_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles ListView1.ItemChecked
@@ -191,7 +202,6 @@ Public Class WorkspaceManager
             If Not IsNothing(ListView1.SelectedItems) And Not ListView1.SelectedItems.Count = 0 Then
                 CheckBox1.Checked = ListView1.SelectedItems(0).Checked
                 SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
-                PropertyGrid1.SelectedObject = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1)
             End If
         Catch ex As Exception
         End Try
@@ -207,7 +217,10 @@ Public Class WorkspaceManager
                 ListView1.SelectedItems(0).Text = TextBox1.Text
                 ListView1.SelectedItems(0).SubItems(1).Text = TextBox2.Text
                 SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
-                PropertyGrid1.SelectedObject = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1)
+
+                If ListView1.SelectedItems(0).Index = 0 Then
+                    _parent.UserSettings = PropertyGrid1.SelectedObject
+                End If
             End If
         Catch ex As Exception
         End Try
@@ -279,5 +292,9 @@ Public Class WorkspaceManager
 
     Private Sub WorkspaceManager_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         _parent.LoadGUIStateFromUserSettings()
+    End Sub
+
+    Private Sub PropertyGrid1_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs) Handles PropertyGrid1.PropertyValueChanged
+        SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
     End Sub
 End Class
