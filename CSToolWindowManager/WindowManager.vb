@@ -429,6 +429,30 @@ Public Class WindowManager
         End Try
     End Function
 
+    Public Function GetActiveWindow() As DockingHostWindow
+        Try
+            Dim HostingWindowObj As DockContent
+            HostingWindowObj = _DockingContent.ActiveContent
+
+            Return HostingWindowObj
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+    Public Function GetActiveWindowPluginInstance() As CSToolPluginLib.ICSToolInterface
+        Try
+            Dim HostingWindowObj As DockContent
+            HostingWindowObj = _DockingContent.ActiveContent
+
+            Dim PluginInterfaceObj As CSToolPluginLib.ICSToolInterface
+            PluginInterfaceObj = HostingWindowObj.Tag
+            Return PluginInterfaceObj
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Function SaveAllGUIPluginSettings(Optional ByVal UserSettingName As String = "Default", Optional ByVal ForceSave As Boolean = False) As Boolean
         Try
             _LogManager.WriteLogEntry("Enumerate " & _DockingContent.Contents.Count & " GUI plugins...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)

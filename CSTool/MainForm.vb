@@ -1573,4 +1573,12 @@ Public Class MainForm
     Private Sub ControlVisibleMenuItemsContext_Closing(sender As Object, e As ToolStripDropDownClosingEventArgs) Handles ControlVisibleMenuItemsContext.Closing
         WriteGUIStateToUserSettings()
     End Sub
+
+    Private Sub CurrentSelctedDockingWindowChanged() Handles CSDockPanelHosting.ActiveContentChanged
+        Dim currentplug As CSToolPluginLib.ICSToolInterface
+        currentplug = WindowManagerHandler.GetActiveWindowPluginInstance
+        If Not IsNothing(currentplug) Then
+            ToolStripComboBox1.SelectedItem = currentplug.PluginName
+        End If
+    End Sub
 End Class
