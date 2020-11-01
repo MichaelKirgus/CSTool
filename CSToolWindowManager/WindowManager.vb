@@ -442,14 +442,18 @@ Public Class WindowManager
 
     Public Function GetActiveWindowPluginInstance() As CSToolPluginLib.ICSToolInterface
         Try
-            Dim HostingWindowObj As DockContent
-            HostingWindowObj = _DockingContent.ActiveContent
+            If Not IsNothing(_DockingContent.ActiveContent) Then
+                Dim HostingWindowObj As DockContent
+                HostingWindowObj = _DockingContent.ActiveContent
 
-            Dim PluginInterfaceObj As CSToolPluginLib.ICSToolInterface
+                Dim PluginInterfaceObj As CSToolPluginLib.ICSToolInterface
 
-            If Not IsNothing(HostingWindowObj.Tag) Then
-                PluginInterfaceObj = HostingWindowObj.Tag
-                Return PluginInterfaceObj
+                If Not IsNothing(HostingWindowObj.Tag) Then
+                    PluginInterfaceObj = HostingWindowObj.Tag
+                    Return PluginInterfaceObj
+                Else
+                    Return Nothing
+                End If
             Else
                 Return Nothing
             End If
