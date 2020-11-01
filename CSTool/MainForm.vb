@@ -604,7 +604,7 @@ Public Class MainForm
             WindowManagerHandler.SaveFormLocationAndSize(Me, UserSettings.LastWindowSize, UserSettings.LastWindowLocation, UserSettings.LastWindowState)
 
             'Save user settings to file
-            UserSettingManager.SaveSettings(UserSettings, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, False, CurrentUserSettingName))
+            UserSettingManager.SaveSettings(UserSettings, CurrentUserProfilePath & "\" & UserSettingManager.UserSettingsFile)
 
             'Flush log file (if enabled)
             LogManager.CloseStreams()
