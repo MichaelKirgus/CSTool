@@ -49,6 +49,8 @@ Partial Class AboutFrm
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,6 +62,7 @@ Partial Class AboutFrm
         Me.TabPage5.SuspendLayout()
         Me.TabPage6.SuspendLayout()
         Me.TabPage7.SuspendLayout()
+        Me.TabPage8.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox2
@@ -69,7 +72,7 @@ Partial Class AboutFrm
         Me.PictureBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(574, 425)
+        Me.PictureBox2.Size = New System.Drawing.Size(652, 425)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox2.TabIndex = 5
         Me.PictureBox2.TabStop = False
@@ -84,7 +87,7 @@ Partial Class AboutFrm
         Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(546, 94)
+        Me.Panel1.Size = New System.Drawing.Size(628, 94)
         Me.Panel1.TabIndex = 6
         '
         'LinkLabel1
@@ -147,10 +150,11 @@ Partial Class AboutFrm
         Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage6)
         Me.TabControl1.Controls.Add(Me.TabPage7)
+        Me.TabControl1.Controls.Add(Me.TabPage8)
         Me.TabControl1.Location = New System.Drawing.Point(12, 112)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(550, 301)
+        Me.TabControl1.Size = New System.Drawing.Size(628, 301)
         Me.TabControl1.TabIndex = 7
         '
         'TabPage1
@@ -159,7 +163,7 @@ Partial Class AboutFrm
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(542, 275)
+        Me.TabPage1.Size = New System.Drawing.Size(620, 275)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "CSTool"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -173,7 +177,7 @@ Partial Class AboutFrm
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox1.Size = New System.Drawing.Size(536, 269)
+        Me.TextBox1.Size = New System.Drawing.Size(614, 269)
         Me.TextBox1.TabIndex = 0
         '
         'TabPage2
@@ -250,7 +254,7 @@ Partial Class AboutFrm
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(542, 275)
+        Me.TabPage5.Size = New System.Drawing.Size(620, 275)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "CefSharp"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -264,7 +268,7 @@ Partial Class AboutFrm
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.ReadOnly = True
         Me.TextBox5.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox5.Size = New System.Drawing.Size(536, 269)
+        Me.TextBox5.Size = New System.Drawing.Size(614, 269)
         Me.TextBox5.TabIndex = 2
         '
         'TabPage6
@@ -273,7 +277,7 @@ Partial Class AboutFrm
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(542, 275)
+        Me.TabPage6.Size = New System.Drawing.Size(620, 275)
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "Gecko"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -287,7 +291,7 @@ Partial Class AboutFrm
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.ReadOnly = True
         Me.TextBox6.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox6.Size = New System.Drawing.Size(536, 269)
+        Me.TextBox6.Size = New System.Drawing.Size(614, 269)
         Me.TextBox6.TabIndex = 2
         '
         'TabPage7
@@ -296,7 +300,7 @@ Partial Class AboutFrm
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(542, 275)
+        Me.TabPage7.Size = New System.Drawing.Size(620, 275)
         Me.TabPage7.TabIndex = 6
         Me.TabPage7.Text = "Heroicons"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -310,15 +314,38 @@ Partial Class AboutFrm
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.ReadOnly = True
         Me.TextBox7.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TextBox7.Size = New System.Drawing.Size(536, 269)
+        Me.TextBox7.Size = New System.Drawing.Size(614, 269)
         Me.TextBox7.TabIndex = 1
+        '
+        'TabPage8
+        '
+        Me.TabPage8.Controls.Add(Me.TextBox8)
+        Me.TabPage8.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage8.Name = "TabPage8"
+        Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage8.Size = New System.Drawing.Size(620, 275)
+        Me.TabPage8.TabIndex = 7
+        Me.TabPage8.Text = "SSH.NET"
+        Me.TabPage8.UseVisualStyleBackColor = True
+        '
+        'TextBox8
+        '
+        Me.TextBox8.BackColor = System.Drawing.Color.White
+        Me.TextBox8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox8.Location = New System.Drawing.Point(3, 3)
+        Me.TextBox8.Multiline = True
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.ReadOnly = True
+        Me.TextBox8.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TextBox8.Size = New System.Drawing.Size(614, 269)
+        Me.TextBox8.TabIndex = 2
         '
         'AboutFrm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(574, 425)
+        Me.ClientSize = New System.Drawing.Size(652, 425)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PictureBox2)
@@ -350,6 +377,8 @@ Partial Class AboutFrm
         Me.TabPage6.PerformLayout()
         Me.TabPage7.ResumeLayout(False)
         Me.TabPage7.PerformLayout()
+        Me.TabPage8.ResumeLayout(False)
+        Me.TabPage8.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -376,4 +405,6 @@ Partial Class AboutFrm
     Friend WithEvents TextBox6 As TextBox
     Friend WithEvents TabPage7 As TabPage
     Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents TabPage8 As TabPage
+    Friend WithEvents TextBox8 As TextBox
 End Class
