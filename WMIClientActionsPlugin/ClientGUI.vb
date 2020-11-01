@@ -466,4 +466,14 @@ Public Class ClientGUI
             RunTaskAsync.RunWorkerAsync(argslist)
         End If
     End Sub
+
+    Private Sub KillVNCViewerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KillVNCViewerToolStripMenuItem.Click
+        Try
+            Dim proc As Process
+            proc = Process.GetProcessById(CurrentVNCViewerPID)
+
+            proc.Kill()
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class

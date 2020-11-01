@@ -8,7 +8,7 @@ Partial Class ClientGUI
     Inherits System.Windows.Forms.UserControl
 
     'UserControl überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -25,7 +25,7 @@ Partial Class ClientGUI
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
@@ -35,12 +35,15 @@ Partial Class ClientGUI
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
+        Me.VNCViewerAdvancedOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.KillVNCViewerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.CustomItemsContext = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RunTaskAsync = New System.ComponentModel.BackgroundWorker()
         Me.autofill = New System.Windows.Forms.Timer(Me.components)
         Me.RaiseCustomActionAsync = New System.ComponentModel.BackgroundWorker()
         Me.FlowLayoutPanel1.SuspendLayout()
+        Me.VNCViewerAdvancedOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'FlowLayoutPanel1
@@ -111,12 +114,26 @@ Partial Class ClientGUI
         'Button9
         '
         Me.Button9.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.Button9.ContextMenuStrip = Me.VNCViewerAdvancedOptions
         Me.Button9.Image = Global.WMIClientActionsPlugin.My.Resources.Resources.ultravnc_png
         Me.Button9.Location = New System.Drawing.Point(308, 3)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(55, 41)
         Me.Button9.TabIndex = 17
         Me.Button9.UseVisualStyleBackColor = True
+        '
+        'VNCViewerAdvancedOptions
+        '
+        Me.VNCViewerAdvancedOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KillVNCViewerToolStripMenuItem})
+        Me.VNCViewerAdvancedOptions.Name = "VNCViewerAdvancedOptions"
+        Me.VNCViewerAdvancedOptions.Size = New System.Drawing.Size(181, 48)
+        '
+        'KillVNCViewerToolStripMenuItem
+        '
+        Me.KillVNCViewerToolStripMenuItem.Image = Global.WMIClientActionsPlugin.My.Resources.Resources.icon_x_circle_16x16
+        Me.KillVNCViewerToolStripMenuItem.Name = "KillVNCViewerToolStripMenuItem"
+        Me.KillVNCViewerToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.KillVNCViewerToolStripMenuItem.Text = "Kill VNC-Viewer"
         '
         'Button5
         '
@@ -156,6 +173,7 @@ Partial Class ClientGUI
         Me.Name = "ClientGUI"
         Me.Size = New System.Drawing.Size(430, 49)
         Me.FlowLayoutPanel1.ResumeLayout(False)
+        Me.VNCViewerAdvancedOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -172,4 +190,6 @@ Partial Class ClientGUI
     Friend WithEvents autofill As Windows.Forms.Timer
     Friend WithEvents CustomItemsContext As Windows.Forms.ContextMenuStrip
     Friend WithEvents RaiseCustomActionAsync As ComponentModel.BackgroundWorker
+    Friend WithEvents VNCViewerAdvancedOptions As Windows.Forms.ContextMenuStrip
+    Friend WithEvents KillVNCViewerToolStripMenuItem As Windows.Forms.ToolStripMenuItem
 End Class

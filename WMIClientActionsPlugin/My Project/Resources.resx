@@ -118,8 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="add-to-desktop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add-to-desktop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ultravnc_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ultravnc_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="system-switch-user-3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\system-switch-user-3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="games-solve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\games-solve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -127,16 +130,16 @@
   <data name="system-reboot-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\system-reboot-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="add-to-desktop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add-to-desktop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="system-shutdown-6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\system-shutdown-6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="system-suspend-hibernate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\system-suspend-hibernate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="system-switch-user-3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\system-switch-user-3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ultravnc_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ultravnc_png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-x-circle_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-x-circle_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
