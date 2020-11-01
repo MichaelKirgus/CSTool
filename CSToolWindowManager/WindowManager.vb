@@ -897,7 +897,7 @@ Public Class WindowManager
             Dim PluginGUID As String
             PluginGUID = settingsarray(0)
             DockWindow.InstanceGUID = settingsarray(1)
-            DockWindow.SettingsKey = settingsarray(3)
+            DockWindow.SettingsKey = _UserSettingName
 
             Dim ContentPlugin As ICSToolInterface
             ContentPlugin = PluginManager.CreateNewPluginInstance(GetPluginIndexByGUID(PluginGUID, PluginManager.PluginCollection))
@@ -906,7 +906,7 @@ Public Class WindowManager
             If ContentPlugin.PluginType = ICSToolInterface.PluginTypeEnum.GUIWindow Then
                 DockWindow.PluginHandler = ContentPlugin
                 DockWindow._PluginSettingsFile = _UserProfilePath & "\" & ContentPlugin.PluginGUID & "_" & DockWindow.InstanceGUID & ".xml"
-                _LogManager.WriteLogEntry("Load plugin " & ContentPlugin.PluginName & " with GUID " & ContentPlugin.PluginGUID & " and settings " & _UserProfilePath & "\" & _UserSettingName & "\" & ContentPlugin.PluginGUID & "_" & DockWindow.InstanceGUID & ".xml", GetType(WindowManager), LogEntryTypeEnum.Info, LogEntryLevelEnum.Advanced)
+                _LogManager.WriteLogEntry("Load plugin " & ContentPlugin.PluginName & " with GUID " & ContentPlugin.PluginGUID & " and settings " & _UserProfilePath & "\" & ContentPlugin.PluginGUID & "_" & DockWindow.InstanceGUID & ".xml", GetType(WindowManager), LogEntryTypeEnum.Info, LogEntryLevelEnum.Advanced)
                 ContentPlugin.LoadPlugin()
 
                 Return DockWindow

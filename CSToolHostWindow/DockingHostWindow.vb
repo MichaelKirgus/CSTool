@@ -19,7 +19,7 @@ Public Class DockingHostWindow
     Public Property _IsNonPersistent As Boolean = False
 
     Protected Overloads Overrides Function GetPersistString() As String
-        Return PluginHandler.PluginGUID & "|" & InstanceGUID.ToString & "|" & PluginHandler.PluginName & "|" & SettingsKey
+        Return PluginHandler.PluginGUID & "|" & InstanceGUID.ToString & "|" & PluginHandler.PluginName
     End Function
 
     Private Sub DockingHostWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load

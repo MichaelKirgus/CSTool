@@ -11,7 +11,7 @@ Public Class WorkspaceManager
 
     Public ProfilePath As String = ""
     Public WasValueChanged As Boolean = False
-    Public CurrentUserSettingID As String = "Default"
+    Public CurrentUserSettingID As String = ""
 
     Private Sub WorkspaceManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ParentDir As New IO.DirectoryInfo(_parent.CurrentUserProfilePath)
@@ -168,8 +168,10 @@ Public Class WorkspaceManager
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         Try
             If Not IsNothing(ListView1.SelectedItems) And Not ListView1.SelectedItems.Count = 0 Then
-                ListView1.SelectedItems(0).Checked = CheckBox1.Checked
-                SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+                If Not CurrentUserSettingID = "" Then
+                    ListView1.SelectedItems(0).Checked = CheckBox1.Checked
+                    SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+                End If
             End If
         Catch ex As Exception
         End Try
@@ -195,7 +197,9 @@ Public Class WorkspaceManager
         Try
             If Not IsNothing(ListView1.SelectedItems) And Not ListView1.SelectedItems.Count = 0 Then
                 CheckBox1.Checked = ListView1.SelectedItems(0).Checked
-                SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+                If Not CurrentUserSettingID = "" Then
+                    SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+                End If
             End If
         Catch ex As Exception
         End Try

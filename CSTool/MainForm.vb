@@ -372,6 +372,24 @@ Public Class MainForm
             'Set SettingName (workspace ID)
             WindowManagerHandler._UserSettingName = CurrentUserSettingName
 
+            'Check if additional workspaces should be spawn
+            If Not Workspaces.Count = 1 Then
+                If IsChild = False And CurrentUserSettingName = "Default" Then
+                    CurrentLoadActionState = "Check for additional needed workspaces..."
+                    For index = 0 To Workspaces.Count - 1
+                        If Workspaces(index).Autostart Then
+                            CurrentLoadActionState = "Spawn workspace " & Workspaces(index).TemplateName
+
+                            Select Case Workspaces(index).StartType
+                                Case UserSettings.StartTypeEnum.NewWindow
+                                    OpenNewWindow(False, Workspaces(index).SettingName)
+                                Case UserSettings.StartTypeEnum.NewInstance
+                                    SpawnNewProcessInstance(Workspaces(index).SettingName)
+                            End Select
+                        End If
+                    Next
+                End If
+            End If
             'Get Window size and location from settings
             CurrentLoadActionState = "Restore form size and location..."
             WindowManagerHandler.LoadFormLocationAndSize(Me, True, True, UserSettings.LastWindowSize.Height, UserSettings.LastWindowSize.Width, UserSettings.LastWindowLocation.X, UserSettings.LastWindowLocation.Y,
@@ -687,23 +705,15 @@ Public Class MainForm
             Me.Text = "CSTool"
         Else
             Me.Text = Clientname.ToUpper
-            If Not UserSettings.TemplateName = "Default" Then
-                Me.Text += " (" & UserSettings.TemplateName & ")"
-            End If
+        End If
+        If Not UserSettings.SettingName = "Default" Then
+            Me.Text += " (" & UserSettings.TemplateName & ")"
         End If
         If IsNonPersistent Then
-            If Not UserSettings.TemplateName = "Default" Then
-                Me.Text += " (" & UserSettings.TemplateName & ") [Non-Persistent]"
-            Else
-                Me.Text += " [Non-Persistent]"
-            End If
+            Me.Text += " [Non-Persistent]"
         End If
         If IsChild Then
-            If Not UserSettings.TemplateName = "Default" Then
-                Me.Text += " (" & UserSettings.TemplateName & ") [Child]"
-            Else
-                Me.Text += " [Child]"
-            End If
+            Me.Text += " [Child]"
         End If
         If Not InstanceTag = "" Then
             Me.Text += " - " & InstanceTag
