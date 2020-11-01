@@ -30,47 +30,46 @@ Partial Class WorkspaceTemplateForm
         Me.components = New System.ComponentModel.Container()
         Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Workspaces in Profile", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Global Workspaces", System.Windows.Forms.HorizontalAlignment.Left)
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Default", "Default user workspace", "0"}, 1)
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Initial template", "Add initial template to profile", "0"}, 3)
-        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"New empty workspace", "Add new empty workspace to user profile", "0"}, 0)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Initial template", "Add initial template to profile", "0"}, 3)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"New empty workspace", "Add new empty workspace to user profile", "0"}, 0)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(WorkspaceTemplateForm))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
+        Me.LoadImage1 = New System.Windows.Forms.PictureBox()
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.LoadImage2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.WorkspaceNameLbl = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
-        Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.WorkspaceNameLbl = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.LoadGlobalTemplates = New System.ComponentModel.BackgroundWorker()
         Me.LoadProfileTemplates = New System.ComponentModel.BackgroundWorker()
         Me.LoadThumbnail = New System.ComponentModel.BackgroundWorker()
         Me.LoadWait = New System.ComponentModel.BackgroundWorker()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.LoadImage1 = New System.Windows.Forms.PictureBox()
-        Me.LoadImage2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer2.Panel1.SuspendLayout()
         Me.SplitContainer2.Panel2.SuspendLayout()
         Me.SplitContainer2.SuspendLayout()
+        CType(Me.LoadImage1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer3.Panel1.SuspendLayout()
         Me.SplitContainer3.Panel2.SuspendLayout()
         Me.SplitContainer3.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        CType(Me.LoadImage1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LoadImage2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -91,6 +90,35 @@ Partial Class WorkspaceTemplateForm
         Me.SplitContainer1.SplitterDistance = 414
         Me.SplitContainer1.TabIndex = 0
         '
+        'SplitContainer2
+        '
+        Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer2.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer2.Name = "SplitContainer2"
+        '
+        'SplitContainer2.Panel1
+        '
+        Me.SplitContainer2.Panel1.Controls.Add(Me.LoadImage1)
+        Me.SplitContainer2.Panel1.Controls.Add(Me.ListView1)
+        '
+        'SplitContainer2.Panel2
+        '
+        Me.SplitContainer2.Panel2.Controls.Add(Me.SplitContainer3)
+        Me.SplitContainer2.Size = New System.Drawing.Size(800, 414)
+        Me.SplitContainer2.SplitterDistance = 440
+        Me.SplitContainer2.TabIndex = 1
+        '
+        'LoadImage1
+        '
+        Me.LoadImage1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LoadImage1.Image = Global.CSTool.My.Resources.Resources.Microsoft_1_5s_125px
+        Me.LoadImage1.Location = New System.Drawing.Point(0, 0)
+        Me.LoadImage1.Name = "LoadImage1"
+        Me.LoadImage1.Size = New System.Drawing.Size(440, 414)
+        Me.LoadImage1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.LoadImage1.TabIndex = 5
+        Me.LoadImage1.TabStop = False
+        '
         'ListView1
         '
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -102,12 +130,10 @@ Partial Class WorkspaceTemplateForm
         Me.ListView1.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2})
         Me.ListView1.HideSelection = False
         ListViewItem1.Group = ListViewGroup1
-        ListViewItem1.Tag = "0"
+        ListViewItem1.Tag = "2"
         ListViewItem2.Group = ListViewGroup1
-        ListViewItem2.Tag = "2"
-        ListViewItem3.Group = ListViewGroup1
-        ListViewItem3.Tag = "1"
-        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3})
+        ListViewItem2.Tag = "1"
+        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2})
         Me.ListView1.LargeImageList = Me.ImageList1
         Me.ListView1.Location = New System.Drawing.Point(0, 0)
         Me.ListView1.Name = "ListView1"
@@ -125,6 +151,75 @@ Partial Class WorkspaceTemplateForm
         Me.ImageList1.Images.SetKeyName(2, "workspace_company.png")
         Me.ImageList1.Images.SetKeyName(3, "workspace_initial.png")
         '
+        'SplitContainer3
+        '
+        Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer3.Name = "SplitContainer3"
+        Me.SplitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'SplitContainer3.Panel1
+        '
+        Me.SplitContainer3.Panel1.Controls.Add(Me.Panel2)
+        '
+        'SplitContainer3.Panel2
+        '
+        Me.SplitContainer3.Panel2.Controls.Add(Me.TextBox1)
+        Me.SplitContainer3.Size = New System.Drawing.Size(356, 414)
+        Me.SplitContainer3.SplitterDistance = 339
+        Me.SplitContainer3.TabIndex = 0
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.LoadImage2)
+        Me.Panel2.Controls.Add(Me.PictureBox1)
+        Me.Panel2.Controls.Add(Me.WorkspaceNameLbl)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(356, 339)
+        Me.Panel2.TabIndex = 0
+        '
+        'LoadImage2
+        '
+        Me.LoadImage2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LoadImage2.Image = Global.CSTool.My.Resources.Resources.Microsoft_1_5s_125px
+        Me.LoadImage2.Location = New System.Drawing.Point(0, 27)
+        Me.LoadImage2.Name = "LoadImage2"
+        Me.LoadImage2.Size = New System.Drawing.Size(356, 312)
+        Me.LoadImage2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.LoadImage2.TabIndex = 6
+        Me.LoadImage2.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 27)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(356, 312)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
+        '
+        'WorkspaceNameLbl
+        '
+        Me.WorkspaceNameLbl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.WorkspaceNameLbl.Location = New System.Drawing.Point(0, 0)
+        Me.WorkspaceNameLbl.Name = "WorkspaceNameLbl"
+        Me.WorkspaceNameLbl.Size = New System.Drawing.Size(356, 27)
+        Me.WorkspaceNameLbl.TabIndex = 0
+        Me.WorkspaceNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox1.Location = New System.Drawing.Point(0, 0)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(356, 71)
+        Me.TextBox1.TabIndex = 0
+        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.CheckBox2)
@@ -136,6 +231,28 @@ Partial Class WorkspaceTemplateForm
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(800, 32)
         Me.Panel1.TabIndex = 0
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Enabled = False
+        Me.CheckBox2.Location = New System.Drawing.Point(365, 8)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(159, 17)
+        Me.CheckBox2.TabIndex = 3
+        Me.CheckBox2.Text = "Load this workspace default"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.Enabled = False
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Open workspace non-persistent", "Add workspace to profile"})
+        Me.ComboBox1.Location = New System.Drawing.Point(143, 5)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(216, 21)
+        Me.ComboBox1.TabIndex = 2
         '
         'Button1
         '
@@ -159,83 +276,6 @@ Partial Class WorkspaceTemplateForm
         Me.CheckBox1.Text = "Always show on start"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
-        'SplitContainer2
-        '
-        Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer2.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer2.Name = "SplitContainer2"
-        '
-        'SplitContainer2.Panel1
-        '
-        Me.SplitContainer2.Panel1.Controls.Add(Me.LoadImage1)
-        Me.SplitContainer2.Panel1.Controls.Add(Me.ListView1)
-        '
-        'SplitContainer2.Panel2
-        '
-        Me.SplitContainer2.Panel2.Controls.Add(Me.SplitContainer3)
-        Me.SplitContainer2.Size = New System.Drawing.Size(800, 414)
-        Me.SplitContainer2.SplitterDistance = 440
-        Me.SplitContainer2.TabIndex = 1
-        '
-        'SplitContainer3
-        '
-        Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer3.Name = "SplitContainer3"
-        Me.SplitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal
-        '
-        'SplitContainer3.Panel1
-        '
-        Me.SplitContainer3.Panel1.Controls.Add(Me.Panel2)
-        '
-        'SplitContainer3.Panel2
-        '
-        Me.SplitContainer3.Panel2.Controls.Add(Me.TextBox1)
-        Me.SplitContainer3.Size = New System.Drawing.Size(356, 414)
-        Me.SplitContainer3.SplitterDistance = 339
-        Me.SplitContainer3.TabIndex = 0
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Location = New System.Drawing.Point(0, 0)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(356, 71)
-        Me.TextBox1.TabIndex = 0
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.LoadImage2)
-        Me.Panel2.Controls.Add(Me.PictureBox1)
-        Me.Panel2.Controls.Add(Me.WorkspaceNameLbl)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(356, 339)
-        Me.Panel2.TabIndex = 0
-        '
-        'WorkspaceNameLbl
-        '
-        Me.WorkspaceNameLbl.Dock = System.Windows.Forms.DockStyle.Top
-        Me.WorkspaceNameLbl.Location = New System.Drawing.Point(0, 0)
-        Me.WorkspaceNameLbl.Name = "WorkspaceNameLbl"
-        Me.WorkspaceNameLbl.Size = New System.Drawing.Size(356, 27)
-        Me.WorkspaceNameLbl.TabIndex = 0
-        Me.WorkspaceNameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.Enabled = False
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Open workspace non-persistent", "Add workspace to profile"})
-        Me.ComboBox1.Location = New System.Drawing.Point(143, 5)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(216, 21)
-        Me.ComboBox1.TabIndex = 2
-        '
         'LoadGlobalTemplates
         '
         Me.LoadGlobalTemplates.WorkerReportsProgress = True
@@ -256,49 +296,6 @@ Partial Class WorkspaceTemplateForm
         Me.LoadWait.WorkerReportsProgress = True
         Me.LoadWait.WorkerSupportsCancellation = True
         '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Enabled = False
-        Me.CheckBox2.Location = New System.Drawing.Point(365, 8)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(159, 17)
-        Me.CheckBox2.TabIndex = 3
-        Me.CheckBox2.Text = "Load this workspace default"
-        Me.CheckBox2.UseVisualStyleBackColor = True
-        '
-        'LoadImage1
-        '
-        Me.LoadImage1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LoadImage1.Image = Global.CSTool.My.Resources.Resources.Microsoft_1_5s_125px
-        Me.LoadImage1.Location = New System.Drawing.Point(0, 0)
-        Me.LoadImage1.Name = "LoadImage1"
-        Me.LoadImage1.Size = New System.Drawing.Size(440, 414)
-        Me.LoadImage1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.LoadImage1.TabIndex = 5
-        Me.LoadImage1.TabStop = False
-        '
-        'LoadImage2
-        '
-        Me.LoadImage2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LoadImage2.Image = Global.CSTool.My.Resources.Resources.Microsoft_1_5s_125px
-        Me.LoadImage2.Location = New System.Drawing.Point(0, 27)
-        Me.LoadImage2.Name = "LoadImage2"
-        Me.LoadImage2.Size = New System.Drawing.Size(356, 312)
-        Me.LoadImage2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.LoadImage2.TabIndex = 6
-        Me.LoadImage2.TabStop = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 27)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(356, 312)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
         'WorkspaceTemplateForm
         '
         Me.AcceptButton = Me.Button1
@@ -314,21 +311,21 @@ Partial Class WorkspaceTemplateForm
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.SplitContainer2.Panel1.ResumeLayout(False)
         Me.SplitContainer2.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.ResumeLayout(False)
+        CType(Me.LoadImage1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer3.Panel1.ResumeLayout(False)
         Me.SplitContainer3.Panel2.ResumeLayout(False)
         Me.SplitContainer3.Panel2.PerformLayout()
         CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer3.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        CType(Me.LoadImage1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LoadImage2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

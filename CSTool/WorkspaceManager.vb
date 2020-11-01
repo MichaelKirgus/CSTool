@@ -8,12 +8,15 @@ Imports CSToolUserSettingsManager
 
 Public Class WorkspaceManager
     Public _parent As MainForm
-    Public UserSettingsFilename As String = "UserSettings.xml"
+
     Public ProfilePath As String = ""
+    Public WasValueChanged As Boolean = False
 
     Private Sub WorkspaceManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ParentDir As New IO.DirectoryInfo(_parent.CurrentUserProfilePath)
         ProfilePath = ParentDir.Parent.FullName
+
+        _parent.Workspaces = _parent.WorkspaceSettingsHandler.GetAllWorkspaces(ProfilePath)
 
         LoadCustomWorkspacesToGUI()
         ListView1.Items(0).Selected = True
@@ -27,9 +30,8 @@ Public Class WorkspaceManager
                 Dim cloneobj As New UserSettings
                 If ListView1.SelectedItems(0).Index = 0 Then
                     cloneobj = _parent.UserSettings.Clone
-                    cloneobj.UserTemplates.Clear()
                 Else
-                    cloneobj = _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1)
+                    cloneobj = _parent.UserSettingManager.LoadSettings(ListView1.SelectedItems(0).Tag & "\" & _parent.UserSettingManager.UserSettingsFile)
                 End If
 
                 itm.Text = cloneobj.TemplateName & " (duplicate)"
@@ -39,33 +41,36 @@ Public Class WorkspaceManager
                 Dim newdirguid As String
                 newdirguid = Guid.NewGuid.ToString
 
+                cloneobj.LastSettingName = newdirguid
+                cloneobj.SettingName = newdirguid
+
                 If ListView1.SelectedItems(0).Index = 0 Then
                     Dim Folderstr As String
                     Folderstr = _parent.CurrentUserProfilePath
                     My.Computer.FileSystem.CopyDirectory(Folderstr, ProfilePath & "\" & newdirguid)
                 Else
                     Dim Folderstr As String
-                    Folderstr = ProfilePath & "\" & _parent.UserSettings.UserTemplates(ListView1.SelectedItems(0).Index - 1).TemplateName
+                    Folderstr = ProfilePath & "\" & ListView1.SelectedItems(0).Tag
                     My.Computer.FileSystem.CopyDirectory(Folderstr, ProfilePath & "\" & newdirguid)
                 End If
 
-                _parent.UserSettingManager.SaveSettings(cloneobj, ProfilePath & "\" & newdirguid & "\" & UserSettingsFilename)
+                _parent.UserSettingManager.SaveSettings(cloneobj, ProfilePath & "\" & newdirguid & "\" & _parent.UserSettingManager.UserSettingsFile)
                 itm.Tag = newdirguid
             Else
+                Dim newdirguid As String
+                newdirguid = Guid.NewGuid.ToString
+
                 Dim newclass As New UserSettings
                 newclass.TemplateName = "New Workspace"
-                newclass.LastSettingName = "New Workspace"
-                newclass.SettingName = "New Workspace"
+                newclass.LastSettingName = newdirguid
+                newclass.SettingName = newdirguid
 
                 itm.Text = "New Workspace"
                 itm.SubItems.Add("")
                 itm.Checked = False
 
-                Dim newdirguid As String
-                newdirguid = Guid.NewGuid.ToString
-
                 My.Computer.FileSystem.CreateDirectory(ProfilePath & "\" & newdirguid)
-                _parent.UserSettingManager.SaveSettings(newclass, ProfilePath & "\" & newdirguid & "\" & UserSettingsFilename)
+                _parent.UserSettingManager.SaveSettings(newclass, ProfilePath & "\" & newdirguid & "\" & _parent.UserSettingManager.UserSettingsFile)
 
                 itm.Tag = newdirguid
             End If
@@ -92,7 +97,7 @@ Public Class WorkspaceManager
         Try
             If Not index = 0 Then
                 Dim Folderstr As String
-                Folderstr = ProfilePath & "\" & ListView1.Items(index).Tag & "\" & UserSettingsFilename
+                Folderstr = ProfilePath & "\" & ListView1.Items(index).Tag & "\" & _parent.UserSettingManager.UserSettingsFile
 
                 Dim settingsobj As UserSettings
                 settingsobj = PropertyGrid1.SelectedObject
@@ -114,15 +119,10 @@ Public Class WorkspaceManager
             ListView1.BeginUpdate()
             ListView1.Items.Clear()
 
-            Dim dircoll As New IO.DirectoryInfo(ProfilePath)
-
-            Dim dircollarray As IO.DirectoryInfo()
-            dircollarray = dircoll.GetDirectories
-
-            If Not dircollarray.Count = 0 Then
-                For index = 0 To dircollarray.Count - 1
+            If Not _parent.Workspaces.Count = 0 Then
+                For index = 0 To _parent.Workspaces.Count - 1
                     Dim settingspath As String
-                    settingspath = dircollarray(index).FullName & "\" & UserSettingsFilename
+                    settingspath = ProfilePath & "\" & _parent.Workspaces(index).SettingName & "\" & _parent.UserSettingManager.UserSettingsFile
                     Dim settingsobj As UserSettings
                     settingsobj = _parent.UserSettingManager.LoadSettings(settingspath)
 
@@ -130,8 +130,13 @@ Public Class WorkspaceManager
                     itm.Text = settingsobj.TemplateName
                     itm.SubItems.Add(settingsobj.TemplateDescription)
                     itm.Checked = settingsobj.Autostart
-                    itm.Tag = dircollarray(index).Name
-                    ListView1.Items.Add(itm)
+                    itm.Tag = ProfilePath & "\" & _parent.Workspaces(index).SettingName
+
+                    If _parent.Workspaces(index).SettingName = "Default" Then
+                        ListView1.Items.Insert(0, itm)
+                    Else
+                        ListView1.Items.Add(itm)
+                    End If
                 Next
             End If
 
@@ -165,7 +170,7 @@ Public Class WorkspaceManager
                     Dim Folderstr As String
                     Folderstr = ProfilePath & "\" & ListView1.SelectedItems(0).Tag
                     Dim settingsobj As UserSettings
-                    settingsobj = _parent.UserSettingManager.LoadSettings(Folderstr & "\" & UserSettingsFilename)
+                    settingsobj = _parent.UserSettingManager.LoadSettings(Folderstr & "\" & _parent.UserSettingManager.UserSettingsFile)
 
                     CheckBox1.Checked = settingsobj.Autostart
                     TextBox1.Text = settingsobj.TemplateName
@@ -185,16 +190,19 @@ Public Class WorkspaceManager
             End If
         Catch ex As Exception
         End Try
+        WasValueChanged = True
     End Sub
 
     Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
         AddNewWorkspaceToGUI(False)
+        WasValueChanged = True
     End Sub
 
     Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
         RemoveWorkspaceFromGUI(ListView1.SelectedItems(0).Index)
         LoadCustomWorkspacesToGUI()
         ListView1.Items(0).Selected = True
+        WasValueChanged = True
     End Sub
 
     Private Sub ListView1_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles ListView1.ItemChecked
@@ -205,10 +213,12 @@ Public Class WorkspaceManager
             End If
         Catch ex As Exception
         End Try
+        WasValueChanged = True
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         AddNewWorkspaceToGUI(True)
+        WasValueChanged = True
     End Sub
 
     Public Sub SaveGUIChanges()
@@ -224,10 +234,12 @@ Public Class WorkspaceManager
             End If
         Catch ex As Exception
         End Try
+        WasValueChanged = True
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         SaveGUIChanges()
+        WasValueChanged = True
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
@@ -271,6 +283,9 @@ Public Class WorkspaceManager
                 MsgBox("Import failed!")
             End If
         End If
+        LoadCustomWorkspacesToGUI()
+        ListView1.Items(0).Selected = True
+        WasValueChanged = True
     End Sub
 
     Private Sub ImportToNewWorkplaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToNewWorkplaceToolStripMenuItem.Click
@@ -288,13 +303,21 @@ Public Class WorkspaceManager
                 MsgBox("Import failed!")
             End If
         End If
+        LoadCustomWorkspacesToGUI()
+        ListView1.Items(0).Selected = True
+        WasValueChanged = True
     End Sub
 
     Private Sub WorkspaceManager_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         _parent.LoadGUIStateFromUserSettings()
+
+        If WasValueChanged Then
+            _parent.Workspaces = _parent.WorkspaceSettingsHandler.GetAllWorkspaces(ProfilePath)
+        End If
     End Sub
 
     Private Sub PropertyGrid1_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs) Handles PropertyGrid1.PropertyValueChanged
         SaveWorkspaceItemSettings(ListView1.SelectedItems(0).Index, ListView1.SelectedItems(0).Text, ListView1.SelectedItems(0).SubItems(1).Text, ListView1.SelectedItems(0).Checked)
+        WasValueChanged = True
     End Sub
 End Class

@@ -22,6 +22,7 @@ Imports CSToolSettingsConsoleLib
 Imports CSToolUserSettingsLib
 Imports CSToolUserSettingsManager
 Imports CSToolWindowManager
+Imports CSToolWorkspaceManager
 Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class MainForm
@@ -29,6 +30,7 @@ Public Class MainForm
     Public WindowManagerHandler As New WindowManager
     Public ApplicationSettingManager As New ApplicationSettingsManager
     Public ApplicationSettings As New ApplicationSettings
+    Public WorkspaceSettingsHandler As New WorkspaceHandler
     Public UserSettingManager As New UserSettingsManager
     Public EnvironmentManager As New EnvironmentManager
     Public PingCheckManager As New PingHelper
@@ -38,7 +40,9 @@ Public Class MainForm
     Public UserTemplateManager As New TemplateManager
     Public LauncherLibHandler As New LauncherLib
 
-    Public CurrentUserSettingName As String = ""
+    Public LayoutFilename = "Layout.xml"
+    Public Workspaces As New List(Of UserSettings)
+    Public CurrentUserSettingName As String = "Default"
     Public CurrentUsername As String = ""
     Public CurrentUserProfilePath As String = ""
     Public IsFormLoading As Boolean = True
@@ -285,23 +289,51 @@ Public Class MainForm
         CurrentLoadActionState = "Reading command line args (step 2)..."
         ProccessCommandLineArgsUserSettings(Environment.GetCommandLineArgs)
 
+        'Get user settings environment strings
+        CurrentLoadActionState = "Retrieve user environment settings..."
+        Dim UserProfileBasicPath As String = UserSettingManager.GetInitUserBasePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure)
+        Dim UserProfileWorkspacePath As String = UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, CurrentUserSettingName)
+        Dim UserProfileWorkspaceSettingsFile As String = UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, True, CurrentUsername, CurrentUserSettingName)
+        Dim UserProfileWorkspaceLayoutFile As String = UserProfileWorkspacePath & "\" & LayoutFilename
+
+        Debug.WriteLine(UserProfileBasicPath)
+        Debug.WriteLine(UserProfileWorkspacePath)
+        Debug.WriteLine(UserProfileWorkspaceSettingsFile)
+        Debug.WriteLine(UserProfileWorkspaceLayoutFile)
+
+        'Set global user settings variable
+        Dim dirinf As New IO.DirectoryInfo(UserProfileWorkspacePath)
+        CurrentUserProfilePath = dirinf.FullName
+
+        'Set user profile in window manager
+        WindowManagerHandler._UserProfilePath = UserProfileWorkspacePath
+
         If RestoreSettings Then
             'Load user (default) settings
             CurrentLoadActionState = "Searching for user settings..."
-            If Not IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, True, CurrentUsername)) Then
-                IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername))
+            If Not IO.File.Exists(UserProfileWorkspaceSettingsFile) Then
+                IO.Directory.CreateDirectory(UserProfileWorkspacePath)
                 'Check, if we have an valid initial template dir
                 If IO.Directory.Exists(ApplicationSettings.UserInitialTemplateDir) Then
                     'Copy content to new user profile path
                     CurrentLoadActionState = "Copy user settings..."
+                    'Get all workspaces from directory
+                    Dim InitialTemplateWorkspaceCollection As IO.DirectoryInfo()
+                    Dim InitialTemplateWorkspaceDirInfo As New IO.DirectoryInfo(ApplicationSettings.UserInitialTemplateDir)
+                    InitialTemplateWorkspaceCollection = InitialTemplateWorkspaceDirInfo.GetDirectories
 
-                    My.Computer.FileSystem.CopyDirectory(ApplicationSettings.UserInitialTemplateDir & "\Default", UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername))
+                    'Copy all initial workspaces to users profile path
+                    If Not InitialTemplateWorkspaceCollection.Count = 0 Then
+                        For index = 0 To InitialTemplateWorkspaceCollection.Count - 1
+                            CurrentLoadActionState = "Copy workspace (" & (index + 1) & " from " & InitialTemplateWorkspaceCollection.Count & ")"
+                            My.Computer.FileSystem.CopyDirectory(InitialTemplateWorkspaceCollection(index).FullName, UserProfileBasicPath & "\" & InitialTemplateWorkspaceCollection(index).Name)
+                        Next
+                    End If
 
-                    'My.Computer.FileSystem.CopyDirectory(ApplicationSettings.UserInitialTemplateDir, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername), True)
-                    If IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\" & UserSettingManager.UserSettingsFile) Then
+                    If IO.File.Exists(UserProfileWorkspaceSettingsFile) Then
                         'We found a valid initial user settings file...
                         CurrentLoadActionState = "Apply initial user settings..."
-                        UserSettings = UserSettingManager.LoadSettings(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, True, CurrentUsername))
+                        UserSettings = UserSettingManager.LoadSettings(UserProfileWorkspaceSettingsFile)
                         CurrentLoadActionState = "Resetting window positions..."
                         UserSettings.LastNormalWindowSize = ApplicationSettings.InitialWindowSize
                         UserSettings.LastNormalWindowLocation = ApplicationSettings.InitialWindowLocation
@@ -310,114 +342,42 @@ Public Class MainForm
                         UserSettings.LastWindowState = ApplicationSettings.InitialWindowState
                     End If
                 Else
+                    'Create user (default) template folder if not exists
+                    If Not IO.Directory.Exists(UserProfileWorkspacePath) Then
+                        IO.Directory.CreateDirectory(UserProfileWorkspacePath)
+                    End If
+
                     'No initial template, start with an empty one and save it.
-                    UserSettingManager.SaveSettings(UserSettings, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, True, CurrentUsername))
+                    UserSettingManager.SaveSettings(UserSettings, UserProfileWorkspaceSettingsFile)
                 End If
             Else
                 'We hava an valid settings file, load it.
                 CurrentLoadActionState = "Loading user settings..."
-                UserSettings = UserSettingManager.LoadSettings(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, True, CurrentUsername))
+                UserSettings = UserSettingManager.LoadSettings(UserProfileWorkspaceSettingsFile)
             End If
 
             'Load logging settings to log manager
             LogManager.LogSettings = UserSettings.LogSettings
             LogManager.ReInitLogSystem()
 
-            'Create user (default) template folder if not exists
-            If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername)) Then
-                IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False))
-            End If
-
-            'Set global user settings variable
-            Dim dirinf As New IO.DirectoryInfo(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername))
-            CurrentUserProfilePath = dirinf.FullName
-
             'Set user profile in window manager
             'This profile is the default.
             CurrentLoadActionState = "Loading user settings in window manager..."
-            WindowManagerHandler._UserProfilePath = UserSettingManager.GetInitUserSettingsPath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure)
+            WindowManagerHandler._UserProfilePath = UserProfileWorkspacePath
 
-            If Not CurrentUserSettingName = "" Then
-                'Create (default) user settings folder if not exists
-                If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, CurrentUserSettingName)) Then
-                    IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, CurrentUserSettingName))
-                End If
-                'Create (default) docking layout file if not exists
-                IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, CurrentUserSettingName))
-                If Not IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\Layout.xml") Then
-                    WindowManagerHandler.SaveWindowLayoutToXML("Layout.xml", True, CurrentUserSettingName)
-                End If
-                'Set specific user setting tag (if instance or window was spawned from parent)
-                WindowManagerHandler._UserSettingName = CurrentUserSettingName
-            Else
-                'Create (default) user settings folder if not exists
-                If Not IO.Directory.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername)) Then
-                    IO.Directory.CreateDirectory(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername))
-                End If
-                'Create (default) docking layout file if not exists
-                If Not IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername) & "\Layout.xml") Then
-                    WindowManagerHandler.SaveWindowLayoutToXML()
-                End If
-                'Set last user setting to window manager (to restore settings)
-                WindowManagerHandler._UserSettingName = UserSettings.LastSettingName
-            End If
+            'Collect all additional workspaces
+            CurrentLoadActionState = "Loading additional workspaces..."
+            Workspaces = WorkspaceSettingsHandler.GetAllWorkspaces(UserProfileBasicPath)
+
+            'Set SettingName (workspace ID)
+            WindowManagerHandler._UserSettingName = CurrentUserSettingName
 
             'Get Window size and location from settings
             CurrentLoadActionState = "Restore form size and location..."
-
-            If Not CurrentUserSettingName = "" And Not CurrentUserSettingName = "Default" Then
-                'Get workspace to load
-                If Not UserSettings.UserTemplates.Count = 0 Then
-                    For index = 0 To UserSettings.UserTemplates.Count - 1
-                        If UserSettings.UserTemplates(index).SettingName = UserSettings.LastSettingName Then
-                            'Found setting name, load position and size
-                            WindowManagerHandler.LoadFormLocationAndSize(Me, True, True, UserSettings.UserTemplates(index).LastWindowSize.Height,
-                                                                         UserSettings.UserTemplates(index).LastWindowSize.Width,
-                                                                         UserSettings.UserTemplates(index).LastWindowLocation.X,
-                                                                         UserSettings.UserTemplates(index).LastWindowLocation.Y,
-                                                                         UserSettings.UserTemplates(index).LastNormalWindowSize.Height,
-                                                                         UserSettings.UserTemplates(index).LastNormalWindowSize.Width,
-                                                                         UserSettings.UserTemplates(index).LastNormalWindowLocation.X,
-                                                                         UserSettings.UserTemplates(index).LastNormalWindowLocation.Y,
-                                                                         UserSettings.UserTemplates(index).LastWindowState)
-
-                            Exit For
-                        End If
-                    Next
-                End If
-            Else
-                WindowManagerHandler.LoadFormLocationAndSize(Me, True, True, UserSettings.LastWindowSize.Height,
-                                                             UserSettings.LastWindowSize.Width,
-                                                             UserSettings.LastWindowLocation.X,
-                                                             UserSettings.LastWindowLocation.Y,
-                                                             UserSettings.LastNormalWindowSize.Height,
-                                                             UserSettings.LastNormalWindowSize.Width,
-                                                             UserSettings.LastNormalWindowLocation.X,
-                                                             UserSettings.LastNormalWindowLocation.Y,
+            WindowManagerHandler.LoadFormLocationAndSize(Me, True, True, UserSettings.LastWindowSize.Height, UserSettings.LastWindowSize.Width, UserSettings.LastWindowLocation.X, UserSettings.LastWindowLocation.Y,
+                                                             UserSettings.LastNormalWindowSize.Height, UserSettings.LastNormalWindowSize.Width, UserSettings.LastNormalWindowLocation.X, UserSettings.LastNormalWindowLocation.Y,
                                                              UserSettings.LastWindowState)
-            End If
-
-            'Check if additional workspaces or instances should be spawn
-            If Not UserSettings.UserTemplates.Count = 0 And IsChild = False And CurrentUserSettingName = "" Then
-                CurrentLoadActionState = "Restore additional workspaces..."
-                For index = 0 To UserSettings.UserTemplates.Count - 1
-                    If UserSettings.UserTemplates(index).Autostart Then
-                        If UserSettings.UserTemplates(index).StartType = UserSettings.StartTypeEnum.NewWindow Then
-                            OpenNewWindow(False, UserSettings.UserTemplates(index).SettingName)
-                        Else
-                            SpawnNewProcessInstance(UserSettings.UserTemplates(index).SettingName)
-                        End If
-                    End If
-                Next
-            End If
         Else
-            'Set global user settings variable
-            Dim dirinf As New IO.DirectoryInfo(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername))
-            CurrentUserProfilePath = dirinf.FullName
-
-            'Set user profile in window manager
-            WindowManagerHandler._UserProfilePath = UserSettingManager.GetInitUserSettingsPath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure)
-
             'Set last user setting to window manager (to restore settings)
             WindowManagerHandler._UserSettingName = UserSettings.LastSettingName
 
@@ -446,9 +406,9 @@ Public Class MainForm
 
         If RestoreSettings Then
             'Load last user setting (template)
-            If IO.File.Exists(UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername, WindowManagerHandler._UserSettingName) & "\Layout.xml") Then
+            If IO.File.Exists(UserProfileWorkspaceLayoutFile) Then
                 CurrentLoadActionState = "Loading workspace layout..."
-                WindowManagerHandler.LoadWindowLayoutFromXML("Layout.xml", True, WindowManagerHandler._UserSettingName)
+                WindowManagerHandler.LoadWindowLayoutFromXML(LayoutFilename, True, WindowManagerHandler._UserSettingName)
             End If
         End If
 
@@ -641,23 +601,10 @@ Public Class MainForm
             End If
 
             'Save window position to user settings class
-            If Not CurrentUserSettingName = "" And Not CurrentUserSettingName = "Default" Then
-                'Get workspace to save
-                If Not UserSettings.UserTemplates.Count = 0 Then
-                    For index = 0 To UserSettings.UserTemplates.Count - 1
-                        If UserSettings.UserTemplates(index).SettingName = UserSettings.LastSettingName Then
-                            'Found setting name, save position and size
-                            WindowManagerHandler.SaveFormLocationAndSize(Me, UserSettings.UserTemplates(index).LastWindowSize, UserSettings.UserTemplates(index).LastWindowLocation, UserSettings.UserTemplates(index).LastWindowState)
-                            Exit For
-                        End If
-                    Next
-                End If
-            Else
-                WindowManagerHandler.SaveFormLocationAndSize(Me, UserSettings.LastWindowSize, UserSettings.LastWindowLocation, UserSettings.LastWindowState)
-            End If
+            WindowManagerHandler.SaveFormLocationAndSize(Me, UserSettings.LastWindowSize, UserSettings.LastWindowLocation, UserSettings.LastWindowState)
 
             'Save user settings to file
-            UserSettingManager.SaveSettings(UserSettings, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure))
+            UserSettingManager.SaveSettings(UserSettings, UserSettingManager.GetUserSettingsFilePath(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, False, CurrentUserSettingName))
 
             'Flush log file (if enabled)
             LogManager.CloseStreams()
@@ -740,20 +687,20 @@ Public Class MainForm
             Me.Text = "CSTool"
         Else
             Me.Text = Clientname.ToUpper
-            If Not CurrentUserSettingName = "" Then
-                Me.Text += " (" & CurrentUserSettingName & ")"
+            If Not UserSettings.TemplateName = "Default" Then
+                Me.Text += " (" & UserSettings.TemplateName & ")"
             End If
         End If
         If IsNonPersistent Then
-            If Not CurrentUserSettingName = "" Then
-                Me.Text += " (" & CurrentUserSettingName & ") [Non-Persistent]"
+            If Not UserSettings.TemplateName = "Default" Then
+                Me.Text += " (" & UserSettings.TemplateName & ") [Non-Persistent]"
             Else
                 Me.Text += " [Non-Persistent]"
             End If
         End If
         If IsChild Then
-            If Not CurrentUserSettingName = "" Then
-                Me.Text += " (" & CurrentUserSettingName & ") [Child]"
+            If Not UserSettings.TemplateName = "Default" Then
+                Me.Text += " (" & UserSettings.TemplateName & ") [Child]"
             Else
                 Me.Text += " [Child]"
             End If
@@ -1049,11 +996,13 @@ Public Class MainForm
             Dim newins As New MainForm
             If Not CloneSettingsAndLayout Then
                 newins.RestoreSettings = False
-                If UserSettingName = "" Then
+                If UserSettingName = "Default" Then
                     newins.IsNonPersistent = True
                 Else
                     newins.CurrentUserSettingName = UserSettingName
                 End If
+            Else
+                newins.CurrentUserSettingName = UserSettingName
             End If
 
             newins.IsNonPersistent = NonPersistent
@@ -1168,23 +1117,6 @@ Public Class MainForm
 
                 If IO.Directory.Exists(workspacedir) Then
                     My.Computer.FileSystem.DeleteDirectory(workspacedir, FileIO.DeleteDirectoryOption.DeleteAllContents)
-
-                    If UserSettings.SettingName = WorkspaceToReset Then
-                        'Its the default profile, delete file and profile itself
-                        My.Computer.FileSystem.DeleteDirectory(ApplicationSettings.UserProfileDir, ApplicationSettings.UseUserDomainInFolderStructure, False, CurrentUsername)
-                    Else
-                        'Its an sub-workspace, find workspace in user settings
-                        If Not UserSettings.UserTemplates.Count = 0 Then
-                            For index = 0 To UserSettings.UserTemplates.Count - 1
-                                If UserSettings.UserTemplates(index).SettingName = WorkspaceToReset Then
-                                    'Delete workspace directory
-                                    My.Computer.FileSystem.DeleteDirectory(workspacedir, FileIO.DeleteDirectoryOption.DeleteAllContents)
-                                    'Copy initial workspace to directory
-                                    My.Computer.FileSystem.CopyDirectory(ApplicationSettings.UserInitialTemplateDir & "\Default", workspacedir, True)
-                                End If
-                            Next
-                        End If
-                    End If
 
                     'Ensure that no settings will be saved if application exits
                     IsNonPersistent = True

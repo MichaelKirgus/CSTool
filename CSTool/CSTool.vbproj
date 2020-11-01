@@ -416,6 +416,10 @@
       <Project>{9ed8dbb2-b501-4797-8ce1-04dddad6ef8c}</Project>
       <Name>CSToolWMIHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSToolWorkspaceManager\CSToolWorkspaceManager.vbproj">
+      <Project>{eae86597-e6bf-4a37-8f06-52b11be7d739}</Project>
+      <Name>CSToolWorkspaceManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSWorkspaceTemplateManager\CSWorkspaceTemplateManager.vbproj">
       <Project>{3bb82795-d94c-42f4-beb9-b8a3c9b806aa}</Project>
       <Name>CSWorkspaceTemplateManager</Name>

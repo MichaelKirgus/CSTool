@@ -114,4 +114,21 @@ Public Class UserSettingsManager
             End If
         End If
     End Function
+
+    Public Function GetInitUserBasePath(ByVal BasePath As String, ByVal UseDomain As Boolean, Optional ByVal OverridingUsername As String = "") As String
+        'Loading user settings
+        If OverridingUsername = "" Then
+            If UseDomain Then
+                Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower
+            Else
+                Return BasePath & "\" & CredentialBuildInHelperInstance.GetUserName.ToLower
+            End If
+        Else
+            If UseDomain Then
+                Return BasePath & "\" & CredentialBuildInHelperInstance.GetDomainName.ToUpper & "\" & OverridingUsername
+            Else
+                Return BasePath & "\" & OverridingUsername
+            End If
+        End If
+    End Function
 End Class
