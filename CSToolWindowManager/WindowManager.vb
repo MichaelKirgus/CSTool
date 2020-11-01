@@ -446,8 +446,13 @@ Public Class WindowManager
             HostingWindowObj = _DockingContent.ActiveContent
 
             Dim PluginInterfaceObj As CSToolPluginLib.ICSToolInterface
-            PluginInterfaceObj = HostingWindowObj.Tag
-            Return PluginInterfaceObj
+
+            If Not IsNothing(HostingWindowObj.Tag) Then
+                PluginInterfaceObj = HostingWindowObj.Tag
+                Return PluginInterfaceObj
+            Else
+                Return Nothing
+            End If
         Catch ex As Exception
             Return Nothing
         End Try
