@@ -4,9 +4,17 @@
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
 Public Class RuntimeInfoForm
+    Public _parent As MainForm
+
     Private Sub RuntimeInfoForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             TextBox1.Text = Application.StartupPath
+
+            If Not IsNothing(_parent.LogManager) Then
+                If Not IsNothing(_parent.LogManager.LogCollection) Then
+                    TextBox2.Text = _parent.LogManager.LogCollection.Count
+                End If
+            End If
 
             For Each cmdobj As String In Environment.GetCommandLineArgs
                 ListBox1.Items.Add(cmdobj)
