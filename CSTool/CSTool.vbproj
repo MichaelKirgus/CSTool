@@ -545,6 +545,7 @@
     <None Include="Resources\workspace_company_22x22.png" />
     <None Include="Resources\icon-desktop_22x22.png" />
     <None Include="Resources\icon-desktop_16x16.png" />
+    <Content Include="Licenses\License_SSHNET.txt" />
     <Content Include="wizard_app.ico" />
   </ItemGroup>
   <ItemGroup>
