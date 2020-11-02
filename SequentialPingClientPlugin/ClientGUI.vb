@@ -123,4 +123,26 @@ Public Class ClientGUI
     Private Sub ClearOutputToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearOutputToolStripMenuItem.Click
         ListBox1.Items.Clear()
     End Sub
+
+    Private Sub SaveOutputToFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveOutputToFileToolStripMenuItem.Click
+        SaveFileDialog1.ShowDialog()
+    End Sub
+
+    Private Sub SaveFileDialog1_FileOk(sender As Object, e As ComponentModel.CancelEventArgs) Handles SaveFileDialog1.FileOk
+        Try
+            If Not ListBox1.Items.Count = 0 Then
+                Dim logstr As String = ""
+
+                For index = 0 To ListBox1.Items.Count - 1
+                    logstr += ListBox1.Items(index) & vbNewLine
+                Next
+
+                My.Computer.FileSystem.WriteAllText(SaveFileDialog1.FileName, logstr, False)
+            End If
+
+            MsgBox("Output saved to " & SaveFileDialog1.FileName, MsgBoxStyle.Information)
+        Catch ex As Exception
+            MsgBox("Export failed!", MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
 End Class

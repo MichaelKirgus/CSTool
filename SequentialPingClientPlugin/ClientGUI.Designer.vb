@@ -40,6 +40,9 @@ Partial Class ClientGUI
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ClearOutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutoScrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SaveOutputToFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -64,9 +67,9 @@ Partial Class ClientGUI
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyEntryToClipboardToolStripMenuItem, Me.CopyIPToClipboardToolStripMenuItem, Me.CopyIpv6ToClipboardToolStripMenuItem, Me.ToolStripSeparator1, Me.RefreshToolStripMenuItem, Me.AutoScrollToolStripMenuItem, Me.ToolStripSeparator2, Me.ClearOutputToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyEntryToClipboardToolStripMenuItem, Me.CopyIPToClipboardToolStripMenuItem, Me.CopyIpv6ToClipboardToolStripMenuItem, Me.ToolStripSeparator1, Me.RefreshToolStripMenuItem, Me.AutoScrollToolStripMenuItem, Me.ToolStripSeparator2, Me.ClearOutputToolStripMenuItem, Me.ToolStripSeparator3, Me.SaveOutputToFileToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(200, 148)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(200, 176)
         '
         'CopyEntryToClipboardToolStripMenuItem
         '
@@ -120,6 +123,23 @@ Partial Class ClientGUI
         Me.AutoScrollToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
         Me.AutoScrollToolStripMenuItem.Text = "Auto-Scroll"
         '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(196, 6)
+        '
+        'SaveOutputToFileToolStripMenuItem
+        '
+        Me.SaveOutputToFileToolStripMenuItem.Name = "SaveOutputToFileToolStripMenuItem"
+        Me.SaveOutputToFileToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.SaveOutputToFileToolStripMenuItem.Text = "Save output to file..."
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.Filter = "Text file|*.txt|Log file|*.log"
+        Me.SaveFileDialog1.RestoreDirectory = True
+        Me.SaveFileDialog1.SupportMultiDottedExtensions = True
+        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -144,4 +164,7 @@ Partial Class ClientGUI
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents ClearOutputToolStripMenuItem As Windows.Forms.ToolStripMenuItem
     Friend WithEvents AutoScrollToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents SaveOutputToFileToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveFileDialog1 As Windows.Forms.SaveFileDialog
 End Class
