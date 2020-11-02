@@ -45,6 +45,7 @@ Public Class MainForm
     Public CurrentUserSettingName As String = "Default"
     Public CurrentUsername As String = ""
     Public CurrentUserProfilePath As String = ""
+    Public CurrentUserProfileBasicPath As String = ""
     Public IsFormLoading As Boolean = True
     Public IsChild As Boolean = False
     Public ParentInstance As MainForm = Nothing
@@ -313,6 +314,7 @@ Public Class MainForm
         'Set global user settings variable
         Dim dirinf As New IO.DirectoryInfo(UserProfileWorkspacePath)
         CurrentUserProfilePath = dirinf.FullName
+        CurrentUserProfileBasicPath = UserProfileBasicPath
 
         'Set user profile in window manager
         WindowManagerHandler._UserProfilePath = UserProfileWorkspacePath
@@ -856,12 +858,12 @@ Public Class MainForm
                         Dim NewHostSpawnInstance As New StandaloneInstanceBuilder
                         Dim pluginpath As String
                         pluginpath = WindowManagerHandler.PluginManager.GetPluginFilepathFromInterfaceInstance(WindowManagerHandler.GetPluginByName(PluginName, WindowManagerHandler.PluginManager.PluginCollection))
-                        Return NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, "", CurrentUserProfilePath, ApplicationSettings.EnvironmentPluginDir, ApplicationSettings.CredentialPluginDir, True, WindowManagerHandler._UserSettingName, InstanceTag, "", OverrideWindowState)
+                        Return NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, "", CurrentUserProfileBasicPath, ApplicationSettings.EnvironmentPluginDir, ApplicationSettings.CredentialPluginDir, True, WindowManagerHandler._UserSettingName, InstanceTag, "", OverrideWindowState)
                     Case DefaultWindowStyleEnum.StandaloneProcessWindow
                         Dim NewHostSpawnInstance As New StandaloneInstanceBuilder
                         Dim pluginpath As String
                         pluginpath = WindowManagerHandler.PluginManager.GetPluginFilepathFromInterfaceInstance(WindowManagerHandler.GetPluginByName(PluginName, WindowManagerHandler.PluginManager.PluginCollection))
-                        Return NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, "", CurrentUserProfilePath, ApplicationSettings.EnvironmentPluginDir, ApplicationSettings.CredentialPluginDir, False, WindowManagerHandler._UserSettingName, InstanceTag, "", OverrideWindowState)
+                        Return NewHostSpawnInstance.SpawnStandaloneInstance(pluginpath, "", CurrentUserProfileBasicPath, ApplicationSettings.EnvironmentPluginDir, ApplicationSettings.CredentialPluginDir, False, WindowManagerHandler._UserSettingName, InstanceTag, "", OverrideWindowState)
                     Case Else
                         Return False
                 End Select
