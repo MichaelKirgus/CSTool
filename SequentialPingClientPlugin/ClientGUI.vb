@@ -49,14 +49,24 @@ Public Class ClientGUI
             DateT = DateAndTime.Now.ToString & " "
         End If
 
-        CurrentIPv4 = PingManager.IpAddressV4
-        CurrentIPv4 = PingManager.IpAddressV6
+        If Not IsNothing(PingManager.IpAddressV4) Then
+            CurrentIPv4 = PingManager.IpAddressV4
+        Else
+            CurrentIPv4 = ""
+        End If
+        If Not IsNothing(PingManager.IpAddressV6) Then
+            CurrentIPv6 = PingManager.IpAddressV6
+        Else
+            CurrentIPv6 = ""
+        End If
 
         If e.Result Then
             ListBox1.Items.Add(DateT & PingManager.HostName & " [" & PingManager.IpAddressV4 & "] [ " & PingManager.IpAddressV6 & " ] " & PingManager.ResponseTime & " ms")
             ListBox1.BackColor = Color.FromArgb(_Settings.BackColorIfPingOK.Argb)
             ListBox1.ForeColor = Color.FromArgb(_Settings.FontForeColorIfPingOK.Argb)
-            ListBox1.SetSelected(ListBox1.Items.Count - 1, True)
+            If AutoScrollToolStripMenuItem.Checked Then
+                ListBox1.SetSelected(ListBox1.Items.Count - 1, True)
+            End If
             _ParentInstance.CurrentLogInstance.WriteLogEntry("Ping worker: " & PingManager.HostName & " [" & PingManager.IpAddressV4 & "] [ " & PingManager.IpAddressV6 & " ] " & PingManager.ResponseTime & " ms", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
         Else
             ListBox1.Items.Add(DateT & PingManager.HostName & " [" & PingManager.IpAddressV4 & "] [ " & PingManager.IpAddressV6 & " ] Error: " & PingManager.ErrorDesc)

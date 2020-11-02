@@ -39,6 +39,7 @@ Partial Class ClientGUI
         Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ClearOutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AutoScrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -63,7 +64,7 @@ Partial Class ClientGUI
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyEntryToClipboardToolStripMenuItem, Me.CopyIPToClipboardToolStripMenuItem, Me.CopyIpv6ToClipboardToolStripMenuItem, Me.ToolStripSeparator1, Me.RefreshToolStripMenuItem, Me.ToolStripSeparator2, Me.ClearOutputToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyEntryToClipboardToolStripMenuItem, Me.CopyIPToClipboardToolStripMenuItem, Me.CopyIpv6ToClipboardToolStripMenuItem, Me.ToolStripSeparator1, Me.RefreshToolStripMenuItem, Me.AutoScrollToolStripMenuItem, Me.ToolStripSeparator2, Me.ClearOutputToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(200, 148)
         '
@@ -110,6 +111,15 @@ Partial Class ClientGUI
         Me.ClearOutputToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
         Me.ClearOutputToolStripMenuItem.Text = "Clear output"
         '
+        'AutoScrollToolStripMenuItem
+        '
+        Me.AutoScrollToolStripMenuItem.Checked = True
+        Me.AutoScrollToolStripMenuItem.CheckOnClick = True
+        Me.AutoScrollToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.AutoScrollToolStripMenuItem.Name = "AutoScrollToolStripMenuItem"
+        Me.AutoScrollToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.AutoScrollToolStripMenuItem.Text = "Auto-Scroll"
+        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -133,4 +143,5 @@ Partial Class ClientGUI
     Friend WithEvents CopyIpv6ToClipboardToolStripMenuItem As Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents ClearOutputToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AutoScrollToolStripMenuItem As Windows.Forms.ToolStripMenuItem
 End Class
