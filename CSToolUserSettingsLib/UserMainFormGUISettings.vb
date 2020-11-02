@@ -5,19 +5,19 @@
 'Additional copyright notices in project base directory or main executable directory.
 <Serializable> Public Class UserMainFormGUISettings
     Implements ICloneable
-    Public Property ShowHostnameIPLabel = True
-    Public Property ShowHostnameIPTextbox = True
-    Public Property ShowHostnameIPSearchIcon = True
-    Public Property ShowHostnameIPRefreshIcon = True
-    Public Property ShowCustomActionIcon = True
-    Public Property ShowTemplateManagerIcon = True
-    Public Property ShowAddItemIcon = True
-    Public Property ShowRemoveItemIcon = True
-    Public Property ShowWorkspaceTemplateManagerIcon = True
-    Public Property ShowWindowManagerIcon = True
-    Public Property ShowNewInstanceIcon = True
-    Public Property ShowUserProfileManagerIcon = True
-    Public Property ShowLockunlockWorkpsaceIcon = True
+    Public Property ShowHostnameIPLabel As Boolean = True
+    Public Property ShowHostnameIPTextbox As Boolean = True
+    Public Property ShowHostnameIPSearchIcon As Boolean = True
+    Public Property ShowHostnameIPRefreshIcon As Boolean = True
+    Public Property ShowCustomActionIcon As Boolean = True
+    Public Property ShowTemplateManagerIcon As Boolean = True
+    Public Property ShowAddItemIcon As Boolean = True
+    Public Property ShowRemoveItemIcon As Boolean = True
+    Public Property ShowWorkspaceTemplateManagerIcon As Boolean = True
+    Public Property ShowWindowManagerIcon As Boolean = True
+    Public Property ShowNewInstanceIcon As Boolean = True
+    Public Property ShowUserProfileManagerIcon As Boolean = True
+    Public Property ShowLockunlockWorkpsaceIcon As Boolean = True
 
     Public Function Clone() As Object Implements System.ICloneable.Clone
         Return MemberwiseClone()
