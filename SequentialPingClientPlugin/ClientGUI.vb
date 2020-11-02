@@ -109,4 +109,8 @@ Public Class ClientGUI
     Private Sub CopyIpv6ToClipboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyIpv6ToClipboardToolStripMenuItem.Click
         My.Computer.Clipboard.SetText(CurrentIPv6)
     End Sub
+
+    Private Sub ClearOutputToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearOutputToolStripMenuItem.Click
+        ListBox1.Items.Clear()
+    End Sub
 End Class

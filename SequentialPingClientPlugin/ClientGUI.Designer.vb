@@ -34,14 +34,17 @@ Partial Class ClientGUI
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyEntryToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyIPToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopyIpv6ToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopyIpv6ToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ClearOutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListBox1
         '
+        Me.ListBox1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.ListBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.Location = New System.Drawing.Point(0, 0)
@@ -60,9 +63,9 @@ Partial Class ClientGUI
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyEntryToClipboardToolStripMenuItem, Me.CopyIPToClipboardToolStripMenuItem, Me.CopyIpv6ToClipboardToolStripMenuItem, Me.ToolStripSeparator1, Me.RefreshToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyEntryToClipboardToolStripMenuItem, Me.CopyIPToClipboardToolStripMenuItem, Me.CopyIpv6ToClipboardToolStripMenuItem, Me.ToolStripSeparator1, Me.RefreshToolStripMenuItem, Me.ToolStripSeparator2, Me.ClearOutputToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(200, 120)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(200, 148)
         '
         'CopyEntryToClipboardToolStripMenuItem
         '
@@ -75,6 +78,12 @@ Partial Class ClientGUI
         Me.CopyIPToClipboardToolStripMenuItem.Name = "CopyIPToClipboardToolStripMenuItem"
         Me.CopyIPToClipboardToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
         Me.CopyIPToClipboardToolStripMenuItem.Text = "Copy IPv4 to clipboard"
+        '
+        'CopyIpv6ToClipboardToolStripMenuItem
+        '
+        Me.CopyIpv6ToClipboardToolStripMenuItem.Name = "CopyIpv6ToClipboardToolStripMenuItem"
+        Me.CopyIpv6ToClipboardToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.CopyIpv6ToClipboardToolStripMenuItem.Text = "Copy IPv6 to clipboard"
         '
         'ToolStripSeparator1
         '
@@ -90,11 +99,16 @@ Partial Class ClientGUI
         Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
         Me.RefreshToolStripMenuItem.Text = "Refresh"
         '
-        'CopyIpv6ToClipboardToolStripMenuItem
+        'ToolStripSeparator2
         '
-        Me.CopyIpv6ToClipboardToolStripMenuItem.Name = "CopyIpv6ToClipboardToolStripMenuItem"
-        Me.CopyIpv6ToClipboardToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
-        Me.CopyIpv6ToClipboardToolStripMenuItem.Text = "Copy IPv6 to clipboard"
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(196, 6)
+        '
+        'ClearOutputToolStripMenuItem
+        '
+        Me.ClearOutputToolStripMenuItem.Name = "ClearOutputToolStripMenuItem"
+        Me.ClearOutputToolStripMenuItem.Size = New System.Drawing.Size(199, 22)
+        Me.ClearOutputToolStripMenuItem.Text = "Clear output"
         '
         'ClientGUI
         '
@@ -117,4 +131,6 @@ Partial Class ClientGUI
     Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
     Friend WithEvents RefreshToolStripMenuItem As Windows.Forms.ToolStripMenuItem
     Friend WithEvents CopyIpv6ToClipboardToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
+    Friend WithEvents ClearOutputToolStripMenuItem As Windows.Forms.ToolStripMenuItem
 End Class
