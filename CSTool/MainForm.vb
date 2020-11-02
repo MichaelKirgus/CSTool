@@ -634,6 +634,9 @@ Public Class MainForm
             'Save window position to user settings class
             WindowManagerHandler.SaveFormLocationAndSize(Me, UserSettings.LastWindowSize, UserSettings.LastWindowLocation, UserSettings.LastWindowState)
 
+            'Save top toolbar settings to settings class
+            WriteGUIStateToUserSettings()
+
             'Save user settings to file
             UserSettingManager.SaveSettings(UserSettings, CurrentUserProfilePath & "\" & UserSettingManager.UserSettingsFile)
 
@@ -1594,7 +1597,7 @@ Public Class MainForm
         ToolStripButton10.Visible = ShowLockunlockWorkpsaceIconToolStripMenuItem.Checked
     End Sub
 
-    Private Sub ControlVisibleMenuItemsContext_Closing(sender As Object, e As ToolStripDropDownClosingEventArgs) Handles ControlVisibleMenuItemsContext.Closing
+    Private Sub ControlVisibleMenuItemsContext_Closing(sender As Object, e As ToolStripDropDownClosedEventArgs) Handles ControlVisibleMenuItemsContext.Closed
         WriteGUIStateToUserSettings()
     End Sub
 
