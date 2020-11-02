@@ -386,19 +386,21 @@ Public Class MainForm
             'Check if additional workspaces should be spawn
             If Not Workspaces.Count = 1 Then
                 If IsChild = False And CurrentUserSettingName = "Default" Then
-                    CurrentLoadActionState = "Check for additional needed workspaces..."
-                    For index = 0 To Workspaces.Count - 1
-                        If Workspaces(index).Autostart Then
-                            CurrentLoadActionState = "Spawn workspace " & Workspaces(index).TemplateName
+                    If Not My.Computer.Keyboard.ShiftKeyDown Then
+                        CurrentLoadActionState = "Check for additional needed workspaces..."
+                        For index = 0 To Workspaces.Count - 1
+                            If Workspaces(index).Autostart Then
+                                CurrentLoadActionState = "Spawn workspace " & Workspaces(index).TemplateName
 
-                            Select Case Workspaces(index).StartType
-                                Case UserSettings.StartTypeEnum.NewWindow
-                                    OpenNewWindow(False, Workspaces(index).SettingName)
-                                Case UserSettings.StartTypeEnum.NewInstance
-                                    SpawnNewProcessInstance(Workspaces(index).SettingName)
-                            End Select
-                        End If
-                    Next
+                                Select Case Workspaces(index).StartType
+                                    Case UserSettings.StartTypeEnum.NewWindow
+                                        OpenNewWindow(False, Workspaces(index).SettingName)
+                                    Case UserSettings.StartTypeEnum.NewInstance
+                                        SpawnNewProcessInstance(Workspaces(index).SettingName)
+                                End Select
+                            End If
+                        Next
+                    End If
                 End If
             End If
             'Get Window size and location from settings
