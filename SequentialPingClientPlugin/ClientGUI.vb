@@ -12,6 +12,8 @@ Public Class ClientGUI
     Public _ParentInstance As CSToolPluginLib.ICSToolInterface
     Public PingManager As New PingHelper
     Public CurrentIPHostname As String = ""
+    Public CurrentIPv4 As String = ""
+    Public CurrentIPv6 As String = ""
 
     Sub RaiseAction(ByVal IPOrHostname As String, Optional ByVal IsRefresh As Boolean = False)
         If Not IsRefresh Then
@@ -28,7 +30,9 @@ Public Class ClientGUI
             End If
 
             If _Settings.AutoRefresh Then
-                RefreshTimer.Start()
+                If RefreshToolStripMenuItem.Checked Then
+                    RefreshTimer.Start()
+                End If
             End If
         Else
             RefreshTimer.Stop()
@@ -44,6 +48,9 @@ Public Class ClientGUI
         If _Settings.ShowDateAndTime Then
             DateT = DateAndTime.Now.ToString & " "
         End If
+
+        CurrentIPv4 = PingManager.IpAddressV4
+        CurrentIPv4 = PingManager.IpAddressV6
 
         If e.Result Then
             ListBox1.Items.Add(DateT & PingManager.HostName & " [" & PingManager.IpAddressV4 & "] [ " & PingManager.IpAddressV6 & " ] " & PingManager.ResponseTime & " ms")
@@ -68,6 +75,7 @@ Public Class ClientGUI
         ListBox1.ForeColor = Color.FromArgb(_Settings.DefaultForeColor.Argb)
         ListBox1.BackColor = Color.FromArgb(_Settings.DefaultBackColor.Argb)
         RefreshTimer.Interval = _Settings.AutRefreshInterval
+        RefreshToolStripMenuItem.Checked = _Settings.AutoRefresh
     End Sub
 
     Private Sub ClientGUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -76,5 +84,29 @@ Public Class ClientGUI
 
     Private Sub RefreshTimer_Tick(sender As Object, e As EventArgs) Handles RefreshTimer.Tick
         RaiseAction(CurrentIPHostname, True)
+    End Sub
+
+    Private Sub RefreshToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RefreshToolStripMenuItem.Click
+        If RefreshToolStripMenuItem.Checked Then
+            If Not RefreshTimer.Enabled Then
+                RefreshTimer.Start()
+            End If
+        Else
+            If RefreshTimer.Enabled Then
+                RefreshTimer.Stop()
+            End If
+        End If
+    End Sub
+
+    Private Sub CopyEntryToClipboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyEntryToClipboardToolStripMenuItem.Click
+        My.Computer.Clipboard.SetText(ListBox1.SelectedItem)
+    End Sub
+
+    Private Sub CopyIPToClipboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyIPToClipboardToolStripMenuItem.Click
+        My.Computer.Clipboard.SetText(CurrentIPv4)
+    End Sub
+
+    Private Sub CopyIpv6ToClipboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyIpv6ToClipboardToolStripMenuItem.Click
+        My.Computer.Clipboard.SetText(CurrentIPv6)
     End Sub
 End Class
