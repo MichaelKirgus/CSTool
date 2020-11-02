@@ -3,6 +3,8 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
+Imports WeifenLuo.WinFormsUI.Docking
+
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainForm
     Inherits System.Windows.Forms.Form
@@ -860,16 +862,16 @@ Partial Class MainForm
     End Sub
     Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
-    Friend WithEvents DockingSuiteVS2015BlueTheme As WeifenLuo.WinFormsUI.Docking.VS2015BlueTheme
-    Friend WithEvents DockingSuiteVS2015LightTheme As WeifenLuo.WinFormsUI.Docking.VS2015LightTheme
+    Friend WithEvents DockingSuiteVS2015BlueTheme As VS2015BlueTheme
+    Friend WithEvents DockingSuiteVS2015LightTheme As VS2015LightTheme
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents ToolStripButton2 As ToolStripButton
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents ToolStripComboBox1 As ToolStripComboBox
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents ToolStripButton5 As ToolStripButton
-    Friend WithEvents CSDockPanelHosting As WeifenLuo.WinFormsUI.Docking.DockPanel
-    Friend WithEvents VisualStudioToolStripExtender1 As WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender
+    Friend WithEvents CSDockPanelHosting As DockPanel
+    Friend WithEvents VisualStudioToolStripExtender1 As VisualStudioToolStripExtender
     Friend WithEvents ToolStripButton7 As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripButton9 As ToolStripButton
@@ -888,7 +890,7 @@ Partial Class MainForm
     Friend WithEvents DocktopToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripButton6 As ToolStripSplitButton
     Friend WithEvents ToolStripButton4 As ToolStripButton
-    Friend WithEvents VS2015DarkTheme1 As WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme
+    Friend WithEvents VS2015DarkTheme1 As VS2015DarkTheme
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents NewIndependentWindowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DockdocumentToolStripMenuItem As ToolStripMenuItem
