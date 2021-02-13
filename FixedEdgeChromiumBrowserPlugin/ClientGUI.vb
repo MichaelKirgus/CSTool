@@ -71,20 +71,52 @@ Public Class ClientGUI
 
     Private Sub WebBrowser1_InitCompleted(sender As Object, e As Object) Handles WebView2.CoreWebView2InitializationCompleted
         InitWebBrowserPluginSettings()
-        Debug.WriteLine("Fertig!")
+        _ParentInstance.CurrentLogInstance.WriteLogEntry("Finished WebView2 initialization", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+
+        _ParentInstance.CurrentLogInstance.WriteLogEntry("Set GUI settings...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+        WebView2.CoreWebView2.Settings.IsScriptEnabled = _Settings.EnableJavaScript
+        WebView2.CoreWebView2.Settings.AreDefaultContextMenusEnabled = _Settings.ContextMenuEnabled
+        WebView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = _Settings.DefaultScriptsDialogsEnabled
+        WebView2.CoreWebView2.Settings.AreDevToolsEnabled = _Settings.DeveloperToolsEnabled
+        WebView2.CoreWebView2.Settings.AreHostObjectsAllowed = _Settings.HostObjectsEnabled
+        WebView2.CoreWebView2.Settings.IsBuiltInErrorPageEnabled = _Settings.BuildInErrorPagesEnabled
+        WebView2.CoreWebView2.Settings.IsStatusBarEnabled = _Settings.StatusBarEnabled
+        WebView2.CoreWebView2.Settings.IsWebMessageEnabled = _Settings.WebMessageEnabled
+        WebView2.CoreWebView2.Settings.IsZoomControlEnabled = _Settings.ZoomEnabled
+        _ParentInstance.CurrentLogInstance.WriteLogEntry("GUI settings applied.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
     End Sub
 
     Public Sub InitWebBrowserPluginSettings()
         If Not IsNothing(_Settings) Then
+            _ParentInstance.CurrentLogInstance.WriteLogEntry("Start initialization of WebView2...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
             If WebView2Init = False Then
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("Create WebView2Core objects...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                 Dim cproper As New CoreWebView2CreationProperties
+                Dim cenviron As New CoreWebView2EnvironmentOptions
+                Dim cenvinstance As CoreWebView2Environment
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("Set WebView2Core language...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                 cproper.BrowserExecutableFolder = _Settings.BrowserExecutableFolder
                 cproper.Language = _Settings.BrowserLanguage
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("Set WebView2Core user data directory...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                cproper.UserDataFolder = _Settings.UserDataFolder
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("Set WebView2Core SSO settings...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                cenviron.AllowSingleSignOnUsingOSPrimaryAccount = _Settings.AllowSingleSignOnUsingOSPrimaryAccount
 
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("Set WebView2Core creation properties...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                 WebView2.CreationProperties = cproper
 
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("Create async WebView2Core environment...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                Dim environtask As Task(Of CoreWebView2Environment)
+                environtask = CoreWebView2Environment.CreateAsync("", "", cenviron)
+                environtask.Wait()
+                cenvinstance = environtask.Result
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("WebView2Core environment created.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+
                 Dim inittask As Task
-                inittask = WebView2.EnsureCoreWebView2Async()
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("Create async WebView2 instance...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
+                inittask = WebView2.EnsureCoreWebView2Async(cenvinstance)
+
+                _ParentInstance.CurrentLogInstance.WriteLogEntry("WebView2 instance created.", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
 
                 WebView2Init = True
             End If
