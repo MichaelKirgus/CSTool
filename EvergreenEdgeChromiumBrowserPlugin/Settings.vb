@@ -11,10 +11,20 @@
     Public Property LoadURLAtStart As Boolean = True
     Public Property RaiseURLRefreshIfHostnameChanged As Boolean = True
     Public Property ShowWebsiteTitleInWindowTitle As Boolean = True
+    Public Property AllowSingleSignOnUsingOSPrimaryAccount As Boolean = True
+    Public Property UserDataFolder As String = ""
     Public Property UseCustomAuthentification As Boolean = False
     Public Property UseCustomAuthentificationUsername As String = ""
     Public Property UseCustomAuthentificationPassword As String = ""
     Public Property ShowNavigationToolbar As Boolean = True
     Public Property EnableJavaScript As Boolean = True
+    Public Property ContextMenuEnabled As Boolean = True
+    Public Property StatusBarEnabled As Boolean = True
+    Public Property DefaultScriptsDialogsEnabled As Boolean = True
+    Public Property DeveloperToolsEnabled As Boolean = False
+    Public Property HostObjectsEnabled As Boolean = True
+    Public Property BuildInErrorPagesEnabled As Boolean = True
+    Public Property ZoomEnabled As Boolean = True
+    Public Property WebMessageEnabled As Boolean = True
     Public Property BrowserLanguage As String = ""
 End Class
