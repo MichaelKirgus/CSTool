@@ -69,7 +69,7 @@ Public Class ClientGUI
         End If
     End Sub
 
-    Private Sub WebBrowser1_InitCompleted(sender As Object, e As Object) Handles WebView2.CoreWebView2Ready
+    Private Sub WebBrowser1_InitCompleted(sender As Object, e As Object) Handles WebView2.CoreWebView2InitializationCompleted
         InitWebBrowserPluginSettings()
         Debug.WriteLine("Fertig!")
     End Sub

@@ -175,7 +175,6 @@ Partial Class ClientGUI
         Me.WebView2.Name = "WebView2"
         Me.WebView2.Size = New System.Drawing.Size(730, 416)
         Me.WebView2.TabIndex = 0
-        Me.WebView2.Text = "WebView21"
         Me.WebView2.ZoomFactor = 1.0R
         '
         'ClientGUI
