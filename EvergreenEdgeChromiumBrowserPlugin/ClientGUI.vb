@@ -112,9 +112,9 @@ Public Class ClientGUI
                     Dim cenviron As New CoreWebView2EnvironmentOptions
                     Dim cenvinstance As CoreWebView2Environment
                     _ParentInstance.CurrentLogInstance.WriteLogEntry("Set WebView2Core language...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                    cproper.Language = _Settings.BrowserLanguage
+                    cproper.Language = EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.BrowserLanguage)
                     _ParentInstance.CurrentLogInstance.WriteLogEntry("Set WebView2Core user data directory...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
-                    cproper.UserDataFolder = _Settings.UserDataFolder
+                    cproper.UserDataFolder = EnvManager.ResolveEnvironmentVariables(_ParentInstance.EnvironmentRuntimeVariables, _Settings.UserDataFolder)
                     _ParentInstance.CurrentLogInstance.WriteLogEntry("Set WebView2Core SSO settings...", Me.GetType, LogEntryTypeEnum.Info, LogEntryLevelEnum.Debug)
                     cenviron.AllowSingleSignOnUsingOSPrimaryAccount = _Settings.AllowSingleSignOnUsingOSPrimaryAccount
 
