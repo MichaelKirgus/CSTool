@@ -17,7 +17,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Tool for manage clients and server")>
 <Assembly: AssemblyCompany("Michael Kirgus")>
 <Assembly: AssemblyProduct("CSTool")>
-<Assembly: AssemblyCopyright("Copyright ©  2020 Michael Kirgus")>
+<Assembly: AssemblyCopyright("Copyright ©  2020-2021 Michael Kirgus")>
 <Assembly: AssemblyTrademark("CSTool")>
 
 <Assembly: ComVisible(False)>
@@ -36,5 +36,5 @@ Imports System.Runtime.InteropServices
 ' indem Sie "*" wie unten gezeigt eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("2.0.0.18")>
-<Assembly: AssemblyFileVersion("2.0.0.18")>
+<Assembly: AssemblyVersion("2.0.0.19")>
+<Assembly: AssemblyFileVersion("2.0.0.19")>

@@ -14,11 +14,11 @@ Imports System.Runtime.InteropServices
 ' Werte der Assemblyattribute überprüfen
 
 <Assembly: AssemblyTitle("CSToolLauncher")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyDescription("Setup an run CSTool")>
+<Assembly: AssemblyCompany("Michael Kirgus")>
 <Assembly: AssemblyProduct("CSToolLauncher")>
-<Assembly: AssemblyCopyright("Copyright ©  2020")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyCopyright("Copyright ©  2020-2021")>
+<Assembly: AssemblyTrademark("CSTool")>
 
 <Assembly: ComVisible(False)>
 
@@ -36,5 +36,5 @@ Imports System.Runtime.InteropServices
 ' indem Sie "*" wie unten gezeigt eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("2.0.0.18")>
-<Assembly: AssemblyFileVersion("2.0.0.18")>
+<Assembly: AssemblyVersion("2.0.0.19")>
+<Assembly: AssemblyFileVersion("2.0.0.19")>
