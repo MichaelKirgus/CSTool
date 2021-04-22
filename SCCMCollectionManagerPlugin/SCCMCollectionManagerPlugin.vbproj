@@ -255,6 +255,7 @@
     <None Include="Resources\icon-duplicate_16x16.png" />
     <None Include="Resources\icon-cheveron-down_16x16.png" />
     <None Include="Resources\icon-cheveron-up_16x16.png" />
+    <None Include="Resources\icon-clipboard_16x16.png" />
     <Content Include="wizard_app.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,7 @@ Public Class ClientGUI
     Public _ParentInstance As CSToolPluginLib.ICSToolInterface
     Public EnvManager As New EnvironmentManager
     Public CurrentIPHostname As String = ""
+    Public CurrentCollectionClipboardItems As New List(Of ListViewItem)
 
     <DllImport("uxtheme", CharSet:=CharSet.Unicode)>
     Public Shared Function SetWindowTheme(ByVal hWnd As IntPtr, ByVal textSubAppName As String, ByVal textSubIdList As String) As Integer
@@ -1496,6 +1497,9 @@ Public Class ClientGUI
             Dim obj As WqlResultObject
             obj = item.Tag
 
+            Dim PendingGroupItem As New ListViewGroup("Add - Pending")
+            AddGroupToListView(ListView4, PendingGroupItem)
+
             collid = obj.PropertyList("CollectionID")
             If AddToCollection(collid, GetClientnameResourceID, CurrentIPHostname, CurrentSMSConnection) Then
                 Dim jj As ListViewItem
@@ -1503,6 +1507,7 @@ Public Class ClientGUI
 
                 jj.BackColor = Color.LightGreen
                 AddListViewItem(ListView4, jj)
+                SetGroupOfListViewItem(ListView4, jj, PendingGroupItem)
             End If
         Next
 
@@ -1537,8 +1542,12 @@ Public Class ClientGUI
 
             collid = obj.PropertyList("CollectionID")
 
+            Dim PendingGroupItem As New ListViewGroup("Remove - Pending")
+            AddGroupToListView(ListView4, PendingGroupItem)
+
             If RemoveFromCollection(collid, GetClientnameResourceID, CurrentSMSConnection) Then
                 item.BackColor = Color.LightCoral
+                SetGroupOfListViewItem(ListView4, item, PendingGroupItem)
             End If
 
             remcnt += 1
@@ -1696,28 +1705,44 @@ Public Class ClientGUI
     Private Sub LogSpeichernToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogSpeichernToolStripMenuItem.Click
         SaveTextfileDlg.ShowDialog()
         If Not SaveTextfileDlg.FileName = "" Then
-            SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView3)
+            If SaveTextfileDlg.FilterIndex = 3 Then
+                SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView3, ";")
+            Else
+                SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView3)
+            End If
         End If
     End Sub
 
     Private Sub ExportInDateiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportInDateiToolStripMenuItem.Click
         SaveTextfileDlg.ShowDialog()
         If Not SaveTextfileDlg.FileName = "" Then
-            SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView2)
+            If SaveTextfileDlg.FilterIndex = 3 Then
+                SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView2, ";")
+            Else
+                SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView2)
+            End If
         End If
     End Sub
 
     Private Sub ExportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToolStripMenuItem.Click
         SaveTextfileDlg.ShowDialog()
         If Not SaveTextfileDlg.FileName = "" Then
-            SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView4)
+            If SaveTextfileDlg.FilterIndex = 3 Then
+                SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView4, ";")
+            Else
+                SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView4)
+            End If
         End If
     End Sub
 
     Private Sub ExportInDateiToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExportInDateiToolStripMenuItem1.Click
         SaveTextfileDlg.ShowDialog()
         If Not SaveTextfileDlg.FileName = "" Then
-            SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView1)
+            If SaveTextfileDlg.FilterIndex = 3 Then
+                SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView1, ";")
+            Else
+                SaveListviewContentToFile(SaveTextfileDlg.FileName, ListView1)
+            End If
         End If
     End Sub
 
@@ -1930,6 +1955,9 @@ Public Class ClientGUI
             Dim destinationclientres As String
             destinationclientres = GetSpecificClientResourceID(arglist(1))
 
+            Dim PendingGroupItem As New ListViewGroup("Add - Pending")
+            AddGroupToListView(ListView4, PendingGroupItem)
+
             For index = 0 To collectionlist.Count - 1
                 If AddToCollection(collectionlist(index), destinationclientres, arglist(1), CurrentSMSConnection) Then
                     Dim qq As New ListViewItem
@@ -1943,6 +1971,7 @@ Public Class ClientGUI
                     qq.BackColor = Color.LightGreen
 
                     AddListViewItem(ListView4, qq)
+                    SetGroupOfListViewItem(ListView4, qq, PendingGroupItem)
                 End If
             Next
 
@@ -1950,6 +1979,7 @@ Public Class ClientGUI
                 ForceRefreshPolicies(arglist(1), True, IsClientPackageStateReceived)
             End If
         Catch ex As Exception
+            PostLogText("Error: " & ex.Message, True)
         End Try
     End Sub
 
@@ -1990,5 +2020,96 @@ Public Class ClientGUI
 
     Private Sub SortDescendingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortDescendingToolStripMenuItem.Click
         SortListView(ListView2, SortOrder.Descending)
+    End Sub
+
+    Private Sub CopySelectedMembershipsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopySelectedMembershipsToolStripMenuItem.Click
+        Try
+            CurrentCollectionClipboardItems.Clear()
+
+            For Each item As ListViewItem In ListView4.SelectedItems
+                CurrentCollectionClipboardItems.Add(item.Clone)
+            Next
+        Catch ex As Exception
+            PostLogText("Error: " & ex.Message, True)
+        End Try
+    End Sub
+
+    Private Sub PasteMembershipsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PasteMembershipsToolStripMenuItem.Click
+        Try
+            If Not CurrentCollectionClipboardItems.Count = 0 Then
+                If Not PasteCollectionsWorker.IsBusy Then
+                    PasteCollectionsWorker.RunWorkerAsync(CurrentCollectionClipboardItems)
+                Else
+                    MsgBox("System is busy, please wait.", MsgBoxStyle.Exclamation)
+                End If
+            Else
+                MsgBox("No collections in clipboard!", MsgBoxStyle.Exclamation)
+            End If
+        Catch ex As Exception
+            PostLogText("Error: " & ex.Message, True)
+        End Try
+    End Sub
+
+    Private Sub PasteCollectionsWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles PasteCollectionsWorker.DoWork
+        Try
+            Dim workerobj As List(Of ListViewItem)
+            workerobj = e.Argument
+
+            For Index = 0 To workerobj.Count - 1
+                Dim jj As ListViewItem
+                jj = workerobj(Index).Clone
+
+                Dim obj As WqlResultObject
+                obj = jj.Tag
+
+                Dim PendingGroupItem As New ListViewGroup("Add - Pending")
+                AddGroupToListView(ListView4, PendingGroupItem)
+
+                If AddToCollection(obj.PropertyList("CollectionID"), GetClientnameResourceID, CurrentIPHostname, CurrentSMSConnection) Then
+                    jj.BackColor = Color.LightGreen
+                    AddListViewItem(ListView4, jj)
+                    SetGroupOfListViewItem(ListView4, jj, PendingGroupItem)
+                End If
+            Next
+
+            If _Settings.SMSVerifyCollectionMembership Then
+                Dim NewItemCount As Integer
+                NewItemCount = ListView4.Items.Count + SkippedClientCollectionsCount
+
+                PostLogText("Waiting for SMS...", False)
+                WatchingClientname = CurrentIPHostname
+                If WaitForMembershipUpdate(NewItemCount) Then
+                    PostLogText("SMS: Collection added.", False)
+                    If LiveModeButton.Checked Then
+                        ForceRefreshPolicies(CurrentIPHostname, True, IsClientPackageStateReceived)
+                    End If
+                Else
+                    PostLogText("SMS: Error. Collection can not be added to the membership.", True)
+                End If
+            Else
+                If LiveModeButton.Checked Then
+                    ForceRefreshPolicies(CurrentIPHostname, True, IsClientPackageStateReceived)
+                End If
+            End If
+        Catch ex As Exception
+            PostLogText("Error: " & ex.Message, True)
+        End Try
+    End Sub
+
+    Private Sub PasteCollectionsWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles PasteCollectionsWorker.RunWorkerCompleted
+        TriggerClientCollectionMembershipsWorker()
+        SetOptimalListViewStyle()
+    End Sub
+
+    Private Sub CopySelectedMembershipsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CopySelectedMembershipsToolStripMenuItem1.Click
+        Try
+            CurrentCollectionClipboardItems.Clear()
+
+            For Each item As ListViewItem In ListView2.SelectedItems
+                CurrentCollectionClipboardItems.Add(item.Clone)
+            Next
+        Catch ex As Exception
+            PostLogText("Error: " & ex.Message, True)
+        End Try
     End Sub
 End Class
