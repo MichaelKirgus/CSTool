@@ -174,6 +174,10 @@ Public Class ClientGUI
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        RefreshServerCollections()
+    End Sub
+
+    Public Sub RefreshServerCollections()
         _Settings.SMSServer = ToolStripTextBox1.Text
 
         If CurrentSMSConnection Is Nothing Then
@@ -2111,5 +2115,9 @@ Public Class ClientGUI
         Catch ex As Exception
             PostLogText("Error: " & ex.Message, True)
         End Try
+    End Sub
+
+    Private Sub RefreshCollectionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RefreshCollectionsToolStripMenuItem.Click
+        RefreshServerCollections()
     End Sub
 End Class
