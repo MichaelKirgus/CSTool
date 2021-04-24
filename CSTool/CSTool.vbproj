@@ -571,7 +571,7 @@
       <Version>87.1.132</Version>
     </PackageReference>
     <PackageReference Include="Geckofx60.64">
-      <Version>60.0.54</Version>
+      <Version>60.0.55</Version>
     </PackageReference>
     <PackageReference Include="Geckofx60.64.Windows">
       <Version>0.18.0</Version>
@@ -580,7 +580,7 @@
       <Version>6.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2">
-      <Version>1.0.705.50</Version>
+      <Version>1.0.818.41</Version>
     </PackageReference>
     <PackageReference Include="SSH.NET">
       <Version>2020.0.1</Version>
