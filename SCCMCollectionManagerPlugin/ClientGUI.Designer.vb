@@ -129,6 +129,7 @@ Partial Class ClientGUI
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.SortAscendingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SortDescendingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RefreshCollectionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportInDateiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
@@ -160,7 +161,6 @@ Partial Class ClientGUI
         Me.ConnectToSMSMServerWorker = New System.ComponentModel.BackgroundWorker()
         Me.CloneCollectionFromDeviceWorker = New System.ComponentModel.BackgroundWorker()
         Me.PasteCollectionsWorker = New System.ComponentModel.BackgroundWorker()
-        Me.RefreshCollectionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -276,9 +276,9 @@ Partial Class ClientGUI
         Me.SCCMClientsSplash.BackColor = System.Drawing.Color.White
         Me.SCCMClientsSplash.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SCCMClientsSplash.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.adminstatus
-        Me.SCCMClientsSplash.Location = New System.Drawing.Point(0, 25)
+        Me.SCCMClientsSplash.Location = New System.Drawing.Point(0, 31)
         Me.SCCMClientsSplash.Name = "SCCMClientsSplash"
-        Me.SCCMClientsSplash.Size = New System.Drawing.Size(777, 169)
+        Me.SCCMClientsSplash.Size = New System.Drawing.Size(777, 163)
         Me.SCCMClientsSplash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.SCCMClientsSplash.TabIndex = 7
         Me.SCCMClientsSplash.TabStop = False
@@ -290,9 +290,9 @@ Partial Class ClientGUI
         Me.ListView5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView5.FullRowSelect = True
         Me.ListView5.HideSelection = False
-        Me.ListView5.Location = New System.Drawing.Point(0, 25)
+        Me.ListView5.Location = New System.Drawing.Point(0, 31)
         Me.ListView5.Name = "ListView5"
-        Me.ListView5.Size = New System.Drawing.Size(777, 169)
+        Me.ListView5.Size = New System.Drawing.Size(777, 163)
         Me.ListView5.SmallImageList = Me.ImageList1
         Me.ListView5.TabIndex = 1
         Me.ListView5.UseCompatibleStateImageBehavior = False
@@ -335,7 +335,7 @@ Partial Class ClientGUI
         '
         Me.ToolStripMenuItem4.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_announcement_16x16
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(163, 30)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(155, 22)
         Me.ToolStripMenuItem4.Text = "Wake-Up client"
         '
         'ImageList1
@@ -364,14 +364,14 @@ Partial Class ClientGUI
         Me.ToolStrip3.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel3, Me.ToolStripTextBox3, Me.ToolStripButton8, Me.ToolStripSeparator4, Me.ToolStripButton7, Me.ToolStripButton4, Me.ToolStripButton9})
         Me.ToolStrip3.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip3.Name = "ToolStrip3"
-        Me.ToolStrip3.Size = New System.Drawing.Size(777, 25)
+        Me.ToolStrip3.Size = New System.Drawing.Size(777, 31)
         Me.ToolStrip3.TabIndex = 0
         Me.ToolStrip3.Text = "ToolStrip3"
         '
         'ToolStripLabel3
         '
         Me.ToolStripLabel3.Name = "ToolStripLabel3"
-        Me.ToolStripLabel3.Size = New System.Drawing.Size(139, 22)
+        Me.ToolStripLabel3.Size = New System.Drawing.Size(139, 28)
         Me.ToolStripLabel3.Text = "Search device/username:"
         '
         'ToolStripTextBox3
@@ -379,7 +379,7 @@ Partial Class ClientGUI
         Me.ToolStripTextBox3.Enabled = False
         Me.ToolStripTextBox3.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.ToolStripTextBox3.Name = "ToolStripTextBox3"
-        Me.ToolStripTextBox3.Size = New System.Drawing.Size(150, 25)
+        Me.ToolStripTextBox3.Size = New System.Drawing.Size(150, 31)
         '
         'ToolStripButton8
         '
@@ -387,13 +387,13 @@ Partial Class ClientGUI
         Me.ToolStripButton8.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_search_16x16
         Me.ToolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton8.Name = "ToolStripButton8"
-        Me.ToolStripButton8.Size = New System.Drawing.Size(62, 22)
+        Me.ToolStripButton8.Size = New System.Drawing.Size(70, 28)
         Me.ToolStripButton8.Text = "&Search"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 31)
         '
         'ToolStripButton7
         '
@@ -401,7 +401,7 @@ Partial Class ClientGUI
         Me.ToolStripButton7.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_refresh_16x16
         Me.ToolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton7.Name = "ToolStripButton7"
-        Me.ToolStripButton7.Size = New System.Drawing.Size(120, 22)
+        Me.ToolStripButton7.Size = New System.Drawing.Size(128, 28)
         Me.ToolStripButton7.Text = "&Reload all devices"
         '
         'ToolStripButton4
@@ -412,7 +412,7 @@ Partial Class ClientGUI
         Me.ToolStripButton4.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_clock_16x16
         Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton4.Name = "ToolStripButton4"
-        Me.ToolStripButton4.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton4.Size = New System.Drawing.Size(28, 28)
         Me.ToolStripButton4.Text = "Show log (on/off)"
         '
         'ToolStripButton9
@@ -422,13 +422,13 @@ Partial Class ClientGUI
         Me.ToolStripButton9.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_link_16x16
         Me.ToolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton9.Name = "ToolStripButton9"
-        Me.ToolStripButton9.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton9.Size = New System.Drawing.Size(28, 28)
         Me.ToolStripButton9.Text = "Custom WQL-Query..."
         '
         'SplitContainer3
         '
         Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer3.Location = New System.Drawing.Point(0, 25)
+        Me.SplitContainer3.Location = New System.Drawing.Point(0, 31)
         Me.SplitContainer3.Name = "SplitContainer3"
         Me.SplitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -441,8 +441,8 @@ Partial Class ClientGUI
         'SplitContainer3.Panel2
         '
         Me.SplitContainer3.Panel2.Controls.Add(Me.TabControl1)
-        Me.SplitContainer3.Size = New System.Drawing.Size(777, 538)
-        Me.SplitContainer3.SplitterDistance = 256
+        Me.SplitContainer3.Size = New System.Drawing.Size(777, 532)
+        Me.SplitContainer3.SplitterDistance = 253
         Me.SplitContainer3.SplitterWidth = 2
         Me.SplitContainer3.TabIndex = 3
         '
@@ -451,7 +451,7 @@ Partial Class ClientGUI
         Me.GroupMemberSplashLabel.AutoSize = True
         Me.GroupMemberSplashLabel.BackColor = System.Drawing.Color.White
         Me.GroupMemberSplashLabel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupMemberSplashLabel.Location = New System.Drawing.Point(0, 243)
+        Me.GroupMemberSplashLabel.Location = New System.Drawing.Point(0, 240)
         Me.GroupMemberSplashLabel.Name = "GroupMemberSplashLabel"
         Me.GroupMemberSplashLabel.Size = New System.Drawing.Size(121, 13)
         Me.GroupMemberSplashLabel.TabIndex = 6
@@ -464,7 +464,7 @@ Partial Class ClientGUI
         Me.GroupMemberSplash.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.adminstatus
         Me.GroupMemberSplash.Location = New System.Drawing.Point(0, 0)
         Me.GroupMemberSplash.Name = "GroupMemberSplash"
-        Me.GroupMemberSplash.Size = New System.Drawing.Size(777, 256)
+        Me.GroupMemberSplash.Size = New System.Drawing.Size(777, 253)
         Me.GroupMemberSplash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.GroupMemberSplash.TabIndex = 5
         Me.GroupMemberSplash.TabStop = False
@@ -478,7 +478,7 @@ Partial Class ClientGUI
         Me.ListView4.HideSelection = False
         Me.ListView4.Location = New System.Drawing.Point(0, 0)
         Me.ListView4.Name = "ListView4"
-        Me.ListView4.Size = New System.Drawing.Size(777, 256)
+        Me.ListView4.Size = New System.Drawing.Size(777, 253)
         Me.ListView4.SmallImageList = Me.ImageList1
         Me.ListView4.TabIndex = 4
         Me.ListView4.UseCompatibleStateImageBehavior = False
@@ -515,45 +515,45 @@ Partial Class ClientGUI
         '
         Me.EntfernenToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_minus_square_16x16
         Me.EntfernenToolStripMenuItem.Name = "EntfernenToolStripMenuItem"
-        Me.EntfernenToolStripMenuItem.Size = New System.Drawing.Size(251, 30)
+        Me.EntfernenToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
         Me.EntfernenToolStripMenuItem.Text = "Delete membership from device"
         '
         'ObjekteigenschaftenToolStripMenuItem1
         '
         Me.ObjekteigenschaftenToolStripMenuItem1.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_information_16x16
         Me.ObjekteigenschaftenToolStripMenuItem1.Name = "ObjekteigenschaftenToolStripMenuItem1"
-        Me.ObjekteigenschaftenToolStripMenuItem1.Size = New System.Drawing.Size(251, 30)
+        Me.ObjekteigenschaftenToolStripMenuItem1.Size = New System.Drawing.Size(243, 22)
         Me.ObjekteigenschaftenToolStripMenuItem1.Text = "Item properties..."
         '
         'ToolStripSeparator11
         '
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(248, 6)
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(240, 6)
         '
         'CopySelectedMembershipsToolStripMenuItem
         '
-        Me.CopySelectedMembershipsToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_duplicate_16x16
+        Me.CopySelectedMembershipsToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_duplicate_16x16_cleared
         Me.CopySelectedMembershipsToolStripMenuItem.Name = "CopySelectedMembershipsToolStripMenuItem"
-        Me.CopySelectedMembershipsToolStripMenuItem.Size = New System.Drawing.Size(251, 30)
+        Me.CopySelectedMembershipsToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
         Me.CopySelectedMembershipsToolStripMenuItem.Text = "Copy selected memberships"
         '
         'PasteMembershipsToolStripMenuItem
         '
         Me.PasteMembershipsToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_clipboard_16x16
         Me.PasteMembershipsToolStripMenuItem.Name = "PasteMembershipsToolStripMenuItem"
-        Me.PasteMembershipsToolStripMenuItem.Size = New System.Drawing.Size(251, 30)
+        Me.PasteMembershipsToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
         Me.PasteMembershipsToolStripMenuItem.Text = "Paste memberships"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(248, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(240, 6)
         '
         'ExportToolStripMenuItem
         '
         Me.ExportToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_news_16x16
         Me.ExportToolStripMenuItem.Name = "ExportToolStripMenuItem"
-        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(251, 30)
+        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(243, 22)
         Me.ExportToolStripMenuItem.Text = "Export to file..."
         '
         'TabControl1
@@ -566,7 +566,7 @@ Partial Class ClientGUI
         Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(777, 280)
+        Me.TabControl1.Size = New System.Drawing.Size(777, 277)
         Me.TabControl1.TabIndex = 8
         '
         'TabPage1
@@ -578,7 +578,7 @@ Partial Class ClientGUI
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(769, 254)
+        Me.TabPage1.Size = New System.Drawing.Size(769, 251)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Collections from device"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -588,7 +588,7 @@ Partial Class ClientGUI
         Me.ClientPackageSplashLabel.AutoSize = True
         Me.ClientPackageSplashLabel.BackColor = System.Drawing.Color.White
         Me.ClientPackageSplashLabel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ClientPackageSplashLabel.Location = New System.Drawing.Point(0, 241)
+        Me.ClientPackageSplashLabel.Location = New System.Drawing.Point(0, 238)
         Me.ClientPackageSplashLabel.Name = "ClientPackageSplashLabel"
         Me.ClientPackageSplashLabel.Size = New System.Drawing.Size(124, 13)
         Me.ClientPackageSplashLabel.TabIndex = 8
@@ -601,7 +601,7 @@ Partial Class ClientGUI
         Me.ClientPackageSplash.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.adminstatus
         Me.ClientPackageSplash.Location = New System.Drawing.Point(0, 0)
         Me.ClientPackageSplash.Name = "ClientPackageSplash"
-        Me.ClientPackageSplash.Size = New System.Drawing.Size(769, 254)
+        Me.ClientPackageSplash.Size = New System.Drawing.Size(769, 251)
         Me.ClientPackageSplash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.ClientPackageSplash.TabIndex = 6
         Me.ClientPackageSplash.TabStop = False
@@ -615,7 +615,7 @@ Partial Class ClientGUI
         Me.ListView1.HideSelection = False
         Me.ListView1.Location = New System.Drawing.Point(0, 0)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(769, 254)
+        Me.ListView1.Size = New System.Drawing.Size(769, 251)
         Me.ListView1.SmallImageList = Me.ImageList1
         Me.ListView1.TabIndex = 2
         Me.ListView1.UseCompatibleStateImageBehavior = False
@@ -669,26 +669,26 @@ Partial Class ClientGUI
         '
         Me.NurClientstatusAktualisierenToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_refresh_16x16
         Me.NurClientstatusAktualisierenToolStripMenuItem.Name = "NurClientstatusAktualisierenToolStripMenuItem"
-        Me.NurClientstatusAktualisierenToolStripMenuItem.Size = New System.Drawing.Size(218, 30)
+        Me.NurClientstatusAktualisierenToolStripMenuItem.Size = New System.Drawing.Size(210, 22)
         Me.NurClientstatusAktualisierenToolStripMenuItem.Text = "Only refresh device data..."
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(215, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(207, 6)
         '
         'ObjekteigenschaftenToolStripMenuItem2
         '
         Me.ObjekteigenschaftenToolStripMenuItem2.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_information_16x16
         Me.ObjekteigenschaftenToolStripMenuItem2.Name = "ObjekteigenschaftenToolStripMenuItem2"
-        Me.ObjekteigenschaftenToolStripMenuItem2.Size = New System.Drawing.Size(218, 30)
+        Me.ObjekteigenschaftenToolStripMenuItem2.Size = New System.Drawing.Size(210, 22)
         Me.ObjekteigenschaftenToolStripMenuItem2.Text = "Item properties..."
         '
         'ExportInDateiToolStripMenuItem1
         '
         Me.ExportInDateiToolStripMenuItem1.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_news_16x16
         Me.ExportInDateiToolStripMenuItem1.Name = "ExportInDateiToolStripMenuItem1"
-        Me.ExportInDateiToolStripMenuItem1.Size = New System.Drawing.Size(218, 30)
+        Me.ExportInDateiToolStripMenuItem1.Size = New System.Drawing.Size(210, 22)
         Me.ExportInDateiToolStripMenuItem1.Text = "Export to file..."
         '
         'TabPage2
@@ -700,7 +700,7 @@ Partial Class ClientGUI
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(0)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Size = New System.Drawing.Size(769, 254)
+        Me.TabPage2.Size = New System.Drawing.Size(769, 251)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Collections from server"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -710,7 +710,7 @@ Partial Class ClientGUI
         Me.ServerPackageSplashLabel.AutoSize = True
         Me.ServerPackageSplashLabel.BackColor = System.Drawing.Color.White
         Me.ServerPackageSplashLabel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ServerPackageSplashLabel.Location = New System.Drawing.Point(0, 241)
+        Me.ServerPackageSplashLabel.Location = New System.Drawing.Point(0, 238)
         Me.ServerPackageSplashLabel.Name = "ServerPackageSplashLabel"
         Me.ServerPackageSplashLabel.Size = New System.Drawing.Size(121, 13)
         Me.ServerPackageSplashLabel.TabIndex = 8
@@ -722,7 +722,7 @@ Partial Class ClientGUI
         Me.ServerPackageSplash.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ServerPackageSplash.Location = New System.Drawing.Point(0, 0)
         Me.ServerPackageSplash.Name = "ServerPackageSplash"
-        Me.ServerPackageSplash.Size = New System.Drawing.Size(769, 254)
+        Me.ServerPackageSplash.Size = New System.Drawing.Size(769, 251)
         Me.ServerPackageSplash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.ServerPackageSplash.TabIndex = 7
         Me.ServerPackageSplash.TabStop = False
@@ -736,7 +736,7 @@ Partial Class ClientGUI
         Me.ListView6.HideSelection = False
         Me.ListView6.Location = New System.Drawing.Point(0, 0)
         Me.ListView6.Name = "ListView6"
-        Me.ListView6.Size = New System.Drawing.Size(769, 254)
+        Me.ListView6.Size = New System.Drawing.Size(769, 251)
         Me.ListView6.SmallImageList = Me.ImageList1
         Me.ListView6.TabIndex = 3
         Me.ListView6.UseCompatibleStateImageBehavior = False
@@ -772,26 +772,26 @@ Partial Class ClientGUI
         '
         Me.ToolStripMenuItem1.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_refresh_16x16
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(206, 30)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(198, 22)
         Me.ToolStripMenuItem1.Text = "Only refresh server data"
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(203, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(195, 6)
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_information_16x16
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(206, 30)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(198, 22)
         Me.ToolStripMenuItem2.Text = "Item properties..."
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_news_16x16
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(206, 30)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(198, 22)
         Me.ToolStripMenuItem3.Text = "Export to file..."
         '
         'ToolStrip2
@@ -800,14 +800,14 @@ Partial Class ClientGUI
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.ToolStripTextBox2, Me.ToolStripSeparator2, Me.ToolStripButton1, Me.ToolStripButton6, Me.ToolStripSeparator3, Me.ToolStripButton3, Me.LiveModeButton, Me.ToolStripButton5, Me.ToolStripButton13, Me.ToolStripButton15, Me.ToolStripButton16})
         Me.ToolStrip2.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(777, 25)
+        Me.ToolStrip2.Size = New System.Drawing.Size(777, 31)
         Me.ToolStrip2.TabIndex = 0
         Me.ToolStrip2.Text = "ToolStrip2"
         '
         'ToolStripLabel2
         '
         Me.ToolStripLabel2.Name = "ToolStripLabel2"
-        Me.ToolStripLabel2.Size = New System.Drawing.Size(45, 22)
+        Me.ToolStripLabel2.Size = New System.Drawing.Size(45, 28)
         Me.ToolStripLabel2.Text = "Device:"
         '
         'ToolStripTextBox2
@@ -815,12 +815,12 @@ Partial Class ClientGUI
         Me.ToolStripTextBox2.Enabled = False
         Me.ToolStripTextBox2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.ToolStripTextBox2.Name = "ToolStripTextBox2"
-        Me.ToolStripTextBox2.Size = New System.Drawing.Size(100, 25)
+        Me.ToolStripTextBox2.Size = New System.Drawing.Size(100, 31)
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
         '
         'ToolStripButton1
         '
@@ -828,7 +828,7 @@ Partial Class ClientGUI
         Me.ToolStripButton1.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_check_circle_16x16
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(95, 22)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(103, 28)
         Me.ToolStripButton1.Text = "&Connect (F5)"
         '
         'ToolStripButton6
@@ -837,13 +837,13 @@ Partial Class ClientGUI
         Me.ToolStripButton6.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_view_16x16
         Me.ToolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton6.Name = "ToolStripButton6"
-        Me.ToolStripButton6.Size = New System.Drawing.Size(161, 22)
+        Me.ToolStripButton6.Size = New System.Drawing.Size(169, 28)
         Me.ToolStripButton6.Text = "Only load &collections (F6)"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 31)
         '
         'ToolStripButton3
         '
@@ -851,7 +851,7 @@ Partial Class ClientGUI
         Me.ToolStripButton3.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_announcement_16x16
         Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(128, 22)
+        Me.ToolStripButton3.Size = New System.Drawing.Size(136, 28)
         Me.ToolStripButton3.Text = "&Apply changes (F7)"
         '
         'LiveModeButton
@@ -862,7 +862,7 @@ Partial Class ClientGUI
         Me.LiveModeButton.Enabled = False
         Me.LiveModeButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.LiveModeButton.Name = "LiveModeButton"
-        Me.LiveModeButton.Size = New System.Drawing.Size(68, 22)
+        Me.LiveModeButton.Size = New System.Drawing.Size(68, 28)
         Me.LiveModeButton.Text = "&Live-Mode"
         '
         'ToolStripButton5
@@ -875,7 +875,7 @@ Partial Class ClientGUI
         Me.ToolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton5.Name = "ToolStripButton5"
-        Me.ToolStripButton5.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton5.Size = New System.Drawing.Size(23, 28)
         Me.ToolStripButton5.Text = "Filter collections"
         '
         'ToolStripButton13
@@ -888,7 +888,7 @@ Partial Class ClientGUI
         Me.ToolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton13.Name = "ToolStripButton13"
-        Me.ToolStripButton13.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton13.Size = New System.Drawing.Size(23, 28)
         Me.ToolStripButton13.Text = "Group collections"
         '
         'ToolStripButton15
@@ -901,16 +901,16 @@ Partial Class ClientGUI
         Me.ToolStripButton15.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_view_16x16
         Me.ToolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton15.Name = "ToolStripButton15"
-        Me.ToolStripButton15.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton15.Size = New System.Drawing.Size(28, 28)
         Me.ToolStripButton15.Text = "Show search device/username panel"
         '
         'ToolStripButton16
         '
         Me.ToolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton16.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_duplicate_16x16
+        Me.ToolStripButton16.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_duplicate_16x16_cleared
         Me.ToolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton16.Name = "ToolStripButton16"
-        Me.ToolStripButton16.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton16.Size = New System.Drawing.Size(28, 28)
         Me.ToolStripButton16.Text = "Duplicate collections from device (up) to device (down)"
         '
         'SMSCollectionSplashLabel
@@ -929,9 +929,9 @@ Partial Class ClientGUI
         Me.SMSCollectionSplash.BackColor = System.Drawing.Color.White
         Me.SMSCollectionSplash.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SMSCollectionSplash.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.adminstatus
-        Me.SMSCollectionSplash.Location = New System.Drawing.Point(0, 25)
+        Me.SMSCollectionSplash.Location = New System.Drawing.Point(0, 31)
         Me.SMSCollectionSplash.Name = "SMSCollectionSplash"
-        Me.SMSCollectionSplash.Size = New System.Drawing.Size(443, 734)
+        Me.SMSCollectionSplash.Size = New System.Drawing.Size(443, 728)
         Me.SMSCollectionSplash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.SMSCollectionSplash.TabIndex = 6
         Me.SMSCollectionSplash.TabStop = False
@@ -943,9 +943,9 @@ Partial Class ClientGUI
         Me.ListView2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView2.FullRowSelect = True
         Me.ListView2.HideSelection = False
-        Me.ListView2.Location = New System.Drawing.Point(0, 25)
+        Me.ListView2.Location = New System.Drawing.Point(0, 31)
         Me.ListView2.Name = "ListView2"
-        Me.ListView2.Size = New System.Drawing.Size(443, 734)
+        Me.ListView2.Size = New System.Drawing.Size(443, 728)
         Me.ListView2.SmallImageList = Me.ImageList1
         Me.ListView2.TabIndex = 3
         Me.ListView2.UseCompatibleStateImageBehavior = False
@@ -982,59 +982,66 @@ Partial Class ClientGUI
         '
         Me.ZuweisenToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_plus_square_16x16
         Me.ZuweisenToolStripMenuItem.Name = "ZuweisenToolStripMenuItem"
-        Me.ZuweisenToolStripMenuItem.Size = New System.Drawing.Size(280, 30)
+        Me.ZuweisenToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.ZuweisenToolStripMenuItem.Text = "Assign collection to device"
         '
         'AlleGeräteMitDieserCollectionToolStripMenuItem
         '
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_search_16x16
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Name = "AlleGeräteMitDieserCollectionToolStripMenuItem"
-        Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Size = New System.Drawing.Size(280, 30)
+        Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Text = "Show all devices with this collection..."
         '
         'CopySelectedMembershipsToolStripMenuItem1
         '
-        Me.CopySelectedMembershipsToolStripMenuItem1.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_duplicate_16x16
+        Me.CopySelectedMembershipsToolStripMenuItem1.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_duplicate_16x16_cleared
         Me.CopySelectedMembershipsToolStripMenuItem1.Name = "CopySelectedMembershipsToolStripMenuItem1"
-        Me.CopySelectedMembershipsToolStripMenuItem1.Size = New System.Drawing.Size(280, 30)
+        Me.CopySelectedMembershipsToolStripMenuItem1.Size = New System.Drawing.Size(272, 22)
         Me.CopySelectedMembershipsToolStripMenuItem1.Text = "Copy selected memberships"
         '
         'ObjekteigenschaftenToolStripMenuItem
         '
         Me.ObjekteigenschaftenToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_information_16x16
         Me.ObjekteigenschaftenToolStripMenuItem.Name = "ObjekteigenschaftenToolStripMenuItem"
-        Me.ObjekteigenschaftenToolStripMenuItem.Size = New System.Drawing.Size(280, 30)
+        Me.ObjekteigenschaftenToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.ObjekteigenschaftenToolStripMenuItem.Text = "Item properties..."
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(277, 6)
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(269, 6)
         '
         'SortAscendingToolStripMenuItem
         '
         Me.SortAscendingToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_cheveron_up_16x16
         Me.SortAscendingToolStripMenuItem.Name = "SortAscendingToolStripMenuItem"
-        Me.SortAscendingToolStripMenuItem.Size = New System.Drawing.Size(280, 30)
+        Me.SortAscendingToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.SortAscendingToolStripMenuItem.Text = "Sort ascending"
         '
         'SortDescendingToolStripMenuItem
         '
         Me.SortDescendingToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_cheveron_down_16x16
         Me.SortDescendingToolStripMenuItem.Name = "SortDescendingToolStripMenuItem"
-        Me.SortDescendingToolStripMenuItem.Size = New System.Drawing.Size(280, 30)
+        Me.SortDescendingToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.SortDescendingToolStripMenuItem.Text = "Sort descending"
+        '
+        'RefreshCollectionsToolStripMenuItem
+        '
+        Me.RefreshCollectionsToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_refresh_16x16
+        Me.RefreshCollectionsToolStripMenuItem.Name = "RefreshCollectionsToolStripMenuItem"
+        Me.RefreshCollectionsToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
+        Me.RefreshCollectionsToolStripMenuItem.Text = "Refresh collections"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(277, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(269, 6)
         '
         'ExportInDateiToolStripMenuItem
         '
         Me.ExportInDateiToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_news_16x16
         Me.ExportInDateiToolStripMenuItem.Name = "ExportInDateiToolStripMenuItem"
-        Me.ExportInDateiToolStripMenuItem.Size = New System.Drawing.Size(280, 30)
+        Me.ExportInDateiToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.ExportInDateiToolStripMenuItem.Text = "Export to file..."
         '
         'ToolStrip1
@@ -1043,14 +1050,14 @@ Partial Class ClientGUI
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripTextBox1, Me.ToolStripSeparator1, Me.ToolStripButton2, Me.ToolStripSeparator9, Me.ToolStripButton10, Me.ToolStripButton14, Me.ToolStripButton12, Me.ToolStripButton11})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(443, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(443, 31)
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
         '
         'ToolStripLabel1
         '
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(33, 22)
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(33, 28)
         Me.ToolStripLabel1.Text = "SMS:"
         '
         'ToolStripTextBox1
@@ -1058,12 +1065,12 @@ Partial Class ClientGUI
         Me.ToolStripTextBox1.Enabled = False
         Me.ToolStripTextBox1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
-        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 25)
+        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 31)
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
         '
         'ToolStripButton2
         '
@@ -1071,13 +1078,13 @@ Partial Class ClientGUI
         Me.ToolStripButton2.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_refresh_16x16
         Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(138, 22)
+        Me.ToolStripButton2.Size = New System.Drawing.Size(146, 28)
         Me.ToolStripButton2.Text = "&Reload all collections"
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(6, 31)
         '
         'ToolStripButton10
         '
@@ -1089,7 +1096,7 @@ Partial Class ClientGUI
         Me.ToolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton10.Name = "ToolStripButton10"
-        Me.ToolStripButton10.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton10.Size = New System.Drawing.Size(23, 28)
         Me.ToolStripButton10.Text = "Filter collections"
         '
         'ToolStripButton14
@@ -1102,7 +1109,7 @@ Partial Class ClientGUI
         Me.ToolStripButton14.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton14.Name = "ToolStripButton14"
-        Me.ToolStripButton14.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton14.Size = New System.Drawing.Size(23, 28)
         Me.ToolStripButton14.Text = "Group collections"
         '
         'ToolStripButton12
@@ -1112,7 +1119,7 @@ Partial Class ClientGUI
         Me.ToolStripButton12.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_news_16x16
         Me.ToolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton12.Name = "ToolStripButton12"
-        Me.ToolStripButton12.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton12.Size = New System.Drawing.Size(28, 28)
         Me.ToolStripButton12.Text = "Show only collections with members"
         '
         'ToolStripButton11
@@ -1121,7 +1128,7 @@ Partial Class ClientGUI
         Me.ToolStripButton11.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_search_16x16
         Me.ToolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton11.Name = "ToolStripButton11"
-        Me.ToolStripButton11.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton11.Size = New System.Drawing.Size(28, 28)
         Me.ToolStripButton11.Text = "Search catalog..."
         '
         'ListView3
@@ -1160,9 +1167,10 @@ Partial Class ClientGUI
         '
         'LogContextMenu
         '
+        Me.LogContextMenu.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.LogContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogSpeichernToolStripMenuItem})
         Me.LogContextMenu.Name = "LogContextMenu"
-        Me.LogContextMenu.Size = New System.Drawing.Size(128, 26)
+        Me.LogContextMenu.Size = New System.Drawing.Size(136, 34)
         '
         'LogSpeichernToolStripMenuItem
         '
@@ -1237,13 +1245,6 @@ Partial Class ClientGUI
         '
         Me.PasteCollectionsWorker.WorkerReportsProgress = True
         Me.PasteCollectionsWorker.WorkerSupportsCancellation = True
-        '
-        'RefreshCollectionsToolStripMenuItem
-        '
-        Me.RefreshCollectionsToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_refresh_16x16
-        Me.RefreshCollectionsToolStripMenuItem.Name = "RefreshCollectionsToolStripMenuItem"
-        Me.RefreshCollectionsToolStripMenuItem.Size = New System.Drawing.Size(280, 30)
-        Me.RefreshCollectionsToolStripMenuItem.Text = "Refresh collections"
         '
         'ClientGUI
         '
