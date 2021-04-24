@@ -2122,18 +2122,18 @@ Public Class ClientGUI
     End Sub
 
     Private Sub CopySelectedMembershipsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CopySelectedMembershipsToolStripMenuItem1.Click
-        Try
-            CurrentCollectionClipboardItems.Clear()
-
-            For Each item As ListViewItem In ListView2.SelectedItems
-                CurrentCollectionClipboardItems.Add(item.Clone)
-            Next
-        Catch ex As Exception
-            PostLogText("Error: " & ex.Message, True)
-        End Try
+        CopySelectedCollectionsToClipboard(ListView2)
     End Sub
 
     Private Sub RefreshCollectionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RefreshCollectionsToolStripMenuItem.Click
         RefreshServerCollections()
+    End Sub
+
+    Private Sub AddSelectedCollectionToClipboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddSelectedCollectionToClipboardToolStripMenuItem.Click
+        CopySelectedCollectionsToClipboard(ListView4, False)
+    End Sub
+
+    Private Sub ToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem5.Click
+        CopySelectedCollectionsToClipboard(ListView2, False)
     End Sub
 End Class

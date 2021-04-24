@@ -161,6 +161,8 @@ Partial Class ClientGUI
         Me.ConnectToSMSMServerWorker = New System.ComponentModel.BackgroundWorker()
         Me.CloneCollectionFromDeviceWorker = New System.ComponentModel.BackgroundWorker()
         Me.PasteCollectionsWorker = New System.ComponentModel.BackgroundWorker()
+        Me.AddSelectedCollectionToClipboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -507,9 +509,9 @@ Partial Class ClientGUI
         '
         'RemoveMemershipContextMenu
         '
-        Me.RemoveMemershipContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EntfernenToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem1, Me.ToolStripSeparator11, Me.CopySelectedMembershipsToolStripMenuItem, Me.PasteMembershipsToolStripMenuItem, Me.ToolStripSeparator6, Me.ExportToolStripMenuItem})
+        Me.RemoveMemershipContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EntfernenToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem1, Me.ToolStripSeparator11, Me.CopySelectedMembershipsToolStripMenuItem, Me.ToolStripMenuItem5, Me.PasteMembershipsToolStripMenuItem, Me.ToolStripSeparator6, Me.ExportToolStripMenuItem})
         Me.RemoveMemershipContextMenu.Name = "ContextMenuStrip2"
-        Me.RemoveMemershipContextMenu.Size = New System.Drawing.Size(244, 126)
+        Me.RemoveMemershipContextMenu.Size = New System.Drawing.Size(278, 170)
         '
         'EntfernenToolStripMenuItem
         '
@@ -974,16 +976,16 @@ Partial Class ClientGUI
         '
         'AddMemberContextMenu
         '
-        Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.CopySelectedMembershipsToolStripMenuItem1, Me.ObjekteigenschaftenToolStripMenuItem, Me.ToolStripSeparator10, Me.SortAscendingToolStripMenuItem, Me.SortDescendingToolStripMenuItem, Me.RefreshCollectionsToolStripMenuItem, Me.ToolStripSeparator5, Me.ExportInDateiToolStripMenuItem})
+        Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.CopySelectedMembershipsToolStripMenuItem1, Me.AddSelectedCollectionToClipboardToolStripMenuItem, Me.ObjekteigenschaftenToolStripMenuItem, Me.ToolStripSeparator10, Me.SortAscendingToolStripMenuItem, Me.SortDescendingToolStripMenuItem, Me.RefreshCollectionsToolStripMenuItem, Me.ToolStripSeparator5, Me.ExportInDateiToolStripMenuItem})
         Me.AddMemberContextMenu.Name = "ContextMenuStrip1"
-        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 192)
+        Me.AddMemberContextMenu.Size = New System.Drawing.Size(278, 214)
         '
         'ZuweisenToolStripMenuItem
         '
         Me.ZuweisenToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_plus_square_16x16
         Me.ZuweisenToolStripMenuItem.Name = "ZuweisenToolStripMenuItem"
-        Me.ZuweisenToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
-        Me.ZuweisenToolStripMenuItem.Text = "Assign collection to device"
+        Me.ZuweisenToolStripMenuItem.Size = New System.Drawing.Size(277, 22)
+        Me.ZuweisenToolStripMenuItem.Text = "Assign collection(s) to device"
         '
         'AlleGeräteMitDieserCollectionToolStripMenuItem
         '
@@ -1246,6 +1248,20 @@ Partial Class ClientGUI
         Me.PasteCollectionsWorker.WorkerReportsProgress = True
         Me.PasteCollectionsWorker.WorkerSupportsCancellation = True
         '
+        'AddSelectedCollectionToClipboardToolStripMenuItem
+        '
+        Me.AddSelectedCollectionToClipboardToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_plus_circle_16x16
+        Me.AddSelectedCollectionToClipboardToolStripMenuItem.Name = "AddSelectedCollectionToClipboardToolStripMenuItem"
+        Me.AddSelectedCollectionToClipboardToolStripMenuItem.Size = New System.Drawing.Size(277, 22)
+        Me.AddSelectedCollectionToClipboardToolStripMenuItem.Text = "Add selected collection(s) to clipboard"
+        '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_plus_circle_16x16
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(277, 22)
+        Me.ToolStripMenuItem5.Text = "Add selected collection(s) to clipboard"
+        '
         'ClientGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1431,4 +1447,6 @@ Partial Class ClientGUI
     Friend WithEvents PasteCollectionsWorker As System.ComponentModel.BackgroundWorker
     Friend WithEvents CopySelectedMembershipsToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents RefreshCollectionsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AddSelectedCollectionToClipboardToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem5 As ToolStripMenuItem
 End Class

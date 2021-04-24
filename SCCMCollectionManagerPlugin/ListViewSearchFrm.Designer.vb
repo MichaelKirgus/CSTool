@@ -242,14 +242,14 @@ Partial Class ListViewSearchFrm
         '
         Me.AddMemberContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ZuweisenToolStripMenuItem, Me.AlleGeräteMitDieserCollectionToolStripMenuItem, Me.CopySelectedMembershipsToolStripMenuItem1, Me.AddSelectedCollectionToClipboardToolStripMenuItem})
         Me.AddMemberContextMenu.Name = "ContextMenuStrip1"
-        Me.AddMemberContextMenu.Size = New System.Drawing.Size(273, 92)
+        Me.AddMemberContextMenu.Size = New System.Drawing.Size(278, 92)
         '
         'ZuweisenToolStripMenuItem
         '
         Me.ZuweisenToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_plus_square_16x16
         Me.ZuweisenToolStripMenuItem.Name = "ZuweisenToolStripMenuItem"
-        Me.ZuweisenToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
-        Me.ZuweisenToolStripMenuItem.Text = "Assign collection to device"
+        Me.ZuweisenToolStripMenuItem.Size = New System.Drawing.Size(277, 22)
+        Me.ZuweisenToolStripMenuItem.Text = "Assign collection(s) to device"
         '
         'AlleGeräteMitDieserCollectionToolStripMenuItem
         '
@@ -269,8 +269,8 @@ Partial Class ListViewSearchFrm
         '
         Me.AddSelectedCollectionToClipboardToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_plus_circle_16x16
         Me.AddSelectedCollectionToClipboardToolStripMenuItem.Name = "AddSelectedCollectionToClipboardToolStripMenuItem"
-        Me.AddSelectedCollectionToClipboardToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
-        Me.AddSelectedCollectionToClipboardToolStripMenuItem.Text = "Add selected collection to clipboard"
+        Me.AddSelectedCollectionToClipboardToolStripMenuItem.Size = New System.Drawing.Size(277, 22)
+        Me.AddSelectedCollectionToClipboardToolStripMenuItem.Text = "Add selected collection(s) to clipboard"
         '
         'ListViewSearchFrm
         '
