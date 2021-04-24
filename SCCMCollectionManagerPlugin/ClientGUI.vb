@@ -1177,7 +1177,7 @@ Public Class ClientGUI
 
     Private Sub ZuweisenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZuweisenToolStripMenuItem.Click
         If AddToCollectionWorker.IsBusy = False Then
-            AddToCollectionWorker.RunWorkerAsync()
+            AddToCollectionWorker.RunWorkerAsync(ListView2)
         Else
             PostLogText("Es läuft bereits eine Zuweisung. Bitte warten Sie, bis die Collection-Mitgliedschaft aktualisiert wurde.", True)
         End If
@@ -1419,7 +1419,7 @@ Public Class ClientGUI
                 SetSMSClientsGUIState(False)
                 SetSMSClientsLoadGUIState(True)
 
-                CollectAllClientsFromCollection.RunWorkerAsync()
+                CollectAllClientsFromCollection.RunWorkerAsync(ListView2)
             End If
         Else
             PostLogText("Fehler: Es besteht keine Verbindung zum SMS " & _Settings.SMSServer, True)
@@ -1496,7 +1496,11 @@ Public Class ClientGUI
     End Sub
 
     Private Sub AddToCollectionWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles AddToCollectionWorker.DoWork
-        For Each item As ListViewItem In ListView2.SelectedItems
+        Dim TargetListView As ListView
+        TargetListView = e.Argument
+
+
+        For Each item As ListViewItem In TargetListView.SelectedItems
             Dim collid As String
             Dim obj As WqlResultObject
             obj = item.Tag
@@ -1534,6 +1538,8 @@ Public Class ClientGUI
                 ForceRefreshPolicies(CurrentIPHostname, True, IsClientPackageStateReceived)
             End If
         End If
+
+        e.Result = TargetListView
     End Sub
 
     Private Sub DeleteFromCollectionWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles DeleteFromCollectionWorker.DoWork
@@ -1752,8 +1758,11 @@ Public Class ClientGUI
 
     Private Sub CollectAllClientsFromCollection_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles CollectAllClientsFromCollection.DoWork
         Try
+            Dim TargetListview As ListView
+            TargetListview = e.Argument
+
             Dim kk As WqlResultObject
-            kk = ListView2.SelectedItems(0).Tag
+            kk = TargetListview.SelectedItems(0).Tag
 
             CurrentClientsFromCollectionMembership = GetAllClientsFromCollectionMembership(kk.PropertyList("CollectionID"))
 
@@ -1890,6 +1899,7 @@ Public Class ClientGUI
     Private Sub ToolStripButton11_Click(sender As Object, e As EventArgs) Handles ToolStripButton11.Click
         Dim kk As New ListViewSearchFrm
         kk.ListViewCtl = ListView2
+        kk._parent = Me
         kk.Show()
     End Sub
 
@@ -2027,10 +2037,16 @@ Public Class ClientGUI
     End Sub
 
     Private Sub CopySelectedMembershipsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopySelectedMembershipsToolStripMenuItem.Click
-        Try
-            CurrentCollectionClipboardItems.Clear()
+        CopySelectedCollectionsToClipboard(ListView4)
+    End Sub
 
-            For Each item As ListViewItem In ListView4.SelectedItems
+    Public Sub CopySelectedCollectionsToClipboard(ByVal TargetListView As ListView, Optional ByVal ClearClipboard As Boolean = True)
+        Try
+            If ClearClipboard Then
+                CurrentCollectionClipboardItems.Clear()
+            End If
+
+            For Each item As ListViewItem In TargetListView.SelectedItems
                 CurrentCollectionClipboardItems.Add(item.Clone)
             Next
         Catch ex As Exception

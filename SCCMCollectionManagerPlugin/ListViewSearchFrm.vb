@@ -3,11 +3,17 @@
 'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 'You should have received a copy of the GNU General Public License along with this program; if not, see <https://www.gnu.org/licenses>.
 'Additional copyright notices in project base directory or main executable directory.
+Imports System.Runtime.InteropServices
 Imports System.Windows.Forms
 
 Public Class ListViewSearchFrm
 
     Public ListViewCtl As ListView
+    Public _parent As ClientGUI
+
+    <DllImport("uxtheme", CharSet:=CharSet.Unicode)>
+    Public Shared Function SetWindowTheme(ByVal hWnd As IntPtr, ByVal textSubAppName As String, ByVal textSubIdList As String) As Integer
+    End Function
 
     Public Sub LoadGroupItems()
         Try
@@ -29,6 +35,10 @@ Public Class ListViewSearchFrm
             Dim FirstFoundItemIndex As Integer = 0
             Dim resultcount As Integer = 0
 
+            If CheckBox4.Checked Then
+                ListView2.Items.Clear()
+            End If
+
             If ComboBox1.SelectedIndex = 0 Then
                 If RadioButton1.Checked Then
                     If CheckBox1.Checked Then
@@ -36,6 +46,9 @@ Public Class ListViewSearchFrm
                             If ListViewCtl.Items(ind).Text.Contains(TextBox1.Text) Then
                                 If CheckBox2.Checked Then
                                     ListViewCtl.Items(ind).Selected = True
+                                    If CheckBox3.Checked Then
+                                        ListView2.Items.Add(ListViewCtl.Items(ind).Clone)
+                                    End If
                                 End If
                                 If result = False Then
                                     FirstFoundItemIndex = ind
@@ -49,6 +62,9 @@ Public Class ListViewSearchFrm
                             If ListViewCtl.Items(ind).Text.ToLower.Contains(TextBox1.Text.ToLower) Then
                                 If CheckBox2.Checked Then
                                     ListViewCtl.Items(ind).Selected = True
+                                    If CheckBox3.Checked Then
+                                        ListView2.Items.Add(ListViewCtl.Items(ind).Clone)
+                                    End If
                                 End If
                                 If result = False Then
                                     FirstFoundItemIndex = ind
@@ -64,6 +80,9 @@ Public Class ListViewSearchFrm
                             If ListViewCtl.Items(ind).Text = TextBox1.Text Then
                                 If CheckBox2.Checked Then
                                     ListViewCtl.Items(ind).Selected = True
+                                    If CheckBox3.Checked Then
+                                        ListView2.Items.Add(ListViewCtl.Items(ind).Clone)
+                                    End If
                                 End If
                                 If result = False Then
                                     FirstFoundItemIndex = ind
@@ -77,6 +96,9 @@ Public Class ListViewSearchFrm
                             If ListViewCtl.Items(ind).Text.ToLower = TextBox1.Text.ToLower Then
                                 If CheckBox2.Checked Then
                                     ListViewCtl.Items(ind).Selected = True
+                                    If CheckBox3.Checked Then
+                                        ListView2.Items.Add(ListViewCtl.Items(ind).Clone)
+                                    End If
                                 End If
                                 If result = False Then
                                     FirstFoundItemIndex = ind
@@ -95,6 +117,9 @@ Public Class ListViewSearchFrm
                                 If ListViewCtl.Items(ind).Text.Contains(TextBox1.Text) Then
                                     If CheckBox2.Checked Then
                                         ListViewCtl.Items(ind).Selected = True
+                                        If CheckBox3.Checked Then
+                                            ListView2.Items.Add(ListViewCtl.Items(ind).Clone)
+                                        End If
                                     End If
                                     If result = False Then
                                         FirstFoundItemIndex = ind
@@ -106,6 +131,9 @@ Public Class ListViewSearchFrm
                                 If ListViewCtl.Items(ind).Text.ToLower.Contains(TextBox1.Text.ToLower) Then
                                     If CheckBox2.Checked Then
                                         ListViewCtl.Items(ind).Selected = True
+                                        If CheckBox3.Checked Then
+                                            ListView2.Items.Add(ListViewCtl.Items(ind).Clone)
+                                        End If
                                     End If
                                     If result = False Then
                                         FirstFoundItemIndex = ind
@@ -119,6 +147,9 @@ Public Class ListViewSearchFrm
                                 If ListViewCtl.Items(ind).Text = TextBox1.Text Then
                                     If CheckBox2.Checked Then
                                         ListViewCtl.Items(ind).Selected = True
+                                        If CheckBox3.Checked Then
+                                            ListView2.Items.Add(ListViewCtl.Items(ind).Clone)
+                                        End If
                                     End If
                                     If result = False Then
                                         FirstFoundItemIndex = ind
@@ -130,6 +161,9 @@ Public Class ListViewSearchFrm
                                 If ListViewCtl.Items(ind).Text.ToLower = TextBox1.Text.ToLower Then
                                     If CheckBox2.Checked Then
                                         ListViewCtl.Items(ind).Selected = True
+                                        If CheckBox3.Checked Then
+                                            ListView2.Items.Add(ListViewCtl.Items(ind).Clone)
+                                        End If
                                     End If
                                     If result = False Then
                                         FirstFoundItemIndex = ind
@@ -158,5 +192,26 @@ Public Class ListViewSearchFrm
 
     Private Sub ListViewSearchFrm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadGroupItems()
+        SetWindowTheme(ListView2.Handle, "explorer", Nothing)
+    End Sub
+
+    Private Sub ZuweisenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZuweisenToolStripMenuItem.Click
+        If Not _parent.AddToCollectionWorker.IsBusy Then
+            _parent.AddToCollectionWorker.RunWorkerAsync(ListView2)
+        Else
+            MsgBox("An action ist pending, please wait!")
+        End If
+    End Sub
+
+    Private Sub AlleGeräteMitDieserCollectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlleGeräteMitDieserCollectionToolStripMenuItem.Click
+        If Not _parent.CollectAllClientsFromCollection.IsBusy Then
+            _parent.CollectAllClientsFromCollection.RunWorkerAsync(ListView2)
+        Else
+            MsgBox("An action ist pending, please wait!")
+        End If
+    End Sub
+
+    Private Sub CopySelectedMembershipsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CopySelectedMembershipsToolStripMenuItem1.Click
+        _parent.CopySelectedCollectionsToClipboard(ListView2)
     End Sub
 End Class
