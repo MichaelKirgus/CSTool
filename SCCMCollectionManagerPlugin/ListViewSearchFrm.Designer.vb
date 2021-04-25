@@ -32,6 +32,8 @@ Partial Class ListViewSearchFrm
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -45,8 +47,6 @@ Partial Class ListViewSearchFrm
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader22 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
         Me.AddMemberContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ZuweisenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -105,6 +105,30 @@ Partial Class ListViewSearchFrm
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Settings"
+        '
+        'CheckBox4
+        '
+        Me.CheckBox4.AutoSize = True
+        Me.CheckBox4.Checked = True
+        Me.CheckBox4.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox4.Location = New System.Drawing.Point(477, 42)
+        Me.CheckBox4.Name = "CheckBox4"
+        Me.CheckBox4.Size = New System.Drawing.Size(83, 17)
+        Me.CheckBox4.TabIndex = 7
+        Me.CheckBox4.Text = "Clear results"
+        Me.CheckBox4.UseVisualStyleBackColor = True
+        '
+        'CheckBox3
+        '
+        Me.CheckBox3.AutoSize = True
+        Me.CheckBox3.Checked = True
+        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox3.Location = New System.Drawing.Point(283, 42)
+        Me.CheckBox3.Name = "CheckBox3"
+        Me.CheckBox3.Size = New System.Drawing.Size(171, 17)
+        Me.CheckBox3.TabIndex = 6
+        Me.CheckBox3.Text = "Show results in search window"
+        Me.CheckBox3.UseVisualStyleBackColor = True
         '
         'CheckBox2
         '
@@ -196,7 +220,7 @@ Partial Class ListViewSearchFrm
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Collection"
-        Me.ColumnHeader3.Width = 242
+        Me.ColumnHeader3.Width = 380
         '
         'ColumnHeader6
         '
@@ -213,30 +237,6 @@ Partial Class ListViewSearchFrm
         'ColumnHeader22
         '
         Me.ColumnHeader22.Text = "Type"
-        '
-        'CheckBox3
-        '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Checked = True
-        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox3.Location = New System.Drawing.Point(283, 42)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(171, 17)
-        Me.CheckBox3.TabIndex = 6
-        Me.CheckBox3.Text = "Show results in search window"
-        Me.CheckBox3.UseVisualStyleBackColor = True
-        '
-        'CheckBox4
-        '
-        Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Checked = True
-        Me.CheckBox4.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox4.Location = New System.Drawing.Point(477, 42)
-        Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(83, 17)
-        Me.CheckBox4.TabIndex = 7
-        Me.CheckBox4.Text = "Clear results"
-        Me.CheckBox4.UseVisualStyleBackColor = True
         '
         'AddMemberContextMenu
         '
@@ -255,14 +255,14 @@ Partial Class ListViewSearchFrm
         '
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_search_16x16
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Name = "AlleGeräteMitDieserCollectionToolStripMenuItem"
-        Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
+        Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Size = New System.Drawing.Size(277, 22)
         Me.AlleGeräteMitDieserCollectionToolStripMenuItem.Text = "Show all devices with this collection..."
         '
         'CopySelectedMembershipsToolStripMenuItem1
         '
         Me.CopySelectedMembershipsToolStripMenuItem1.Image = Global.SCCMCollectionManagerPlugin.My.Resources.Resources.icon_duplicate_16x16_cleared
         Me.CopySelectedMembershipsToolStripMenuItem1.Name = "CopySelectedMembershipsToolStripMenuItem1"
-        Me.CopySelectedMembershipsToolStripMenuItem1.Size = New System.Drawing.Size(272, 22)
+        Me.CopySelectedMembershipsToolStripMenuItem1.Size = New System.Drawing.Size(277, 22)
         Me.CopySelectedMembershipsToolStripMenuItem1.Text = "Copy selected memberships"
         '
         'AddSelectedCollectionToClipboardToolStripMenuItem
