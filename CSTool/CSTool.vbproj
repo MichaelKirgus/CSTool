@@ -583,7 +583,7 @@
       <Version>1.0.818.41</Version>
     </PackageReference>
     <PackageReference Include="SSH.NET">
-      <Version>2020.0.1</Version>
+      <Version>2020.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
